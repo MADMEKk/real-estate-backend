@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="{% static 'favicon.ico'%}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="aures real estate"
+    />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png'%}">
+    <link rel="stylesheet" href=" {% static 'fonts/flaticon/font/flaticon.css'%} ">
+    <link rel="stylesheet" href="  {% static 'fonts/icomoon/style.css'%}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png'%}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png'%}">
+    <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg'%}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{% static 'css/libs.bundle.css'%}" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/theme.bundle.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery/dist/css/lightgallery.min.css">
+    <!-- Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Fix for custom scrollbar if JS is disabled-->
+    <noscript>
+        <style>
+          /**
+          * Reinstate scrolling for non-JS clients
+          */
+          .simplebar-content-wrapper {
+            overflow: auto;
+          }
+        </style>
+    </noscript>
+
+    <!-- Page Title -->
+    <title>Aures | REAL ESTATE</title>
+  </head>
+  <body>
+
+
+
+  {% block body %} {% endblock %}
+
+
+    <!-- Theme JS -->
+    <!-- Vendor JS -->
+    <script src="{% static 'js/vendor.bundle.js'%}"></script>
+
+    <!-- Theme JS -->
+    <script src="{% static 'js/theme.bundle.js'%}"></script>
+<!--contact us script-->
+<script>
+
+        document.getElementById('contactAgent').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Gather form data
+            const formData = new FormData(this);
+
+            // If you want to include additional data not visible on the form
+            formData.append('additionalField', 'additionalValue');
+
+            // Convert form data to JSON
+            const jsonData = {};
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+            console.log(jsonData);
+
+            // Make a POST request to your API
+            fetch('http://127.0.0.1:8000/api/v1/enquiries/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('API response:', data);
+                // Handle API response here
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+                // Handle errors here
+            });
+        });
+    </script>
+
+
+  <script>
+    function openModal() {
+        var modal = document.getElementById('allPhotosModal');
+        modal.classList.add('show');
+        modal.style.display = 'block';
+        document.body.classList.add('modal-open');
+        var backdrop = document.createElement('div');
+        backdrop.classList.add('modal-backdrop', 'fade', 'show');
+        document.body.appendChild(backdrop);
+
+        // Initialize Swiper
+
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('allPhotosModal');
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+        var backdrop = document.querySelector('.modal-backdrop');
+        backdrop.parentNode.removeChild(backdrop);
+    }
+
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery/dist/js/lightgallery.min.js"></script>
+{% block scripts %} {% endblock %}
+  </body>
+</html>

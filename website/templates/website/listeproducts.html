@@ -1,0 +1,163 @@
+ {% extends './pagesbase.html' %}
+{% load static %}
+<!-- {% block bannertitle %}
+ FIND YOUR DREAM PROPERTY
+ {% endblock %}
+{% block bannertext %}
+
+ you can find your dream property here by searching for the property you want with the best price and the best location
+
+ {% endblock %}-->
+
+{% block section %}
+  <section class="mt-0 ">
+        <!-- Page Content Goes Here -->
+
+        <!-- Category Top Banner -->
+        <div class="py-6 bg-img-cover bg-dark bg-overlay-gradient-dark position-relative overflow-hidden mb-4 bg-pos-center-center"
+            style="background-image: url(./assets/images/banners/banner-1.jpg);">
+            <div class="container position-relative z-index-20" data-aos="fade-right" data-aos-delay="300">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item breadcrumb-light"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item breadcrumb-light"><a href="#">Activities</a></li>
+                      <li class="breadcrumb-item active breadcrumb-light" aria-current="page">Clothing</li>
+                    </ol>
+                </nav>                <h1 class="fw-bold display-6 mb-4 text-white">Latest Arrivals (121)</h1>
+                <div class="col-12 col-md-6">
+                    <p class="lead text-white mb-0">
+                        Move, stretch, jump and hike in our latest waterproof arrivals. We've got you covered for your
+                        hike or climbing sessions, from Gortex jackets to lightweight waterproof pants. Discover our
+                        latest range of outdoor clothing.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Category Top Banner -->
+
+        <div class="container-fluid" data-aos="fade-in">
+            <!-- Category Toolbar-->
+                <div class="d-flex justify-content-between items-center pt-5 pb-4 flex-column flex-lg-row">
+                    <div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="#">Home</a></li>
+                              <li class="breadcrumb-item"><a href="#">Sneakers</a></li>
+                              <li class="breadcrumb-item active" aria-current="page">New Releases</li>
+                            </ol>
+                        </nav>        <h1 class="fw-bold fs-3 mb-2">New Releases (121)</h1>
+                        <p class="m-0 text-muted small">Showing 1 - 9 of 121</p>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center mt-4 mt-lg-0 flex-column flex-md-row">
+
+                        <!-- Filter Trigger-->
+                        <button class="btn bg-light p-3 me-md-3 d-flex align-items-center fs-7 lh-1 w-100 mb-2 mb-md-0 w-md-auto " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
+                            <i class="ri-equalizer-line me-2"></i> Filters
+                        </button>
+                        <!-- / Filter Trigger-->
+
+                        <!-- Sort Options-->
+                            <select class="form-select form-select-sm border-0 bg-light p-3 pe-5 lh-1 fs-7">
+                                <option selected>Sort By</option>
+                                <option value="1">Hi Low</option>
+                                <option value="2">Low Hi</option>
+                                <option value="3">Name</option>
+                            </select>
+                        <!-- / Sort Options-->
+                    </div>
+                </div>            <!-- /Category Toolbar-->
+
+
+                <!-- Products-->
+                <div class="row g-4 mb-5" id="poperty">
+
+
+                </div>
+                <!-- / Products-->
+
+            <!-- Pagination-->
+            <div class="d-flex flex-column f-w-44 mx-auto my-5 text-center">
+                <small class="text-muted">Showing 9 of 121 products</small>
+                <div class="progress f-h-1 mt-3">
+                    <div class="progress-bar bg-dark" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <a href="#" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2">Load More</a>
+            </div>            <!-- / Pagination-->
+        </div>
+
+        <!-- /Page Content -->
+    </section>
+
+
+
+
+ {% endblock %}
+
+ {% block subject %}
+              <div class="d-flex justify-content-between align-items-center">
+              <div class="form-group">
+                            <label for="subject" class="form-label">subject</label>
+                            <input name="subject" id="subject" class="form-control" type="text">
+                          </div>
+            </div>
+              {% endblock %}
+
+
+
+{% block scripts %}
+
+
+ <script>
+
+  const urlParams = new URLSearchParams(window.location.search);
+const status = urlParams.get('status');
+console.log(status);
+if(status){
+console.log('fetching');
+
+fetch(`http://127.0.0.1:8000/api/v1/properties/all/?status=${status}`)
+    .then(
+
+    response =>{
+    console.log(response);
+    return response.json();
+     })
+    .then(data => {
+
+   data.results.forEach((item) => {
+   console.log(item);
+    document.getElementById('poperty').innerHTML += `<div class="col-12 col-sm-6 col-md-3">
+                    <div class="property-item mb-30">
+              <a href="property-single.html" class="img">
+                <img src="${item.cover_photo}" alt="Image" class="img-fluid">
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>${ item.price }</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"> ${ item.street_address } </span>
+                  <span class="city d-block mb-3">${ item.city }</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">F${ item.bedrooms }</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">${ item.bathrooms }</span>
+                    </span>
+                  </div>
+
+                  <a href="http://127.0.0.1:8000/property/${item.slug}" class="btn btn-orange rounded-pill py-2 px-3">See details</a>
+                </div>
+              </div>
+            </div>
+                     </div>
+
+    `;});
+    });
+     }
+
+</script>
+ {% endblock %}
