@@ -1,15 +1,13 @@
 from rest_framework import serializers
+import json
 
-
-from .models import Property, PropertyViews
+from .models import Property, PropertyViews, Photo
 
 
 class PropertySerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
     cover_photo = serializers.SerializerMethodField()
     profile_photo = serializers.SerializerMethodField()
-
-
     class Meta:
         model = Property
         fields = [
@@ -34,9 +32,8 @@ class PropertySerializer(serializers.ModelSerializer):
             "advert_type",
             "property_type",
             "cover_photo",
-            "photos",
             "vedio",
-
+            "photos",
             "published_status",
             "views",
         ]
@@ -47,8 +44,7 @@ class PropertySerializer(serializers.ModelSerializer):
     def get_cover_photo(self, obj):
         return obj.cover_photo.url
 
-    def get_photos(self, obj):
-        return obj.photos.all.image.url
+
 
     def get_video(self, obj):
         return obj.vedio.url
@@ -57,14 +53,20 @@ class PropertySerializer(serializers.ModelSerializer):
         return obj.user.profile.profile_photo.url
 
 
-class PropertyCreateSerializer(serializers.ModelSerializer):
 
+
+class PropertyCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Property
-        exclude = ["updated_at", "pkid"]
+        fields = ['title', 'description',  'city', 'postal_code', 'street_address', 'property_number', 'price', 'plot_area', 'total_floors', 'bedrooms', 'bathrooms', 'advert_type', 'property_type', 'cover_photo', 'vedio','user']
+
 
 
 class PropertyViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = PropertyViews
         exclude = ["updated_at", "pkid"]
+
+
+
+

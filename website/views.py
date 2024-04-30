@@ -12,7 +12,11 @@ def website(request):
 def properties(request):
     return render(request, 'website/listeproducts.html')
 
+def sellproperty(request):
+    return render(request, 'website/sellproperty.html')
 
+def propertysaved(request):
+    return render(request, 'website/propertysaved.html')
 
 
 def propertydetails( request, slug):

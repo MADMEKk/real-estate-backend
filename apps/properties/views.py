@@ -1,6 +1,7 @@
 import logging
 
 import django_filters
+from django.core.mail import send_mail
 from django.db.models import query
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, generics, permissions, status
@@ -8,9 +9,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import render, redirect
-
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from .exceptions import PropertyNotFound
-from .models import Property, PropertyViews
+from .models import Property, PropertyViews, Photo, Propertysellerinfo
 from .pagination import PropertyPagination
 from .serializers import (PropertyCreateSerializer, PropertySerializer,
                           PropertyViewSerializer)
@@ -57,7 +58,6 @@ class ListAllPropertiesAPIView(generics.ListAPIView):
         response["Access-Control-Allow-Origin"] = "http://192.168.8.104:3000"
         return response
 
-
 class ListAgentsPropertiesAPIView(generics.ListAPIView):
     serializer_class = PropertySerializer
     pagination_class = PropertyPagination
@@ -69,6 +69,8 @@ class ListAgentsPropertiesAPIView(generics.ListAPIView):
     filterset_class = PropertyFilter
     search_fields = ["country", "city"]
     ordering_fields = ["created_at"]
+    authentication_classes = [JWTAuthentication]  # Add JWT authentication
+    permission_classes = [permissions.IsAuthenticated]  # Add permission class to require authentication
 
     def get_queryset(self):
         user = self.request.user
@@ -79,12 +81,20 @@ class ListAgentsPropertiesAPIView(generics.ListAPIView):
 class PropertyViewsAPIView(generics.ListAPIView):
     serializer_class = PropertyViewSerializer
     queryset = PropertyViews.objects.all()
-
-
+@api_view(["GET"])
+def get_property_photos(request, slug):
+    property = Property.objects.get(slug=slug)
+    values = []
+    value = Photo.objects.filter(property=property).values()
+    val = list(value)
+    values += val
+    return Response(values, status=status.HTTP_200_OK)
 class PropertyDetailView(APIView):
     def get(self, request, slug):
-        property = Property.objects.get(slug=slug)
-
+        if request.user == Property.objects.get(slug=slug).user:
+            property = Property.objects.get(slug=slug)
+        else:
+            property = Property.published.get(slug=slug)
         x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
         if x_forwarded_for:
             ip = x_forwarded_for.split(",")[0]
@@ -124,6 +134,7 @@ def update_property_api_view(request, slug):
         return Response(serializer.data)
 
 
+# for agents
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def create_property_api_view(request):
@@ -166,100 +177,89 @@ def delete_property_api_view(request, slug):
         return Response(data=data)
 
 
-@api_view(["POST"])
-def uploadPropertyImage(request):
-    data = request.data
-
-    property_id = data["property_id"]
-    property = Property.objects.get(id=property_id)
-    property.cover_photo = request.FILES.get("cover_photo")
-    property.photo1 = request.FILES.get("photo1")
-    property.photo2 = request.FILES.get("photo2")
-    property.photo3 = request.FILES.get("photo3")
-    property.photo4 = request.FILES.get("photo4")
-    property.save()
-    return Response("Image(s) uploaded")
-
-
 class PropertySearchAPIView(APIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = PropertyCreateSerializer
 
     def post(self, request):
-        queryset = Property.objects.filter(published_status=True)
+        queryset = Property.published.all()
         data = self.request.data
 
         advert_type = data["advert_type"]
-        queryset = queryset.filter(advert_type__iexact=advert_type)
+        if len(advert_type) > 0:  # If advert_type is not None and not an empty string
+            queryset = queryset.filter(advert_type__in=advert_type)
 
         property_type = data["property_type"]
-        queryset = queryset.filter(property_type__iexact=property_type)
+        if len(property_type) > 0:
+            queryset = queryset.filter(property_type__in=property_type)
 
-        price = data["price"]
-        if price == "$0+":
-            price = 0
-        elif price == "$50,000+":
-            price = 50000
-        elif price == "$100,000+":
-            price = 100000
-        elif price == "$200,000+":
-            price = 200000
-        elif price == "$400,000+":
-            price = 400000
-        elif price == "$600,000+":
-            price = 600000
-        elif price == "Any":
-            price = -1
-
-        if price != -1:
-            queryset = queryset.filter(price__gte=price)
+        pricegt = data["pricegt"]
+        pricelt = data["pricelt"]
+        if pricegt & pricelt:
+            queryset = queryset.filter(price__gt=pricegt, price__lt=pricelt)
 
         bedrooms = data["bedrooms"]
-        if bedrooms == "0+":
-            bedrooms = 0
-        elif bedrooms == "1+":
-            bedrooms = 1
-        elif bedrooms == "2+":
-            bedrooms = 2
-        elif bedrooms == "3+":
-            bedrooms = 3
-        elif bedrooms == "4+":
-            bedrooms = 4
-        elif bedrooms == "5+":
-            bedrooms = 5
 
-        queryset = queryset.filter(bedrooms__gte=bedrooms)
+        if bedrooms:
+            queryset = queryset.filter(bedrooms__gte=bedrooms)
 
-        bathrooms = data["bathrooms"]
-        if bathrooms == "0+":
-            bathrooms = 0.0
-        elif bathrooms == "1+":
-            bathrooms = 1.0
-        elif bathrooms == "2+":
-            bathrooms = 2.0
-        elif bathrooms == "3+":
-            bathrooms = 3.0
-        elif bathrooms == "4+":
-            bathrooms = 4.0
+            bathrooms = data["bathrooms"]
 
-        queryset = queryset.filter(bathrooms__gte=bathrooms)
+        if bathrooms:
+            queryset = queryset.filter(bathrooms__gte=bathrooms)
 
         catch_phrase = data["catch_phrase"]
-        queryset = queryset.filter(description__icontains=catch_phrase)
+        if catch_phrase:
+            queryset = queryset.filter(description__icontains=catch_phrase)
 
         serializer = PropertySerializer(queryset, many=True)
 
         return Response(serializer.data)
 
 
+# for seller
 @api_view(["POST"])
-@permission_classes([permissions.AllowAny])
-def send_create_property_request_api_view(request):
+def create_property_request_api_view(request):
     data = request.data
-    serializer = PropertyCreateSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save()
+    data["user"] = "1"
+    # get firstname lastname and email from the request
+    seller_info = {
+        "first_name": request.data.get("first_name"),
+        "last_name": request.data.get("last_name"),
+        "email": request.data.get("email"),
+        "phone": request.data.get("phone"),
+    }
+    # delete from data seller info fields
+    del data["first_name"]
+    del data["last_name"]
+    del data["email"]
+    del data["phone"]
+    photos = request.FILES.getlist("photos")
+    del data["photos"]
 
-        return Response(serializer.data)
+    # Assuming user is authenticated and you want to set the user ID
+    property_serializer = PropertyCreateSerializer(data=data)
 
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if property_serializer.is_valid():
+        # Save the property
+        property_instance = property_serializer.save()
+        property_id = property_instance.id
+        upload_property_photos(property_id, photos)
+        create_property_seller_info(property_id, seller_info)
+        property_instance.slug
+        return Response(property_instance.slug, status=status.HTTP_201_CREATED)
+
+    return Response(property_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def upload_property_photos(property_id, photos):
+    property = Property.objects.get(id=property_id)
+    for photo in photos:
+        Photo.objects.create(image=photo, property=property)
+    return Response("Photos uploaded successfully")
+
+
+def create_property_seller_info(property_id, seller_info):
+    property = Property.objects.get(id=property_id)
+    Propertysellerinfo.objects.create(property=property, **seller_info)
+    return Response("Seller info created successfully")

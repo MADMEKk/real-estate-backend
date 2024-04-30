@@ -1,0 +1,258 @@
+ {% extends './pagesbase.html' %}
+{% load static %}
+ {% block bannertitle %}
+ {{ property.title }}
+ {% endblock %}
+{% block bannertext %}
+
+ {{ property.description }}
+
+ {% endblock %}
+
+{% block section %}
+
+<section class="mt-0  vh-lg-100">
+        <!-- Page Content Goes Here -->
+        <div class="container">
+            <div class="row g-0 vh-lg-100">
+                <div class="col-lg-7 pt-5 pt-lg-10">
+
+<form id="propertyForm" enctype="multipart/form-data">
+    <section class="mt-0 vh-lg-100">
+        <!-- Page Content Goes Here -->
+        <div class="container">
+            <div class="row g-0 vh-lg-100">
+                <div class="pt-5 pt-lg-10">
+                    <div class="mt-5">
+                    <div class="pe-lg-5"> <div class="row">
+                              <!-- First Name-->
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label for="first_name" class="form-label">First name</label>
+                                  <input type="text" class="form-control" id="first_name" name="first_name" placeholder="" value="" required="">
+                                </div>
+                              </div>
+
+                              <!-- Last Name-->
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label for="last_name" class="form-label">Last name</label>
+                                  <input type="text" class="form-control" name="last_name" id="last_name" placeholder="" value="" required="">
+                                </div>
+                              </div>
+
+                              <!-- Email-->
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="email" class="form-label">Email</label>
+                                  <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+                                </div>
+                                <!-- phone -->
+                                  <div class="form-group">
+                                  <label for="phone" class="form-label text-capitalize">phone</label>
+                                  <input type="tel" class="form-control" id="phone" name="phone" >
+                                </div>
+
+                                <!-- Mailing List Signup-->
+                                <div class="form-group form-check m-0">
+                                  <input type="checkbox" class="form-check-input" id="add-mailinglist" checked="">
+                                  <label class="form-check-label small text-muted" for="add-mailinglist">Keep me updated with your latest news and offers</label>
+                                </div>
+                              </div>
+                            </div>
+                        <!-- Title -->
+                        <div class="form-group">
+                            <label for="title" class="form-label">Property Title</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter property title" required>
+                        </div>
+                        <!-- / Title -->
+
+                        <!-- Description -->
+                        <div class="form-group">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter property description"></textarea>
+                        </div>
+                        <!-- / Description -->
+
+                        <!-- City -->
+                        <div class="form-group">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
+                        </div>
+                        <!-- / City -->
+
+                        <!-- Postal Code -->
+                        <div class="form-group">
+                            <label for="postal_code" class="form-label">Postal Code</label>
+                            <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="Enter postal code" required>
+                        </div>
+                        <!-- / Postal Code -->
+
+                        <!-- Street Address -->
+                        <div class="form-group">
+                            <label for="street_address" class="form-label">Street Address</label>
+                            <input type="text" class="form-control" id="street_address" name="street_address" placeholder="Enter street address" required>
+                        </div>
+                        <!-- / Street Address -->
+
+                        <!-- Property Number -->
+                        <div class="form-group">
+                            <label for="property_number" class="form-label">Property Number</label>
+                            <input type="number" class="form-control" id="property_number" name="property_number" placeholder="Enter property number" required>
+                        </div>
+                        <!-- / Property Number -->
+
+                        <!-- Price -->
+                        <div class="form-group">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="price" name="price" placeholder="Enter price" required>
+                        </div>
+                        <!-- / Price -->
+
+
+                        <!-- Plot Area -->
+                        <div class="form-group">
+                            <label for="plot_area" class="form-label">Plot Area(m^2)</label>
+                            <input type="number" class="form-control" id="plot_area" name="plot_area" placeholder="Enter plot area" required>
+                        </div>
+                        <!-- / Plot Area -->
+
+                        <!-- Total Floors -->
+                        <div class="form-group">
+                            <label for="total_floors" class="form-label">Number of Floors</label>
+                            <input type="number" class="form-control" id="total_floors" name="total_floors" placeholder="Enter total floors" required>
+                        </div>
+                        <!-- / Total Floors -->
+
+                        <!-- Bedrooms -->
+                        <div class="form-group">
+                            <label for="bedrooms" class="form-label">Bedrooms</label>
+                            <input type="number" class="form-control" id="bedrooms" name="bedrooms" placeholder="Enter number of bedrooms" required>
+                        </div>
+                        <!-- / Bedrooms -->
+
+                        <!-- Bathrooms -->
+                        <div class="form-group">
+                            <label for="bathrooms" class="form-label">Bathrooms</label>
+                            <input type="number" class="form-control" id="bathrooms" name="bathrooms" placeholder="Enter number of bathrooms" required>
+                        </div>
+                        <!-- / Bathrooms -->
+
+                        <!-- Advert Type -->
+                        <div class="form-group">
+                            <label for="advert_type" class="form-label">Advert Type</label>
+                            <select class="form-select" id="advert_type" name="advert_type" required>
+                                <option value="For Sale">For Sale</option>
+                                <option value="For Rent">For Rent</option>
+                                <option value="Auction">Auction</option>
+                            </select>
+                        </div>
+                        <!-- / Advert Type -->
+
+                        <!-- Property Type -->
+                        <div class="form-group">
+                            <label for="property_type" class="form-label">Property Type</label>
+                            <select class="form-select" id="property_type" name="property_type" required>
+                                <option value="House">House</option>
+                                <option value="Apartment">Apartment</option>
+                                <option value="Office">Office</option>
+                                <option value="Warehouse">Warehouse</option>
+                                <option value="Commercial">Commercial</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <!-- / Property Type -->
+
+                        <!-- Cover Photo -->
+                        <div class="form-group">
+                            <label for="cover_photo" class="form-label">Cover Photo</label>
+                            <input type="file" class="form-control" id="cover_photo" name="cover_photo">
+                        </div>
+                        <!-- / Cover Photo -->
+
+                        <!-- Vedio -->
+                        <div class="form-group">
+                            <label for="vedio" class="form-label">Video</label>
+                            <input type="file" class="form-control" id="vedio" name="vedio">
+                        </div>
+                        <!-- / Vedio -->
+                          <!-- Photos -->
+                            <div class="form-group">
+                                <label for="photos" class="form-label">Photos</label>
+                                <input type="file" class="form-control" id="photos" name="photos" multiple>
+                                <small class="form-text text-muted">Tap to select multiple photos.</small>
+                            </div>
+                            <!-- / Photos -->
+
+
+                        <!-- Submit Button -->
+                        <button type="submit" name="submit" class="btn btn-dark w-100">Submit</button>
+                        <!-- / Submit Button -->
+                    </div>
+                </div>
+                <!-- Sidebar -->
+
+</div>
+</div>
+</section>
+</form>
+
+                </div>
+                <div class="col-12 col-lg-5 bg-light pt-lg-10 aside-checkout pb-5 pb-lg-0 my-5 my-lg-0">
+                    <div class="p-4 py-lg-0 pe-lg-0 ps-lg-5">
+                        <div class="pb-3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            </div>
+        </div>
+    <!-- /Page Content -->
+    </section>
+
+{% endblock %}
+{% block scripts %}
+<script>
+ document.addEventListener("DOMContentLoaded", function () {
+    const propertyForm = document.getElementById("propertyForm");
+
+    propertyForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(propertyForm);
+        const photosInput = document.getElementById("photos");
+        const photos = photosInput.files;
+
+        // Append each photo to formData
+        for (let i = 0; i < photos.length; i++) {
+            formData.append("photos", photos[i]);
+        }
+
+        fetch("http://127.0.0.1:8000/api/v1/properties/createprop/", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Property saved successfully:", data);
+            // Handle successful response here
+            window.location.href = "/propertysaved";
+            })
+        .catch(error => {
+            console.error("There was a problem saving the property:", error.message);
+            // Handle errors here
+        });
+    });
+});
+
+
+</script>
+
+ {% endblock %}

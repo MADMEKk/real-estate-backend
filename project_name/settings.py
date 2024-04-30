@@ -15,8 +15,15 @@ from pathlib import Path
 
 import os
 
+import environ
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+environ.Env.read_env(BASE_DIR / ".env")
+env = environ.Env(DEBUG=(bool, False))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -27,7 +34,8 @@ SECRET_KEY = 'django-insecure-ocxc02(3-fi3_7rq8bae+%-=dj6(*%^$z$1zo5tnr(3#g#2$0@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
 
 # Application definition
 # Application definition
@@ -59,7 +67,7 @@ THIRD_PARTY_APPS = [
     'phonenumber_field',
     'djoser',
     'rest_framework_simplejwt',
-    # 'djcelery_email'
+    'djcelery_email'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -103,13 +111,22 @@ WSGI_APPLICATION = 'project_name.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env('POSTGRES_ENGINE'),
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -149,8 +166,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'project_name/static')
 ]
-# MEDIA_URL = "/mediafiles/"
-# MEDIA_ROOT = BASE_DIR / "mediafiles"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -177,8 +193,7 @@ SIMPLE_JWT = {
 }
 
 # EMAIL
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'alaeddine4531@gmail.com'
@@ -193,7 +208,8 @@ EMAIL_USE_TLS = True
 # EMAIL_USE_TLS = True
 DOMAIN = 'DOMAIN'
 DEFAULT_FROM_EMAIL = "info@real-estate.com"
-
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 Mb limit
+# DJOSER
 DJOSER = {
     'LOGIN_FIELD': 'email',
     'USER_CREATE_PASSWORD_RETYPE': True,
@@ -215,3 +231,10 @@ DJOSER = {
         'current_user': 'apps.users.serializers.UserSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer', },
 }
+
+
+
+
+CELERY_BROKER_URL = env("CELERY_BROKER")
+result_backend = env("CELERY_BACKEND")
+timezone = 'UTC'

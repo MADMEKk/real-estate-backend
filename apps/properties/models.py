@@ -3,9 +3,13 @@ import string
 
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
+from django.core.mail import send_mail
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
+from rest_framework.response import Response
 
 from apps.common.models import TimeStampedUUIDModel
 
@@ -102,14 +106,12 @@ class Property(TimeStampedUUIDModel):
     cover_photo = models.ImageField(
         verbose_name=_("Main Photo"), default="/house_sample.jpg", null=True, blank=True
     )
-    photos = models.ManyToManyField('Photo', related_name='properties')
-    vedio = models.FileField( default="/interior_sample.jpg", null=True, blank=True)
+    vedio = models.FileField(default="/interior_sample.jpg", null=True, blank=True)
 
     published_status = models.BooleanField(
         verbose_name=_("Published Status"), default=False
     )
     views = models.IntegerField(verbose_name=_("Total Views"), default=0)
-
 
     objects = models.Manager()
     published = PropertyPublishedManager()
@@ -138,12 +140,14 @@ class Property(TimeStampedUUIDModel):
         return price_after_tax
 
 
-
 class Photo(models.Model):
     image = models.ImageField(upload_to='property_photos')
+    property = models.ForeignKey(Property, related_name='photos', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.image.url
+
+
 class PropertyViews(TimeStampedUUIDModel):
     ip = models.CharField(verbose_name=_("IP Address"), max_length=250)
     property = models.ForeignKey(
@@ -160,99 +164,30 @@ class PropertyViews(TimeStampedUUIDModel):
         verbose_name_plural = "Total Property Views"
 
 
-class Propertyrequest(TimeStampedUUIDModel):
-    class AdvertType(models.TextChoices):
-        FOR_SALE = "For Sale", _("For Sale")
-        FOR_RENT = "For Rent", _("For Rent")
-        AUCTION = "Auction", _("Auction")
+class Propertysellerinfo(TimeStampedUUIDModel):
+    first_name = models.CharField(verbose_name=_("First Name"), max_length=100)
+    last_name = models.CharField(verbose_name=_("Last Name"), max_length=100)
+    email = models.EmailField(verbose_name=_("Email"), max_length=150)
+    phone = models.CharField(verbose_name=_("Phone"), max_length=15)
 
-    class PropertyType(models.TextChoices):
-        HOUSE = "House", _("House")
-        APARTMENT = "Apartment", _("Apartment")
-        OFFICE = "Office", _("Office")
-        WAREHOUSE = "Warehouse", _("Warehouse")
-        COMMERCIAL = "Commercial", _("Commercial")
-        OTHER = "Other", _("Other")
-
-    title = models.CharField(verbose_name=_("Property Title"), max_length=250)
-    ref_code = models.CharField(
-        verbose_name=_("Property Reference Code"),
-        max_length=255,
-        unique=True,
-        blank=True,
-    )
-    description = models.TextField(
-        verbose_name=_("Description"),
-        default="Default description...update me please....",
+    property = models.ForeignKey(
+        Property, related_name="property_enquiries", on_delete=models.CASCADE
     )
 
-    city = models.CharField(verbose_name=_("City"), max_length=180, default="Oran")
-    postal_code = models.CharField(
-        verbose_name=_("Postal Code"), max_length=100, default="140"
-    )
-    street_address = models.CharField(
-        verbose_name=_("Street Address"), max_length=150, default="USTO"
-    )
-    property_number = models.IntegerField(
-        verbose_name=_("Property Number"),
-        validators=[MinValueValidator(1)],
-        default=112,
-    )
-    price = models.DecimalField(
-        verbose_name=_("Price"), max_digits=8, decimal_places=2, default=0.0
-    )
-    tax = models.DecimalField(
-        verbose_name=_("Property Tax"),
-        max_digits=6,
-        decimal_places=2,
-        default=0.15,
-        help_text="15% property tax charged",
-    )
-    plot_area = models.DecimalField(
-        verbose_name=_("Plot Area(m^2)"), max_digits=8, decimal_places=2, default=0.0
-    )
-    total_floors = models.IntegerField(verbose_name=_("Number of floors"), default=0)
-    bedrooms = models.IntegerField(verbose_name=_("Bedrooms"), default=1)
-    bathrooms = models.DecimalField(
-        verbose_name=_("Bathrooms"), max_digits=4, decimal_places=2, default=1.0
-    )
-    advert_type = models.CharField(
-        verbose_name=_("Advert Type"),
-        max_length=50,
-        choices=AdvertType.choices,
-        default=AdvertType.FOR_SALE,
-    )
+    def __str__(self):
+        return f"Enquiry for - {self.property.title} by {self.name}"
 
-    property_type = models.CharField(
-        verbose_name=_("Property Type"),
-        max_length=50,
-        choices=PropertyType.choices,
-        default=PropertyType.OTHER,
-    )
-
-    cover_photo = models.ImageField(
-        verbose_name=_("Main Photo"), default="/house_sample.jpg", null=True, blank=True
-    )
-    photo1 = models.ImageField(
-        default="/interior_sample.jpg",
-        null=True,
-        blank=True,
-    )
-    photo2 = models.ImageField(
-        default="/interior_sample.jpg",
-        null=True,
-        blank=True,
-    )
-    photo3 = models.ImageField(
-        default="/interior_sample.jpg",
-        null=True,
-        blank=True,
-    )
-    photo4 = models.ImageField(
-        default="/interior_sample.jpg",
-        null=True,
-        blank=True,
-    )
+    class Meta:
+        verbose_name = "Property seller Info"
+        verbose_name_plural = "Property seller Info"
 
 
-
+# when propertysellerinfo is created, send email to the seller
+@receiver(post_save, sender=Propertysellerinfo)
+def send_email_to_seller(sender, instance, created, **kwargs):
+    if created:
+        subject = "Property Saved Successfully"
+        message = f"Hello {instance.first_name}, your property {instance.property.title} has saved   , we will get back to you soon."
+        from_email = "aures@mail.com"
+        recipient_list = [instance.email]
+        send_mail(subject, message, from_email, recipient_list, fail_silently=True)
