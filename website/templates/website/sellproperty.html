@@ -12,69 +12,148 @@
 {% block section %}
 
 <section class="mt-0  vh-lg-100">
+
         <!-- Page Content Goes Here -->
         <div class="container">
-            <div class="row g-0 vh-lg-100">
-                <div class="col-lg-7 pt-5 pt-lg-10">
+            <div class="row g-0 vh-lg-100"><div class="col-lg-7 pt-5 pt-lg-10">
+                <form id="propertyForm" enctype="multipart/form-data">
 
-<form id="propertyForm" enctype="multipart/form-data">
-    <section class="mt-0 vh-lg-100">
-        <!-- Page Content Goes Here -->
-        <div class="container">
-            <div class="row g-0 vh-lg-100">
-                <div class="pt-5 pt-lg-10">
-                    <div class="mt-5">
-                    <div class="pe-lg-5"> <div class="row">
-                              <!-- First Name-->
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label for="first_name" class="form-label">First name</label>
-                                  <input type="text" class="form-control" id="first_name" name="first_name" placeholder="" value="" required="">
-                                </div>
-                              </div>
-
-                              <!-- Last Name-->
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label for="last_name" class="form-label">Last name</label>
-                                  <input type="text" class="form-control" name="last_name" id="last_name" placeholder="" value="" required="">
-                                </div>
-                              </div>
-
-                              <!-- Email-->
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label for="email" class="form-label">Email</label>
-                                  <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
-                                </div>
-                                <!-- phone -->
-                                  <div class="form-group">
-                                  <label for="phone" class="form-label text-capitalize">phone</label>
-                                  <input type="tel" class="form-control" id="phone" name="phone" >
-                                </div>
-
-                                <!-- Mailing List Signup-->
-                                <div class="form-group form-check m-0">
-                                  <input type="checkbox" class="form-check-input" id="add-mailinglist" checked="">
-                                  <label class="form-check-label small text-muted" for="add-mailinglist">Keep me updated with your latest news and offers</label>
-                                </div>
-                              </div>
+                    <!-- property type -->
+                    <div class="step" style=" min-height: 60vh;">
+                        <!-- Step Content -->
+                        <div class="form-group">
+                            <label class="form-label">Property Type</label>
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-orange property-label">
+                                    <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" id="House"><defs><linearGradient id="a"><stop offset="0" stop-color="#0b0b0c" class="stopColor000092 svgShape"></stop><stop offset="1" stop-color="#fc6229" class="stopColorff00f3 svgShape"></stop></linearGradient><linearGradient id="b" x1="5.002" x2="24" y1="15.875" y2="15.875" gradientUnits="userSpaceOnUse" xlink:href="#a"></linearGradient></defs><path style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal" fill="url(#b)" d="M16.506 3.75a11.506 11.506 0 0 0-10.762 7.432A11.495 11.495 0 0 0 8.61 23.604L7.133 26.5A1.002 1.002 0 0 0 8 28h17a1.002 1.002 0 0 0 .867-1.5l-1.478-2.893a11.5 11.5 0 0 0 2.87-12.418A11.502 11.502 0 0 0 16.507 3.75zm-.002 1a10.498 10.498 0 0 1 9.82 6.793A10.492 10.492 0 0 1 23.574 23H23v-7.963l.496.293a.5.5 0 1 0 .508-.86L23 13.878V11h.508a.5.5 0 1 0 0-1h-4a.5.5 0 1 0 0 1H20v1.104l-3.248-1.92a.5.5 0 0 0-.287-.069.5.5 0 0 0-.223.069L8.99 14.47a.5.5 0 1 0 .51.86l.5-.296V23h-.576a10.496 10.496 0 0 1 7.08-18.25zM18.254 7l-.207.793-.793.207.793.207.207.793.207-.793.793-.207-.793-.207L18.254 7zm-8.088 3.416-.207.793-.793.207.793.205.207.795.207-.795.793-.205-.793-.207-.207-.793zM21 11h1v2.285l-1-.59V11zm-4.502.195L22 14.445V23h-6v-4.898c0-1.1-.9-2-2-2s-2 .9-2 2V23h-1v-8.557l5.498-3.248zM25 16l-.207.793L24 17l.793.207L25 18l.207-.793L26 17l-.793-.207L25 16zM8 17l-.207.793L7 18l.793.207L8 19l.207-.793L9 18l-.793-.207L8 17zm9.5 0a.5.5 0 0 0-.5.5v2.508a.5.5 0 0 0 .102.992h4a.5.5 0 1 0 0-1H21v-2.5a.5.5 0 0 0-.5-.5h-3zm-3.5.102c.563 0 1 .437 1 1V23h-2v-4.898c0-.563.437-1 1-1zM18 18h2v2h-2v-2zm-4.303 2.893a.303.303 0 0 0-.304.304.303.303 0 0 0 .304.303.303.303 0 0 0 .303-.303.303.303 0 0 0-.303-.304zM9.53 24h13.936l1.523 2.979A.5.5 0 0 0 25 27H8a.5.5 0 0 0 .012-.023L9.529 24z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible"></path></svg> House
+                                    <input type="radio" class="btn-check" name="property_type" value="House" autocomplete="off" onchange="changeColor(this)">
+                                </label>
+                                <label class="btn btn-outline-orange property-label">
+                                    <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 32 32" viewBox="0 0 32 32" id="Building"><defs><linearGradient id="a"><stop offset="0" stop-color="#0b0b0c" class="stopColor000092 svgShape"></stop><stop offset="1" stop-color="#fc6229" class="stopColorff00f3 svgShape"></stop></linearGradient><linearGradient id="b" x1="2" x2="27" y1="16" y2="16" gradientUnits="userSpaceOnUse" xlink:href="#a"></linearGradient></defs><path fill="url(#b)" d="M 4.5 2 C 4.224 2 4 2.224 4 2.5 L 4 29 L 2.5 29 C 2.224 29 2 29.224 2 29.5 C 2 29.776 2.224 30 2.5 30 L 4.5 30 L 16.5 30 L 18.5 30 L 27.5 30 L 29.5 30 C 29.776 30 30 29.776 30 29.5 C 30 29.224 29.776 29 29.5 29 L 28 29 L 28 11.5 C 28 11.224 27.776 11 27.5 11 L 26 11 L 26 9.5 C 26 9.224 25.776 9 25.5 9 L 24 9 L 24 7.5 C 24 7.224 23.776 7 23.5 7 L 22.5 7 L 22.5 5.5 C 22.5 5.224 22.276 5 22 5 C 21.724 5 21.5 5.224 21.5 5.5 L 21.5 7 L 20.5 7 C 20.224 7 20 7.224 20 7.5 L 20 9 L 19 9 L 19 2.5 C 19 2.224 18.776 2 18.5 2 L 4.5 2 z M 5 3 L 18 3 L 18 9.5 L 18 10.5 L 18 11 L 16.5 11 L 7.5 11 C 7.224 11 7 11.224 7 11.5 C 7 11.776 7.224 12 7.5 12 L 16 12 L 16 12.5 L 16 14 L 7.5 14 C 7.224 14 7 14.224 7 14.5 C 7 14.776 7.224 15 7.5 15 L 16 15 L 16 17 L 7.5 17 C 7.224 17 7 17.224 7 17.5 C 7 17.776 7.224 18 7.5 18 L 16 18 L 16 18.5 L 16 20 L 7.5 20 C 7.224 20 7 20.224 7 20.5 C 7 20.776 7.224 21 7.5 21 L 16 21 L 16 23 L 7.5 23 C 7.224 23 7 23.224 7 23.5 C 7 23.776 7.224 24 7.5 24 L 16 24 L 16 24.5 L 16 26 L 7.5 26 C 7.224 26 7 26.224 7 26.5 C 7 26.776 7.224 27 7.5 27 L 16 27 L 16 29 L 5 29 L 5 3 z M 7.5 5 C 7.224 5 7 5.224 7 5.5 C 7 5.776 7.224 6 7.5 6 L 16.5 6 C 16.776 6 17 5.776 17 5.5 C 17 5.224 16.776 5 16.5 5 L 7.5 5 z M 7.5 8 C 7.224 8 7 8.224 7 8.5 C 7 8.776 7.224 9 7.5 9 L 16.5 9 C 16.776 9 17 8.776 17 8.5 C 17 8.224 16.776 8 16.5 8 L 7.5 8 z M 21 8 L 23 8 L 23 9 L 21 9 L 21 8 z M 19 10 L 25 10 L 25 11 L 19 11 L 19 10.5 L 19 10 z M 17 12 L 27 12 L 27 29 L 18.5 29 L 17 29 L 17 26.5 L 17 24.5 L 17 20.5 L 17 18.5 L 17 14.5 L 17 12.5 L 17 12 z M 19.5 14 C 19.224 14 19 14.224 19 14.5 C 19 14.776 19.224 15 19.5 15 L 24.5 15 C 24.776 15 25 14.776 25 14.5 C 25 14.224 24.776 14 24.5 14 L 19.5 14 z M 19.5 18 C 19.224 18 19 18.224 19 18.5 C 19 18.776 19.224 19 19.5 19 L 24.5 19 C 24.776 19 25 18.776 25 18.5 C 25 18.224 24.776 18 24.5 18 L 19.5 18 z M 19.5 22 C 19.224 22 19 22.224 19 22.5 C 19 22.776 19.224 23 19.5 23 L 24.5 23 C 24.776 23 25 22.776 25 22.5 C 25 22.224 24.776 22 24.5 22 L 19.5 22 z M 19.5 26 C 19.224 26 19 26.224 19 26.5 C 19 26.776 19.224 27 19.5 27 L 24.5 27 C 24.776 27 25 26.776 25 26.5 C 25 26.224 24.776 26 24.5 26 L 19.5 26 z "></path></svg> Apartment
+                                    <input type="radio" class="btn-check" name="property_type" value="Apartment" autocomplete="off" onchange="changeColor(this)">
+                                </label>
+                                <label class="btn btn-outline-orange property-label">
+                                    <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="Desk"><linearGradient id="a" x1="2" x2="27.334" y1="16" y2="16" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0b0b0c" class="stopColor2b2f82 svgShape"></stop><stop offset="1" stop-color="#fc6229" class="stopColorbf509d svgShape"></stop></linearGradient><path fill="url(#a)" d="M29.5 14h-3.592c.056-.157.092-.324.092-.5V13h.5c.827 0 1.5-.673 1.5-1.5s-.673-1.5-1.5-1.5H26v-.5a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 0-.5.5v4c0 .176.036.343.092.5H15v-2h3.5a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5H11v2H2.5a.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5H4v8.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V20h18v8.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V20h1.5a.5.5 0 0 0 .5-.5v-5a.5.5 0 0 0-.5-.5zM26 11h.5a.5.5 0 0 1 0 1H26v-1zm-4-1h3v3.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5V10zM8 4h10v5H8V4zm0 7v-1h10v1H8zm6 1v2h-2v-2h2zM6 28H5v-8h1v8zm21 0h-1v-8h1v8zm2-9H3v-1h26v1zm0-2H3v-2h26v2z"></path></svg> Office
+                                    <input type="radio" class="btn-check" name="property_type" value="Office" autocomplete="off" onchange="changeColor(this)">
+                                </label>
+                                <label class="btn btn-outline-orange property-label">
+                                    <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" id="Logistic"><defs><linearGradient id="a"><stop offset="0" stop-color="#0b0b0c" class="stopColor000092 svgShape"></stop><stop offset="1" stop-color="#fc6229" class="stopColorff00f3 svgShape"></stop></linearGradient><linearGradient id="b" x1="1.008" x2="28" y1="16" y2="16" gradientUnits="userSpaceOnUse" xlink:href="#a"></linearGradient></defs><path fill="url(#b)" fill-rule="evenodd" d="M15.979 3.002a.5.5 0 0 0-.243.072L1.242 12.07a.5.5 0 0 0 .264.924H3v15.504a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V14.994h18v13.504a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V12.994h1.494a.5.5 0 0 0 .264-.924L16.264 3.074a.5.5 0 0 0-.285-.072zM16 4.09l12.738 7.906H28.5a.5.5 0 0 0-.5.5V28h-2V14.496a.5.5 0 0 0-.5-.5h-19a.5.5 0 0 0-.5.5V28H4V12.496a.5.5 0 0 0-.5-.5h-.238L16 4.09zM12.95 8A.5.5 0 0 0 13 9h6a.5.5 0 1 0 0-1h-6a.5.5 0 0 0-.05 0zm-2 2a.5.5 0 0 0 .05 1h10a.5.5 0 1 0 0-1H11a.5.5 0 0 0-.05 0zm5.542 6.994a.5.5 0 0 0-.074.006H14.5a.5.5 0 0 0-.5.5v4.064l-2.227-.96a.5.5 0 0 0-.294-.075.5.5 0 0 0-.233.067l-2.851 1.228a.5.5 0 0 0-.221.112.5.5 0 0 0-.018.017.5.5 0 0 0-.017.016.5.5 0 0 0 0 .002.5.5 0 0 0-.137.488v3.7a.5.5 0 0 0 .006.128.5.5 0 0 0 .004.014.5.5 0 0 0 .002.015.5.5 0 0 0 .007.03.5.5 0 0 0 .004.01.5.5 0 0 0 .014.039.5.5 0 0 0 .004.007.5.5 0 0 0 .018.04.5.5 0 0 0 .01.015.5.5 0 0 0 .29.229l2.895 1.25a.5.5 0 0 0 .012.005.5.5 0 0 0 .074.032.5.5 0 0 0 .213.021.5.5 0 0 0 .002 0 .5.5 0 0 0 .035-.006.5.5 0 0 0 .015-.002.5.5 0 0 0 .034-.007.5.5 0 0 0 .013-.004.5.5 0 0 0 .034-.014.5.5 0 0 0 .058-.027L14 26.96v.539a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5h-1.922a.5.5 0 0 0-.086-.006.5.5 0 0 0-.074.006h-1.84a.5.5 0 0 0-.086-.006zM15 18h1v1.406a.5.5 0 0 0 .586.582.5.5 0 0 0 .014-.002.5.5 0 0 0 .007-.002.5.5 0 0 0 .086-.029.5.5 0 0 0 .008-.002.5.5 0 0 0 .016-.008l.03-.013a.5.5 0 0 0 .007-.004l.738-.371.778.388a.5.5 0 0 0 .287.05.5.5 0 0 0 .052-.01.5.5 0 0 0 .016-.005.5.5 0 0 0 .03-.007.5.5 0 0 0 .003-.002.5.5 0 0 0 .088-.04.5.5 0 0 0 .002-.001.5.5 0 0 0 .041-.026.5.5 0 0 0 .002-.002.5.5 0 0 0 .04-.03.5.5 0 0 0 .032-.032.5.5 0 0 0 .137-.35V18h1v4h-1.383a.5.5 0 0 0-.125-.014.5.5 0 0 0-.113.014h-1.762a.5.5 0 0 0-.125-.014.5.5 0 0 0-.113.014H15v-4zm2 0h1v.691l-.283-.14a.5.5 0 0 0-.242-.053.5.5 0 0 0-.205.053l-.27.135V18zm-5.5 3.576 1.734.748-1.734.748-.707-.304-1.03-.444 1.737-.748zM15 23h1v1.406a.5.5 0 0 0 .45.592.5.5 0 0 0 .052.002.5.5 0 0 0 .266-.078l.724-.361.778.386a.5.5 0 0 0 .093.035.5.5 0 0 0 .045.01.5.5 0 0 0 .1.008.5.5 0 0 0 .004 0 .5.5 0 0 0 .004 0 .5.5 0 0 0 .484-.506V23h1v4h-5v-.762a.5.5 0 0 0 0-.05V23zm2 0h1v.695l-.283-.142a.5.5 0 0 0-.242-.051.5.5 0 0 0-.205.05l-.27.136V23zm-7.998.084.303.13 1.091.472.604.26v2.788l-1.998-.861v-2.789zm4.996 0v2.789L12 26.734v-2.789l1.998-.861z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal"></path></svg> Warehouse
+                                    <input type="radio" class="btn-check" name="property_type" value="Warehouse" autocomplete="off" onchange="changeColor(this)">
+                                </label>
+                                <label class="btn btn-outline-orange property-label">
+                                    <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" id="Shop"><defs><linearGradient id="a"><stop offset="0" stop-color="#0b0b0c" class="stopColor000092 svgShape"></stop><stop offset="1" stop-color="#fc6229" class="stopColorff00f3 svgShape"></stop></linearGradient><linearGradient id="b" x1="1" x2="29" y1="16.001" y2="16.001" gradientUnits="userSpaceOnUse" xlink:href="#a"></linearGradient></defs><path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb" fill="url(#b)" d="M4.844 1a.5.5 0 0 0-.375.313l-3.344 8.874a.5.5 0 0 0-.063.094v.031A.5.5 0 0 0 1 10.5v.5c0 1.1.9 2 2 2 .363 0 .705-.11 1-.281V27H1.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .375.469.5.5 0 0 0 .031.031.5.5 0 0 0 .094 0h16.969a.5.5 0 0 0 .062 0 .5.5 0 0 0 .032 0H31.5a.5.5 0 0 0 .125 0 .5.5 0 0 0 .375-.5v-3a.5.5 0 0 0-.5-.5H29V12.719c.3.18.627.281 1 .281.137 0 .276-.004.406-.031a2.017 2.017 0 0 0 1.438-1.188c.05-.12.098-.245.125-.375.027-.13.031-.269.031-.406v-.531a.5.5 0 0 0 0-.063.5.5 0 0 0 0-.094.5.5 0 0 0-.031-.062.5.5 0 0 0 0-.031.5.5 0 0 0-.063-.094.5.5 0 0 0-.031-.031l-3.313-8.781-.03.03A.5.5 0 0 0 28.093 1H4.937a.5.5 0 0 0-.093 0zm.437 1H27.75L31 10.594V11c0 .563-.437 1-1 1a.952.952 0 0 1-.906-.594A1.1 1.1 0 0 1 29 11v-.031a.5.5 0 0 0 0-.031.5.5 0 0 0 0-.032.5.5 0 0 0 0-.062.5.5 0 0 0-.031-.031.5.5 0 0 0 0-.063.5.5 0 0 0-.032-.031.5.5 0 0 0-.156-.156.5.5 0 0 0-.031 0 .5.5 0 0 0-.063-.032.5.5 0 0 0-.468.063.5.5 0 0 0-.032.031.5.5 0 0 0-.03.031.5.5 0 0 0-.063.063.5.5 0 0 0-.032.062.5.5 0 0 0-.03.031.5.5 0 0 0 0 .063.5.5 0 0 0 0 .031.5.5 0 0 0-.032.063V11c0 .422-.233.788-.594.938-.12.05-.265.062-.406.062a.952.952 0 0 1-.906-.594A1.1 1.1 0 0 1 26 11a.5.5 0 0 0 0-.063.5.5 0 0 0 0-.03.5.5 0 0 0 0-.063.5.5 0 0 0-.031-.031.5.5 0 0 0 0-.063.5.5 0 0 0-.032-.031.5.5 0 0 0-.156-.156.5.5 0 0 0-.031 0 .5.5 0 0 0-.063-.032.5.5 0 0 0-.187-.031.5.5 0 0 0-.281.094.5.5 0 0 0-.032.031.5.5 0 0 0-.03.031.5.5 0 0 0-.063.063.5.5 0 0 0-.032.062.5.5 0 0 0-.03.031.5.5 0 0 0 0 .063.5.5 0 0 0 0 .031.5.5 0 0 0-.032.063.5.5 0 0 0 0 .031c0 .422-.233.788-.594.938-.12.05-.265.062-.406.062a.952.952 0 0 1-.906-.594A1.1 1.1 0 0 1 23 11a.5.5 0 0 0 0-.063.5.5 0 0 0 0-.03.5.5 0 0 0 0-.063.5.5 0 0 0-.031-.031.5.5 0 0 0 0-.063.5.5 0 0 0-.032-.031.5.5 0 0 0-.156-.156.5.5 0 0 0-.031 0 .5.5 0 0 0-.063-.032.5.5 0 0 0-.187-.031.5.5 0 0 0-.281.094.5.5 0 0 0-.032.031.5.5 0 0 0-.03.031.5.5 0 0 0-.063.063.5.5 0 0 0-.032.062.5.5 0 0 0-.03.031.5.5 0 0 0 0 .063.5.5 0 0 0 0 .031.5.5 0 0 0-.032.063.5.5 0 0 0 0 .031c0 .422-.233.788-.594.938-.12.05-.265.062-.406.062a.952.952 0 0 1-.906-.594A1.1 1.1 0 0 1 20 11a.5.5 0 0 0 0-.063.5.5 0 0 0 0-.03.5.5 0 0 0 0-.063.5.5 0 0 0-.031-.031.5.5 0 0 0 0-.063.5.5 0 0 0-.032-.031.5.5 0 0 0-.156-.156.5.5 0 0 0-.031 0 .5.5 0 0 0-.063-.032.5.5 0 0 0-.187-.031.5.5 0 0 0-.281.094.5.5 0 0 0-.032.031.5.5 0 0 0-.03.031.5.5 0 0 0-.063.063.5.5 0 0 0-.032.062.5.5 0 0 0-.03.031.5.5 0 0 0 0 .063.5.5 0 0 0 0 .031.5.5 0 0 0-.032.063.5.5 0 0 0 0 .031c0 .422-.233.788-.594.938a.5.5 0 0 0-.093.03c-.097.03-.206.032-.313.032a.952.952 0 0 1-.906-.594A1.1 1.1 0 0 1 17 11a.5.5 0 0 0 0-.063.5.5 0 0 0 0-.03.5.5 0 0 0 0-.063.5.5 0 0 0-.031-.031.5.5 0 0 0 0-.063.5.5 0 0 0-.032-.031.5.5 0 0 0-.156-.156.5.5 0 0 0-.031 0 .5.5 0 0 0-.063-.032.5.5 0 0 0-.187-.031.5.5 0 0 0-.281.094.5.5 0 0 0-.032.031.5.5 0 0 0-.03.031.5.5 0 0 0-.063.063.5.5 0 0 0-.032.062.5.5 0 0 0-.03.031.5.5 0 0 0 0 .063.5.5 0 0 0 0 .031.5.5 0 0 0-.032.063.5.5 0 0 0 0 .031c0 .422-.233.788-.594.938-.12.05-.265.062-.406.062a.952.952 0 0 1-.906-.594A1.1 1.1 0 0 1 14 11a.5.5 0 0 0 0-.063.5.5 0 0 0 0-.03.5.5 0 0 0 0-.063.5.5 0 0 0-.031-.031.5.5 0 0 0 0-.063.5.5 0 0 0-.031-.031.5.5 0 0 0-.157-.156.5.5 0 0 0-.031 0 .5.5 0 0 0-.063-.032.5.5 0 0 0-.187-.031.5.5 0 0 0-.281.094.5.5 0 0 0-.031.031.5.5 0 0 0-.032.031.5.5 0 0 0-.062.063.5.5 0 0 0-.031.062.5.5 0 0 0-.032.031.5.5 0 0 0 0 .063.5.5 0 0 0 0 .031.5.5 0 0 0-.031.063.5.5 0 0 0 0 .031c0 .422-.233.788-.594.938-.12.05-.265.062-.406.062a.952.952 0 0 1-.906-.594A1.1 1.1 0 0 1 11 11a.5.5 0 0 0 0-.063.5.5 0 0 0 0-.03.5.5 0 0 0 0-.063.5.5 0 0 0-.031-.031.5.5 0 0 0 0-.063.5.5 0 0 0-.031-.031.5.5 0 0 0-.157-.156.5.5 0 0 0-.031 0 .5.5 0 0 0-.063-.032.5.5 0 0 0-.187-.031.5.5 0 0 0-.281.094.5.5 0 0 0-.031.031.5.5 0 0 0-.032.031.5.5 0 0 0-.062.063.5.5 0 0 0-.031.062.5.5 0 0 0-.032.031.5.5 0 0 0 0 .063.5.5 0 0 0 0 .031.5.5 0 0 0-.031.063.5.5 0 0 0 0 .031c0 .422-.233.788-.594.938-.12.05-.265.062-.406.062a.952.952 0 0 1-.906-.594A1.1 1.1 0 0 1 8 11a.5.5 0 0 0 0-.063.5.5 0 0 0 0-.03.5.5 0 0 0 0-.063.5.5 0 0 0-.031-.031.5.5 0 0 0 0-.063.5.5 0 0 0-.032-.031.5.5 0 0 0-.156-.156.5.5 0 0 0-.031 0 .5.5 0 0 0-.063-.032.5.5 0 0 0-.187-.031.5.5 0 0 0-.281.094.5.5 0 0 0-.032.031.5.5 0 0 0-.03.031.5.5 0 0 0-.063.063.5.5 0 0 0-.032.062.5.5 0 0 0-.03.031.5.5 0 0 0 0 .063.5.5 0 0 0 0 .031.5.5 0 0 0-.032.063A.5.5 0 0 0 7 11c0 .422-.233.788-.594.938-.12.05-.265.062-.406.062a.952.952 0 0 1-.906-.594A1.1 1.1 0 0 1 5 11v-.031a.5.5 0 0 0 0-.031.5.5 0 0 0 0-.032.5.5 0 0 0-.125-.281.5.5 0 0 0-.031 0 .5.5 0 0 0 0-.031.5.5 0 0 0-.032 0 .5.5 0 0 0-.156-.094.5.5 0 0 0-.062 0 .5.5 0 0 0-.094-.031.5.5 0 0 0-.406.219.5.5 0 0 0 0 .03.5.5 0 0 0-.032.032.5.5 0 0 0-.03.063.5.5 0 0 0 0 .03.5.5 0 0 0 0 .032.5.5 0 0 0-.032.063.5.5 0 0 0 0 .03A.5.5 0 0 0 4 11c0 .422-.233.788-.594.938-.12.05-.265.062-.406.062a.952.952 0 0 1-.906-.594A1.1 1.1 0 0 1 2 11v-.406L5.281 2zM7.5 12.313c.03.033.062.061.094.093C7.956 12.77 8.45 13 9 13c.593 0 1.133-.274 1.5-.688.03.034.062.062.094.094.362.363.856.594 1.406.594.593 0 1.133-.274 1.5-.688.03.034.062.062.094.094.362.363.856.594 1.406.594.593 0 1.133-.274 1.5-.688.03.034.062.062.094.094.362.363.856.594 1.406.594h.031v14H5V12.719c.3.18.627.281 1 .281.593 0 1.133-.274 1.5-.688zm12 0c.03.033.062.061.094.093.362.363.856.594 1.406.594.593 0 1.133-.274 1.5-.688.03.034.062.062.094.094.362.363.856.594 1.406.594.593 0 1.133-.274 1.5-.688.03.034.062.062.094.094.362.363.856.594 1.406.594.363 0 .705-.11 1-.281v14.75a.5.5 0 0 0 0 .031v.5h-1V17.969l-.5.031h-6a.5.5 0 0 0-.5.5V28h-.969V12.719c.177-.106.333-.253.469-.406zM8.562 14.78l-2 4 .907.438 2-4-.906-.438zm2 2-2.5 5 .907.438 2.5-5-.906-.438zM21 19h5v9h-5v-9zm1 3v2h1v-2h-1zM2 28h16v2H2v-2zm27 0h2v2h-2v-1.375a.5.5 0 0 0 0-.125V28zm-9.969 1H28v1h-8.969v-1z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible"></path></svg> Commercial
+                                    <input type="radio" class="btn-check" name="property_type" value="Commercial" autocomplete="off" onchange="changeColor(this)">
+                                </label>
+                                <label class="btn btn-outline-orange property-label">
+                                    <input type="radio" class="btn-check" name="property_type" value="Other" autocomplete="off" onchange="changeColor(this)">
+                                    <i class="fas fa-question"></i> Other
+                                </label>
                             </div>
-                        <!-- Title -->
+                        </div>
+                        <!-- Previous Button, Next Button -->
+                        <button type="button" class="btn btn-orange next">Next</button>
+
+                    </div>
+                    <!-- advert type -->
+                    <div class="step" style=" min-height: 60vh;">
+                        <!-- Step 2 Content -->
+
+                        <div class="form-group">
+                            <label class="form-label">Advert Type</label>
+                            <div class="btn-group-toggle  d-flex justify-content-center" data-toggle="buttons">
+                                <label class="btn btn-outline-orange property-label">
+                                    <input type="checkbox" name="advert_type" value="For Sale"> For Sale
+                                </label>
+                                <label class="btn btn-outline-orange property-label">
+                                    <input type="checkbox" name="advert_type" value="For Rent"> For Rent
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="w-100 h-auto mt-10 ">
+                        <button type="button" class="btn btn-white prev">Previous</button>
+                        <button type="button" class="btn btn-orange next">Next</button>
+                        </div>
+                        <!-- Previous Button, Next Button -->
+                    </div>
+
+                    <!-- contact info step -->
+                    <div class="step" style=" min-height: 60vh;">
+                        <div class="container">
+                            <div class="row g-0 vh-lg-100">
+                                <div class="pe-lg-5">
+                                    <div class="row">
+                                        <!-- First Name-->
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="first_name" class="form-label">First name</label>
+                                                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="" value="" required="">
+                                            </div>
+                                        </div>
+
+                                        <!-- Last Name-->
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="last_name" class="form-label">Last name</label>
+                                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="" value="" required="">
+                                            </div>
+                                        </div>
+
+                                        <!-- Email-->
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+                                            </div>
+                                            <!-- phone -->
+                                            <div class="form-group">
+                                                <label for="phone" class="form-label text-capitalize">phone</label>
+                                                <input type="tel" class="form-control" id="phone" name="phone">
+                                            </div>
+
+                                            <!-- Mailing List Signup-->
+                                            <div class="form-group form-check m-0">
+                                                <input type="checkbox" class="form-check-input" id="add-mailinglist" checked="">
+                                                <label class="form-check-label small text-muted" for="add-mailinglist">Keep me updated with your latest news and offers</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-white prev">Previous</button>
+
+                                    <button type="button" class="btn btn-orange next">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- prop info step -->
+                    <div class="step" style=" min-height: 60vh;">
+                        <!-- Second step content -->
+                        <!-- Property Title -->
                         <div class="form-group">
                             <label for="title" class="form-label">Property Title</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Enter property title" required>
                         </div>
-                        <!-- / Title -->
-
                         <!-- Description -->
                         <div class="form-group">
                             <label for="description" class="form-label">Description</label>
                             <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter property description"></textarea>
                         </div>
-                        <!-- / Description -->
-
-                        <!-- City -->
+                        <!-- Price -->
+                        <div class="form-group">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="price" name="price" placeholder="Enter price" required>
+                        </div>
+                        <!-- / Price -->
+                        <!-- Add more fields for the second step -->
+                        <button type="button" class="btn btn-white prev">Previous</button>
+                        <button type="button" class="btn btn-orange next">Next</button>
+                    </div>
+                    <!-- prop address step -->
+                    <div class="step" style=" min-height: 60vh;">
+                        <!-- Second step content -->
+                         <!-- City -->
                         <div class="form-group">
                             <label for="city" class="form-label">City</label>
                             <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
@@ -94,22 +173,19 @@
                             <input type="text" class="form-control" id="street_address" name="street_address" placeholder="Enter street address" required>
                         </div>
                         <!-- / Street Address -->
-
                         <!-- Property Number -->
                         <div class="form-group">
                             <label for="property_number" class="form-label">Property Number</label>
                             <input type="number" class="form-control" id="property_number" name="property_number" placeholder="Enter property number" required>
                         </div>
                         <!-- / Property Number -->
+                        <!-- Add more fields for the second step -->
+                        <button type="button" class="btn btn-white prev">Previous</button>
+                        <button type="button" class="btn btn-orange next">Next</button>
+                    </div>
+                    <!-- prop detials step -->
 
-                        <!-- Price -->
-                        <div class="form-group">
-                            <label for="price" class="form-label">Price</label>
-                            <input type="number" class="form-control" id="price" name="price" placeholder="Enter price" required>
-                        </div>
-                        <!-- / Price -->
-
-
+                    <div class="step" style=" min-height: 60vh;">
                         <!-- Plot Area -->
                         <div class="form-group">
                             <label for="plot_area" class="form-label">Plot Area(m^2)</label>
@@ -137,32 +213,13 @@
                             <input type="number" class="form-control" id="bathrooms" name="bathrooms" placeholder="Enter number of bathrooms" required>
                         </div>
                         <!-- / Bathrooms -->
+                        <!-- Add more fields for the second step -->
+                        <button type="button" class="btn btn-white prev">Previous</button>
+                        <button type="button" class="btn btn-orange next">Next</button>
+                    </div>
 
-                        <!-- Advert Type -->
-                        <div class="form-group">
-                            <label for="advert_type" class="form-label">Advert Type</label>
-                            <select class="form-select" id="advert_type" name="advert_type" required>
-                                <option value="For Sale">For Sale</option>
-                                <option value="For Rent">For Rent</option>
-                                <option value="Auction">Auction</option>
-                            </select>
-                        </div>
-                        <!-- / Advert Type -->
-
-                        <!-- Property Type -->
-                        <div class="form-group">
-                            <label for="property_type" class="form-label">Property Type</label>
-                            <select class="form-select" id="property_type" name="property_type" required>
-                                <option value="House">House</option>
-                                <option value="Apartment">Apartment</option>
-                                <option value="Office">Office</option>
-                                <option value="Warehouse">Warehouse</option>
-                                <option value="Commercial">Commercial</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <!-- / Property Type -->
-
+                    <!-- prop info step -->
+                    <div class="step" style=" min-height: 60vh;">
                         <!-- Cover Photo -->
                         <div class="form-group">
                             <label for="cover_photo" class="form-label">Cover Photo</label>
@@ -176,34 +233,21 @@
                             <input type="file" class="form-control" id="vedio" name="vedio">
                         </div>
                         <!-- / Vedio -->
-                          <!-- Photos -->
-                            <div class="form-group">
-                                <label for="photos" class="form-label">Photos</label>
-                                <input type="file" class="form-control" id="photos" name="photos" multiple>
-                                <small class="form-text text-muted">Tap to select multiple photos.</small>
-                            </div>
-                            <!-- / Photos -->
+                        <!-- Photos -->
+                        <div class="form-group">
+                            <label for="photos" class="form-label">Photos</label>
+                            <input type="file" class="form-control" id="photos" name="photos" multiple>
+                            <small class="form-text text-muted">Tap to select multiple photos.</small>
+                        </div>
+                        <!-- / Photos -->
 
-
-                        <!-- Submit Button -->
-                        <button type="submit" name="submit" class="btn btn-dark w-100">Submit</button>
-                        <!-- / Submit Button -->
+                        <button type="button" class="btn btn-white prev">Previous</button>
+                        <button type="submit" class="btn btn-orange">Submit</button>
                     </div>
-                </div>
-                <!-- Sidebar -->
 
-</div>
-</div>
-</section>
-</form>
+                    <!-- Additional steps go here -->
 
-                </div>
-                <div class="col-12 col-lg-5 bg-light pt-lg-10 aside-checkout pb-5 pb-lg-0 my-5 my-lg-0">
-                    <div class="p-4 py-lg-0 pe-lg-0 ps-lg-5">
-                        <div class="pb-3">
-
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -255,4 +299,48 @@
 
 </script>
 
+ <script>
+     // JavaScript for multi-step form
+     const prevBtns = document.querySelectorAll('.prev');
+     const nextBtns = document.querySelectorAll('.next');
+     const steps = document.querySelectorAll('.step');
+
+     let currentStep = 0;
+
+     function showStep(stepIndex) {
+         steps.forEach((step, index) => {
+             if (index === stepIndex) {
+                 step.style.display = 'block';
+             } else {
+                 step.style.display = 'none';
+             }
+         });
+     }
+
+     function goToNextStep() {
+         currentStep++;
+         if (currentStep >= steps.length) {
+             currentStep = steps.length - 1;
+         }
+         showStep(currentStep);
+     }
+
+     function goToPrevStep() {
+         currentStep--;
+         if (currentStep < 0) {
+             currentStep = 0;
+         }
+         showStep(currentStep);
+     }
+
+     prevBtns.forEach(btn => {
+         btn.addEventListener('click', goToPrevStep);
+     });
+
+     nextBtns.forEach(btn => {
+         btn.addEventListener('click', goToNextStep);
+     });
+
+     showStep(currentStep);
+ </script>
  {% endblock %}

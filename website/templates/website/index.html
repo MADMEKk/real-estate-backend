@@ -84,7 +84,7 @@
                         <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:properties' %}?status=for rent">Rent</a>
                     </li>
                     <li class="nav-item me-lg-4">
-                        <a class="nav-link fw-bolder py-lg-4" href="#">About Us</a>
+                        <a class="nav-link fw-bolder py-lg-4" href="#map">About Us</a>
                     </li>
                     <li class="nav-item me-lg-4">
                         <a class="nav-link fw-bolder py-lg-4" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">Contact Us</a>
@@ -176,84 +176,48 @@
 
 
 
-        <!-- Featured Brands-->
-        <div class="brand-section container-fluid aos-init aos-animate" data-aos="fade-in">
-            <div class="bg-overlay-sides-white-to-transparent bg-white py-5 py-md-7">
-             <section class="marquee marquee-hover-pause">
-                    <div class="marquee-body">
-                        <div class="marquee-section animation-marquee-50">
-                            <div class="mx-3 mx-lg-5 f-w-24">
-                                <a class="d-block" href="./category.html">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="{% static 'images/logos/logo-1.png'%}" alt="">
-                                    </picture>
+            <div class="mb-lg-7 bg-light py-4 rounded-pill mt-3" data-aos="fade-in">
+                <div class="container">
+                    <div class="row gx-3 align-items-center">
+                        <div class="col-12 justify-content-center justify-content-md-between align-items-center d-flex flex-wrap">
+                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                <a class="d-block text-decoration-none" href="{% url 'website:properties' %}?property_type=House">
+                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/house.svg'%}" alt="Residential">
+                                    <p class="text-center mb-0 text-dark">House</p>
                                 </a>
                             </div>
-                            <div class="mx-3 mx-lg-5 f-w-24">
-                                <a class="d-block" href="./category.html">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="{% static 'images/logos/logo-2.png'%}" alt="">
-                                    </picture>
+                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                <a class="d-block text-decoration-none" href="{% url 'website:properties' %}?property_type=Apartment" >
+                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/building.svg'%}" alt="Commercial">
+                                    <p class="text-center mb-0 text-dark">Apartment</p>
                                 </a>
                             </div>
-                            <div class="mx-3 mx-lg-5 f-w-24">
-                                <a class="d-block" href="./category.html">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="{% static 'images/logos/logo-3.png'%}" alt="">
-                                    </picture>
+                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                <a class="d-block text-decoration-none" href="{% url 'website:properties' %}?property_type=Commercial" >
+                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/shop.svg'%}" alt="Vacation Homes">
+                                    <p class="text-center mb-0 text-dark">Commercial</p>
                                 </a>
                             </div>
-                            <div class="mx-3 mx-lg-5 f-w-24">
-                                <a class="d-block" href="./category.html">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="{% static 'images/logos/logo-4.png'%}" alt="">
-                                    </picture>
+                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                <a class="d-block text-decoration-none" href="{% url 'website:properties' %}?property_type=Office" >
+                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/desk.svg'%}" alt="Land">
+                                    <p class="text-center mb-0 text-dark">Office</p>
                                 </a>
                             </div>
-                            <div class="mx-3 mx-lg-5 f-w-24">
-                                <a class="d-block" href="./category.html">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="{% static 'images/logos/logo-5.png'%}" alt="">
-                                    </picture>
-                                </a>
-                            </div>
-                            <div class="mx-3 mx-lg-5 f-w-24">
-                                <a class="d-block" href="./category.html">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="{% static 'images/logos/logo-6.png'%}" alt="">
-                                    </picture>
-                                </a>
-                            </div>
-                            <div class="mx-3 mx-lg-5 f-w-24">
-                                <a class="d-block" href="./category.html">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="{% static 'images/logos/logo-7.png'%}" alt="">
-                                    </picture>
-                                </a>
-                            </div>
-                            <div class="mx-3 mx-lg-5 f-w-24">
-                                <a class="d-block" href="./category.html">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="{% static 'images/logos/logo-8.png'%}" alt="">
-                                    </picture>
-                                </a>
-                            </div>
-                            <div class="mx-3 mx-lg-5 f-w-24">
-                                <a class="d-block" href="./category.html">
-                                    <picture>
-                                        <img class="img-fluid d-table mx-auto" src="{% static 'images/logos/logo-9.png'%}" alt="">
-                                    </picture>
+                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                <a class="d-block text-decoration-none" href="{% url 'website:properties' %}?property_type=Warehouse" >
+                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/logistic.svg'%}" alt="Investment Properties">
+                                    <p class="text-center mb-0 text-dark">Warehouse</p>
                                 </a>
                             </div>
                         </div>
                     </div>
-                </section>
-        </div>
-        </div>
+                </div>
+            </div>
+            <!-- Category Toolbar-->
 
 
-   <!--/ Featured Brands-->
-    <!-- Staff Picks-->
+        <!-- Staff Picks-->
     <section class="mb-9 mt-5 aos-init aos-animate" data-aos="fade-up">
             <div class="container">
                 <div class="w-md-50 mb-5">
@@ -343,90 +307,52 @@
         </section>
         <!-- / Staff Picks-->
 
-     <!-- Image Hotspot Banner-->
-<section class="my-10 position-relative">
-    <!-- SVG Shape Divider-->
-    <div class="position-absolute z-index-50 text-white top-0 start-0 end-0">
-        <svg class="align-self-start d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="1283 0 0 0 0 53.25 1283 0"/></svg>
-    </div>
-    <!-- /SVG Shape Divider-->
-
-    <div class="w-100 h-100 bg-img-cover bg-pos-center-center hotspot-container py-5 py-md-7 py-lg-10" style="background-image: url({% static 'images/banners/imagehotspo.jpg'%});">
-        <div class="hotspot d-none d-lg-block" data-options='{
-            "placement": {
-                "left": "68%",
-                "bottom": "40%"
-            },
-            "alwaysVisible": true,
-            "alwaysAnimate": true,
-            "contentTarget": "#hotspot-one",
-            "trigger": "mouseenter"
-        }'>
-        </div>
-        <div class="hotspot d-none d-lg-block" data-options='{
-            "placement": {
-                "left": "53%",
-                "top": "40%"
-            },
-            "alwaysVisible": true,
-            "alwaysAnimate": true,
-            "contentTarget": "#hotspot-one"
-        }'>
-        </div>
-        <div class="container py-lg-8 position-relative z-index-10 d-flex align-items-center" data-aos="fade-left">
-            <div class="py-8 d-flex justify-content-end align-items-start align-items-lg-end flex-column col-lg-4 text-lg-end">
-                <p class="small fw-bolder text-uppercase tracking-wider mb-2 text-muted">Luxurious Living</p>
-                <h2 class="display-5 fw-bold mb-3">Ready to Find Your Dream Residence?</h2>
-                <p class="lead d-none d-lg-block">Real estate is about finding the perfect residence that fits your lifestyle. At Dream Residences, we offer a curated selection of luxurious homes tailored to your preferences and needs.</p>
-                <a class="text-decoration-none fw-bolder" href="#">Explore Listings →</a>
+        <!-- Download App Section -->
+        <section class="my-10 position-relative">
+            <!-- SVG Shape Divider-->
+            <div class="position-absolute z-index-50 text-white top-0 start-0 end-0">
+                <svg class="align-self-start d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="1283 0 0 0 0 53.25 1283 0"/></svg>
             </div>
-        </div>
+            <!-- /SVG Shape Divider-->
 
-        <!-- Example Hotspot HTML Content -->
-        <div id="hotspot-one" class="d-none">
-            <div class="m-n2 rounded overflow-hidden">
-                <div class="mb-1 bg-light d-flex justify-content-center">
-                    <div class="f-w-48 px-3 pt-3">
-                        <img class="img-fluid" src="{% static 'images/banners/imagehotspo.jpg'%}" alt="Bootstrap 5 Template by Pixel Rocket">
-                    </div>
-                </div>
-                <div class="px-4 py-4 text-center">
-                    <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
-                        <!-- Review Stars Small-->
-                        <div class="rating position-relative d-table">
-                            <div class="position-absolute stars" style="width: 80%">
-                                <i class="ri-star-fill text-dark mr-1"></i>
-                                <i class="ri-star-fill text-dark mr-1"></i>
-                                <i class="ri-star-fill text-dark mr-1"></i>
-                                <i class="ri-star-fill text-dark mr-1"></i>
-                                <i class="ri-star-fill text-dark mr-1"></i>
-                            </div>
-                            <div class="stars">
-                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                                <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
+            <div class="w-100 h-100 bg-img-cover bg-pos-center-center download-app-container py-5 py-md-7 py-lg-10" style="background-image: url({% static 'images/banners/imagehotspo.jpg'%});">
+                <div class="container py-lg-8 position-relative z-index-10 d-flex align-items-center" data-aos="fade-left">
+                    <div class="py-8 d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-start align-items-lg-end col-lg-8 text-center text-lg-end">
+                        <div style="margin-right: 20px;"> <!-- Added margin -->
+                            <p class="small fw-bolder text-uppercase tracking-wider mb-2 text-muted">Download Our App</p>
+                            <h2 class="display-5 fw-bold mb-3">Find Your Home Faster on the Go</h2>
+                            <p class="lead d-none d-lg-block">Download our app to explore thousands of listings, save your favorites, and connect with real estate agents wherever you are.</p>
+                            <div class="d-lg-none mb-3">
+                                <a href="#" class="me-3">
+                                    <img src="{% static 'img/get-it-on-google-play-badge-png-get-it-on-google-play-logo-800.png'%}" alt="Get it on Google Play" width="150">
+                                </a>
+                                <a href="#">
+                                    <img src="{% static 'img/IC_button-app-store@2x.png.png'%}" alt="Download on the App Store" width="150">
+                                </a>
                             </div>
                         </div>
-                        <span class="small fw-bolder ms-2 text-muted"> 4.4 (1289)</span>
+                        <div class="position-relative d-none d-lg-block" style="max-width: 250px;">
+                            <img src="{% static 'img/smartphone-and-mobile-phone-free-png.png'%}" alt="Phone Icon" class="img-fluid mx-auto">
+                            <div class="position-absolute top-50 start-50 translate-middle" style="transform: translate(-50%, -50%);">
+                                <a href="#" class="me-3">
+                                    <img src="{% static 'img/get-it-on-google-play-badge-png-get-it-on-google-play-logo-800.png'%}" alt="Get it on Google Play" width="150">
+                                </a>
+                                <a href="#">
+                                    <img src="{% static 'img/IC_button-app-store@2x.png.png'%}" alt="Download on the App Store" width="150">
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <p class="mb-0 mx-4">Luxury Waterfront Villa</p>
-                    <p class="lead lh-1 m-0 fw-bolder mt-2 mb-3">$1,999,000</p>
-                    <a href="./property-details.html" class="fw-bolder text-link-border pb-1 fs-6">Full details <i class="ri-arrow-right-line align-bottom"></i></a>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- SVG Shape Divider-->
-    <div class="position-absolute z-index-50 text-white bottom-0 start-0 end-0">
-        <svg class="align-self-end d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="0 53.25 1283 53.25 1283 0 0 53.25"/></svg>
-    </div>
-    <!-- /SVG Shape Divider-->
-</section>
-<!-- / Image Hotspot Banner-->
-
+            <!-- SVG Shape Divider-->
+            <div class="position-absolute z-index-50 text-white bottom-0 start-0 end-0">
+                <svg class="align-self-end d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="0 53.25 1283 53.25 1283 0 0 53.25"/></svg>
+            </div>
+            <!-- /SVG Shape Divider-->
+        </section>
+        <!-- / Download App Section-->
 
         <!-- Linked Product Carousels-->
        <!-- Homepage Intro-->
@@ -475,9 +401,9 @@
                     <h3 class="fs-1 fw-bold mb-0 lh-1"><i class="ri-home-4-line align-bottom"></i> Explore Properties</h3>
                 </div>
                 <div class="col-12 col-lg-4 d-flex justify-content-center flex-column aos-init aos-animate" data-aos="fade-up" data-aos-delay="250">
-                    <a href="./properties.html" class="btn btn-orange btn-orange-chunky text-white my-1"><span>View Featured Listings</span></a>
-                    <a href="./search.html" class="btn btn-orange btn-orange-chunky text-white my-1"><span>Search Properties</span></a>
-                    <a href="./contact.html" class="btn btn-orange btn-orange-chunky text-white my-1"><span>Contact an Agent</span></a>
+                    <a href="/properties" class="btn btn-orange btn-orange-chunky text-white my-1"><span>View Featured Listings</span></a>
+                    <a href="/properties" class="btn btn-orange btn-orange-chunky text-white my-1"><span>Search Properties</span></a>
+                    <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" class="btn btn-orange btn-orange-chunky text-white my-1"><span>Contact an Agent</span></a>
                 </div>
                 <div class="col-12 col-lg-4 text-center text-lg-end aos-init aos-animate" data-aos="fade-left" data-aos-delay="250">
                     <p class="lead fw-bolder">Find your dream home with us today.</p>
@@ -496,7 +422,7 @@
 
         <!-- Reviews-->
      <section>
-    <div class="container aos-init aos-animate" data-aos="fade-in">
+    <div class="container aos-init aos-animate mb-5" data-aos="fade-in">
         <h2 class="fs-1 fw-bold mb-3 text-center mb-5">Property Reviews</h2>
         <div class="row g-3">
             <div class="col-12 col-lg-4 aos-init aos-animate" data-aos="fade-left">
@@ -600,10 +526,16 @@
 </section>
         <!-- /Reviews-->
 
+
         <!-- /Page Content -->
     </section>
-    <!-- / Main Section-->
 
+    <!-- / Main Section-->
+<!-- Leaflet Map Section -->
+<section class="">
+    <div id="map" class="w-100" style="height: 400px; border-radius: 20px; overflow: hidden;"></div>
+</section>
+<!-- / Leaflet Map Section -->
 {% endblock %}
  {% block subject %}
               <div class="d-flex justify-content-between align-items-center">

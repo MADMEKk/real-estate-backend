@@ -37,10 +37,9 @@
 }
 
 .card-hover:hover .card-title,
-.card-hover:hover .card-text,
-.card-hover:hover .badge,
-.card-hover:hover .btn {
-    color: #9f7c7c; /* Change text color to white on hover */
+.card-hover:hover .card-text
+ {
+    color: #fc6229; /* Change text color to white on hover */
 }
 .card-hover:hover {
     transform: scale(1.1);

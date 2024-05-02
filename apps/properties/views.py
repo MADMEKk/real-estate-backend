@@ -27,14 +27,21 @@ class PropertyFilter(django_filters.FilterSet):
     property_type = django_filters.CharFilter(
         field_name="property_type", lookup_expr="iexact"
     )
+     
+    city = django_filters.CharFilter(field_name="city", lookup_expr='icontains')
+
+    street_address = django_filters.CharFilter(field_name="street_address", lookup_expr='icontains')
+
+    
+    
 
     price = django_filters.NumberFilter()
     price__gt = django_filters.NumberFilter(field_name="price", lookup_expr="gt")
     price__lt = django_filters.NumberFilter(field_name="price", lookup_expr="lt")
-
+    property_location = django_filters.NumberFilter(field_name="postal_code", lookup_expr="iexact")
     class Meta:
         model = Property
-        fields = ["advert_type", "property_type", "price"]
+        fields = ["advert_type", "property_type","city","street_address", "price","postal_code"]
 
 
 class ListAllPropertiesAPIView(generics.ListAPIView):
@@ -48,7 +55,7 @@ class ListAllPropertiesAPIView(generics.ListAPIView):
     ]
 
     filterset_class = PropertyFilter
-    search_fields = ["country", "city"]
+    search_fields = [ "city"]
     ordering_fields = ["created_at"]
 
     def dispatch(self, request, *args, **kwargs):

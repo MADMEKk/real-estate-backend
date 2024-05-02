@@ -29,7 +29,13 @@
     
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{% static 'css/libs.bundle.css'%}" />
-
+    <!-- Leaflet CSS -->
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+            crossorigin=""
+    />
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'css/theme.bundle.css'%}" />
     <link rel="stylesheet" href="{% static 'css/style.css'%}" />
@@ -42,6 +48,7 @@
     <!-- Fix for custom scrollbar if JS is disabled-->
     <noscript>
         <style>
+
           /**
           * Reinstate scrolling for non-JS clients
           */
@@ -49,7 +56,30 @@
             overflow: auto;
           }
         </style>
+
     </noscript>
+    <style>
+      .svg-icon {
+        width: 4em !important;
+        height: 4em !important;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+      }
+      /* Hide the circle of the radio button */
+      .btn-check {
+        border-color: transparent;
+        visibility : hidden;
+      }
+
+      .property-label input[type="radio"]:checked + ~ .svg-icon {
+        /* Add your desired background color here */
+        background-color: #fc6229;
+
+      }
+
+
+    </style>
 
     <!-- Page Title -->
     <title>Aures | REAL ESTATE</title>
@@ -110,7 +140,28 @@
             });
         });
     </script>
+  <script>
+    function changeColor(radioButton) {
+    const svgIcon = radioButton.parentElement;
+    if (radioButton.checked) {
+      svgIcon.style.backgroundColor = "#fc6229";
+      svgIcon.style.color = "black"
+    } else {
+      svgIcon.style.backgroundColor = ""; // Reset color when unchecked
+    }
 
+    // Get all radio buttons with the same name
+    const radioButtons = document.querySelectorAll(`input[type="radio"][name="${radioButton.name}"]`);
+
+    // Loop through radio buttons and set background color of their siblings (svg icons) to white
+    radioButtons.forEach(button => {
+      const siblingIcon = button.parentElement;
+      if (button !== radioButton) { // Exclude the checked radio button
+        siblingIcon.style.backgroundColor = "white";
+      }
+    });
+  }
+  </script>
 
   <script>
     function openModal() {
@@ -139,6 +190,104 @@
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/lightgallery/dist/js/lightgallery.min.js"></script>
-{% block scripts %} {% endblock %}
+
+
+  <!-- Leaflet JavaScript -->
+  <script
+          src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+          integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+          crossorigin=""
+  ></script>
+
+  <!-- Initialize Leaflet Map -->
+  <script>
+    // Initialize and add the map
+    function initMap() {
+      // The location of your business
+      const businessLocation = [35.697494095452626, -0.5895644190306065];
+      // Create the map centered at your business location
+      const map = L.map("map").setView(businessLocation, 15);
+      // Add the OpenStreetMap tile layer
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      }).addTo(map);
+      // Add a marker at your business location
+      L.marker(businessLocation).addTo(map);
+    }
+    // Call the initMap function when the page is loaded
+    window.onload = initMap;
+  </script>
+
+<script>
+  function getPropertyHTML(item) {
+  return `
+  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+    <div class="card card-listing hover-trigger card-hover border">
+      <img src="${item.cover_photo}" class="card-img-top" style="object-fit: cover; height: 200px;" alt="Property Image">
+      <div class="position-absolute top-5 start-7 translate-middle badge bg-dark p-2">${item.advert_type}</div>
+      <div class="card-body">
+        <h5 class="card-title">${item.title}</h5>
+        <p class="card-text">${item.street_address}, ${item.city}</p>
+        <p class="card-text"><small class="text-dark">Price: ${item.price}</small></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Bedrooms <span class="badge bg-dark">${item.bedrooms}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Bathrooms <span class="badge bg-dark">${item.bathrooms}</span>
+        </li>
+      </ul>
+      <div class="card-body">
+        <a href="http://127.0.0.1:8000/property/${item.slug}" class="btn btn-orange rounded-pill py-2 px-3">See Details</a>
+      </div>
+    </div>
+  </div>
+  `;
+  }
+
+  function fetchData(cityName) {
+  fetch(`http://127.0.0.1:8000/api/v1/properties/all/?city=${cityName}`)
+  .then(response => response.json())
+  .then(data => {
+  const propertyContainer = document.getElementById('property');
+  propertyContainer.innerHTML = ''; // Clear previous results
+
+  // Check if 'results' key exists and it's an array
+  if (data.results && Array.isArray(data.results)) {
+  // Iterate through the fetched data.results array and create HTML elements using getPropertyHTML function
+  data.results.forEach(property => {
+  const propertyHTML = getPropertyHTML(property);
+  propertyContainer.innerHTML += propertyHTML;
+  });
+  } else {
+  // If 'results' key doesn't exist or it's not an array, log an error message
+  console.error('Invalid data format:', data);
+  }
+  })
+  .catch(error => console.error('Error fetching data:', error));
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+  const searchForm = document.getElementById('searchForm');
+  searchForm.addEventListener('input', event => {
+  const cityName = event.target.value.trim();
+  const propertyContainer = document.getElementById('property');
+  // Check if the search input is empty
+  if (cityName) {
+  fetchData(cityName);
+  } else {
+  // Clear the property container when the search input is empty
+  propertyContainer.innerHTML = '';
+  }
+  });
+  });
+  </script>
+
+
+  {% block scripts %} {% endblock %}
   </body>
+
+
 </html>
