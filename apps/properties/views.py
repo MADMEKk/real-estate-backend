@@ -14,7 +14,7 @@ from .exceptions import PropertyNotFound
 from .models import Property, PropertyViews, Photo, Propertysellerinfo
 from .pagination import PropertyPagination
 from .serializers import (PropertyCreateSerializer, PropertySerializer,
-                          PropertyViewSerializer)
+                          PropertyViewSerializer,UpdatePropertySerializer)
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +46,7 @@ class PropertyFilter(django_filters.FilterSet):
 
 class ListAllPropertiesAPIView(generics.ListAPIView):
     serializer_class = PropertySerializer
-    queryset = Property.objects.all().order_by("-created_at")
+    queryset = Property.published.all().order_by("-created_at")
     pagination_class = PropertyPagination
     filter_backends = [
         DjangoFilterBackend,
@@ -80,8 +80,7 @@ class ListAgentsPropertiesAPIView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]  # Add permission class to require authentication
 
     def get_queryset(self):
-        user = self.request.user
-        queryset = Property.objects.filter(user=user).order_by("-created_at")
+        queryset = Property.objects.all().order_by("-created_at")
         return queryset
 
 
@@ -119,27 +118,26 @@ class PropertyDetailView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(["PUT"])
+@api_view(['PUT'])
 @permission_classes([permissions.IsAuthenticated])
 def update_property_api_view(request, slug):
-    try:
-        property = Property.objects.get(slug=slug)
-    except Property.DoesNotExist:
-        raise PropertyNotFound
+     try:
+         property = Property.objects.get(slug=slug)
+     except Property.DoesNotExist:
+         raise PropertyNotFound
 
-    user = request.user
-    if property.user != user:
-        return Response(
-            {"error": "You can't update or edit a property that doesn't belong to you"},
-            status=status.HTTP_403_FORBIDDEN,
-        )
-    if request.method == "PUT":
-        data = request.data
-        serializer = PropertySerializer(property, data, many=False)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+     user = request.user
+     if property.user != user:
+         return Response(
+             {"error": "You can't update or edit a property that doesn't belong to you"},
+             status=status.HTTP_403_FORBIDDEN,
+         )
 
+     serializer = UpdatePropertySerializer(property, data=request.data, partial=True)
+     if serializer.is_valid():
+         serializer.save()
+         return Response(serializer.data)
+     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # for agents
 @api_view(["POST"])
@@ -224,6 +222,62 @@ class PropertySearchAPIView(APIView):
         return Response(serializer.data)
 
 
+class PropertyRankAPIView(APIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = PropertySerializer
+
+    def get(self, request):
+        queryset = Property.published.all()
+        data = request.query_params
+
+        advert_type = data.getlist("advert_type", [])
+        property_type = data.getlist("property_type", [])
+        pricegt = data.get("pricegt", 0)
+        pricelt = data.get("pricelt", float('inf'))
+        bedrooms = data.get("bedrooms", 0)
+        bathrooms = data.get("bathrooms", 0)
+        catch_phrase = data.get("catch_phrase", "")
+
+        # Apply initial search criteria
+        if advert_type:
+            queryset = queryset.filter(advert_type__in=advert_type)
+        if property_type:
+            queryset = queryset.filter(property_type__in=property_type)
+        if pricegt and pricelt:
+            queryset = queryset.filter(price__gt=pricegt, price__lt=pricelt)
+        if bedrooms:
+            queryset = queryset.filter(bedrooms__gte=bedrooms)
+        if bathrooms:
+            queryset = queryset.filter(bathrooms__gte=bathrooms)
+        if catch_phrase:
+            queryset = queryset.filter(description__icontains=catch_phrase)
+
+        # If no results, apply fallback mechanism
+        fallback_attempts = 0
+        max_fallback_attempts = 15  # Define how many fallback attempts to make
+
+        while not queryset.exists() and fallback_attempts < max_fallback_attempts:
+            fallback_attempts += 1
+
+            # Gradually widen the price range
+            pricegt = max(0, pricegt - (0.2 * pricegt))  # Decrease minimum price by 20%
+            pricelt = pricelt + (0.2 * pricelt)  # Increase maximum price by 20%
+            queryset = Property.published.all()
+            if advert_type:
+                queryset = queryset.filter(advert_type__in=advert_type)
+            if property_type:
+                queryset = queryset.filter(property_type__in=property_type)
+            if pricegt and pricelt:
+                queryset = queryset.filter(price__gt=pricegt, price__lt=pricelt)
+            if bedrooms:
+                queryset = queryset.filter(bedrooms__gte=bedrooms)
+            if bathrooms:
+                queryset = queryset.filter(bathrooms__gte=bathrooms)
+            if catch_phrase:
+                queryset = queryset.filter(description__icontains=catch_phrase)
+
+        serializer = PropertySerializer(queryset, many=True)
+        return Response(serializer.data)
 # for seller
 @api_view(["POST"])
 def create_property_request_api_view(request):
@@ -262,11 +316,53 @@ def create_property_request_api_view(request):
 def upload_property_photos(property_id, photos):
     property = Property.objects.get(id=property_id)
     for photo in photos:
+
         Photo.objects.create(image=photo, property=property)
     return Response("Photos uploaded successfully")
 
+
+@api_view(['PUT'])
+@permission_classes([permissions.IsAuthenticated])
+def replace_property_photo(request, property_slug, photo_id):
+    try:
+        property = Property.objects.get(slug=property_slug)
+        photo = Photo.objects.get(id=photo_id, property=property)
+
+        if 'file' in request.FILES:
+            photo.image = request.FILES['file']
+            photo.save()
+            return Response("Photo replaced successfully", status=status.HTTP_200_OK)
+        else:
+            return Response("No photo provided", status=status.HTTP_400_BAD_REQUEST)
+    except Property.DoesNotExist:
+        return Response("Property not found", status=status.HTTP_404_NOT_FOUND)
+    except Photo.DoesNotExist:
+        return Response("Photo not found", status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def create_property_seller_info(property_id, seller_info):
     property = Property.objects.get(id=property_id)
     Propertysellerinfo.objects.create(property=property, **seller_info)
     return Response("Seller info created successfully")
+
+
+@api_view(['PUT'])
+def toggle_publish_property(request, slug):
+    if request.method == 'PUT':
+        try:
+            property_instance = Property.objects.get(slug=slug)
+            published = request.data.get('published')
+            if published == 'true':
+                property_instance.published_status = True
+            else:
+                property_instance.published_status =  False
+            property_instance.save()
+            return Response({'message': 'Property published/unpublished successfully.'}, status=200)
+        except Property.DoesNotExist:
+            return Response({'error': 'Property does not exist.'}, status=404)
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+    else:
+        return Response({'error': 'Invalid request method.'}, status=400)
+

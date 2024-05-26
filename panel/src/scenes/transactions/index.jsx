@@ -1,111 +1,127 @@
-import React, { useState } from "react";
-import { Box, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
-import { useGetTransactionsQuery } from "state/api";
-import Header from "components/Header";
-import DataGridCustomToolbar from "components/DataGridCustomToolbar";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, useTheme, Button, Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
+import { getProperties, reset } from "../../features/properties/propertySlice";
+import Header from "../../components/Header";
+import ProductTableRow from "../../components/ProductTableRow";
+import { publishProperty, unpublishProperty } from "../../features/properties/propertySlice";
 
 const Transactions = () => {
-  const theme = useTheme();
+    const theme = useTheme();
+    const dispatch = useDispatch();
+    const { properties: allProperties = [], isLoading } = useSelector((state) => state.properties); // Set default value for allProperties
+    const [unpublishedOnly, setUnpublishedOnly] = useState(false);
 
-  // values to be sent to the backend
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(20);
-  const [sort, setSort] = useState({});
-  const [search, setSearch] = useState("");
+    // Filter properties based on unpublishedOnly state
+    const properties = unpublishedOnly ? allProperties.filter(property => !property.published_status) : allProperties;
 
-  const [searchInput, setSearchInput] = useState("");
-  const { data, isLoading } = useGetTransactionsQuery({
-    page,
-    pageSize,
-    sort: JSON.stringify(sort),
-    search,
-  });
+    useEffect(() => {
+        // Fetch properties initially
+        dispatch(getProperties());
 
-  const columns = [
-    {
-      field: "_id",
-      headerName: "ID",
-      flex: 1,
-    },
-    {
-      field: "userId",
-      headerName: "User ID",
-      flex: 1,
-    },
-    {
-      field: "createdAt",
-      headerName: "CreatedAt",
-      flex: 1,
-    },
-    {
-      field: "products",
-      headerName: "# of Products",
-      flex: 0.5,
-      sortable: false,
-      renderCell: (params) => params.value.length,
-    },
-    {
-      field: "cost",
-      headerName: "Cost",
-      flex: 1,
-      renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
-    },
-  ];
+        return () => {
+            dispatch(reset());
+        };
+    }, [dispatch]); // Only run when dispatch changes
 
-  return (
-    <Box m="1.5rem 2.5rem">
-      <Header title="TRANSACTIONS" subtitle="Entire list of transactions" />
-      <Box
-        height="80vh"
-        sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: theme.palette.primary.light,
-          },
-          "& .MuiDataGrid-footerContainer": {
-            backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
-            borderTop: "none",
-          },
-          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-            color: `${theme.palette.secondary[200]} !important`,
-          },
-        }}
-      >
-        <DataGrid
-          loading={isLoading || !data}
-          getRowId={(row) => row._id}
-          rows={(data && data.transactions) || []}
-          columns={columns}
-          rowCount={(data && data.total) || 0}
-          rowsPerPageOptions={[20, 50, 100]}
-          pagination
-          page={page}
-          pageSize={pageSize}
-          paginationMode="server"
-          sortingMode="server"
-          onPageChange={(newPage) => setPage(newPage)}
-          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          onSortModelChange={(newSortModel) => setSort(...newSortModel)}
-          components={{ Toolbar: DataGridCustomToolbar }}
-          componentsProps={{
-            toolbar: { searchInput, setSearchInput, setSearch },
-          }}
-        />
-      </Box>
-    </Box>
-  );
+    const handleToggleUnpublished = () => {
+        setUnpublishedOnly(!unpublishedOnly);
+    };
+
+    const columns = [
+        { id: "_id", label: "ID", minWidth: 100 },
+        { id: "user", label: "User", minWidth: 100 },
+        { id: "createdAt", label: "Created At", minWidth: 100 },
+        { id: "price", label: "Price", minWidth: 100 },
+        { id: "bedrooms", label: "Bedrooms", minWidth: 100 },
+        { id: "bathrooms", label: "Bathrooms", minWidth: 100 },
+        { id: "advert_type", label: "Advert Type", minWidth: 100 },
+        { id: "property_type", label: "Property Type", minWidth: 100 },
+        { id: "actions", label: "Actions", minWidth: 100 },
+    ];
+
+    const handlePublishProperty = async (propertyId) => {
+        try {
+            await dispatch(publishProperty(propertyId));
+            // Dispatch getProperties to refresh state after successful publish
+            dispatch(getProperties());
+        } catch (error) {
+            console.error("Error publishing property:", error);
+            // Handle publish error (optional: display error message to user)
+        }
+    };
+
+    const handleUnpublishProperty = async (propertyId) => {
+        try {
+            await dispatch(unpublishProperty(propertyId));
+            // Dispatch getProperties to refresh state after successful unpublish
+            dispatch(getProperties());
+        } catch (error) {
+            console.error("Error unpublishing property:", error);
+            // Handle unpublish error (optional: display error message to user)
+        }
+    };
+
+    return (
+        <Box m="1.5rem 2.5rem">
+            <Header title="TRANSACTIONS" subtitle="Entire list of transactions" />
+            {properties || !isLoading ? ( // Check if properties exist or data isn't loading
+                <Box
+                    height="80vh"
+                    sx={{
+                        "& .MuiDataGrid-root": {
+                            border: "none",
+                        },
+                        "& .MuiDataGrid-cell": {
+                            borderBottom: "none",
+                        },
+                        "& .MuiDataGrid-columnHeaders": {
+                            backgroundColor: theme.palette.background.alt,
+                            color: theme.palette.secondary[100],
+                            borderBottom: "none",
+                        },
+                        "& .MuiDataGrid-virtualScroller": {
+                            backgroundColor: theme.palette.primary.light,
+                        },
+                        "& .MuiDataGrid-footerContainer": {
+                            backgroundColor: theme.palette.background.alt,
+                            color: theme.palette.secondary[100],
+                            borderTop: "none",
+                        },
+                        "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+                            color: `${theme.palette.secondary[200]} !important`,
+                        },
+                    }}
+                >
+                    <Button onClick={handleToggleUnpublished} variant="outlined" color="primary" sx={{ mb: 2 }}>
+                        {unpublishedOnly ? "Show All Properties" : "Show Unpublished Only"}
+                    </Button>
+                    <Table stickyHeader>
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell key={column.id} style={{ minWidth: column.minWidth }}>
+                                        {column.label}
+                                    </TableCell>
+                                ))}                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {properties.map((property) => (
+                                <ProductTableRow
+                                    key={property.slug}
+                                    property={property}
+                                    onPublish={handlePublishProperty}
+                                    onUnpublish={handleUnpublishProperty}
+                                />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Box>
+            ) : (
+                <>Loading...</>
+            )}
+        </Box>
+    );
 };
 
 export default Transactions;

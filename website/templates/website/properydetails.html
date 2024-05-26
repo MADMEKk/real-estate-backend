@@ -300,52 +300,45 @@
         <!-- Related Products-->
         <div class="container my-8">
             <h3 class="fs-4 fw-bold mb-5 text-center">You May Also Like</h3>
-                <!-- Swiper Latest -->
-               <div class="swiper-container overflow-visible swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events swiper-container-css-mode" data-swiper="" data-options="{
-    &quot;spaceBetween&quot;: 25,
-    &quot;cssMode&quot;: true,
-    &quot;roundLengths&quot;: true,
-    &quot;scrollbar&quot;: {
-        &quot;el&quot;: &quot;.swiper-scrollbar&quot;,
-        &quot;hide&quot;: false,
-        &quot;draggable&quot;: true
-    },
-    &quot;navigation&quot;: {
-        &quot;nextEl&quot;: &quot;.swiper-next&quot;,
-        &quot;prevEl&quot;: &quot;.swiper-prev&quot;
-    },
-    &quot;breakpoints&quot;: {
-        &quot;576&quot;: {
-            &quot;slidesPerView&quot;: 1
+            <!-- Swiper Latest -->
+            <div class="swiper-container you-may-also-like-swiper overflow-visible" data-swiper="" data-options="{
+        &quot;spaceBetween&quot;: 25,
+        &quot;cssMode&quot;: true,
+        &quot;roundLengths&quot;: true,
+        &quot;scrollbar&quot;: {
+            &quot;el&quot;: &quot;.swiper-scrollbar&quot;,
+            &quot;hide&quot;: false,
+            &quot;draggable&quot;: true
         },
-        &quot;768&quot;: {
-            &quot;slidesPerView&quot;: 2
+        &quot;navigation&quot;: {
+            &quot;nextEl&quot;: &quot;.swiper-next&quot;,
+            &quot;prevEl&quot;: &quot;.swiper-prev&quot;
         },
-        &quot;992&quot;: {
-            &quot;slidesPerView&quot;: 3
-        },
-        &quot;1200&quot;: {
-            &quot;slidesPerView&quot;: 4
+        &quot;breakpoints&quot;: {
+            &quot;576&quot;: {
+                &quot;slidesPerView&quot;: 1
+            },
+            &quot;768&quot;: {
+                &quot;slidesPerView&quot;: 2
+            },
+            &quot;992&quot;: {
+                &quot;slidesPerView&quot;: 3
+            },
+            &quot;1200&quot;: {
+                &quot;slidesPerView&quot;: 4
+            }
         }
-    }
-}">
-    <div class="swiper-wrapper pb-5 pe-1">
-        <div class="swiper-slide d-flex h-auto swiper-slide-active" style="width: 432px; margin-right: 25px;">
-            <!-- Card Product-->
-
-            <!--/ Card Product-->
+    }">
+                <div class="swiper-wrapper pb-5 pe-1" id="related-properties">
+                    <!-- Dynamic slides will be appended here -->
+                </div>
+                <!-- Buttons-->
+                <div class="swiper-btn swiper-disabled-hide swiper-prev swiper-btn-side btn-icon bg-dark text-white ms-3 shadow-lg mt-n5 ms-n4"><i class="ri-arrow-left-s-line ri-lg"></i></div>
+                <div class="swiper-btn swiper-disabled-hide swiper-next swiper-btn-side swiper-btn-side-right btn-icon bg-dark text-white me-n4 shadow-lg mt-n5"><i class="ri-arrow-right-s-line ri-lg"></i></div>
+                <!-- Add Scrollbar -->
+                <div class="swiper-scrollbar"></div>
+            </div>
         </div>
-        <!-- Add other swiper-slide items similarly -->
-    </div>
-
-    <!-- Buttons-->
-    <div class="swiper-btn swiper-disabled-hide swiper-prev swiper-btn-side btn-icon bg-dark text-white ms-3 shadow-lg mt-n5 ms-n4"><i class="ri-arrow-left-s-line ri-lg"></i></div>
-    <div class="swiper-btn swiper-disabled-hide swiper-next swiper-btn-side swiper-btn-side-right btn-icon bg-dark text-white me-n4 shadow-lg mt-n5"><i class="ri-arrow-right-s-line ri-lg"></i></div>
-
-    <!-- Add Scrollbar -->
-    <div class="swiper-scrollbar"><div class="swiper-scrollbar-drag" style="transform: translate3d(68.3443px, 0px, 0px); width: 54.5209px;"></div></div>
-</div>
-  </div>
         <!--/ Related Products-->
 
 
@@ -455,117 +448,93 @@
         {% block scripts %}
 
     <script>
-    function filtersearch() {
-    document.getElementById('poperty').innerHTML = '';
-       console.log('Filter search button clicked');
+        // Function to fetch and display related properties
+        function fetchRelatedProperties() {
+            // Extract current property attributes
+            const propertyType = "{{property.property_type}}";
+            const advertType = "{{property.advert_type}}";
+            const city = "{{property.city}}";
+            const maxPrice = parseFloat("{{property.price}}") * 1.2; // Example: 20% higher than current property price
 
-       // Define the URL of the API endpoint
-       const url = 'http://127.0.0.1:8000/api/v1/properties/search/';
+            // Prepare API endpoint and query parameters
+            const url = `http://127.0.0.1:8000/api/v1/properties/rank/?advert_type=${advertType}&city=${city}&pricelt=${maxPrice}`;
 
-      // Get the selected value for bedrooms
-   var selectedBedrooms = document.querySelector('input[name="bedrooms"]:checked');
-   var bedrooms = selectedBedrooms ? selectedBedrooms.value : "0";
+            // Fetch related properties from the API
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Check if the response contains data
+                    if (Array.isArray(data) && data.length > 0) {
+                        // Generate HTML for each related property
+                        const relatedPropertiesHTML = data.map(item => `
+                    <div class="swiper-slide d-flex h-auto">
+                        <div class="card card-listing hover-trigger card-hover border">
+                            <img src="${item.cover_photo}" class="card-img-top" style="object-fit: cover; height: 200px;" alt="Property Image">
+                            <div class="position-absolute top-5 start-7 translate-middle badge bg-dark p-2">${item.advert_type}</div>
+                            <div class="card-body">
+                                <h5 class="card-title">${item.title}</h5>
+                                <p class="card-text">${item.street_address}, ${item.city}</p>
+                                <p class="card-text"><small class="text-dark">Price: ${item.price}</small></p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Bedrooms <span class="badge bg-dark">${item.bedrooms}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Bathrooms <span class="badge bg-dark">${item.bathrooms}</span>
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <a href="http://127.0.0.1:8000/property/${item.slug}" class="btn btn-orange rounded-pill py-2 px-3">See Details</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                        // Append the generated HTML to the "related-properties" div
+                        document.getElementById('related-properties').innerHTML = relatedPropertiesHTML;
 
-   // Get the selected value for bathrooms
-   var selectedBathrooms = document.querySelector('input[name="bathrooms"]:checked');
-   var bathrooms = selectedBathrooms ? selectedBathrooms.value : "0";
-       // Get the selected checkbox values for propertype
+                        // Initialize Swiper for the specific container or update it
+                        if (window.youMayAlsoLikeSwiper) {
+                            window.youMayAlsoLikeSwiper.update();
+                        } else {
+                            window.youMayAlsoLikeSwiper = new Swiper('.you-may-also-like-swiper', {
+                                spaceBetween: 25,
+                                cssMode: true,
+                                roundLengths: true,
+                                scrollbar: {
+                                    el: '.swiper-scrollbar',
+                                    hide: false,
+                                    draggable: true
+                                },
+                                navigation: {
+                                    nextEl: '.swiper-next',
+                                    prevEl: '.swiper-prev'
+                                },
+                                breakpoints: {
+                                    576: { slidesPerView: 1 },
+                                    768: { slidesPerView: 2 },
+                                    992: { slidesPerView: 3 },
+                                    1200: { slidesPerView: 4 }
+                                }
+                            });
+                        }
+                    } else {
+                        document.getElementById('related-properties').innerHTML = '<p>No related properties found.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching related properties:', error);
+                    document.getElementById('related-properties').innerHTML = '<p>Error fetching related properties.</p>';
+                });
+        }
 
-
-       var selectedadvertypetypes = document.querySelectorAll('input[name="advertype"]:checked');
-       var advertype = [];
-       selectedadvertypetypes.forEach(option => {
-           advertype.push(option.value);
-       });
-       var selectedpropertypes = document.querySelectorAll('input[name="propertype"]:checked');
-       var propertype = [];
-       selectedpropertypes.forEach(option => {
-           propertype.push(option.value);
-       });
-
-
-       // Get other input values
-       var minPrice = document.getElementById('minPrice').value;
-       var maxPrice = document.getElementById('maxPrice').value;
-       var location = document.getElementById('location').value;
-
-       // Parse price values to float or set them to null if they are empty
-       var pricegt = minPrice ? parseFloat(minPrice) : 0;
-       var pricelt = maxPrice ? parseFloat(maxPrice) : 99999999999999999999;
-
-       // Prepare data for API request
-       var data = {
-           "advert_type": advertype,
-           "property_type": propertype,
-           "pricegt": pricegt,
-           "pricelt": pricelt,
-           "bedrooms": bedrooms,
-           "bathrooms": bathrooms,
-           "catch_phrase": location
-           // Add more filters as needed
-       };
-
-       // Display the extracted input data
-       console.log('Input data:', data);
-
-       // Define the request options
-       const requestOptions = {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json', // Assuming JSON data
-           },
-           body: JSON.stringify(data),
-       };
-
-       // Make the POST request
-       fetch(url, requestOptions)
-           .then(response => {
-               if (!response.ok) {
-                   throw new Error(`HTTP error! Status: ${response.status}`);
-               }
-               return response.json();
-           })
-           .then(data => {
-               console.log('Response:', data);
-           // Iterate over the response data and generate HTML elements
-   // Check if the response contains data
-   if (Array.isArray(data) && data.length > 0) {
-       // Access the first item in the array
-       const item = data[0];
-       // Generate HTML elements using the properties of the item
-       document.getElementById('poperty').innerHTML += `
-           <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-               <div class="card card-listing hover-trigger card-hover border">
-                   <img src="${item.cover_photo}" class="card-img-top" style="object-fit: cover; height: 200px;" alt="Property Image">
-                   <div class="position-absolute top-5 start-7 translate-middle badge bg-dark p-2">${item.advert_type}</div>
-                   <div class="card-body">
-                       <h5 class="card-title">${item.title}</h5>
-                       <p class="card-text">${item.street_address}, ${item.city}</p>
-                       <p class="card-text"><small class="text-dark">Price: ${item.price}</small></p>
-                   </div>
-                   <ul class="list-group list-group-flush">
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                           Bedrooms <span class="badge bg-dark">${item.bedrooms}</span>
-                       </li>
-                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                           Bathrooms <span class="badge bg-dark">${item.bathrooms}</span>
-                       </li>
-                   </ul>
-                   <div class="card-body">
-                       <a href="http://127.0.0.1:8000/property/${item.slug}" class="btn btn-orange rounded-pill py-2 px-3">See Details</a>
-                   </div>
-               </div>
-           </div>
-       `;
-   } else {
-       document.getElementById('poperty').innerHTML = '<p>No results found.</p>';
-       }
-
-           })
-           .catch(error => {
-               console.error('Error:', error);
-           });
-   }
+        // Call the function to fetch and display related properties
+        fetchRelatedProperties();
 
     </script>
 

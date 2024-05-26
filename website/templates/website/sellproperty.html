@@ -253,51 +253,76 @@
 
             </div>
         </div>
+    <!-- Loader -->
+
+    <!-- Success message -->
+    <div id="successMessage" style="display: none;">
+        Property saved successfully!
+    </div>
+
+    <!-- Failure message -->
+    <div id="failureMessage" style="display: none;">
+        There was a problem saving the property. Please try again later.
+    </div>
+
     <!-- /Page Content -->
     </section>
 
 {% endblock %}
 {% block scripts %}
-<script>
- document.addEventListener("DOMContentLoaded", function () {
-    const propertyForm = document.getElementById("propertyForm");
+ <script>
+     document.addEventListener("DOMContentLoaded", function () {
+         const propertyForm = document.getElementById("propertyForm");
+         const loader = document.getElementById("loader-overlay");
+         const successMessage = document.getElementById("successMessage");
+         const failureMessage = document.getElementById("failureMessage");
 
-    propertyForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+         propertyForm.addEventListener("submit", function (event) {
+             event.preventDefault();
 
-        const formData = new FormData(propertyForm);
-        const photosInput = document.getElementById("photos");
-        const photos = photosInput.files;
+             const formData = new FormData(propertyForm);
+             const photosInput = document.getElementById("photos");
+             const photos = photosInput.files;
 
-        // Append each photo to formData
-        for (let i = 0; i < photos.length; i++) {
-            formData.append("photos", photos[i]);
-        }
+             // Show loader
+             loader.style.display = "block";
 
-        fetch("http://127.0.0.1:8000/api/v1/properties/createprop/", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Property saved successfully:", data);
-            // Handle successful response here
-            window.location.href = "/propertysaved";
-            })
-        .catch(error => {
-            console.error("There was a problem saving the property:", error.message);
-            // Handle errors here
-        });
-    });
-});
+             // Append each photo to formData
+             for (let i = 0; i < photos.length; i++) {
+                 formData.append("photos", photos[i]);
+             }
 
+             fetch("http://127.0.0.1:8000/api/v1/properties/createprop/", {
+                 method: "POST",
+                 body: formData
+             })
+                 .then(response => {
+                     if (!response.ok) {
+                         throw new Error("Network response was not ok");
+                     }
+                     return response.json();
+                 })
+                 .then(data => {
+                     console.log("Property saved successfully:", data);
+                     // Hide loader
+                     loader.style.display = "none";
+                     // Show success message
+                     successMessage.style.display = "block";
+                     // Redirect or perform any other action as needed
+                      window.location.href = "/propertysaved";
+                 })
+                 .catch(error => {
+                     console.error("There was a problem saving the property:", error.message);
+                     // Hide loader
+                     loader.style.display = "none";
+                     // Show failure message
+                     failureMessage.style.display = "block";
+                     // Handle errors here
+                 });
+         });
+     });
+ </script>
 
-</script>
 
  <script>
      // JavaScript for multi-step form

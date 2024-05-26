@@ -74,15 +74,53 @@
                         <!-- / Mobile Nav Toggler-->
 <ul class="navbar-nav py-lg-2 mx-auto">
                     <!-- Include links relevant to real estate -->
-                    <li class="nav-item me-lg-4">
-                        <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:properties' %}?status=For Sale">Buy</a>
+                    <li  class="nav-item me-lg-4 dropdown position-static">
+                        <a class="nav-link fw-bolder dropdown-toggle py-lg-4" role="button" data-bs-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"  href="{% url 'website:properties' %}?status=For Sale">Buy</a>
+                        <!-- Menswear dropdown menu-->
+                        <div class="dropdown-menu dropdown-megamenu">
+                            <div class="container">
+                                <div class="row g-0">
+                                    <!-- Dropdown Menu Links Section-->
+                                    <div class="col-12 col-lg-7">
+                                        <div class="row py-lg-5">
+
+                                            <!-- menu row-->
+                                            <div class="col col-lg-6 mb-5 mb-sm-0">
+                                                <ul class="list-unstyled">
+                                                    <li class="dropdown-list-item"><a class="dropdown-item" href="{% url 'website:properties' %}?property_type=House">House</a></li>
+                                                    <li class="dropdown-list-item"><a class="dropdown-item" href="{% url 'website:properties' %}?property_type=Apartment">Apartment</a></li>
+                                                    <li class="dropdown-list-item"><a class="dropdown-item" href="{% url 'website:properties' %}?property_type=Commercial">Commercial</a></li>
+                                                    <li class="dropdown-list-item"><a class="dropdown-item" href="{% url 'website:properties' %}?property_type=Office">Office</a></li>
+                                                    <li class="dropdown-list-item"><a class="dropdown-item" href="{% url 'website:properties' %}?property_type=Warehouse">Warehouse</a></li>
+                                                    <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="{% url 'website:properties' %}">View All</a></li>
+                                                </ul>
+                                            </div>
+                                            <!-- /menu row-->
+
+
+
+
+                                        </div>                    </div>
+                                    <!-- /Dropdown Menu Links Section-->
+
+                                    <!-- Dropdown Menu Images Section-->
+                                    <div class="d-none d-lg-block col-lg-5">
+                                        <div class="vw-50 h-100 bg-img-cover bg-pos-center-center position-absolute" style="background-image: url({% static 'images/banners/testimonials-bg.jpg'%});"></div>
+                                    </div>
+                                    <!-- Dropdown Menu Images Section-->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / Menswear dropdown menu-->
                     </li>
+    <li class="nav-item me-lg-4">
+        <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:properties' %}?status=for rent">Rent</a>
+    </li>
                     <li class="nav-item me-lg-4">
                         <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:sellproperty' %}">Sell</a>
                     </li>
-                    <li class="nav-item me-lg-4">
-                        <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:properties' %}?status=for rent">Rent</a>
-                    </li>
+
                     <li class="nav-item me-lg-4">
                         <a class="nav-link fw-bolder py-lg-4" href="#map">About Us</a>
                     </li>
@@ -145,77 +183,143 @@
   <!-- Main Section-->
     <section class="mt-0 ">
         <!-- Page Content Goes Here -->
-
+        <div id="whatsapp-icon">
+            <a href="https://wa.me/YOURNUMBER" target="_blank">
+                <img src="{% static 'svgs/whatsapp.svg' %}" alt="WhatsApp">
+            </a>
+        </div>
       <!-- / Hero Section -->
-<section class="vh-100 position-relative bg-overlay-dark">
-    <div class="container d-flex h-100 justify-content-center align-items-center position-relative z-index-10">
-        <div class="d-flex justify-content-center align-items-center h-100 position-relative z-index-10 text-white">
-            <div>
-                <h1 class="display-1 fw-bold px-2 px-md-5 text-center mx-auto col-lg-8 mt-md-0" data-aos="fade-up" data-aos-delay="1000">Take best choise for your life</h1>
-                <div data-aos="fade-in" data-aos-delay="2000">
-                    <div class="d-md-flex justify-content-center mt-4 mb-3 my-md-5">
-                        <a href="{% url 'website:properties' %}?status=For Sale" class="btn btn-skew-left btn-orange btn-orange-chunky text-white mx-1 w-100 w-md-auto mb-2 mb-md-0"><span>Buy Property <i class="ri-arrow-right-line align-middle fw-bold"></i></span></a>
-                        <a  href="{% url 'website:sellproperty' %}" class="btn btn-skew-left btn-orange btn-orange-chunky text-white mx-1 w-100 w-md-auto mb-2 mb-md-0"><span>Sell Property <i class="ri-arrow-right-line align-middle fw-bold"></i></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="position-absolute z-index-1 top-0 bottom-0 start-0 end-0">
-        <div class=" overflow-hidden bg-light w-100 h-100" data-swiper data-options='{"slidesPerView": 1, "speed": 1500, "loop": true, "effect": "fade", "autoplay": {"delay": 5000}}'>
-                <div class=" position-relative">
-                    <video class="min-w-100   bg-img-cover bg-pos-center-center" style="max-height : 140vh !important;" autoplay muted loop>
-                        <source src="{% static 'images/slideshows/vedioslideshow.mp4' %}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-        </div>
-    </div>
-</section>
-<!--/ Hero Section-->
+        <!-- / Hero Section -->
+        <section class="vh-75 position-relative bg-overlay-dark">
+            <div class="container d-flex h-100 justify-content-center align-items-center position-relative z-index-10">
+                <div class="d-flex justify-content-center align-items-center h-100 position-relative z-index-10 text-white">
+                    <div>
+                        <h1 class="display-1 fw-bold px-2 px-md-5 text-center mx-auto col-lg-8 mt-md-0" data-aos="fade-up" data-aos-delay="500">Take best choice for your life</h1>
+                        <div data-aos="fade-in" data-aos-delay="900">
 
+                            <div class=" d-flex justify-content-center w-100">
 
+                                <div  class="mt-2   w-md-50">
+                                    <form action="{% url 'website:properties' %}" method="GET" class="w-100 d-flex flex-column ">
+                                        <div class=" d-flex justify-content-center w-100">
 
-            <div class="mb-lg-7 bg-light py-4 rounded-pill mt-3" data-aos="fade-in">
-                <div class="container">
-                    <div class="row gx-3 align-items-center">
-                        <div class="col-12 justify-content-center justify-content-md-between align-items-center d-flex flex-wrap">
-                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                <a class="d-block text-decoration-none" href="{% url 'website:properties' %}?property_type=House">
-                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/house.svg'%}" alt="Residential">
-                                    <p class="text-center mb-0 text-dark">House</p>
-                                </a>
-                            </div>
-                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                <a class="d-block text-decoration-none" href="{% url 'website:properties' %}?property_type=Apartment" >
-                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/building.svg'%}" alt="Commercial">
-                                    <p class="text-center mb-0 text-dark">Apartment</p>
-                                </a>
-                            </div>
-                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                <a class="d-block text-decoration-none" href="{% url 'website:properties' %}?property_type=Commercial" >
-                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/shop.svg'%}" alt="Vacation Homes">
-                                    <p class="text-center mb-0 text-dark">Commercial</p>
-                                </a>
-                            </div>
-                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                <a class="d-block text-decoration-none" href="{% url 'website:properties' %}?property_type=Office" >
-                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/desk.svg'%}" alt="Land">
-                                    <p class="text-center mb-0 text-dark">Office</p>
-                                </a>
-                            </div>
-                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                <a class="d-block text-decoration-none" href="{% url 'website:properties' %}?property_type=Warehouse" >
-                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/logistic.svg'%}" alt="Investment Properties">
-                                    <p class="text-center mb-0 text-dark">Warehouse</p>
-                                </a>
+                                            <div class="btn-group w-75  w-md-50 " role="group">
+
+                                                <input type="radio" class="btn-check bg-orange hover-bg-orange" name="status" id="status-sale" value="For Sale" autocomplete="off" checked>
+                                                <label class="btn btn-outline-orange" for="status-sale" style="border: hidden !important; color: white !important;">For Sale</label>
+
+                                                <input type="radio" class="btn-check bg-orange hover-bg-orange" name="status" id="status-rent" value="For Rent" autocomplete="off">
+                                                <label class="btn btn-outline-orange <" for="status-rent"  style="border: hidden !important;color: white !important;">For Rent</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <input type="text" name="query" class="form-control" placeholder="Search properties by city name" aria-label="Search properties">
+
+                                            <button class="btn btn-orange"  type="submit">Search</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Category Toolbar-->
+            <div class="position-absolute z-index-1 top-0 bottom-0 start-0 end-0">
+                <!-- Swiper Info -->
+                <div class="swiper-container overflow-hidden bg-light w-100 h-100"
+                     data-swiper
+                     data-options='{
+                    "slidesPerView": 1,
+                    "speed": 1500,
+                    "loop": true,
+                    "effect": "fade",
+                    "autoplay": {
+                      "delay": 5000
+                    }
+                  }'>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide position-relative">
+                            <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-1.jpg' %});">
+                            </div>
+                        </div>
+                        <div class="swiper-slide position-relative">
+                            <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-2.jpg' %}));">
+                            </div>
+                        </div>
+                        <div class="swiper-slide position-relative">
+                            <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-7.jpg' %}));">
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                <!-- / Swiper Info-->            </div>
+        </section>
+        <!--/ Hero Section-->
+<!--/ Hero Section-->
+
+
+        <!-- Your HTML with icon elements -->
+        <div class="mb-lg-7 bg-light py-4 rounded-pill mt-3" data-aos="fade-in" id="swiper-container">
+            <div class="container">
+                <div class="row gx-3 align-items-center">
+                    <div class="col-12 justify-content-center justify-content-md-between align-items-center d-flex flex-wrap">
+                        <!-- Your icon elements here -->
+                        <div class="swiper swiperIcons">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                        <a class="d-block text-decoration-none slide-icon-house" href="{% url 'website:properties' %}?property_type=House">
+                                            <img class="img-fluid d-table mx-auto mb-2 icon-house-slide custom-icon" src="{% static 'svgs/house.svg' %}" alt="House">
+                                            <p class="text-center mb-0 text-dark">House</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                        <a class="d-block text-decoration-none slide-icon-apartment" href="{% url 'website:properties' %}?property_type=Apartment">
+                                            <img class="img-fluid d-table mx-auto mb-2 icon-apartment-slide custom-icon" src="{% static 'svgs/building.svg' %}" alt="Apartment">
+                                            <p class="text-center mb-0 text-dark">Apartment</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                        <a class="d-block text-decoration-none slide-icon-commercial" href="{% url 'website:properties' %}?property_type=Commercial">
+                                            <img class="img-fluid d-table mx-auto mb-2 icon-commercial-slide custom-icon" src="{% static 'svgs/shop.svg' %}" alt="Commercial">
+                                            <p class="text-center mb-0 text-dark">Commercial</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                        <a class="d-block text-decoration-none slide-icon-office" href="{% url 'website:properties' %}?property_type=Office">
+                                            <img class="img-fluid d-table mx-auto mb-2 icon-office-slide custom-icon" src="{% static 'svgs/desk.svg' %}" alt="Office">
+                                            <p class="text-center mb-0 text-dark">Office</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                        <a class="d-block text-decoration-none slide-icon-warehouse" href="{% url 'website:properties' %}?property_type=Warehouse">
+                                            <img class="img-fluid d-table mx-auto mb-2 icon-warehouse-slide custom-icon" src="{% static 'svgs/logistic.svg' %}" alt="Warehouse">
+                                            <p class="text-center mb-0 text-dark">Warehouse</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Initialize Swiper only on phone screens -->
 
         <!-- Staff Picks-->
     <section class="mb-9 mt-5 aos-init aos-animate" data-aos="fade-up">
@@ -356,7 +460,7 @@
 
         <!-- Linked Product Carousels-->
        <!-- Homepage Intro-->
-<div class="position-relative row my-lg-7 pt-5 ps-3 pt-lg-0 g-8">
+<div class="position-relative row my-lg-7 pt-5 ps-3 pt-lg-0 w-100">
     <div class="bg-text bottom-0 start-0 end-0" data-aos="fade-up">
         <h2 class="bg-text-title opacity-10"><span class="text-outline-dark">Dream</span>Home</h2>
     </div>
@@ -397,15 +501,15 @@
     <div class="py-7 py-lg-10">
         <div class="container text-white py-4 py-md-6">
             <div class="row g-5 align-items-center">
-                <div class="col-12 col-lg-4 justify-content-center d-flex justify-content-lg-start aos-init aos-animate" data-aos="fade-right" data-aos-delay="250">
+                <div class="col-12 col-lg-4 justify-content-center d-flex justify-content-lg-start aos-init aos-animate" data-aos="fade-right" data-aos-delay="350">
                     <h3 class="fs-1 fw-bold mb-0 lh-1"><i class="ri-home-4-line align-bottom"></i> Explore Properties</h3>
                 </div>
-                <div class="col-12 col-lg-4 d-flex justify-content-center flex-column aos-init aos-animate" data-aos="fade-up" data-aos-delay="250">
+                <div class="col-12 col-lg-4 d-flex justify-content-center flex-column aos-init aos-animate" data-aos="fade-up" data-aos-delay="350">
                     <a href="/properties" class="btn btn-orange btn-orange-chunky text-white my-1"><span>View Featured Listings</span></a>
                     <a href="/properties" class="btn btn-orange btn-orange-chunky text-white my-1"><span>Search Properties</span></a>
                     <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" class="btn btn-orange btn-orange-chunky text-white my-1"><span>Contact an Agent</span></a>
                 </div>
-                <div class="col-12 col-lg-4 text-center text-lg-end aos-init aos-animate" data-aos="fade-left" data-aos-delay="250">
+                <div class="col-12 col-lg-4 text-center text-lg-end aos-init aos-animate" data-aos="fade-left" data-aos-delay="350">
                     <p class="lead fw-bolder">Find your dream home with us today.</p>
                     <a class="text-white fw-bolder text-link-border border-2 border-white align-self-start pb-1 transition-all opacity-50-hover" href="#">Learn more about our services <i class="ri-arrow-right-line align-bottom"></i></a>
                 </div>
@@ -420,111 +524,40 @@
     <!-- /SVG Shape Divider-->
 </section>
 
-        <!-- Reviews-->
-     <section>
-    <div class="container aos-init aos-animate mb-5" data-aos="fade-in">
-        <h2 class="fs-1 fw-bold mb-3 text-center mb-5">Property Reviews</h2>
-        <div class="row g-3">
-            <div class="col-12 col-lg-4 aos-init aos-animate" data-aos="fade-left">
-                <div class="bg-light p-4 d-flex h-100 justify-content-start align-items-center flex-column text-center">
-                    <p class="fw-bolder lead">Fantastic Location!</p>
-                    <p class="mb-3">This property is situated in a great neighborhood with easy access to amenities and transportation. I love living here!</p>
-                    <small class="text-muted d-block mb-2 fw-bolder">Sarah Johnson, New York</small>
-                    <!-- Review Stars Small-->
-                    <div class="rating position-relative d-table">
-                        <div class="position-absolute stars" style="width: 80%">
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
+        <!-- Team Presentation-->
+        <section>
+            <div class="container aos-init aos-animate mb-5" data-aos="fade-in">
+                <h2 class="fs-1 fw-bold mb-3 text-center mb-5">Meet Our Team</h2>
+                <div class="row g-3">
+                    <div class="col-12 col-lg-4 aos-init aos-animate" data-aos="fade-left">
+                        <div class="bg-light p-4 d-flex h-100 justify-content-start align-items-center flex-column text-center">
+                            <img src="{% static 'images/team_member_1.jpg' %}" alt="Team Member 1" class="rounded-circle mb-3" width="150" height="150">
+                            <p class="fw-bolder lead">Sarah Johnson</p>
+                            <p class="mb-3">Senior Real Estate Agent</p>
+                            <small class="text-muted d-block mb-2">Sarah brings over 10 years of experience in the real estate industry, specializing in residential properties.</small>
                         </div>
-                        <div class="stars">
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
+                    </div>
+                    <div class="col-12 col-lg-4 aos-init aos-animate" data-aos="fade-left" data-aos-delay="250">
+                        <div class="bg-light p-4 d-flex h-100 justify-content-start align-items-center flex-column text-center">
+                            <img src="{% static 'images/team_member_2.jpg' %}" alt="Team Member 2" class="rounded-circle mb-3" width="150" height="150">
+                            <p class="fw-bolder lead">Michael Anderson</p>
+                            <p class="mb-3">Commercial Property Expert</p>
+                            <small class="text-muted d-block mb-2">Michael has a keen eye for commercial properties and has helped numerous businesses find the perfect location.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 aos-init aos-animate" data-aos="fade-left" data-aos-delay="300">
+                        <div class="bg-light p-4 d-flex h-100 justify-content-start align-items-center flex-column text-center">
+                            <img src="{% static 'images/team_member_3.jpg' %}" alt="Team Member 3" class="rounded-circle mb-3" width="150" height="150">
+                            <p class="fw-bolder lead">Emily Roberts</p>
+                            <p class="mb-3">Luxury Property Specialist</p>
+                            <small class="text-muted d-block mb-2">Emily specializes in luxury properties and has a reputation for providing exceptional customer service.</small>
                         </div>
                     </div>
                 </div>
+
             </div>
-            <div class="col-12 col-lg-4 aos-init aos-animate" data-aos="fade-left" data-aos-delay="150">
-                <div class="bg-light p-4 d-flex h-100 justify-content-start align-items-center flex-column text-center">
-                    <p class="fw-bolder lead">Spacious Interior</p>
-                    <p class="mb-3">The property offers ample space for living and entertaining. The layout is well-designed and comfortable.</p>
-                    <small class="text-muted d-block mb-2 fw-bolder">Michael Anderson, Los Angeles</small>
-                    <!-- Review Stars Small-->
-                    <div class="rating position-relative d-table">
-                        <div class="position-absolute stars" style="width: 85%">
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                        </div>
-                        <div class="stars">
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-4 aos-init aos-animate" data-aos="fade-left" data-aos-delay="300">
-                <div class="bg-light p-4 d-flex h-100 justify-content-start align-items-center flex-column text-center">
-                    <p class="fw-bolder lead">Modern Amenities</p>
-                    <p class="mb-3">The property comes equipped with modern amenities, including a gym, swimming pool, and 24-hour security. It's everything I need!</p>
-                    <small class="text-muted d-block mb-2 fw-bolder">Emily Roberts, Miami</small>
-                    <!-- Review Stars Small-->
-                    <div class="rating position-relative d-table">
-                        <div class="position-absolute stars" style="width: 90%">
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                            <i class="ri-star-fill text-dark mr-1"></i>
-                        </div>
-                        <div class="stars">
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                            <i class="ri-star-fill mr-1 text-muted opacity-25"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center flex-column mt-7 align-items-center">
-            <h3 class="mb-4 fw-bold fs-4">Explore More Properties</h3>
-            <div class="d-flex justify-content-center align-items-center">
-                <span class="fs-3 fw-bold me-4">4.85 / 5</span>
-                <!-- Review Stars Medium-->
-                <div class="rating position-relative d-table">
-                    <div class="position-absolute stars" style="width: 88%">
-                        <i class="ri-star-fill text-dark ri-2x mr-1"></i>
-                        <i class="ri-star-fill text-dark ri-2x mr-1"></i>
-                        <i class="ri-star-fill text-dark ri-2x mr-1"></i>
-                        <i class="ri-star-fill text-dark ri-2x mr-1"></i>
-                        <i class="ri-star-fill text-dark ri-2x mr-1"></i>
-                    </div>
-                    <div class="stars">
-                        <i class="ri-star-fill ri-2x mr-1 text-muted"></i>
-                        <i class="ri-star-fill ri-2x mr-1 text-muted"></i>
-                        <i class="ri-star-fill ri-2x mr-1 text-muted"></i>
-                        <i class="ri-star-fill ri-2x mr-1 text-muted"></i>
-                        <i class="ri-star-fill ri-2x mr-1 text-muted"></i>
-                    </div>
-                </div>
-            </div>
-            <a href="#" class="btn btn-dark rounded-0 mt-4">Browse More Properties</a>
-        </div>
-    </div>
-</section>
-        <!-- /Reviews-->
+        </section>
+        <!-- /Team Presentation-->
 
 
         <!-- /Page Content -->

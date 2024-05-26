@@ -16,53 +16,101 @@
 <div class="py-6 bg-img-cover bg-dark bg-overlay-gradient-dark position-relative overflow-hidden mb-4 bg-pos-center-center" style="background-image: url('{% static 'images/banners/banner-3.jpg'  %}');">
     <div class="container position-relative z-index-20" data-aos="fade-right" data-aos-delay="300">
         <h1 class="fw-bold display-6 mb-4 text-white">Explore Our Real Estate Properties</h1>
-        <div class="col-12 col-md-6">
-            <p class="lead text-white mb-0">
-                Find your dream home or investment property from our wide range of listings. Whether you're looking for a cozy apartment, a spacious house, or a commercial property, we have something for everyone. Start your search now!
-            </p>
+        <div>
+            <div data-aos="fade-in" data-aos-delay="900">
+
+                <div class=" d-flex justify-content-center w-100">
+
+                    <div  class="mt-2   w-md-50">
+                        <div class="w-100 d-flex flex-column ">
+                            <div class=" d-flex justify-content-center w-100">
+
+                                <div class="btn-group w-75  w-md-50 " role="group">
+
+                                    <input type="radio" class="btn-check bg-orange hover-bg-orange" name="advertype" id="status-sale" value="For Sale" autocomplete="off" checked>
+                                    <label class="btn btn-outline-orange" for="status-sale" style="border: hidden !important; color: white !important;">For Sale</label>
+
+                                    <input type="radio" class="btn-check bg-orange hover-bg-orange" name="advertype" id="status-rent" value="For Rent" autocomplete="off">
+                                    <label class="btn btn-outline-orange <" for="status-rent"  style="border: hidden !important;color: white !important;">For Rent</label>
+                                </div>
+
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <input type="text" name="query" class="form-control" id="location" placeholder="Search properties" aria-label="Search properties">
+
+                                <button class="btn btn-orange" onclick="filtersearch()" type="submit">Search</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
+      <div class="mb-lg-7 bg-light py-4 rounded-pill mt-3" data-aos="fade-in" id="swiper-container">
+          <div class="container">
+              <div class="row gx-3 align-items-center">
+                  <div class="col-12 justify-content-center justify-content-md-between align-items-center d-flex flex-wrap">
+                      <!-- Your icon elements here -->
+                      <div class="swiper swiperIcons">
+                          <div class="swiper-wrapper">
+                              <div class="swiper-slide">
+                                  <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                      <a class="d-block text-decoration-none slide-icon-house" onclick="filterByPropertyType('House')">
+                                          <img class="img-fluid d-table mx-auto mb-2 icon-house-slide custom-icon" src="{% static 'svgs/house.svg' %}" alt="House">
+                                          <p class="text-center mb-0 text-dark">House</p>
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="swiper-slide">
+                                  <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                      <a class="d-block text-decoration-none slide-icon-apartment"onclick="filterByPropertyType('Apartment')">
+                                          <img class="img-fluid d-table mx-auto mb-2 icon-apartment-slide custom-icon" src="{% static 'svgs/building.svg' %}" alt="Apartment">
+                                          <p class="text-center mb-0 text-dark">Apartment</p>
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="swiper-slide">
+                                  <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                      <a class="d-block text-decoration-none slide-icon-commercial"onclick="filterByPropertyType('Commercial')">
+                                          <img class="img-fluid d-table mx-auto mb-2 icon-commercial-slide custom-icon" src="{% static 'svgs/shop.svg' %}" alt="Commercial">
+                                          <p class="text-center mb-0 text-dark">Commercial</p>
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="swiper-slide">
+                                  <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                      <a class="d-block text-decoration-none slide-icon-office" onclick="filterByPropertyType('Office')">
+                                          <img class="img-fluid d-table mx-auto mb-2 icon-office-slide custom-icon" src="{% static 'svgs/desk.svg' %}" alt="Office">
+                                          <p class="text-center mb-0 text-dark">Office</p>
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="swiper-slide">
+                                  <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
+                                      <a class="d-block text-decoration-none slide-icon-warehouse" onclick="filterByPropertyType('Warehouse')">
+                                          <img class="img-fluid d-table mx-auto mb-2 icon-warehouse-slide custom-icon" src="{% static 'svgs/logistic.svg' %}" alt="Warehouse">
+                                          <p class="text-center mb-0 text-dark">Warehouse</p>
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>
 
         <div class="container-fluid" data-aos="fade-in">
-            <div class="mb-lg-7 bg-light py-4 rounded-pill" data-aos="fade-in">
-                <div class="container">
-                    <div class="row gx-3 align-items-center">
-                        <div class="col-12 justify-content-center justify-content-md-between align-items-center d-flex flex-wrap">
-                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                <a class="d-block text-decoration-none" href="#" onclick="filterByPropertyType('House')">
-                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/house.svg'%}" alt="Residential">
-                                    <p class="text-center mb-0 text-dark">House</p>
-                                </a>
-                            </div>
-                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                <a class="d-block text-decoration-none" href="#" onclick="filterByPropertyType('Apartment')">
-                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/building.svg'%}" alt="Commercial">
-                                    <p class="text-center mb-0 text-dark">Apartment</p>
-                                </a>
-                            </div>
-                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                <a class="d-block text-decoration-none" href="#" onclick="filterByPropertyType('Commercial')">
-                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/shop.svg'%}" alt="Vacation Homes">
-                                    <p class="text-center mb-0 text-dark">Commercial</p>
-                                </a>
-                            </div>
-                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                <a class="d-block text-decoration-none" href="#" onclick="filterByPropertyType('Office')">
-                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/desk.svg'%}" alt="Land">
-                                    <p class="text-center mb-0 text-dark">Office</p>
-                                </a>
-                            </div>
-                            <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                <a class="d-block text-decoration-none" href="#" onclick="filterByPropertyType('Warehouse')">
-                                    <img class="img-fluid d-table mx-auto mb-2" src="{% static 'svgs/logistic.svg'%}" alt="Investment Properties">
-                                    <p class="text-center mb-0 text-dark">Warehouse</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+            <!-- Your HTML with icon elements -->
+
+
             <!-- Category Toolbar-->
                 <div class="d-flex justify-content-between items-center pt-5 pb-4 flex-column flex-lg-row">
                     <div>
@@ -137,9 +185,11 @@
                  if (!response.ok) {
                      throw new Error(`HTTP error! Status: ${response.status}`);
                  }
+                 document.getElementById('poperty').scrollIntoView({ behavior: 'smooth' });
                  return response.json();
              })
              .then(handleLoadMoreResponse)
+
              .catch(error => {
                  console.error('Error:', error);
              });
@@ -163,6 +213,8 @@
      function displayProperties(properties) {
          const propertyContainer = document.getElementById('poperty');
          propertyContainer.innerHTML += properties.map(getPropertyHTML).join('');
+         document.getElementById('poperty').scrollIntoView({ behavior: 'smooth' });
+
      }
 
      function getPropertyHTML(item) {
@@ -199,10 +251,29 @@
          document.getElementById('count-progress').style.width = `${(products / count) * 100}%`;
      }
 
+     // Get the URL parameters
      const urlParams = new URLSearchParams(window.location.search);
      const status = urlParams.get('status');
-     const fetchingUrl = status ? `http://127.0.0.1:8000/api/v1/properties/all/?advert_type=${status}` : `http://127.0.0.1:8000/api/v1/properties/all`;
+     const query = urlParams.get('query');
+
+     // Construct the fetching URL based on the parameters
+     let fetchingUrl = 'http://127.0.0.1:8000/api/v1/properties/all';
+
+     if (status || query) {
+         fetchingUrl += '/?';
+         if (status) {
+             fetchingUrl += `advert_type=${status}`;
+         }
+         if (query) {
+             fetchingUrl += `${status ? '&' : ''}city=${encodeURIComponent(query)}`;
+         }
+     }
+
+     // Load more properties based on the fetching URL
      loadMore(fetchingUrl);
+
+
+
  </script>
 
  <!-- search -->

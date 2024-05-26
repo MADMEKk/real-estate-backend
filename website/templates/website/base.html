@@ -36,6 +36,9 @@
             integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
             crossorigin=""
     />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'css/theme.bundle.css'%}" />
     <link rel="stylesheet" href="{% static 'css/style.css'%}" />
@@ -55,42 +58,117 @@
           .simplebar-content-wrapper {
             overflow: auto;
           }
+
+
         </style>
 
     </noscript>
+    <script>
+
+      var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 'auto', // Number of slides per view
+        spaceBetween: 20, // Space between slides
+        loop: true, // Enable loop mode
+        autoplay: {
+          delay: 5000, // Delay between slides in milliseconds
+          disableOnInteraction: false, // Continue autoplay even when user interacts with slider
+        },
+        breakpoints: {
+          // Add breakpoints for responsive behavior
+          768: {
+            slidesPerView: 2, // Number of slides per view on tablets
+          },
+          992: {
+            slidesPerView: 3, // Number of slides per view on laptops/desktops
+          },
+        }
+      });
+
+    </script>
     <style>
-      .svg-icon {
-        width: 4em !important;
-        height: 4em !important;
-        vertical-align: -0.15em;
-        fill: currentColor;
-        overflow: hidden;
-      }
-      /* Hide the circle of the radio button */
-      .btn-check {
-        border-color: transparent;
-        visibility : hidden;
-      }
-
-      .property-label input[type="radio"]:checked + ~ .svg-icon {
-        /* Add your desired background color here */
-        background-color: #fc6229;
+      /* Loader CSS */
+      .loader-overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
       }
 
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Hide the loader when JavaScript is disabled */
+      .no-js .loader-overlay .loader {
+        display: none;
+      }
+      .custom-icon {
+        background-color: white;
+        border-radius: 40%;
+        padding: 15px; /* Adjust padding as needed */
+        transition: transform 0.3s, background-color 0.3s;
+      }
+
+      .custom-icon:hover {
+        background-color: orange;
+        transform: scale(1.1);
+      }
+
+      @media (max-width: 576px) {
+        .custom-icon {
+          width: 80px; /* Adjust size for smaller screens */
+          height: 80px; /* Adjust size for smaller screens */
+        }
+      }
+      #whatsapp-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 60px;
+        height: 60px;
+      }
+
+      #whatsapp-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
     </style>
-
     <!-- Page Title -->
     <title>Aures | REAL ESTATE</title>
   </head>
   <body>
 
-
+  <div id="loader-overlay" class="loader-overlay">
+    <div class="loader"></div>
+  </div>
 
   {% block body %} {% endblock %}
 
-
+  <script>
+    window.addEventListener('load', function() {
+      document.getElementById('loader-overlay').style.display = 'none';
+    });
+  </script>
     <!-- Theme JS -->
     <!-- Vendor JS -->
     <script src="{% static 'js/vendor.bundle.js'%}"></script>
@@ -162,7 +240,33 @@
     });
   }
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+  <!-- Initialize Swiper -->
+  <script>
+    var swiperIcons = new Swiper(".swiperIcons", {
+      slidesPerView: 3,
+      spaceBetween: 10,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 50,
+        },
+      },
+    });
+  </script>
   <script>
     function openModal() {
         var modal = document.getElementById('allPhotosModal');

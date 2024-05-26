@@ -422,6 +422,29 @@
 {% endblock %}
 {% block scripts %}
 <script>
+    // Initialize Swiper only on phone screens
+    if (window.innerWidth < 768) {
+        var swiper = new Swiper('#swiper-container', {
+            slidesPerView: 'auto',
+            spaceBetween: 20,
+        });
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var buttons = document.querySelectorAll('.btn-select');
+        var statusInput = document.getElementById('status-input');
 
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                buttons.forEach(function(btn) {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+                statusInput.value = button.getAttribute('data-value');
+            });
+        });
+    });
+</script>
 
 {% endblock %}
