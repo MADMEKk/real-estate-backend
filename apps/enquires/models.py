@@ -3,7 +3,9 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
 from apps.common.models import TimeStampedUUIDModel
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
+from apps.properties.models import Property
 
 class Enquiry(TimeStampedUUIDModel):
     name = models.CharField(_("Your Name"), max_length=100)
@@ -19,3 +21,5 @@ class Enquiry(TimeStampedUUIDModel):
 
     class Meta:
         verbose_name_plural = "Enquiries"
+
+

@@ -1,13 +1,7 @@
  {% extends './pagesbase.html' %}
 {% load static %}
-<!-- {% block bannertitle %}
- FIND YOUR DREAM PROPERTY
- {% endblock %}
-{% block bannertext %}
+ {% load i18n %}
 
- you can find your dream property here by searching for the property you want with the best price and the best location
-
- {% endblock %}-->
 
 {% block section %}
   <section class="mt-0 ">
@@ -15,150 +9,302 @@
 
 <div class="py-6 bg-img-cover bg-dark bg-overlay-gradient-dark position-relative overflow-hidden mb-4 bg-pos-center-center" style="background-image: url('{% static 'images/banners/banner-3.jpg'  %}');">
     <div class="container position-relative z-index-20" data-aos="fade-right" data-aos-delay="300">
-        <h1 class="fw-bold display-6 mb-4 text-white">Explore Our Real Estate Properties</h1>
+        <h1 class="fw-bold display-6 mb-4 text-white">{% trans 'Explorez nos propriétés immobilières' %}</h1>
         <div>
-            <div data-aos="fade-in" data-aos-delay="900">
-
-                <div class=" d-flex justify-content-center w-100">
-
-                    <div  class="mt-2   w-md-50">
-                        <div class="w-100 d-flex flex-column ">
-                            <div class=" d-flex justify-content-center w-100">
-
-                                <div class="btn-group w-75  w-md-50 " role="group">
-
-                                    <input type="radio" class="btn-check bg-orange hover-bg-orange" name="advertype" id="status-sale" value="For Sale" autocomplete="off" checked>
-                                    <label class="btn btn-outline-orange" for="status-sale" style="border: hidden !important; color: white !important;">For Sale</label>
-
-                                    <input type="radio" class="btn-check bg-orange hover-bg-orange" name="advertype" id="status-rent" value="For Rent" autocomplete="off">
-                                    <label class="btn btn-outline-orange <" for="status-rent"  style="border: hidden !important;color: white !important;">For Rent</label>
-                                </div>
-
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <input type="text" name="query" class="form-control" id="location" placeholder="Search properties" aria-label="Search properties">
-
-                                <button class="btn btn-orange" onclick="filtersearch()" type="submit">Search</button>
-                            </div>
-                        </div>
-
+            <div class="filter-container">
+                <div class="filter-bar d-flex justify-content-center w-100 flex-wrap p-3 bg-light rounded">
+                    <!-- Advert Type Filter -->
+                    <div class="form-group mx-1 my-1">
+                        <select id="advertype" class="form-select form-select-sm">
+                            <option value="">{% trans 'Type d\'annonce' %}</option>
+                            <option value="For Sale">{% trans 'À vendre' %}</option>
+                            <option value="For Rent">{% trans 'À louer' %}</option>
+                        </select>
                     </div>
 
+                    <!-- Property Type Filter -->
+                    <div class="form-group mx-1 my-1">
+                        <select id="propertype" class="form-select form-select-sm">
+                            <option value="">{% trans 'Type de propriété' %}</option>
+                            <option value="House">{% trans 'Maison' %}</option>
+                            <option value="Apartment">{% trans 'Appartement' %}</option>
+                            <option value="Office">{% trans 'Bureau' %}</option>
+                            <option value="Warehouse">{% trans 'Entrepôt' %}</option>
+                            <option value="Commercial">{% trans 'Commercial' %}</option>
+                            <option value="Other">{% trans 'Autre' %}</option>
+                        </select>
+                    </div>
+
+                    <!-- Price Range Filter -->
+                    <div class="d-flex mx-1 my-1">
+                        <div class="form-group">
+                            <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="{% trans 'Prix min' %}" min="0">
+                        </div>
+                        <div class="form-group mx-1">
+                            <input type="number" id="maxPrice" class="form-control form-control-sm" placeholder="{% trans 'Prix max' %}" min="0">
+                        </div>
+                    </div>
+
+                    <!-- Filter Button -->
+                    <div class="form-group mx-1 my-1">
+                        <button class="btn btn-orange btn-sm" onclick="filtersearch()">{% trans 'Recherche' %}</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-      <div class="mb-lg-7 bg-light py-4 rounded-pill mt-3" data-aos="fade-in" id="swiper-container">
-          <div class="container">
-              <div class="row gx-3 align-items-center">
-                  <div class="col-12 justify-content-center justify-content-md-between align-items-center d-flex flex-wrap">
-                      <!-- Your icon elements here -->
-                      <div class="swiper swiperIcons">
-                          <div class="swiper-wrapper">
-                              <div class="swiper-slide">
-                                  <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                      <a class="d-block text-decoration-none slide-icon-house" onclick="filterByPropertyType('House')">
-                                          <img class="img-fluid d-table mx-auto mb-2 icon-house-slide custom-icon" src="{% static 'svgs/house.svg' %}" alt="House">
-                                          <p class="text-center mb-0 text-dark">House</p>
-                                      </a>
-                                  </div>
-                              </div>
-                              <div class="swiper-slide">
-                                  <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                      <a class="d-block text-decoration-none slide-icon-apartment"onclick="filterByPropertyType('Apartment')">
-                                          <img class="img-fluid d-table mx-auto mb-2 icon-apartment-slide custom-icon" src="{% static 'svgs/building.svg' %}" alt="Apartment">
-                                          <p class="text-center mb-0 text-dark">Apartment</p>
-                                      </a>
-                                  </div>
-                              </div>
-                              <div class="swiper-slide">
-                                  <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                      <a class="d-block text-decoration-none slide-icon-commercial"onclick="filterByPropertyType('Commercial')">
-                                          <img class="img-fluid d-table mx-auto mb-2 icon-commercial-slide custom-icon" src="{% static 'svgs/shop.svg' %}" alt="Commercial">
-                                          <p class="text-center mb-0 text-dark">Commercial</p>
-                                      </a>
-                                  </div>
-                              </div>
-                              <div class="swiper-slide">
-                                  <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                      <a class="d-block text-decoration-none slide-icon-office" onclick="filterByPropertyType('Office')">
-                                          <img class="img-fluid d-table mx-auto mb-2 icon-office-slide custom-icon" src="{% static 'svgs/desk.svg' %}" alt="Office">
-                                          <p class="text-center mb-0 text-dark">Office</p>
-                                      </a>
-                                  </div>
-                              </div>
-                              <div class="swiper-slide">
-                                  <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                      <a class="d-block text-decoration-none slide-icon-warehouse" onclick="filterByPropertyType('Warehouse')">
-                                          <img class="img-fluid d-table mx-auto mb-2 icon-warehouse-slide custom-icon" src="{% static 'svgs/logistic.svg' %}" alt="Warehouse">
-                                          <p class="text-center mb-0 text-dark">Warehouse</p>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+<div id="filters-icon">
+    <!-- Filter Trigger-->
+    <button class="btn btn-rounded-tl-br bg-orange p-3 me-md-3 d-flex align-items-center " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
+        <i class="ri-equalizer-line me-2"></i> {% trans 'Filters' %}
+    </button>
+    <!-- / Filter Trigger-->
+</div>
 
-                  </div>
+  <div class="container-fluid" data-aos="fade-in">
+
+
+      <!-- Your HTML with icon elements -->
+
+
+      <!-- Category Toolbar-->
+          <div class="d-flex justify-content-between items-center pt-5 pb-4 flex-column flex-lg-row">
+              <div>
+                        <h1 class="fw-bold fs-3 mb-2">{% trans 'Properties' %}</h1>
+                  <p class="m-0 text-muted small">{% trans 'chose' %}</p>
               </div>
+              <div class="d-flex justify-content-end align-items-center mt-4 mt-lg-0 flex-column flex-md-row">
+
+
+
+
+                  <!-- / Sort Options-->
+              </div>
+          </div>            <!-- /Category Toolbar-->
+
+
+          <!-- Products-->
+          <div class="row g-4 mb-5" id="poperty">
+
+
           </div>
-      </div>
+          <!-- / Products-->
 
-        <div class="container-fluid" data-aos="fade-in">
+      <!-- Pagination-->
+      <div class="d-flex flex-column f-w-44 mx-auto my-5 text-center">
+          <small class="text-muted" id="count">{% trans 'no property' %}</small>
+          <div class="progress f-h-1 mt-3">
+              <div class="progress-bar bg-dark" id="count-progress" role="progressbar" style="width: 25%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <button onclick="" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2" id="loadmore">{% trans 'Load More' %}</button>
+      </div>            <!-- / Pagination-->
+  </div>
 
-
-            <!-- Your HTML with icon elements -->
-
-
-            <!-- Category Toolbar-->
-                <div class="d-flex justify-content-between items-center pt-5 pb-4 flex-column flex-lg-row">
-                    <div>
-                              <h1 class="fw-bold fs-3 mb-2">Properties</h1>
-                        <p class="m-0 text-muted small">chose </p>
-                    </div>
-                    <div class="d-flex justify-content-end align-items-center mt-4 mt-lg-0 flex-column flex-md-row">
-
-                        <!-- Filter Trigger-->
-                        <button class="btn bg-light p-3 me-md-3 d-flex align-items-center fs-7 lh-1 w-100 mb-2 mb-md-0 w-md-auto " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
-                            <i class="ri-equalizer-line me-2"></i> Filters
-                        </button>
-                        <!-- / Filter Trigger-->
-
-                        <!-- Sort Options-->
-                            <select class="form-select form-select-sm border-0 bg-light p-3 pe-5 lh-1 fs-7">
-                                <option selected>Sort By</option>
-                                <option value="1">Hi Low</option>
-                                <option value="2">Low Hi</option>
-                                <option value="3">Name</option>
-                            </select>
-                        <!-- / Sort Options-->
-                    </div>
-                </div>            <!-- /Category Toolbar-->
-
-
-                <!-- Products-->
-                <div class="row g-4 mb-5" id="poperty">
-
-
-                </div>
-                <!-- / Products-->
-
-            <!-- Pagination-->
-            <div class="d-flex flex-column f-w-44 mx-auto my-5 text-center">
-                <small class="text-muted" id="count">no property</small>
-                <div class="progress f-h-1 mt-3">
-                    <div class="progress-bar bg-dark" id="count-progress" role="progressbar" style="width: 25%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <button onclick="" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2" id="loadmore">Load More</button>
-            </div>            <!-- / Pagination-->
-        </div>
-
-        <!-- /Page Content -->
+  <!-- /Page Content -->-- /Page Content -->
     </section>
 
 
+ <!--filter-->
+ <div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasFilters">
+     <div class="offcanvas-header d-flex align-items-center">
+         <h5 class="offcanvas-title" id="offcanvasFiltersLabel">{% trans 'Filtres de propriété' %}</h5>
+         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{% trans 'Fermer' %}"></button>
+     </div>
+     <div class="offcanvas-body">
+         <div class="d-flex flex-column justify-content-between w-100 h-100">
 
+             <!-- Filters-->
+             <div>
+                 <!-- Advert Type Filter -->
+                 <div class="py-4 widget-filter border-top">
+                     <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-advertype" role="button" aria-expanded="false" aria-controls="filter-modal-advertype">
+                         {% trans 'Type d\'annonce' %}
+                     </a>
+                     <div id="filter-modal-advertype" class="collapse">
+                         <div class="filter-options mt-3">
+                             <div class="form-group form-check mb-0">
+                                 <input type="checkbox" class="form-check-input" id="filter-advertype-modal-0" name="advertype" value="For Sale">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-advertype-modal-0">{% trans 'À vendre' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="checkbox" class="form-check-input" id="filter-advertype-modal-1" name="advertype" value="For Rent">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-advertype-modal-1">{% trans 'À louer' %}</label>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- / Advert Type Filter -->
+
+                 <!-- Property Type Filter -->
+                 <div class="py-4 widget-filter border-top">
+                     <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-propertype" role="button" aria-expanded="false" aria-controls="filter-modal-propertype">
+                         {% trans 'Type de propriété' %}
+                     </a>
+                     <div id="filter-modal-propertype" class="collapse">
+                         <div class="filter-options mt-3">
+                             <div class="form-group form-check mb-0">
+                                 <input type="checkbox" class="form-check-input" id="filter-propertype-modal-0" name="propertype" value="Appartement">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-0">{% trans 'Appartement' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="checkbox" class="form-check-input" id="filter-propertype-modal-1" name="propertype" value="Villa">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-1">{% trans 'Villa' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="checkbox" class="form-check-input" id="filter-propertype-modal-2" name="propertype" value="Local">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-2">{% trans 'Local' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="checkbox" class="form-check-input" id="filter-propertype-modal-3" name="propertype" value="Terrain">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-3">{% trans 'Terrain' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="checkbox" class="form-check-input" id="filter-propertype-modal-4" name="propertype" value="Hangar">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-4">{% trans 'Hangar' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="checkbox" class="form-check-input" id="filter-propertype-modal-5" name="propertype" value="Bungalow">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-5">{% trans 'Bungalow' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="checkbox" class="form-check-input" id="filter-propertype-modal-6" name="propertype" value="Usine">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-6">{% trans 'Usine' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="checkbox" class="form-check-input" id="filter-propertype-modal-7" name="propertype" value="Other">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-7">{% trans 'Other' %}</label>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- / Property Type Filter -->
+
+                 <!-- Price Range Filter -->
+                 <div class="py-4 widget-filter widget-filter-price border-top">
+                     <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-price" role="button" aria-expanded="false" aria-controls="filter-modal-price">
+                         {% trans 'Gamme de prix' %}
+                     </a>
+                     <div id="filter-modal-price" class="collapse">
+                         <div class="d-flex justify-content-between align-items-center">
+                             <div class="input-group mb-0 me-2 border">
+                                 <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">DZD</span>
+                                 <input type="number" min="0" max="10000000" step="1000" class="filter-min form-control-sm border flex-grow-1 text-muted border-0" placeholder="{% trans 'Min' %}" id="minPrice">
+                             </div>
+                             <div class="input-group mb-0 ms-2 border">
+                                 <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">DZD</span>
+                                 <input type="number" min="0" max="10000000" step="1000" class="filter-max form-control-sm flex-grow-1 text-muted border-0" placeholder="{% trans 'Max' %}" id="maxPrice">
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- / Price Range Filter -->
+                 <!-- Area Range Filter -->
+                 <div class="py-4 widget-filter widget-filter-area border-top">
+                     <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-area" role="button" aria-expanded="false" aria-controls="filter-modal-area">
+                         {% trans 'Area Range' %}
+                     </a>
+                     <div id="filter-modal-area" class="collapse">
+                         <div class="d-flex justify-content-between align-items-center">
+                             <div class="input-group mb-0 me-2 border">
+                                 <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">m<sup>2</sup></span>
+                                 <input type="number" min="0" max="10000" step="10" class="filter-min form-control-sm border flex-grow-1 text-muted border-0" placeholder="{% trans 'Min' %}" id="minArea">
+                             </div>
+                             <div class="input-group mb-0 ms-2 border">
+                                 <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">m<sup>2</sup></span>
+                                 <input type="number" min="0" max="10000" step="10" class="filter-max form-control-sm flex-grow-1 text-muted border-0" placeholder="{% trans 'Max' %}" id="maxArea">
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- / Area Range Filter -->
+
+                 <!-- Bedrooms Filter -->
+                 <div class="py-4 widget-filter border-top">
+                     <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-bedrooms" role="button" aria-expanded="false" aria-controls="filter-modal-bedrooms">
+                         {% trans 'Bedrooms' %}
+                     </a>
+                     <div id="filter-modal-bedrooms" class="collapse">
+                         <div class="filter-options mt-3">
+                             <div class="form-group form-check mb-0">
+                                 <input type="radio" class="form-check-input" id="filter-bedrooms-modal-0" name="bedrooms" value="0">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-0">{% trans '0+ Bedrooms' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="radio" class="form-check-input" id="filter-bedrooms-modal-1" name="bedrooms" value="1">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-1">{% trans '1+ Bedrooms' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="radio" class="form-check-input" id="filter-bedrooms-modal-2" name="bedrooms" value="2">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-2">{% trans '2+ Bedrooms' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="radio" class="form-check-input" id="filter-bedrooms-modal-3" name="bedrooms" value="3">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-3">{% trans '3+ Bedrooms' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="radio" class="form-check-input" id="filter-bedrooms-modal-4" name="bedrooms" value="4">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-4">{% trans '4+ Bedrooms' %}</label>
+                             </div>
+                             <div class="form-group form-check mb-0">
+                                 <input type="radio" class="form-check-input" id="filter-bedrooms-modal-5" name="bedrooms" value="5">
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-5">{% trans '5+ Bedrooms' %}</label>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- / Bedrooms Filter -->
+
+                 <!-- Wilaya Filter -->
+                 <div class="py-4 widget-filter border-top">
+                     <label for="wilaya">{% trans 'Wilaya' %}</label>
+                     <select id="wilaya" class="form-select">
+                         <option value="">{% trans 'Select Wilaya' %}</option>
+                     </select>
+                 </div>
+
+                 <!-- Daira Filter -->
+                 <div class="py-4 widget-filter border-top">
+                     <label for="daira">{% trans 'Daira' %}</label>
+                     <select id="daira" class="form-select">
+                         <option value="">{% trans 'Select Daira' %}</option>
+                     </select>
+                 </div>
+
+                 <!-- Commune Filter -->
+                 <div class="py-4 widget-filter border-top">
+                     <label for="commune">{% trans 'Commune' %}</label>
+                     <select id="commune" class="form-select">
+                         <option value="">{% trans 'Select Commune' %}</option>
+                     </select>
+                 </div>
+
+                 <!-- Keywords Filter -->
+                 <div class="py-4 widget-filter border-top">
+                     <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-location" role="button" aria-expanded="false" aria-controls="filter-modal-location">
+                         {% trans 'Keywords' %}
+                     </a>
+                     <div id="filter-modal-location" class="collapse">
+                         <div class="input-group my-3 py-1">
+                             <input type="text" class="form-control py-2 filter-search rounded" placeholder="{% trans 'Search' %}" aria-label="Search" id="location">
+                             <span class="input-group-text bg-transparent p-2 position-absolute top-2 end-0 border-0 z-index-20"><i class="ri-search-2-line text-muted"></i></span>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- / Keywords Filter -->
+             </div>
+             <!-- / Filters -->
+
+             <!-- Filter Button -->
+             <div class="border-top pt-3">
+                 <a onclick="filter()" class="btn btn-dark mt-2 d-block hover-lift-sm hover-boxshadow" id="applyfilter">{% trans 'Apply Filters' %}</a>
+             </div>
+             <!-- / Filter Button -->
+         </div>
+     </div>
+ </div>
+
+ <!--filter -->
 
  {% endblock %}
 
@@ -185,7 +331,7 @@
                  if (!response.ok) {
                      throw new Error(`HTTP error! Status: ${response.status}`);
                  }
-                 document.getElementById('poperty').scrollIntoView({ behavior: 'smooth' });
+
                  return response.json();
              })
              .then(handleLoadMoreResponse)
@@ -209,93 +355,170 @@
          displayProperties(data.results);
          updateCount(data.count);
      }
-
      function displayProperties(properties) {
          const propertyContainer = document.getElementById('poperty');
-         propertyContainer.innerHTML += properties.map(getPropertyHTML).join('');
-         document.getElementById('poperty').scrollIntoView({ behavior: 'smooth' });
-
+         properties.forEach(property => {
+             propertyContainer.innerHTML += getPropertyHTML(property);
+             updateLikeCount(property.slug); // Initialize like count for each property
+         });
      }
-
      function getPropertyHTML(item) {
          return `
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                <div class="card card-listing hover-trigger card-hover border">
-                    <img src="${item.cover_photo}" class="card-img-top" style="object-fit: cover; height: 200px;" alt="Property Image">
-                    <div class="position-absolute top-5 start-7 translate-middle badge bg-dark p-2">${item.advert_type}</div>
-                    <div class="card-body">
-                        <h5 class="card-title">${item.title}</h5>
-                        <p class="card-text">${item.street_address}, ${item.city}</p>
-                        <p class="card-text"><small class="text-dark">Price: ${item.price}</small></p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Bedrooms <span class="badge bg-dark">${item.bedrooms}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Bathrooms <span class="badge bg-dark">${item.bathrooms}</span>
-                        </li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="http://127.0.0.1:8000/property/${item.slug}" class="btn btn-orange rounded-pill py-2 px-3">See Details</a>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" data-property-slug="${item.slug}">
+    <div class="card card-listing elevation-1 pb-4 border-2 h-100" style="cursor: pointer;">
+        <div class="position-relative">
+                <div class="o-announ-card-image" style="flex-grow: 1;">
+                        <a href="http://127.0.0.1:8000/property/${item.slug}" class="d-flex flex-column flex-grow-1 v-card v-card--link pb-1">
+
+                    <picture>
+                        <source type="image/webp" srcset="${item.cover_photo}">
+                        <img src="${item.cover_photo}" class="ok-img" style="width: 100%; height: 100%; object-fit: cover;" alt="Property Image">
+                    </picture>
+                    </a>
+                </div>
+                <div class="position-absolute top-0 end-0 m-2 d-flex gap-2">
+                    <button class="btn btn-outline-light bg-white-hover bg-dark rounded-circle btn-sm p-1" onclick="toggleLike('${item.slug}')">
+                        <i class="icon-heart"></i>
+                        <span class="badge badge-orange bg-orange rounded-circle position-absolute" style="top: -5px; z-index: 99999;" id="like-count-${item.slug}"></span>
+                    </button>
+                    <button class="btn btn-outline-light bg-white-hover bg-dark rounded-circle btn-sm p-1" onclick="saveProperty('${item.slug}')">
+                        <i class="icon-bookmark"></i>
+                    </button>
+                </div>
+                <div class="mx-2 mt-2" style="flex-grow: 0;">
+                    <h5 class="mb-1 card-title text-truncate">${item.title}</h5>
+                    <div class="d-flex flex-wrap flex-gap-1 align-center mb-1">
+                        <span class="price d-inline-flex"><div class="mr-1">${item.price}</div><div>DA</div></span>
                     </div>
                 </div>
+
+            <div class="d-inline flex-grow-0">
+                <ul class="mt-2 mx-2 d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="icon-bed"></i>
+                        <span class="mx-2">${item.bedrooms}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="icon-bath"></i>
+                        <span class="mx-2">${item.bathrooms}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="icon-expand"></i>
+                        <span class="mx-2">${item.plot_area} m²</span>
+                    </li>
+                </ul>
             </div>
-        `;
+            <div class="mt-2 mx-2 d-flex justify-content-between align-items-center">
+                <!-- Call and Message Buttons -->
+                <button class="btn btn-outline-dark btn-sm" onclick="showModal('call')">
+                    <i class="icon-phone"></i> Call
+                </button>
+                <button class="btn btn-outline-dark btn-sm" onclick="showModal('message')">
+                    <i class="icon-message"></i> Message
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    `;
      }
 
-     function updateCount(count) {
-         const propertyContainer = document.getElementById('poperty');
-         const products = propertyContainer.childElementCount;
-         document.getElementById('count').innerHTML = `Showing ${products} of ${count} products`;
-         document.getElementById('count-progress').style.width = `${(products / count) * 100}%`;
-     }
 
-     // Get the URL parameters
-     const urlParams = new URLSearchParams(window.location.search);
-     const status = urlParams.get('status');
-     const query = urlParams.get('query');
 
-     // Construct the fetching URL based on the parameters
-     let fetchingUrl = 'http://127.0.0.1:8000/api/v1/properties/all';
+     async function saveProperty(propertySlug) {
+         try {
+             let accessToken = localStorage.getItem('access_token');
+             let response = await fetch(`/api/v1/properties/save-property/${propertySlug}/`, {
+                 method: 'POST',
+                 headers: {
+                     'Authorization': 'Bearer ' + accessToken,
+                     'Content-Type': 'application/json'
+                 }
+             });
 
-     if (status || query) {
-         fetchingUrl += '/?';
-         if (status) {
-             fetchingUrl += `advert_type=${status}`;
+             if (response.status === 401) { // If token is invalid or expired
+                 accessToken = await refreshToken(); // Attempt to refresh token
+                 response = await fetch(`/api/v1/properties/save-property/${propertySlug}/`, {
+                     method: 'POST',
+                     headers: {
+                         'Authorization': 'Bearer ' + accessToken,
+                         'Content-Type': 'application/json'
+                     }
+                 });
+             }
+
+             if (!response.ok) {
+                 const errorData = await response.json();
+                 alert('Error: ' + JSON.stringify(errorData));
+                 return;
+             }
+
+             const data = await response.json();
+             alert(data.message);
+         } catch (error) {
+             alert('Error: ' + error);
          }
-         if (query) {
-             fetchingUrl += `${status ? '&' : ''}city=${encodeURIComponent(query)}`;
-         }
      }
 
-     // Load more properties based on the fetching URL
-     loadMore(fetchingUrl);
+     // Fetch saved properties on page load
+     document.addEventListener('DOMContentLoaded',  ()=> {
+
+         updateLikeCount();
+     });
+
 
 
 
  </script>
 
- <!-- search -->
+
  <script>
-     function filtersearch() {
 
-         document.getElementById('poperty').innerHTML = '';
-         console.log('Filter search button clicked');
-         resetFilters();
-         const url = 'http://127.0.0.1:8000/api/v1/properties/search/';
 
-         const data = {
+     initializeLocationSelectors();
+
+     // Function to fetch and parse URL parameters
+     function getURLParameters() {
+         const urlParams = new URLSearchParams(window.location.search);
+         return {
+             advert_type: urlParams.get('advert_type'),
+             property_type: urlParams.get('property_type') ? urlParams.get('property_type').split('-') : [],
+             commune: urlParams.get('commune'),
+             daira: urlParams.get('daira'),
+             wilaya: urlParams.get('wilaya'),
+             street_address: urlParams.get('street_address'),
+             price_gt: urlParams.get('price_gt'),
+             price_lt: urlParams.get('price_lt'),
+             postal_code: urlParams.get('postal_code')
+         };
+     }
+
+     // Function to get form values
+     function getFormValues() {
+         return  {
              "advert_type": getSelectedValues('advertype'),
              "property_type": getSelectedValues('propertype'),
              "pricegt": parseFloat(document.getElementById('minPrice').value) || 0,
              "pricelt": parseFloat(document.getElementById('maxPrice').value) || 99999999999999999999,
              "bedrooms": getSelectedValue('bedrooms'),
              "bathrooms": getSelectedValue('bathrooms'),
-             "catch_phrase": document.getElementById('location').value
+             "catch_phrase": document.getElementById('location').value,
+             "wilaya": document.getElementById('wilaya').value, // Add wilaya filter
+             "daira": document.getElementById('daira').value, // Add daira filter
+             "commune": document.getElementById('commune').value, // Add commune filter
+             "plot_area_gt": parseFloat(document.getElementById('minArea').value) || 0, // Add area_gt filter
+             "plot_area_lt": parseFloat(document.getElementById('maxArea').value) || 99999999999999999999, // Add area_lt filter
          };
+     }
 
-         console.log('Input data:', data);
+     // Function to search with the data provided
+     function filtersearch(data) {
+         document.getElementById('poperty').innerHTML = '';
+         console.log('Filter search button clicked with data:', data);
+
+         const url = 'http://127.0.0.1:8000/api/v1/properties/search/';
 
          const requestOptions = {
              method: 'POST',
@@ -313,10 +536,10 @@
                  return response.json();
              })
              .then(data => {
+                 resetFilters();
                  if (Array.isArray(data) && data.length > 0) {
                      displayProperties(data);
                      updateCount(data.length);
-
                  } else {
                      document.getElementById('poperty').innerHTML = '<p>No results found.</p>';
                  }
@@ -325,6 +548,21 @@
                  console.error('Error:', error);
              });
      }
+
+     // Initialize search using URL parameters if present
+     document.addEventListener('DOMContentLoaded', () => {
+         const urlParams = getURLParameters();
+         if (Object.values(urlParams).some(param => param !== null)) {
+             filtersearch(urlParams);
+         }
+     });
+
+     // Event listener for form submission
+     function filter() {
+         const formValues = getFormValues();
+         filtersearch(formValues);
+     }
+     // Rest of the functions remain the same...
 
      function getSelectedValue(name) {
          const selectedOption = document.querySelector(`input[name="${name}"]:checked`);

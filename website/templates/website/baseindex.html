@@ -1,5 +1,6 @@
 {% extends './base.html' %}
 {% load static %}
+{% load i18n %}
 
 
 {% block body %}
@@ -9,12 +10,12 @@
 
     <!-- Footer -->
     <!-- Footer-->
-<footer class="bg-dark  text-white">
-
-    <!-- Footer socials-->
+<!-- Footer-->
+<footer class="bg-dark text-white">
+    <!-- Réseaux Sociaux-->
     <div class="bg-light py-4">
         <div class="container d-flex justify-content-center align-items-center py-2">
-            <p class="lead fw-bolder mb-0 lh-1 text-dark">Connect with us</p>
+            <p class="lead fw-bolder mb-0 lh-1 text-dark">{% trans 'Restez connecté' %}</p>
             <ul class="list-unstyled d-flex justify-content-start align-items-center mb-0 ms-3 lh-1">
                 <li class="mx-1 mb-0 lh-1"><a class="text-muted text-decoration-none opacity-75-hover transition-all lh-1" href="#"><i class="ri-instagram-fill ri-xl lh-1"></i></a></li>
                 <li class="mx-1 mb-0 lh-1"><a class="text-muted text-decoration-none opacity-75-hover transition-all lh-1" href="#"><i class="ri-facebook-fill ri-xl lh-1"></i></a></li>
@@ -23,348 +24,179 @@
             </ul>
         </div>
     </div>
-    <!-- / Footer socials-->
+    <!-- / Réseaux Sociaux-->
 
-    <!-- Info Bar-->
+    <!-- Barre d'Informations-->
     <div class="container mt-7">
         <div class="row">
 
-            <!-- Info box-->
+            <!-- Boîte d'Info-->
             <div class="col-12 col-md-4 mb-3 mb-xxl-0 text-white aos-init aos-animate" data-aos="fade-left">
                 <div class="border-white-opacity border-2 p-4 d-flex flex-column flex-lg-row justify-content-start align-items-start h-100">
                     <i class="ri-home-line ri-lg mb-3 mb-lg-0"></i>
                     <div class="ms-lg-4">
-                        <p class="mb-1 lh-1 fw-bold">Find Your Dream Home</p>
-                        <small class="text-muted">Browse our listings to find the perfect property for you.</small>
+                        <p class="mb-1 lh-1 fw-bold">{% trans 'Trouvez la maison de vos rêves' %}</p>
+                        <small class="text-muted">{% trans 'Parcourez nos annonces pour trouver la propriété parfaite pour vous.' %}</small>
                     </div>
                 </div>
             </div>
-            <!-- / Info box-->
+            <!-- / Boîte d'Info-->
 
-            <!-- Info box-->
+            <!-- Boîte d'Info-->
             <div class="col-12 col-md-4 mb-3 mb-xxl-0 text-white aos-init aos-animate" data-aos="fade-left" data-aos-delay="250">
                 <div class="border-white-opacity border-2 p-4 d-flex flex-column flex-lg-row justify-content-start align-items-start h-100">
                     <i class="ri-chat-3-line ri-lg mb-3 mb-lg-0"></i>
                     <div class="ms-lg-4">
-                        <p class="mb-1 lh-1 fw-bold">Customer Support</p>
-                        <small class="text-muted">Get in touch with our team for assistance or inquiries.</small>
+                        <p class="mb-1 lh-1 fw-bold">{% trans 'Support client' %}</p>
+                        <small class="text-muted">{% trans 'Contactez notre équipe pour obtenir de l\'aide ou des informations.' %}</small>
                     </div>
                 </div>
             </div>
-            <!-- / Info box-->
+            <!-- / Boîte d'Info-->
 
-            <!-- Info box-->
+            <!-- Boîte d'Info-->
             <div class="col-12 col-md-4 mb-3 mb-xxl-0 text-white aos-init aos-animate" data-aos="fade-left" data-aos-delay="500">
                 <div class="border-white-opacity border-2 p-4 d-flex flex-column flex-lg-row justify-content-start align-items-start h-100">
                     <i class="ri-shield-star-line ri-lg mb-3 mb-lg-0"></i>
                     <div class="ms-lg-4">
-                        <p class="mb-1 lh-1 fw-bold">Trusted Professionals</p>
-                        <small class="text-muted">Work with experienced agents dedicated to your satisfaction.</small>
+                        <p class="mb-1 lh-1 fw-bold">{% trans 'Professionnels de confiance' %}</p>
+                        <small class="text-muted">{% trans 'Travaillez avec des agents expérimentés dédiés à votre satisfaction.' %}</small>
                     </div>
                 </div>
             </div>
-            <!-- / Info box-->
+            <!-- / Boîte d'Info-->
 
         </div>
     </div>
-    <!-- / Info Bar-->
+    <!-- / Barre d'Informations-->
+
 
     <!-- Menus & Newsletter-->
-    <div class="border-top-white-opacity py-7 mt-7 text-white">
+ <div class="border-top-white-opacity py-7 mt-7 text-white">
         <div class="container aos-init aos-animate" data-aos="fade-in">
             <div class="row my-4 flex-wrap">
 
-                <!-- Footer Nav-->
+                <!-- Navigation-->
                 <nav class="col-6 col-md mb-4 mb-md-0">
-                    <h6 class="mb-4 fw-bolder fs-6">Quick Links</h6>
+                    <h6 class="mb-4 fw-bolder fs-6">{% trans 'Liens rapides' %}</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">Search Properties</a></li>
-                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">Sell Your Home</a></li>
-                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">Rentals</a></li>
-                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">Contact Us</a></li>
+                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">{% trans 'Rechercher des propriétés' %}</a></li>
+                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">{% trans 'Vendez votre maison' %}</a></li>
+                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">{% trans 'Locations' %}</a></li>
+                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">{% trans 'Contactez-nous' %}</a></li>
                     </ul>
                 </nav>
-                <!-- /Footer Nav-->
+                <!-- / Navigation-->
 
-                <!-- Footer Nav-->
+                <!-- Navigation-->
                 <nav class="col-6 col-md mb-4 mb-md-0">
-                    <h6 class="mb-4 fw-bolder fs-6">Resources</h6>
+                    <h6 class="mb-4 fw-bolder fs-6">{% trans 'Ressources' %}</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">Mortgage Calculator</a></li>
-                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">Home Valuation</a></li>
-                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">Neighborhood Guides</a></li>
-                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">Real Estate Blog</a></li>
+                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">{% trans 'Évaluation immobilière' %}</a></li>
+                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">{% trans 'Guides de quartier' %}</a></li>
+                        <li class="mb-2"><a class="text-decoration-none text-white opacity-75 opacity-25-hover transition-all" href="#">{% trans 'Blog immobilier' %}</a></li>
                     </ul>
                 </nav>
-                <!-- /Footer Nav-->
+                <!-- / Navigation-->
 
-                <!-- Footer Contact-->
+                <!-- Contact-->
                 <div class="col-12 col-md-5">
-                    <h6 class="mb-4 fw-bolder fs-6">Subscribe to Our Newsletter</h6>
-                    <p class="opacity-75">Stay updated with the latest news and property listings.</p>
+                    <h6 class="mb-4 fw-bolder fs-6">{% trans 'Abonnez-vous à notre newsletter' %}</h6>
+                    <p class="opacity-75">{% trans 'Restez informé des dernières nouvelles et des annonces immobilières.' %}</p>
+                    <form class="bg-white d-flex justify-content-start align-items-center border-dark-focus-within transition-all mt
                     <form class="bg-white d-flex justify-content-start align-items-center border-dark-focus-within transition-all mt-4">
-                        <div class="input-group m-0">
-                            <input type="email" class="form-control d-flex flex-grow-1 border-0 bg-transparent py-3" placeholder="Enter your email" aria-label="Enter your email">
-                            <span class="input-group-text bg-transparent border-0"><i class="ri-arrow-right-line align-middle"></i></span>
-                        </div>
+                    <div class="input-group m-0">
+                        <input type="email" class="form-control d-flex flex-grow-1 border-0 bg-transparent py-3" placeholder="{% trans 'Entrez votre email' %}" aria-label="{% trans 'Entrez votre email' %}">
+                        <span class="input-group-text bg-transparent border-0"><i class="ri-arrow-right-line align-middle"></i></span>
+                    </div>
                     </form>
                 </div>
-                <!-- /Footer Contact-->
-
-
-    <!-- / Footer-->    <!-- / Footer-->
-
-
-
-    <!-- Search Overlay-->
-                   </div>
+                <!-- / Contact-->
+            </div>
         </div>
     </div>
 </footer>
 <!-- / Footer-->
   <!-- Offcanvas Imports-->
-    <!-- ContactUs Offcanvas-->
-    <div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasCart">
-      <div class="offcanvas-header d-flex align-items-center">
-        <h5 class="offcanvas-title" id="offcanvasCartLabel">Contact US</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-    <div class="offcanvas-body">
-        <div class="d-flex flex-column justify-content-between w-100 h-100">
-          <div class="w-100">
-               <form id="contactAgent">    <!-- Checkout Panel Contact -->
-                    <div class="checkout-panel">
-                      <h5 class="title-checkout">Contact Information</h5>
-                      <div class="row">
+<!-- ContactUs Offcanvas-->
+<div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasCart">
+  <div class="offcanvas-header d-flex align-items-center">
+    <h5 class="offcanvas-title" id="offcanvasCartLabel">{% trans 'Contactez-nous' %}</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{% trans 'Fermer' %}"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="d-flex flex-column justify-content-between w-100 h-100">
+      <div class="w-100">
+        <form id="contactAgent">    <!-- Checkout Panel Contact -->
+          <div class="checkout-panel">
+            <h5 class="title-checkout">{% trans 'Informations de contact' %}</h5>
+            <div class="row">
 
-                        <!-- Email-->
-                        <div class="col-12">
-                          <div class="form-group">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
-                          </div>
+              <!-- Email-->
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="email" class="form-label">{% trans 'Email' %}</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="{% trans 'vous@exemple.com' %}">
+                </div>
 
-                          <!-- Mailing List Signup-->
-                          <div class="form-group form-check m-0">
-                            <input type="checkbox" class="form-check-input" id="add-mailinglist" checked="">
-                            <label class="form-check-label" for="add-mailinglist">Keep me updated with your latest news and offers</label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <!-- /Checkout Panel Contact -->                    <!-- Checkout Shipping Address -->
-                    <div class="checkout-panel">
-                      <div class="row">
-
-
-                        <!-- Last Name-->
-                        <div class="col-12">
-                          <div class="form-group">
-                            <label for="Name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="Name" name="name">
-                          </div>
-                        </div>
-
-                        <!-- phone-->
-                        <div class="col-12">
-                          <div class="form-group">
-                            <label for="phone" class="form-label">phone</label>
-                            <input name="phone_number" id="phone" class="form-control" required="" placeholder="" type="phone">
-                          </div>
-                        </div>
-
-
-
-
-
-                        {% block subject %}{% endblock %}
-
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="message" class="form-label">message</label>
-                            <textarea type="text" name="message" class="form-control" id="message" placeholder="" required=""></textarea>
-                          </div>
-                        </div>
-                      </div>
-
-
+                <!-- Mailing List Signup-->
+                <div class="form-group form-check m-0">
+                  <input type="checkbox" class="form-check-input" id="add-mailinglist" checked="">
+                  <label class="form-check-label" for="add-mailinglist">{% trans 'Gardez-moi informé de vos dernières nouvelles et offres' %}</label>
+                </div>
+              </div>
             </div>
-          <div class="border-top pt-3">
-            <button  class="btn btn-orange btn-orange-chunky mt-5 mb-2 w-100 d-block text-center" type="submit" name="submit">Send</button>
           </div>
-               </form>
+
+
+          <!-- /Checkout Panel Contact -->                    <!-- Checkout Shipping Address -->
+          <div class="checkout-panel">
+            <div class="row">
+
+
+              <!-- Last Name-->
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="Name" class="form-label">{% trans 'Nom' %}</label>
+                  <input type="text" class="form-control" id="Name" name="name">
+                </div>
+              </div>
+
+              <!-- phone-->
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="phone" class="form-label">{% trans 'téléphone' %}</label>
+                  <input name="phone_number" id="phone" class="form-control" required="" placeholder="" type="phone">
+                </div>
+              </div>
+
+              {% block subject %}{% endblock %}
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="message" class="form-label">{% trans 'message' %}</label>
+                  <textarea type="text" name="message" class="form-control" id="message" placeholder="" required=""></textarea>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        <div class="border-top pt-3">
+          <button  class="btn btn-orange btn-orange-chunky mt-5 mb-2 w-100 d-block text-center" type="submit" name="submit">{% trans 'Envoyer' %}</button>
         </div>
+        </form>
       </div>
     </div>
-    </div>
-  <!-- Filters Offcanvas-->
-
-
-<!--filter-->
-<div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasFilters">
-    <div class="offcanvas-header d-flex align-items-center">
-        <h5 class="offcanvas-title" id="offcanvasFiltersLabel">Property Filters</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="d-flex flex-column justify-content-between w-100 h-100">
-
-            <!-- Filters-->
-            <div>
-                <!-- Advert Type Filter -->
-                <div class="py-4 widget-filter border-top">
-                    <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-advertype" role="button" aria-expanded="false" aria-controls="filter-modal-bedrooms">
-                        Advert Type
-                    </a>
-                    <div id="filter-modal-advertype" class="collapse">
-                        <div class="filter-options mt-3">
-                            <div class="form-group form-check mb-0">
-                                <input type="checkbox" class="form-check-input" id="filter-advertype-modal-0" name="advertype" value="For sale">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-0">For Sale </label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="checkbox" class="form-check-input" id="filter-advertype-modal-1" name="advertype" value="For rent">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-advertype-modal-1">For Rent</label>
-                            </div>
-
-                            <!-- Add more bathroom options as needed -->
-                        </div>
-                    </div>
-                </div>
-                <!-- / Advert Type Filter -->
-                <!-- Property Type Filter -->
-                <div class="py-4 widget-filter border-top">
-                    <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-propertype" role="button" aria-expanded="false" aria-controls="filter-modal-bedrooms">
-                        Property Type
-                    </a>
-                    <div id="filter-modal-propertype" class="collapse">
-                        <div class="filter-options mt-3">
-                            <div class="form-group form-check mb-0">
-                                <input type="checkbox" class="form-check-input" id="filter-propertype-modal-0" name="propertype" value="House">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-0">House </label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="checkbox" class="form-check-input" id="filter-propertype-modal-1" name="propertype" value="Apartment">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-1">Appartement</label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="checkbox" class="form-check-input" id="filter-propertype-modal-2" name="propertype" value="Office">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-2">Office</label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="checkbox" class="form-check-input" id="filter-propertype-modal-3" name="propertype" value="Warehouse">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-3">Warehouse</label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="checkbox" class="form-check-input" id="filter-propertype-modal-4" name="propertype" value="Commercial">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-4">Commercial</label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="checkbox" class="form-check-input" id="filter-propertype-modal-5" name="propertype" value="Other">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-propertype-modal-5">Other</label>
-                            </div>
-
-                            <!-- Add more bathroom options as needed -->
-                        </div>
-                    </div>
-                </div>
-                <!-- / Property Type Filter -->
-                <!-- Price Range Filter -->
-                <div class="py-4 widget-filter widget-filter-price border-top">
-                    <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-price" role="button" aria-expanded="false" aria-controls="filter-modal-price">
-                        Price Range
-                    </a>
-                    <div id="filter-modal-price" class="collapse">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="input-group mb-0 me-2 border">
-                                <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">DZD</span>
-                                <input type="number" min="0" max="10000000" step="1000" class="filter-min form-control-sm border flex-grow-1 text-muted border-0" placeholder="Min" id="minPrice">
-                            </div>
-                            <div class="input-group mb-0 ms-2 border">
-                                <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">DZD</span>
-                                <input type="number" min="0" max="10000000" step="1000" class="filter-max form-control-sm flex-grow-1 text-muted border-0" placeholder="Max" id="maxPrice">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- / Price Range Filter -->
-                <!-- Bedrooms Filter -->
-                <div class="py-4 widget-filter border-top">
-                    <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-bedrooms" role="button" aria-expanded="false" aria-controls="filter-modal-bedrooms">
-                        Bedrooms
-                    </a>
-                    <div id="filter-modal-bedrooms" class="collapse">
-                        <div class="filter-options mt-3">
-                            <div class="form-group form-check mb-0">
-                                <input type="radio" class="form-check-input" id="filter-bedrooms-modal-0" name="bedrooms" value="0">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-0">0+ Bedrooms </label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="radio" class="form-check-input" id="filter-bedrooms-modal-1" name="bedrooms" value="1">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-1">1+ Bedrooms </label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="radio" class="form-check-input" id="filter-bedrooms-modal-2" name="bedrooms" value="2">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-2">2+ Bedrooms </label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="radio" class="form-check-input" id="filter-bedrooms-modal-3" name="bedrooms" value="3">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-3">3+ Bedrooms </label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="radio" class="form-check-input" id="filter-bedrooms-modal-4" name="bedrooms" value="4">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-4">4+ Bedrooms </label>
-                            </div>
-                            <div class="form-group form-check mb-0">
-                                <input type="radio" class="form-check-input" id="filter-bedrooms-modal-5" name="bedrooms" value="5">
-                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-4">5+ Bedrooms </label>
-                            </div>
-                            <!-- Add more bathroom options as needed -->
-                        </div>
-                    </div>
-                </div>
-                <!-- / Bedrooms Filter -->
-
-
-                <!-- Other filters (minPrice, maxPrice, location) can be added as per your requirement -->
-
-
-                <!-- Location Filter -->
-                <div class="py-4 widget-filter border-top">
-                    <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-location" role="button" aria-expanded="false" aria-controls="filter-modal-location">
-                        Location
-                    </a>
-                    <div id="filter-modal-location" class="collapse">
-                        <div class="input-group my-3 py-1">
-                            <input type="text" class="form-control py-2 filter-search rounded" placeholder="Search" aria-label="Search" id="location">
-                            <span class="input-group-text bg-transparent p-2 position-absolute top-2 end-0 border-0 z-index-20"><i
-<i class="ri-search-2-line text-muted"></i></span>
-                        </div>
-                        <!-- Add location filtering options here -->
-                    </div>
-                </div>
-                <!-- / Location Filter -->
-            </div>
-            <!-- / Filters-->
-
-            <!-- Filter Button-->
-            <div class="border-top pt-3">
-                <a onclick="filtersearch()" class="btn btn-dark mt-2 d-block hover-lift-sm hover-boxshadow" id="applyfilter">Apply Filters</a>
-            </div>
-            <!-- /Filter Button-->
-        </div>
-    </div>
+  </div>
 </div>
-
-
-<!--filter -->
-
+<!-- Filters Offcanvas-->
 
 
 
-     <div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasReview">
+
+
+ <div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasReview">
       <div class="offcanvas-header d-flex align-items-center">
         <h5 class="offcanvas-title" id="offcanvasReviewLabel">Leave A Review</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -394,31 +226,33 @@
         <!-- / Review Form-->
       </div>
     </div>
-    <!-- Search Overlay-->
-    <section class="search-overlay">
-        <div class="container search-container">
-            <div class="py-5">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <p class="lead lh-1 m-0 fw-bold">What are you looking for?</p>
-                    <button class="btn btn-light btn-close-search"><i class="ri-close-circle-line align-bottom"></i> Close search</button>
-                </div>
-                <form>
-                    <input type="text" class="form-control" id="searchForm" placeholder="Search by Location ...">
-                </form>
-                <div class="my-5">
 
-                    <div class="row" id="property">
 
-                    </div>
-                </div>
 
-                <div class="bg-dark p-4 text-white">
-                    <p class="lead m-0">Didn't find what you are looking for? <a class="transition-all opacity-50-hover text-white text-link-border border-white pb-1 border-2" href="#">Send us a message.</a></p>
+<!-- Search Overlay-->
+<section class="search-overlay">
+    <div class="container search-container">
+        <div class="py-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="lead lh-1 m-0 fw-bold">{% trans 'Que cherchez-vous ?' %}</p>
+                <button class="btn btn-light btn-close-search"><i class="ri-close-circle-line align-bottom"></i> {% trans 'Fermer la recherche' %}</button>
+            </div>
+            <form>
+                <input type="text" class="form-control" id="searchForm" placeholder="{% trans 'Recherche par emplacement ...' %}">
+            </form>
+            <div class="my-5">
+
+                <div class="row" id="property">
+
                 </div>
             </div>
-        </div>
-    </section>
 
+            <div class="bg-dark p-4 text-white">
+                <p class="lead m-0">{% blocktrans %}Vous n'avez pas trouvé ce que vous cherchez ? <a class="transition-all opacity-50-hover text-white text-link-border border-white pb-1 border-2" href="#">Envoyez-nous un message.</a>{% endblocktrans %}</p>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
 {% block scripts %}
 <script>
@@ -430,7 +264,11 @@
         });
     }
 </script>
+<!--
+fetching wilaya
+-->
 <script>
+
     document.addEventListener('DOMContentLoaded', function() {
         var buttons = document.querySelectorAll('.btn-select');
         var statusInput = document.getElementById('status-input');
@@ -446,5 +284,7 @@
         });
     });
 </script>
+
+
 
 {% endblock %}

@@ -11,9 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
     gender = serializers.CharField(source="profile.gender")
     phone_number = PhoneNumberField(source="profile.phone_number")
     profile_photo = serializers.ImageField(source="profile.profile_photo")
-    country = CountryField(source="profile.country")
-    city = serializers.CharField(source="profile.city")
-    top_seller = serializers.BooleanField(source="profile.top_seller")
+
 
     class Meta:
         model = User
@@ -21,12 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
             "id",
             "username",
             "email",
-            "gender",
             "phone_number",
-            "profile_photo",
-            "country",
-            "city",
-            "top_seller",
         ]
 
     def to_representation(self, instance):

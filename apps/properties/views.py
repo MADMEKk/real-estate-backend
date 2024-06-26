@@ -1,125 +1,169 @@
 import logging
-
 import django_filters
 from django.core.mail import send_mail
 from django.db.models import query
+
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, generics, permissions, status
+from rest_framework import filters, generics, permissions, status, viewsets
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.shortcuts import render, redirect
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .exceptions import PropertyNotFound
-from .models import Property, PropertyViews, Photo, Propertysellerinfo
+from apps.users.models import User
+
+from .models import Property, PropertyViews, Photo, Propertysellerinfo,SavedProperty,PropertyLike
 from .pagination import PropertyPagination
-from .serializers import (PropertyCreateSerializer, PropertySerializer,
-                          PropertyViewSerializer,UpdatePropertySerializer)
+from .serializers import (PropertyCreateSerializer, PropertySerializer,PropertyLikeSerializer,
+                         SavedPropertySerializer, PropertyViewSerializer, UpdatePropertySerializer, UserSerializer)
+from .permissions import IsAgentOrReadOnly, IsOwnerOrReadOnly, IsAdminOrAgent, IsAgent
 
 logger = logging.getLogger(__name__)
 
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def toggle_like_property(request, slug):
+    try:
+        property_instance = Property.objects.get(slug=slug)
+        like, created = PropertyLike.objects.get_or_create(property=property_instance, user=request.user)
+
+        if not created:
+            # If the like already exists, remove it (unlike)
+            like.delete()
+            return Response({'message': 'Property unliked'}, status=status.HTTP_200_OK)
+        else:
+            # If the like was created, return the like information
+            serializer = PropertyLikeSerializer(like)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    except Property.DoesNotExist:
+        return Response({'message': 'Property not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+def property_likes(request, slug):
+    try:
+        property_instance = Property.objects.get(slug=slug)
+        likes_count = PropertyLike.objects.filter(property=property_instance).count()
+        return Response({'likes_count': likes_count}, status=status.HTTP_200_OK)
+    except Property.DoesNotExist:
+        return Response({'message': 'Property not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def check_like_status(request, slug):
+    try:
+        property_instance = Property.objects.get(slug=slug)
+        is_liked = PropertyLike.objects.filter(property=property_instance, user=request.user).exists()
+        return Response({'is_liked': is_liked}, status=status.HTTP_200_OK)
+    except Property.DoesNotExist:
+        return Response({'message': 'Property not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class SavedPropertyAPIView(APIView):
+    serializer_class = SavedPropertySerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+    def get(self, request):
+        saved_properties = SavedProperty.objects.filter(user=request.user)
+        serializer = SavedPropertySerializer(saved_properties, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, slug):
+        try:
+            property_instance = Property.objects.get(slug=slug)
+            user = request.user
+            saved_property, created = SavedProperty.objects.get_or_create(user=user, property=property_instance)
+            if created:
+                return Response({'message': 'Property saved successfully'}, status=status.HTTP_200_OK)
+            else:
+                return Response({'message': 'Property is already saved'}, status=status.HTTP_200_OK)
+        except Property.DoesNotExist:
+            return Response({'error': 'Property not found'}, status=status.HTTP_404_NOT_FOUND)
+
 
 class PropertyFilter(django_filters.FilterSet):
-    advert_type = django_filters.CharFilter(
-        field_name="advert_type", lookup_expr="iexact"
-    )
-
-    property_type = django_filters.CharFilter(
-        field_name="property_type", lookup_expr="iexact"
-    )
-     
-    city = django_filters.CharFilter(field_name="city", lookup_expr='icontains')
-
+    advert_type = django_filters.CharFilter(field_name="advert_type", lookup_expr="exact")
+    property_type = django_filters.CharFilter(field_name="property_type", lookup_expr="exact")
+    commune = django_filters.CharFilter(field_name="commune", lookup_expr='exact')
+    daira = django_filters.CharFilter(field_name="daira", lookup_expr='exact')
+    wilaya = django_filters.CharFilter(field_name="wilaya", lookup_expr='exact')
     street_address = django_filters.CharFilter(field_name="street_address", lookup_expr='icontains')
-
-    
-    
-
     price = django_filters.NumberFilter()
     price__gt = django_filters.NumberFilter(field_name="price", lookup_expr="gt")
     price__lt = django_filters.NumberFilter(field_name="price", lookup_expr="lt")
     property_location = django_filters.NumberFilter(field_name="postal_code", lookup_expr="iexact")
+
     class Meta:
         model = Property
-        fields = ["advert_type", "property_type","city","street_address", "price","postal_code"]
-
+        fields = ["advert_type", "property_type", "wilaya", "daira", "commune", "street_address", "price", "postal_code"]
 
 class ListAllPropertiesAPIView(generics.ListAPIView):
     serializer_class = PropertySerializer
     queryset = Property.published.all().order_by("-created_at")
     pagination_class = PropertyPagination
-    filter_backends = [
-        DjangoFilterBackend,
-        filters.SearchFilter,
-        filters.OrderingFilter,
-    ]
-
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_class = PropertyFilter
-    search_fields = [ "city"]
-    ordering_fields = ["created_at"]
+    search_fields = ["commune__name", "daira__name", "wilaya__name", "title", "description"]
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
-        response["Access-Control-Allow-Credentials"] = "true"
-        # Assuming your React app runs on `http://localhost:3000`:
+        response["Access-Control-Allow-Credentials"] = "True"
         response["Access-Control-Allow-Origin"] = "http://192.168.8.104:3000"
         return response
 
 class ListAgentsPropertiesAPIView(generics.ListAPIView):
     serializer_class = PropertySerializer
     pagination_class = PropertyPagination
-    filter_backends = [
-        DjangoFilterBackend,
-        filters.SearchFilter,
-        filters.OrderingFilter,
-    ]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_class = PropertyFilter
-    search_fields = ["country", "city"]
+    search_fields = ["wilaya__name", "commune__name", "daira__name"]
     ordering_fields = ["created_at"]
-    authentication_classes = [JWTAuthentication]  # Add JWT authentication
-    permission_classes = [permissions.IsAuthenticated]  # Add permission class to require authentication
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated , IsAgent]
 
     def get_queryset(self):
-        queryset = Property.objects.all().order_by("-created_at")
-        return queryset
-
+        user = self.request.user
+        if user.is_agent:
+            return Property.objects.all().order_by("-created_at")
+        return Property.published.all().order_by("-created_at")
 
 class PropertyViewsAPIView(generics.ListAPIView):
     serializer_class = PropertyViewSerializer
     queryset = PropertyViews.objects.all()
+
 @api_view(["GET"])
 def get_property_photos(request, slug):
-    property = Property.objects.get(slug=slug)
-    values = []
-    value = Photo.objects.filter(property=property).values()
-    val = list(value)
-    values += val
-    return Response(values, status=status.HTTP_200_OK)
+    property = get_object_or_404(Property, slug=slug, published_status=True)
+    photos = Photo.objects.filter(property=property).values()
+    return Response(list(photos), status=status.HTTP_200_OK)
+
 class PropertyDetailView(APIView):
     def get(self, request, slug):
-        if request.user == Property.objects.get(slug=slug).user:
+        property = get_object_or_404(Property, slug=slug, published_status=True)
+        if request.user.is_authenticated and (request.user == property.user or request.user.is_agent):
             property = Property.objects.get(slug=slug)
         else:
-            property = Property.published.get(slug=slug)
+            property = get_object_or_404(Property, slug=slug, published_status=True)
+
         x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(",")[0]
-        else:
-            ip = request.META.get("REMOTE_ADDR")
+        ip = x_forwarded_for.split(",")[0] if x_forwarded_for else request.META.get("REMOTE_ADDR")
 
         if not PropertyViews.objects.filter(property=property, ip=ip).exists():
             PropertyViews.objects.create(property=property, ip=ip)
-
             property.views += 1
             property.save()
 
         serializer = PropertySerializer(property, context={"request": request})
-
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
 @api_view(['PUT'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOrReadOnly])
 def update_property_api_view(request, slug):
      try:
          property = Property.objects.get(slug=slug)
@@ -139,26 +183,26 @@ def update_property_api_view(request, slug):
          return Response(serializer.data)
      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# for agents
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def create_property_api_view(request):
     user = request.user
     data = request.data
-    data["user"] = request.user.pkid
+    data["user"] = user.pkid
+    photos = request.FILES.getlist("photos")
+    del data["photos"]
     serializer = PropertyCreateSerializer(data=data)
     if serializer.is_valid():
-        serializer.save()
-        logger.info(
-            f"property {serializer.data.get('title')} created by {user.username}"
-        )
-        return Response(serializer.data)
 
+        property_instance = serializer.save()
+        property_id = property_instance.id
+        upload_property_photos(property_id, photos)
+        logger.info(f"Property {serializer.data.get('title')} created by {user.username}")
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 @api_view(["DELETE"])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOrReadOnly,IsAdminOrAgent])
 def delete_property_api_view(request, slug):
     try:
         property = Property.objects.get(slug=slug)
@@ -181,44 +225,57 @@ def delete_property_api_view(request, slug):
             data["failure"] = "Deletion failed"
         return Response(data=data)
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import permissions
+from .models import Property
+from .serializers import PropertySerializer
 
 class PropertySearchAPIView(APIView):
     permission_classes = [permissions.AllowAny]
-    serializer_class = PropertyCreateSerializer
+    serializer_class = PropertySerializer
 
     def post(self, request):
         queryset = Property.published.all()
-        data = self.request.data
+        data = request.data
 
-        advert_type = data["advert_type"]
-        if len(advert_type) > 0:  # If advert_type is not None and not an empty string
-            queryset = queryset.filter(advert_type__in=advert_type)
+        advert_type = data.get("advert_type")
+        if advert_type:
+            queryset = queryset.filter(advert_type=advert_type)
 
-        property_type = data["property_type"]
-        if len(property_type) > 0:
+        property_type = data.get("property_type", [])
+        if property_type:
             queryset = queryset.filter(property_type__in=property_type)
 
-        pricegt = data["pricegt"]
-        pricelt = data["pricelt"]
-        if pricegt & pricelt:
-            queryset = queryset.filter(price__gt=pricegt, price__lt=pricelt)
+        price_gt = data.get("price_gt")
+        if price_gt is not None:
+            queryset = queryset.filter(price__gt=price_gt)
 
-        bedrooms = data["bedrooms"]
+        price_lt = data.get("price_lt")
+        if price_lt is not None:
+            queryset = queryset.filter(price__lt=price_lt)
 
-        if bedrooms:
-            queryset = queryset.filter(bedrooms__gte=bedrooms)
+        commune = data.get("commune")
+        if commune:
+            queryset = queryset.filter(commune=commune)
 
-            bathrooms = data["bathrooms"]
+        daira = data.get("daira")
+        if daira:
+            queryset = queryset.filter(daira=daira)
 
-        if bathrooms:
-            queryset = queryset.filter(bathrooms__gte=bathrooms)
+        wilaya = data.get("wilaya")
+        if wilaya:
+            queryset = queryset.filter(wilaya=wilaya)
 
-        catch_phrase = data["catch_phrase"]
-        if catch_phrase:
-            queryset = queryset.filter(description__icontains=catch_phrase)
+        street_address = data.get("street_address")
+        if street_address:
+            queryset = queryset.filter(street_address__icontains=street_address)
+
+        postal_code = data.get("postal_code")
+        if postal_code:
+            queryset = queryset.filter(postal_code=postal_code)
 
         serializer = PropertySerializer(queryset, many=True)
-
         return Response(serializer.data)
 
 
@@ -278,11 +335,49 @@ class PropertyRankAPIView(APIView):
 
         serializer = PropertySerializer(queryset, many=True)
         return Response(serializer.data)
+
+@api_view(["PATCH"])
+@permission_classes([permissions.IsAuthenticated, IsAdminOrAgent])
+def toggle_publish_property(request, slug):
+    property = get_object_or_404(Property, slug=slug)
+    if request.user != property.user and not request.user.is_agent:
+        return Response({"error": "You can't change the publish status of a property that doesn't belong to you"}, status=status.HTTP_403_FORBIDDEN)
+
+    property.published_status = not property.published_status
+    property.save()
+    return Response({"success": "Publish status updated successfully"}, status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOrReadOnly,IsAdminOrAgent])
+def replace_property_photo(request, property_slug, photo_id):
+    try:
+        property = Property.objects.get(slug=property_slug)
+        photo = Photo.objects.get(id=photo_id, property=property)
+
+        if 'file' in request.FILES:
+            photo.image = request.FILES['file']
+            photo.save()
+            return Response("Photo replaced successfully", status=status.HTTP_200_OK)
+        else:
+            return Response("No photo provided", status=status.HTTP_400_BAD_REQUEST)
+    except Property.DoesNotExist:
+        return Response("Property not found", status=status.HTTP_404_NOT_FOUND)
+    except Photo.DoesNotExist:
+        return Response("Photo not found", status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrAgent]
+
+
 # for seller
 @api_view(["POST"])
 def create_property_request_api_view(request):
     data = request.data
-    data["user"] = "1"
+    data["user"] = User.objects.get(is_agent=True)[1]
     # get firstname lastname and email from the request
     seller_info = {
         "first_name": request.data.get("first_name"),
@@ -319,50 +414,3 @@ def upload_property_photos(property_id, photos):
 
         Photo.objects.create(image=photo, property=property)
     return Response("Photos uploaded successfully")
-
-
-@api_view(['PUT'])
-@permission_classes([permissions.IsAuthenticated])
-def replace_property_photo(request, property_slug, photo_id):
-    try:
-        property = Property.objects.get(slug=property_slug)
-        photo = Photo.objects.get(id=photo_id, property=property)
-
-        if 'file' in request.FILES:
-            photo.image = request.FILES['file']
-            photo.save()
-            return Response("Photo replaced successfully", status=status.HTTP_200_OK)
-        else:
-            return Response("No photo provided", status=status.HTTP_400_BAD_REQUEST)
-    except Property.DoesNotExist:
-        return Response("Property not found", status=status.HTTP_404_NOT_FOUND)
-    except Photo.DoesNotExist:
-        return Response("Photo not found", status=status.HTTP_404_NOT_FOUND)
-    except Exception as e:
-        return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-def create_property_seller_info(property_id, seller_info):
-    property = Property.objects.get(id=property_id)
-    Propertysellerinfo.objects.create(property=property, **seller_info)
-    return Response("Seller info created successfully")
-
-
-@api_view(['PUT'])
-def toggle_publish_property(request, slug):
-    if request.method == 'PUT':
-        try:
-            property_instance = Property.objects.get(slug=slug)
-            published = request.data.get('published')
-            if published == 'true':
-                property_instance.published_status = True
-            else:
-                property_instance.published_status =  False
-            property_instance.save()
-            return Response({'message': 'Property published/unpublished successfully.'}, status=200)
-        except Property.DoesNotExist:
-            return Response({'error': 'Property does not exist.'}, status=404)
-        except Exception as e:
-            return Response({'error': str(e)}, status=500)
-    else:
-        return Response({'error': 'Invalid request method.'}, status=400)
-

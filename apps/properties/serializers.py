@@ -2,12 +2,40 @@ from rest_framework import serializers
 import json
 
 from .models import Property, PropertyViews, Photo
+from rest_framework import serializers
+from algeria.models import Wilaya, Daira, Commune
+from .models import Property
+
+class WilayaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Wilaya
+        fields = ['id', 'name', 'name_ascii', 'code']
+
+class DairaSerializer(serializers.ModelSerializer):
+    wilaya_name = serializers.CharField(source='wilaya.name', read_only=True)
+
+    class Meta:
+        model = Daira
+        fields = ['id', 'name', 'name_ascii', 'wilaya', 'wilaya_name']
+
+class CommuneSerializer(serializers.ModelSerializer):
+    daira_name = serializers.CharField(source='daira.name', read_only=True)
+    wilaya_name = serializers.CharField(source='daira.wilaya.name', read_only=True)
+
+    class Meta:
+        model = Commune
+        fields = ['id', 'name', 'name_ascii', 'daira', 'daira_name', 'wilaya_name']
 
 
 class PropertySerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
     cover_photo = serializers.SerializerMethodField()
+    video = serializers.SerializerMethodField()
     profile_photo = serializers.SerializerMethodField()
+    commune_name = serializers.CharField(source='commune.name', read_only=True)
+    daira_name = serializers.CharField(source='daira.name', read_only=True)
+    wilaya_name = serializers.CharField(source='wilaya.name', read_only=True)
+
     class Meta:
         model = Property
         fields = [
@@ -18,11 +46,17 @@ class PropertySerializer(serializers.ModelSerializer):
             "slug",
             "ref_code",
             "description",
-            "city",
+            "wilaya",
+            "commune",
+            "daira",
+            "commune_name",
+            "daira_name",
+            "wilaya_name",
             "postal_code",
             "street_address",
             "property_number",
             "price",
+
             "tax",
             "final_property_price",
             "plot_area",
@@ -32,10 +66,16 @@ class PropertySerializer(serializers.ModelSerializer):
             "advert_type",
             "property_type",
             "cover_photo",
-            "vedio",
+            "video",
             "photos",
             "published_status",
             "views",
+            "amenities",
+            "property_status",
+
+            "neighborhood_info",
+            "legal_status",
+            "payment_options",
         ]
 
     def get_user(self, obj):
@@ -44,21 +84,16 @@ class PropertySerializer(serializers.ModelSerializer):
     def get_cover_photo(self, obj):
         return obj.cover_photo.url
 
-
-
-    def get_video(self, obj):
-        return obj.vedio.url
-
     def get_profile_photo(self, obj):
         return obj.user.profile.profile_photo.url
 
-
-
+    def get_video(self, obj):
+        return obj.video.url
 
 class PropertyCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Property
-        fields = ['title', 'description',  'city', 'postal_code', 'street_address', 'property_number', 'price', 'plot_area', 'total_floors', 'bedrooms', 'bathrooms', 'advert_type', 'property_type', 'cover_photo', 'vedio','user']
+        fields = ['title', 'description',  'wilaya', 'commune','daira', 'postal_code', 'street_address', 'property_number', 'price', 'plot_area', 'total_floors', 'bedrooms', 'bathrooms', 'advert_type', 'property_type', 'cover_photo', 'vedio','user']
 
 
 
@@ -68,7 +103,6 @@ class PropertyViewSerializer(serializers.ModelSerializer):
         exclude = ["updated_at", "pkid"]
 
 
-from rest_framework import serializers
 from .models import Property, Photo
 
 class UpdatePropertySerializer(serializers.ModelSerializer):
@@ -83,7 +117,9 @@ class UpdatePropertySerializer(serializers.ModelSerializer):
             "slug",
             "ref_code",
             "description",
-            "city",
+            "wilaya",
+            "commune",
+            "daira",
             "postal_code",
             "street_address",
             "property_number",
@@ -122,6 +158,63 @@ class UpdatePropertySerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+# myapp/serializers.py
+from .models import Property, Photo, PropertyViews, Propertysellerinfo,SavedProperty,PropertyLike
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = '__all__'
+
+class PropertyViewsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PropertyViews
+        fields = '__all__'
+
+class PropertysellerinfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Propertysellerinfo
+        fields = '__all__'
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'is_agent']
+
+class PropertyCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Property
+        fields = '__all__'
+
+class UpdatePropertySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Property
+        fields = '__all__'
+
+class PropertyViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PropertyViews
+        fields = '__all__'
 
 
 
+class SavedPropertySerializer(serializers.ModelSerializer):
+    property_title = serializers.CharField(source='property.title')
+    property_description = serializers.CharField(source='property.description')
+    property_wilaya = serializers.CharField(source='property.wilaya')
+    cover_photo = serializers.CharField(source='property.cover_photo.url')
+    advert_type = serializers.CharField(source='property.advert_type')
+    property_type = serializers.CharField(source='property.property_type')
+    property_slug = serializers.CharField(source='property.slug')
+    class Meta:
+        model = SavedProperty
+        fields = ['property_title', 'property_slug', 'property_description','property_wilaya','advert_type','property_type','cover_photo', 'saved_at']
+
+class PropertyLikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PropertyLike
+        fields = '__all__'

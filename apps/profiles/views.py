@@ -1,70 +1,47 @@
-from rest_framework import generics, permissions, status
-from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from .exceptions import NotYourProfile, ProfileNotFound
+from rest_framework.response import Response
+from rest_framework import status
 from .models import Profile
-from .renderers import ProfileJSONRenderer
-from .serializers import ProfileSerializer, UpdateProfileSerializer
+from .serializers import ProfileSerializer
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsOwnerOrReadOnly
 
-
-class AgentListAPIView(generics.ListAPIView):
-    permission_classes = [permissions.IsAuthenticated]
-    queryset = Profile.objects.filter(is_agent=True)
-    serializer_class = ProfileSerializer
-
-
-"""
-    from rest_framework import api_view, permissions
-
-    @api_view(["GET"])
-    @permission_classes((permissions.IsAuthenticated))
-    def get_all_agents(request):
-        agents = Profile.objects.filter(is_agent=True)
-        serializer=ProfileSerializer(agents, many=True)
-        name_spaced_response={"agents": serializer.data}
-        return Response(name_spaced_response,status=status.HTTP_200_OK)
-"""
-
-
-class TopAgentsListAPIView(generics.ListAPIView):
-    permission_classes = [permissions.IsAuthenticated]
-    queryset = Profile.objects.filter(top_agent=True)
-    serializer_class = ProfileSerializer
-
-
-class GetProfileAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-    renderer_classes = [ProfileJSONRenderer]
+class ProfileAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
     def get(self, request):
-        user = self.request.user
-        user_profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(user_profile, context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        profiles = Profile.objects.filter(user=request.user)
+        serializer = ProfileSerializer(profiles, many=True)
+        return Response(serializer.data)
 
+    def post(self, request):
+        serializer = ProfileSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class UpdateProfileAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-    renderer_classes = [ProfileJSONRenderer]
-
-    serializer_class = UpdateProfileSerializer
-
-    def patch(self, request, username):
+    def put(self, request, pk):
         try:
-            Profile.objects.get(user__username=username)
+            profile = Profile.objects.get(pk=pk)
         except Profile.DoesNotExist:
-            raise ProfileNotFound
+            return Response({'error': 'Profile does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-        user_name = request.user.username
-        if user_name != username:
-            raise NotYourProfile
+        self.check_object_permissions(request, profile)
 
-        data = request.data
-        serializer = UpdateProfileSerializer(
-            instance=request.user.profile, data=data, partial=True
-        )
+        serializer = ProfileSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        serializer.is_valid()
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    def delete(self, request, pk):
+        try:
+            profile = Profile.objects.get(pk=pk)
+        except Profile.DoesNotExist:
+            return Response({'error': 'Profile does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+        self.check_object_permissions(request, profile)
+
+        profile.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

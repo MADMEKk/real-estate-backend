@@ -1,569 +1,568 @@
 {% extends './baseindex.html' %}
 {% load static %}
+{% load i18n %}
+{% block title %}{{ _('Agence Immobilière à Oran') }}{% endblock %}
 
 
 {% block content %}
+<div id="loader-overlay" class="loader-overlay">
+    <div class="loader"></div>
+</div>
+<!-- Navbar -->
+<div class="position-relative z-index-30">
     <!-- Navbar -->
-    <div class="position-relative z-index-30">
-        <!-- Navbar -->
-       <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mx-0 p-0 flex-column  border-0 position-absolute w-100 z-index-30 bg-transparent navbar-dark navbar-transparent bg-white-hover transition-all">
-            <div class="w-100 pb-lg-0 pt-lg-0 pt-4 pb-3">
-                <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
+    <nav    class="navbar navbar-expand-lg navbar-light bg-white  flex-column  border-0 position-absolute w-100 z-index-30 ">
+        <div class="w-100 pb-lg-0 pt-lg-0 pt-4 pb-3">
+            <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
 
-                    <!-- Logo-->
-                    <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0" href="{% url 'website:index' %}">
-                        <!-- Start of Logo-->
-                        <div class="d-flex align-items-center">
-                            <div class="f-w-20 d-flex align-items-center me-2 lh-1">
-
-<svg
-   version="1.0"
-   style="height: auto;"
-   viewBox="0 0 1029.4914 522.37114"
-   preserveAspectRatio="xMidYMid"
-   id="svg5"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs5" />
-  <g
-     transform="matrix(0.30388082,0,0,-0.30388082,-1221.3094,835.36837)"
-     fill="#000000"
-     stroke="none"
-     id="g5">
-    <path
-       fill="currentColor"
-       class="svg-logo-white"
-       d="m 6808,2687 -118,-62 v -71 -70 l -70,-34 -70,-34 v -48 c 0,-31 -5,-50 -12,-52 -7,-2 -53,-13 -103,-24 -115,-28 -283,-111 -396,-196 -92,-70 -239,-219 -265,-268 l -16,-31 408,6 c 225,4 419,9 432,13 22,6 22,8 22,188 v 181 l 67,35 c 37,19 70,37 75,38 4,2 8,-96 8,-218 v -221 l 98,3 97,3 -1,438 c 0,240 2,437 5,437 3,0 44,-16 92,-36 l 86,-36 6,-146 c 4,-81 10,-253 13,-384 l 7,-236 27,-6 c 15,-3 40,-8 55,-12 l 27,-7 -4,307 c -2,200 0,306 7,306 6,0 34,-11 63,-25 l 52,-24 v -676 c 0,-593 2,-675 15,-675 13,0 15,82 15,678 0,527 -3,682 -12,694 -7,9 -45,31 -85,48 l -71,32 -39,-26 -38,-26 -10,102 -10,102 -105,47 c -58,26 -112,48 -120,48 -8,0 -68,-28 -132,-62 z"
-       id="path1" />
-    <path
-       fill="currentColor"
-       class="svg-logo-white"
-       d="m 4695,2678 c -3,-35 -5,-173 -3,-307 l 3,-243 120,168 120,168 6,131 c 3,71 3,133 1,138 -2,4 -57,7 -122,7 h -118 z"
-       id="path2" />
-    <path
-       fill="currentColor"
-       class="svg-logo-dark"
-       d="m 4585,1897 c -325,-462 -594,-846 -598,-853 -7,-12 16,-14 126,-14 h 134 l 494,715 c 272,393 496,715 499,715 3,-1 82,-134 175,-298 136,-237 175,-298 193,-300 12,-2 22,0 22,4 0,8 -409,794 -440,845 l -15,27 z"
-       id="path3" />
-    <path
-       fill="currentColor"
-       class="svg-logo-dark"
-       d="m 6995,1697 c -55,-31 -85,-79 -85,-136 0,-77 43,-130 178,-219 99,-65 132,-104 132,-156 0,-30 -7,-45 -34,-72 -40,-40 -85,-45 -145,-14 -44,22 -109,93 -117,127 -4,15 -14,23 -28,23 h -22 l 12,-97 c 7,-54 13,-101 14,-105 0,-14 33,-8 52,8 16,16 21,16 65,-2 91,-34 194,-19 260,39 63,56 79,127 44,196 -24,47 -66,84 -176,156 -84,55 -135,112 -135,148 0,51 59,93 117,82 44,-8 114,-71 138,-125 10,-22 25,-40 33,-40 12,0 14,11 9,68 -4,37 -7,82 -7,100 0,40 -23,52 -51,26 -18,-17 -22,-17 -73,-1 -73,23 -133,21 -181,-6 z"
-       id="path4" />
-    <path
-       fill="currentColor"
-       class="svg-logo-dark"
-       d="m 4905,1690 c 3,-5 16,-10 29,-10 13,0 31,-9 42,-21 17,-19 19,-43 24,-243 6,-250 9,-263 88,-323 55,-42 111,-56 192,-51 78,6 133,32 182,86 49,54 58,106 58,326 0,170 1,184 20,204 16,17 32,22 70,22 80,0 80,0 80,-306 v -263 l -26,-20 c -15,-12 -35,-21 -45,-21 -11,0 -19,-4 -19,-10 0,-6 55,-10 145,-10 90,0 145,4 145,10 0,6 -9,10 -20,10 -11,0 -29,9 -40,20 -18,18 -20,33 -20,140 0,120 0,120 24,120 19,0 47,-30 137,-150 l 114,-149 359,2 360,2 18,60 c 10,33 18,68 18,78 0,30 -24,19 -47,-22 -34,-60 -87,-81 -205,-81 -130,0 -129,0 -126,161 l 3,124 77,3 c 99,4 141,-13 159,-62 7,-20 19,-36 26,-36 10,0 13,27 13,115 0,93 -3,115 -14,115 -8,0 -17,-13 -21,-30 -11,-49 -37,-60 -147,-60 h -98 v 104 c 0,57 3,111 6,120 5,13 25,16 116,16 60,0 118,-5 130,-11 11,-6 26,-26 34,-45 24,-58 44,-44 44,31 v 65 h -265 c -170,0 -265,-4 -265,-10 0,-5 11,-10 24,-10 15,0 33,-11 45,-26 20,-25 21,-39 21,-271 0,-266 -5,-296 -55,-309 -62,-15 -101,15 -230,175 l -93,116 47,17 c 89,34 146,118 127,192 -9,37 -56,87 -101,107 -36,17 -71,19 -362,19 -209,0 -323,-4 -323,-10 0,-5 11,-10 25,-10 13,0 33,-10 45,-22 19,-20 20,-34 20,-230 0,-230 -5,-255 -59,-301 -87,-73 -209,-48 -261,54 -18,34 -20,59 -20,249 0,197 1,211 20,230 11,11 31,20 45,20 14,0 25,5 25,10 0,6 -57,10 -151,10 -97,0 -148,-4 -144,-10 z m 1038,-44 c 47,-19 87,-70 87,-110 0,-77 -89,-146 -186,-146 h -52 l 4,43 c 2,23 5,79 8,124 2,45 7,86 11,92 9,15 90,14 128,-3 z"
-       id="path5" />
-  </g>
-</svg>                            </div> <span class="fs-5"></span>
+                <!-- Logo-->
+                <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0" href="{% url 'website:index' %}">
+                    <!-- Start of Logo-->
+                    <div class="d-flex align-items-center">
+                        <div class="f-w-20 d-flex align-items-center me-2 lh-1">
+                            <!-- SVG Logo Here -->
                         </div>
-                        <!-- / Logo-->
-
-                    </a>
+                        <span class="fs-5"></span>
+                    </div>
                     <!-- / Logo-->
+                </a>
+                <!-- / Logo-->
 
-                    <!-- Main Navigation-->
-                    <div class="ms-5 flex-shrink-0 navbar-collapse navbar-collapse-light w-auto flex-grow-1 collapse" id="navbarNavDropdown" style="">
-
-                        <!-- Mobile Nav Toggler-->
-                        <button class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 position-absolute top-0 end-0 mt-3 me-2 collapsed" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="ri-close-circle-line ri-2x"></i>
-                        </button>
-                        <!-- / Mobile Nav Toggler-->
-<ul class="navbar-nav py-lg-2 mx-auto">
-                    <!-- Include links relevant to real estate -->
-                    <li  class="nav-item me-lg-4 dropdown position-static">
-                        <a class="nav-link fw-bolder dropdown-toggle py-lg-4" role="button" data-bs-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false"  href="{% url 'website:properties' %}?status=For Sale">Buy</a>
-                        <!-- Menswear dropdown menu-->
-                        <div class="dropdown-menu dropdown-megamenu">
-                            <div class="container">
-                                <div class="row g-0">
-                                    <!-- Dropdown Menu Links Section-->
-                                    <div class="col-12 col-lg-7">
-                                        <div class="row py-lg-5">
-
-                                            <!-- menu row-->
-                                            <div class="col col-lg-6 mb-5 mb-sm-0">
-                                                <ul class="list-unstyled">
-                                                    <li class="dropdown-list-item"><a class="dropdown-item" href="{% url 'website:properties' %}?property_type=House">House</a></li>
-                                                    <li class="dropdown-list-item"><a class="dropdown-item" href="{% url 'website:properties' %}?property_type=Apartment">Apartment</a></li>
-                                                    <li class="dropdown-list-item"><a class="dropdown-item" href="{% url 'website:properties' %}?property_type=Commercial">Commercial</a></li>
-                                                    <li class="dropdown-list-item"><a class="dropdown-item" href="{% url 'website:properties' %}?property_type=Office">Office</a></li>
-                                                    <li class="dropdown-list-item"><a class="dropdown-item" href="{% url 'website:properties' %}?property_type=Warehouse">Warehouse</a></li>
-                                                    <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="{% url 'website:properties' %}">View All</a></li>
-                                                </ul>
+                <!-- Main Navigation-->
+                <div class="ms-5 flex-shrink-0 navbar-collapse navbar-collapse-light w-auto flex-grow-1 collapse" id="navbarNavDropdown" style="">
+                    <!-- Mobile Nav Toggler-->
+                    <button class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 position-absolute top-0 end-0 mt-3 me-2 collapsed" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="{% trans 'Toggle navigation' %}">
+                        <i class="ri-close-circle-line ri-2x"></i>
+                    </button>
+                    <!-- / Mobile Nav Toggler-->
+                    <ul class="navbar-nav py-lg-2 mx-auto">
+                        <li class="nav-item me-lg-4 dropdown position-static">
+                            <a class="nav-link fw-bolder dropdown-toggle py-lg-4" role="button" data-bs-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" href="{% url 'website:properties' %}?status=For Sale">{% trans 'Annonces' %}</a>
+                            <div class="dropdown-menu dropdown-megamenu">
+                                <div class="container">
+                                    <div class="row g-0">
+                                        <div class="col-12 col-lg-7">
+                                            <div class="row py-lg-5">
+                                                <div class="col col-lg-6 mb-5 mb-sm-0">
+                                                    <h6 class="dropdown-heading">{% trans 'Vente' %}</h6>
+                                                    <ul class="list-unstyled">
+                                                        <li class="dropdown-list-item">
+                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Sale&property_type=Appartement-Villa-Local">Appartement-Villa-Local</a>
+                                                        </li>
+                                                        <li class="dropdown-list-item">
+                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Sale&property_type=Terrain-Hangar">Terrain-Hangar</a>
+                                                        </li>
+                                                        <!-- Add more combined filters as needed -->
+                                                    </ul>
+                                                </div>
+                                                <div class="col col-lg-6 mb-5 mb-sm-0">
+                                                    <h6 class="dropdown-heading">{% trans 'Location' %}</h6>
+                                                    <ul class="list-unstyled">
+                                                        <li class="dropdown-list-item">
+                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Rent&property_type=Bungalow-Usine-Hangar">Bungalow-Usine-Hangar</a>
+                                                        </li>
+                                                        <li class="dropdown-list-item">
+                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Rent&property_type=Appartement-Villa-Bungalow">Appartement-Villa-Bungalow</a>
+                                                        </li>
+                                                        <li class="dropdown-list-item">
+                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Rent&property_type=Local">Local</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-12 mt-4">
+                                                    <h6 class="dropdown-heading">{% trans 'Annonces par localité' %}</h6>
+                                                    <ul class="list-unstyled">
+                                                        <li class="dropdown-list-item">
+                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?wilaya=Oran">Oran</a>
+                                                        </li>
+                                                        <li class="dropdown-list-item">
+                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?wilaya=Alger">Alger</a>
+                                                        </li>
+                                                        <li class="dropdown-list-item">
+                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?wilaya=Setif">Setif</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <!-- /menu row-->
-
-
-
-
-                                        </div>                    </div>
-                                    <!-- /Dropdown Menu Links Section-->
-
-                                    <!-- Dropdown Menu Images Section-->
-                                    <div class="d-none d-lg-block col-lg-5">
-                                        <div class="vw-50 h-100 bg-img-cover bg-pos-center-center position-absolute" style="background-image: url({% static 'images/banners/testimonials-bg.jpg'%});"></div>
+                                        </div>
+                                        <div class="d-none d-lg-block col-lg-5">
+                                            <div class="vw-50 h-100 bg-img-cover bg-pos-center-center position-absolute" style="background-image: url({% static 'images/banners/testimonials-bg.jpg'%});"></div>
+                                        </div>
                                     </div>
-                                    <!-- Dropdown Menu Images Section-->
                                 </div>
                             </div>
-                        </div>
-                        <!-- / Menswear dropdown menu-->
-                    </li>
-    <li class="nav-item me-lg-4">
-        <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:properties' %}?status=for rent">Rent</a>
-    </li>
-                    <li class="nav-item me-lg-4">
-                        <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:sellproperty' %}">Sell</a>
-                    </li>
-
-                    <li class="nav-item me-lg-4">
-                        <a class="nav-link fw-bolder py-lg-4" href="#map">About Us</a>
-                    </li>
-                    <li class="nav-item me-lg-4">
-                        <a class="nav-link fw-bolder py-lg-4" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">Contact Us</a>
-                    </li>
-                </ul></div>
-                    <!-- / Main Navigation-->
-
-                    <!-- Navbar Icons-->
-                    <ul class="list-unstyled mb-0 d-flex align-items-center">
-
-                        <!-- Navbar Toggle Icon-->
-                        <li class="d-inline-block d-lg-none">
-                            <button class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 d-flex align-items-center collapsed" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                                <i class="ri-menu-line ri-lg align-middle"></i>
-                            </button>
                         </li>
-                        <!-- /Navbar Toggle Icon-->
-
-                        <!-- Navbar Search-->
-                        <li class="ms-1 d-inline-block">
-                            <button class="btn btn-link px-2 text-decoration-none d-flex align-items-center" data-pr-search="">
-                                <i class="ri-search-2-line ri-lg align-middle"></i>
-                            </button>
+                        <li class="nav-item me-lg-4">
+                            <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:properties' %}?status=for rent">{% trans 'Louer' %}</a>
                         </li>
-                        <!-- /Navbar Search-->
-
-                        <!-- Navbar Wishlist-->
-                        <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center" href="#">
-
-                            </a>
+                        <li class="nav-item me-lg-4">
+                            <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:sellproperty' %}">{% trans 'Vendre' %}</a>
                         </li>
-                        <!-- /Navbar Wishlist-->
-
-                        <!-- Navbar Login-->
-                        <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="#">
-             Login                     <i class="ri-user-line ri-lg align-middle"></i>
-                            </a>
+                        <li class="nav-item me-lg-4">
+                            <a class="nav-link fw-bolder py-lg-4" href="#map">{% trans 'À propos de nous' %}</a>
                         </li>
-                        <!-- /Navbar Login-->
-
-                        <!-- Navbar Cart-->
-                        <li class="ms-1 d-inline-block position-relative">
-
+                        <li class="nav-item me-lg-4">
+                            <a class="nav-link fw-bolder py-lg-4" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">{% trans 'Contactez-nous' %}</a>
                         </li>
-                        <!-- /Navbar Cart-->
 
                     </ul>
-                    <!-- Navbar Icons-->
-
                 </div>
+                <!-- / Main Navigation-->
+
+                <!-- Navbar Icons-->
+                <ul class="list-unstyled mb-0 d-flex align-items-center">
+                    <!-- Language Selector -->
+                    <li class="ms-1 d-inline-block">
+                        <form method="get" action="{% url 'set_language' %}">
+                            <select name="language" onchange="this.form.submit()">
+                                <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+                                <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>Français</option>
+                                <option value="ar" {% if LANGUAGE_CODE == 'ar' %}selected{% endif %}>العربية</option>
+                            </select>
+                        </form>
+                    </li>
+                    <!-- /Language Selector -->
+                    <!-- Navbar Search-->
+                    <li class="ms-1 d-inline-block">
+                        <button class="btn btn-link px-2 text-decoration-none d-flex align-items-center" data-pr-search="">
+                            <i class="ri-search-2-line ri-lg align-middle"></i>
+                        </button>
+                    </li>
+                    <!-- /Navbar Search-->
+                    <!-- Navbar Wishlist-->
+                    <li class="ms-1 d-none d-lg-inline-block">
+                        <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center" href="#">
+                        </a>
+                    </li>
+                    <!-- /Navbar Wishlist-->
+
+                    <!-- Navbar Login/Logout-->
+                    <li class="ms-1" id="auth-link">
+                        <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="/login">
+                            Login <i class="ri-user-line ri-lg align-middle"></i>
+                        </a>
+                    </li>
+                    <!-- /Navbar Login-->
+                    <!-- Navbar Cart-->
+                    <li class="ms-1 d-inline-block position-relative">
+                    </li>
+                    <!-- /Navbar Cart-->
+
+                    <!-- Navbar Toggle Icon-->
+                    <li class="d-inline-block d-lg-none">
+                        <button class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 d-flex align-items-center collapsed" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="ri-menu-line ri-lg align-middle"></i>
+                        </button>
+                    </li>
+                    <!-- /Navbar Toggle Icon-->
+                </ul>
+                <!-- / Navbar Icons-->
+
             </div>
-        </nav>
-        <!-- / Navbar-->
-    </div>
-    <!-- / Navbar-->
-  <!-- Main Section-->
-    <section class="mt-0 ">
-        <!-- Page Content Goes Here -->
-        <div id="whatsapp-icon">
-            <a href="https://wa.me/YOURNUMBER" target="_blank">
-                <img src="{% static 'svgs/whatsapp.svg' %}" alt="WhatsApp">
-            </a>
         </div>
-      <!-- / Hero Section -->
+    </nav>
+    <!-- / Navbar-->    </div>
+<!-- / Navbar-->
+
+
+
         <!-- / Hero Section -->
-        <section class="vh-100 position-relative bg-overlay-dark">
-            <div class="container d-flex h-100 justify-content-center align-items-center position-relative z-index-10">
-                <div class="d-flex justify-content-center align-items-center h-100 position-relative z-index-10 text-white">
-                    <div>
-                        <h1 class="display-1 fw-bold px-2 px-md-5 text-center mx-auto col-lg-8 mt-md-0" data-aos="fade-up" data-aos-delay="500">Take best choice for your life</h1>
-                        <div data-aos="fade-in" data-aos-delay="900">
+<section class=" position-relative bg-overlay-dark" style="height: 100vh">
+    <div class="container d-flex h-100 justify-content-center align-items-center position-relative z-index-10">
+        <div class="d-flex justify-content-center align-items-center h-100 position-relative z-index-10 text-white">
+            <div class="d-flex flex-column justify-content-between mt-9">
+                <h3 class="display-md-6     fw-bold px-2 px-md-5 text-center mx-auto col-lg-8 mt-md-0" data-aos="fade-up" data-aos-delay="500">{% trans 'Confiance - Sérieux - Rapidité' %}</h3>
 
-                            <div class=" d-flex justify-content-center w-100">
+                <div class="mt-5" data-aos="fade-in " data-aos-delay="900">
 
-                                <div  class="mt-2   w-md-50">
-                                    <form action="{% url 'website:properties' %}" method="GET" class="w-100 d-flex flex-column ">
-                                        <div class=" d-flex justify-content-center w-100">
-
-                                            <div class="btn-group w-75  w-md-50 " role="group">
-
-                                                <input type="radio" class="btn-check bg-orange hover-bg-orange" name="status" id="status-sale" value="For Sale" autocomplete="off" checked>
-                                                <label class="btn btn-outline-orange" for="status-sale" style="border: hidden !important; color: white !important;">For Sale</label>
-
-                                                <input type="radio" class="btn-check bg-orange hover-bg-orange" name="status" id="status-rent" value="For Rent" autocomplete="off">
-                                                <label class="btn btn-outline-orange <" for="status-rent"  style="border: hidden !important;color: white !important;">For Rent</label>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <input type="text" name="query" class="form-control" placeholder="Search properties by city name" aria-label="Search properties">
-
-                                            <button class="btn btn-orange"  type="submit">Search</button>
-                                        </div>
-                                    </form>
-
+                    <form action="{% url 'website:properties' %}" method="GET" >
+                        <div class="filter-container rounded-3 ">
+                            <div class="filter-bar d-flex justify-content-center w-100 flex-wrap p-3  rounded">
+                                <!-- Advert Type Filter -->
+                                <div class="form-group mx-1 my-1">
+                                    <select id="advertype" class="form-select ri-2x select2-dropdown form-select-sm">
+                                        <option value="For Sale">{% trans 'Achat' %}</option>
+                                        <option value="For Rent">{% trans 'Location' %}</option>
+                                    </select>
                                 </div>
 
+                                <!-- Property Type Filter -->
+                                <div class="form-group mx-1 my-1">
+                                    <select id="propertype" class="form-select form-select-sm">
+                                        <option value="">{% trans 'Property Type' %}</option>
+                                        <option value="Appartement">{% trans 'Appartement' %}</option>
+                                        <option value="Villa">{% trans 'Villa' %}</option>
+                                        <option value="Local">{% trans 'Local' %}</option>
+                                        <option value="Terrain">{% trans 'Terrain' %}</option>
+                                        <option value="Hangar">{% trans 'Hangar' %}</option>
+                                        <option value="Bungalow">{% trans 'Bungalow' %}</option>
+                                        <option value="Usine">{% trans 'Usine' %}</option>
+                                    </select>
+                                </div>
+
+                                <!-- Wilaya Dropdown -->
+                                <div class="form-group mx-1 my-1">
+                                    <select id="wilaya" name="wilaya" class="form-select form-select-sm" >
+                                        <option value="">{% trans 'Wilaya' %}</option>
+                                    </select>
+                                </div>
+
+
+                                <!-- Price Range Filter -->
+                                <div class="d-flex mx-1 my-1">
+                                    <div class="form-group">
+                                        <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="{% trans 'Min Price DZD' %}" min="0">
+                                    </div>
+                                    <div class="form-group mx-1">
+                                        <input type="number" id="maxPrice" class="form-control form-control-sm" placeholder="{% trans 'Max Price DZD' %}" min="0">
+                                    </div>
+                                </div>
+
+
+
+                                <!-- Filter Button -->
+                                <div class="form-group mx-1 my-1">
+                                    <button class="btn btn-orange btn-sm" type="submit">{% trans 'Filter' %}</button>
+                                </div>
                             </div>
                         </div>
+
+
+
+                    </form>
+                </div>
+                <a href="#suite" class=" d-block text-center text-decoration-none animation-float ri-2x transition-all opacity-50-hover text-white mt-9"
+                      data-pixr-scrollto data-target=".brand-section" data-aos="fade-up"
+                      data-aos-delay="700">
+                    {% trans 'lire la suite' %}
+
+                </a>
+                <i class="ri-arrow-drop-down-line d-block text-center animation-float ri-2x transition-all opacity-50-hover text-white "
+                   data-pixr-scrollto data-target=".brand-section" data-aos="fade-up"
+                   data-aos-delay="700"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="position-absolute z-index-1 top-0 bottom-0 start-0 end-0">
+        <!-- Swiper Info -->
+        <div class="swiper-container overflow-hidden bg-light w-100 h-100"
+             data-swiper
+             data-options='{
+            "slidesPerView": 1,
+            "speed": 1500,
+            "loop": true,
+            "effect": "fade",
+            "autoplay": {
+              "delay": 5000
+            }
+          }'>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide position-relative">
+                    <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-1.jpg' %});">
+                    </div>
+                </div>
+                <div class="swiper-slide position-relative">
+                    <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-2.jpg' %}));">
+                    </div>
+                </div>
+                <div class="swiper-slide position-relative">
+                    <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-7.jpg' %}));">
                     </div>
                 </div>
             </div>
-            <div class="position-absolute z-index-1 top-0 bottom-0 start-0 end-0">
-                <!-- Swiper Info -->
-                <div class="swiper-container overflow-hidden bg-light w-100 h-100"
-                     data-swiper
-                     data-options='{
-                    "slidesPerView": 1,
-                    "speed": 1500,
-                    "loop": true,
-                    "effect": "fade",
-                    "autoplay": {
-                      "delay": 5000
-                    }
-                  }'>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide position-relative">
-                            <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-1.jpg' %});">
-                            </div>
-                        </div>
-                        <div class="swiper-slide position-relative">
-                            <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-2.jpg' %}));">
-                            </div>
-                        </div>
-                        <div class="swiper-slide position-relative">
-                            <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-7.jpg' %}));">
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-                <!-- / Swiper Info-->            </div>
-        </section>
-        <!--/ Hero Section-->
+        </div>
+        <!-- / Swiper Info-->            </div>
+</section>
+<!--/ Hero Section-->
 <!--/ Hero Section-->
 
 
-        <!-- Your HTML with icon elements -->
-        <div class="mb-lg-7 bg-light py-4 rounded-pill mt-3" data-aos="fade-in" id="swiper-container">
-            <div class="container">
-                <div class="row gx-3 align-items-center">
-                    <div class="col-12 justify-content-center justify-content-md-between align-items-center d-flex flex-wrap">
-                        <!-- Your icon elements here -->
-                        <div class="swiper swiperIcons">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                        <a class="d-block text-decoration-none slide-icon-house" href="{% url 'website:properties' %}?property_type=House">
-                                            <img class="img-fluid d-table mx-auto mb-2 icon-house-slide custom-icon" src="{% static 'svgs/house.svg' %}" alt="House">
-                                            <p class="text-center mb-0 text-dark">House</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                        <a class="d-block text-decoration-none slide-icon-apartment" href="{% url 'website:properties' %}?property_type=Apartment">
-                                            <img class="img-fluid d-table mx-auto mb-2 icon-apartment-slide custom-icon" src="{% static 'svgs/building.svg' %}" alt="Apartment">
-                                            <p class="text-center mb-0 text-dark">Apartment</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                        <a class="d-block text-decoration-none slide-icon-commercial" href="{% url 'website:properties' %}?property_type=Commercial">
-                                            <img class="img-fluid d-table mx-auto mb-2 icon-commercial-slide custom-icon" src="{% static 'svgs/shop.svg' %}" alt="Commercial">
-                                            <p class="text-center mb-0 text-dark">Commercial</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                        <a class="d-block text-decoration-none slide-icon-office" href="{% url 'website:properties' %}?property_type=Office">
-                                            <img class="img-fluid d-table mx-auto mb-2 icon-office-slide custom-icon" src="{% static 'svgs/desk.svg' %}" alt="Office">
-                                            <p class="text-center mb-0 text-dark">Office</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="me-2 f-w-20 m-4 ms-md-0 mt-md-0 mb-md-0">
-                                        <a class="d-block text-decoration-none slide-icon-warehouse" href="{% url 'website:properties' %}?property_type=Warehouse">
-                                            <img class="img-fluid d-table mx-auto mb-2 icon-warehouse-slide custom-icon" src="{% static 'svgs/logistic.svg' %}" alt="Warehouse">
-                                            <p class="text-center mb-0 text-dark">Warehouse</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Initialize Swiper only on phone screens -->
-
-        <!-- Staff Picks-->
-    <section class="mb-9 mt-5 aos-init aos-animate" data-aos="fade-up">
-            <div class="container">
-                <div class="w-md-50 mb-5">
-                    <p class="small fw-bolder text-uppercase tracking-wider mb-2 text-muted">Populaire</p>
-                    <h2 class="display-5 fw-bold mb-3">Populaire properties</h2>
-                    <p class="lead">We've sorted through our feed to put together a collection of our products perfect
-                        for a summer outdoors.</p>
-                </div>
-                <!-- Swiper Latest -->
-                <div class="swiper-container overflow-visible swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events swiper-container-css-mode" data-swiper="" data-options="{
-                    &quot;spaceBetween&quot;: 25,
-                    &quot;cssMode&quot;: true,
-                    &quot;roundLengths&quot;: true,
-                    &quot;scrollbar&quot;: {
-                      &quot;el&quot;: &quot;.swiper-scrollbar&quot;,
-                      &quot;hide&quot;: false,
-                      &quot;draggable&quot;: true
-                    },
-                    &quot;navigation&quot;: {
-                      &quot;nextEl&quot;: &quot;.swiper-next&quot;,
-                      &quot;prevEl&quot;: &quot;.swiper-prev&quot;
-                    },
-                    &quot;breakpoints&quot;: {
-                      &quot;576&quot;: {
-                        &quot;slidesPerView&quot;: 1
-                      },
-                      &quot;768&quot;: {
-                        &quot;slidesPerView&quot;: 2
-                      },
-                      &quot;992&quot;: {
-                        &quot;slidesPerView&quot;: 3
-                      },
-                      &quot;1200&quot;: {
-                        &quot;slidesPerView&quot;: 4
-                      }
-                    }
-                  }">
-                  <div class="swiper-wrapper pb-5 pe-1">
-                       {% for prop in pop_properties  %}
-
-                      <div class="swiper-slide d-flex h-auto swiper-slide-active" style="width: 393px; margin-right: 25px;">
-                        <!-- Card Product-->
-                        <div class="card position-relative h-100 card-listing hover-trigger">
-                            <div class="card-header">
-                                <picture class="position-relative overflow-hidden d-block bg-light">
-                                    <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ prop.cover_photo.url  }}" alt="">
-                                </picture>
-                                    <picture class="position-absolute z-index-20 start-0 top-0 hover-show bg-light">
-                                        <img class="w-100 img-fluid" title="" src="{{ prop.photo1.url  }}" alt="">
-                                    </picture>
-                                <div class="card-actions">
-                                    <a href="{% url 'website:propdetails' prop.slug %}" class="small text-uppercase tracking-wide fw-bolder text-center d-block">show details</a>
-
-                                </div>
-                            </div>
-                            <div class="card-body px-0 text-center">
-                                <div class="d-flex justify-content-center align-items-center mx-auto mb-1">
-                                    <!-- Review Stars Small-->
-
-                                <a class="mb-0 mx-2 mx-md-4 fs-p link-cover text-decoration-none d-block text-center"
-                                    href="{% url 'website:propdetails' prop.slug %}">{{ prop.title }}</a>
-                                    <p class="fw-bolder m-0 mt-2">{{ prop.price }}</p>
-                            </div>
-                            </div>
-
-                        </div>
-                        <!--/ Card Product-->
-                      </div>
-                        {% endfor %}
-                    <div class="swiper-slide d-flex h-auto justify-content-center align-items-center" style="width: 393px;">
-                      <a href="{% url 'website:properties' %}" class="d-flex text-decoration-none flex-column justify-content-center align-items-center">
-                        <span class="btn btn-dark btn-icon mb-3"><i class="ri-arrow-right-line ri-lg lh-1"></i></span>
-                        <span class="lead fw-bolder">See All</span>
-                      </a>
-                    </div>
-                  </div>
-
-                  <!-- Buttons-->
-                  <div class="swiper-btn swiper-disabled-hide swiper-prev swiper-btn-side btn-icon bg-dark text-white ms-3 shadow-lg mt-n5 ms-n4 swiper-button-disabled"><i class="ri-arrow-left-s-line ri-lg"></i></div>
-                  <div class="swiper-btn swiper-disabled-hide swiper-next swiper-btn-side swiper-btn-side-right btn-icon bg-dark text-white me-n4 shadow-lg mt-n5"><i class="ri-arrow-right-s-line ri-lg"></i></div>
-
-                  <!-- Add Scrollbar -->
-                  <div class="swiper-scrollbar"><div class="swiper-scrollbar-drag" style="transform: translate3d(0px, 0px, 0px); width: 41.3297px;"></div></div>
-
-                </div>
-                <!-- / Swiper Latest-->            </div>
-        </section>
-        <!-- / Staff Picks-->
-
-        <!-- Download App Section -->
-        <section class="my-10 position-relative">
-            <!-- SVG Shape Divider-->
-            <div class="position-absolute z-index-50 text-white top-0 start-0 end-0">
-                <svg class="align-self-start d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="1283 0 0 0 0 53.25 1283 0"/></svg>
-            </div>
-            <!-- /SVG Shape Divider-->
-
-            <div class="w-100 h-100 bg-img-cover bg-pos-center-center download-app-container py-5 py-md-7 py-lg-10" style="background-image: url({% static 'images/banners/imagehotspo.jpg'%});">
-                <div class="container py-lg-8 position-relative z-index-10 d-flex align-items-center" data-aos="fade-left">
-                    <div class="py-8 d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-start align-items-lg-end col-lg-8 text-center text-lg-end">
-                        <div style="margin-right: 20px;"> <!-- Added margin -->
-                            <p class="small fw-bolder text-uppercase tracking-wider mb-2 text-muted">Download Our App</p>
-                            <h2 class="display-5 fw-bold mb-3">Find Your Home Faster on the Go</h2>
-                            <p class="lead d-none d-lg-block">Download our app to explore thousands of listings, save your favorites, and connect with real estate agents wherever you are.</p>
-                            <div class="d-lg-none mb-3">
-                                <a href="#" class="me-3">
-                                    <img src="{% static 'img/get-it-on-google-play-badge-png-get-it-on-google-play-logo-800.png'%}" alt="Get it on Google Play" width="150">
-                                </a>
-                                <a href="#">
-                                    <img src="{% static 'img/IC_button-app-store@2x.png.png'%}" alt="Download on the App Store" width="150">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="position-relative d-none d-lg-block" style="max-width: 250px;">
-                            <img src="{% static 'img/smartphone-and-mobile-phone-free-png.png'%}" alt="Phone Icon" class="img-fluid mx-auto">
-                            <div class="position-absolute top-50 start-50 translate-middle" style="transform: translate(-50%, -50%);">
-                                <a href="#" class="me-3">
-                                    <img src="{% static 'img/get-it-on-google-play-badge-png-get-it-on-google-play-logo-800.png'%}" alt="Get it on Google Play" width="150">
-                                </a>
-                                <a href="#">
-                                    <img src="{% static 'img/IC_button-app-store@2x.png.png'%}" alt="Download on the App Store" width="150">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SVG Shape Divider-->
-            <div class="position-absolute z-index-50 text-white bottom-0 start-0 end-0">
-                <svg class="align-self-end d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="0 53.25 1283 53.25 1283 0 0 53.25"/></svg>
-            </div>
-            <!-- /SVG Shape Divider-->
-        </section>
-        <!-- / Download App Section-->
-
-        <!-- Linked Product Carousels-->
-       <!-- Homepage Intro-->
-<div class="position-relative row my-lg-7 pt-5 ps-3 pt-lg-0 w-100">
-    <div class="bg-text bottom-0 start-0 end-0" data-aos="fade-up">
-        <h2 class="bg-text-title opacity-10"><span class="text-outline-dark">Dream</span>Home</h2>
+<div class="position-relative row my-lg-7 pt-5 ps-3 pt-lg-0 w-100 mt-6" id="suite" >
+    <div class="bg-text bottom-0 start-0 end-0" data-aos="fade-up" >
+        <h2 class="bg-text-title opacity-10"><span class="text-outline-dark">{% trans 'Dream' %}</span>{% trans 'Home' %}</h2>
     </div>
     <div class="col-12 col-md-6 position-relative z-index-20 mb-7 mb-lg-0" data-aos="fade-right">
-        <p class="text-muted title-small">Welcome</p>
-        <h3 class="display-3 fw-bold mb-5"><span class="text-outline-dark">AURES</span> - Your Premier Real Estate Partner</h3>
-        <p class="lead">Welcome to AURES, your trusted partner in finding your dream property. We specialize in offering premium properties tailored to your needs and preferences.</p>
-        <p class="lead">With a wide range of properties and expert guidance from our team, we make the process of finding your dream home a seamless and enjoyable experience.</p>
-        <a href="./properties.html" class="btn btn-psuedo" role="button">Explore Properties</a>
+        <h3 class="display-3 fw-bold mb-5"><span class="text-outline-dark">
+{% trans 'Agence immobilière' %}
+</span> - L'IMMOBILIAH</h3>
+        <p class="lead">
+            {% blocktrans %}
+            ImmobiliaH, agent immobilier à Oran, est à votre écoute  : conseil en ACHAT, VENTE, LOCATION, GESTION et SYNDIC de villas et d'appartements. Réalise votre évaluation personnelle pour vendre ou louer dans les meilleures conditions.
+            {% endblocktrans %}
+        </p>
+        <p class="lead">
+            {% blocktrans %}
+            Spécialiste de la villa et de l'appartement, ImmobiliaH réalise votre projet. Administrateur de biens, gardien de votre patrimoine, Immobilia gère votre bien comme le sien :
+            prise en charge totale, mise en place d'un locataire sérieux, assurance loyers impayés
+            {% endblocktrans %}
+        </p>
+        <a href="./properties.html" class="btn btn-psuedo" role="button">{% trans 'Explorer les propriétés' %}</a>
     </div>
-    <div class="col-12 col-md-6 position-relative z-index-20 pe-0" data-aos="fade-left">
+    <div class="col-12 col-md-6 position-relative z-index-20 pe-0 mt-6 " data-aos="fade-left">
 
         <picture class="w-50 d-block position-relative z-index-10 border border-white border-4 shadow-lg">
-            <img class="img-fluid" src="{% static 'images/banners/banner-3.jpg'%}" alt="Real Estate Banner 1">
+            <img loading="lazy" class="img-fluid" src="{% static 'images/slideshows/slideshow-2.jpg'%}" alt="{% trans 'Real Estate Banner 1' %}">
         </picture>
 
-         <video class="w-60 d-block me-8 mt-n10 shadow-lg border border-white border-4 position-relative z-index-20 ms-auto" style="max-height : 140vh !important;" autoplay muted loop>
-                        <source src="{% static 'images/banners/pexels-kindel-media-7578544 (Original).mp4' %}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+
+        <picture class="w-60 d-block me-8 mt-n10 shadow-lg border border-white border-4 position-relative z-index-20 ms-auto" style="max-height : 140vh !important;">
+            <img loading="lazy" class="img-fluid" src="{% static 'images/slideshows/slideshow-1.jpg'%}" alt="{% trans 'Real Estate Banner 1' %}">
+        </picture>
 
         <picture class="w-50 d-block me-8 mt-n7 shadow-lg border border-white border-4 position-absolute top-0 end-0 z-index-0 ">
-            <img class="img-fluid" src="{% static 'images/banners/testimonials-bg.jpg'%}" alt="Real Estate Banner 3">
+            <img loading="lazy" class="img-fluid" src="{% static 'images/banners/testimonials-bg.jpg'%}" alt="{% trans 'Real Estate Banner 3' %}">
         </picture>
     </div>
 </div>
 <!-- / Linked Product Carousels-->
 
-
-
-       <section class="position-relative my-5 my-md-7 my-lg-9 bg-dark aos-init aos-animate" data-aos="fade-in">
-    <!-- SVG Shape Divider-->
-    <div class="position-absolute text-white z-index-50 top-0 end-0 start-0">
-        <svg class="align-self-start d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="1283 0 0 0 0 53.25 1283 0"></polygon></svg>
+<!-- Homepage Intro-->
+<section class="position-relative my-5 my-md-7 my-lg-9 bg-dark text-white aos-init aos-animate" data-aos="fade-in">
+    <!-- SVG Shape Divider -->
+    <div class="position-absolute z-index-50 top-0 end-0 start-0">
+        <svg class="align-self-start d-flex w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25">
+            <polygon fill="currentColor" points="1283 0 0 0 0 53.25 1283 0"></polygon>
+        </svg>
     </div>
-    <!-- /SVG Shape Divider-->
+    <!-- /SVG Shape Divider -->
 
     <div class="py-7 py-lg-10">
         <div class="container text-white py-4 py-md-6">
-            <div class="row g-5 align-items-center">
-                <div class="col-12 col-lg-4 justify-content-center d-flex justify-content-lg-start aos-init aos-animate" data-aos="fade-right" data-aos-delay="350">
-                    <h3 class="fs-1 fw-bold mb-0 lh-1"><i class="ri-home-4-line align-bottom"></i> Explore Properties</h3>
+            <div class="text-center mb-5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Flag_of_Algeria.svg/320px-Flag_of_Algeria.svg.png" alt="{% trans 'Drapeau Algérien' %}" style="max-width: 100px;">
+                <h2 class="fw-bold mt-3">{% trans 'Agence Immobilière Algérienne Agréée par l\'État' %}</h2>
+            </div>
+
+            <div class="row g-5 align-items-start">
+                <div class="col-12 col-md-4">
+                    <h3 class="fs-1 fw-bold mb-4"><i class="ri-home-4-line align-bottom"></i> {% trans 'Nos Services' %}</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><strong>{% trans 'Vente de Biens Immobiliers' %}</strong>
+                            <ul>
+                                <li>{% trans 'Maisons' %}</li>
+                                <li>{% trans 'Appartements' %}</li>
+                                <li>{% trans 'Terrains' %}</li>
+                            </ul>
+                        </li>
+                        <li class="mb-2"><strong>{% trans 'Location de Biens Immobiliers' %}</strong>
+                            <ul>
+                                <li>{% trans 'Locations à court terme' %}</li>
+                                <li>{% trans 'Locations à long terme' %}</li>
+                            </ul>
+                        </li>
+                        <li class="mb-2"><strong>{% trans 'Gestion Immobilière' %}</strong>
+                            <ul>
+                                <li>{% trans 'Administration de biens' %}</li>
+                                <li>{% trans 'Gestion locative' %}</li>
+                            </ul>
+                        </li>
+                        <li class="mb-2"><strong>{% trans 'Conseil et Accompagnement' %}</strong>
+                            <ul>
+                                <li>{% trans 'Évaluation immobilière' %}</li>
+                                <li>{% trans 'Conseils juridiques' %}</li>
+                                <li>{% trans 'Accompagnement personnalisé' %}</li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-12 col-lg-4 d-flex justify-content-center flex-column aos-init aos-animate" data-aos="fade-up" data-aos-delay="350">
-                    <a href="/properties" class="btn btn-orange btn-orange-chunky text-white my-1"><span>View Featured Listings</span></a>
-                    <a href="/properties" class="btn btn-orange btn-orange-chunky text-white my-1"><span>Search Properties</span></a>
-                    <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" class="btn btn-orange btn-orange-chunky text-white my-1"><span>Contact an Agent</span></a>
+
+                <div class="col-12 col-md-4">
+                    <h3 class="fs-1 fw-bold mb-4"><i class="ri-hand-heart-line align-bottom"></i> {% trans 'Nos Engagements' %}</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><strong>{% trans 'Professionnalisme:' %}</strong> {% trans 'Nous assurons un service de haute qualité avec des agents qualifiés et compétents.' %}</li>
+                        <li class="mb-3"><strong>{% trans 'Transparence:' %}</strong> {% trans 'Toutes nos transactions sont effectuées en toute transparence, conformément aux lois en vigueur.' %}</li>
+                        <li class="mb-3"><strong>{% trans 'Satisfaction Client:' %}</strong> {% trans 'Votre satisfaction est notre priorité. Nous mettons tout en œuvre pour répondre à vos attentes et besoins.' %}</li>
+                    </ul>
                 </div>
-                <div class="col-12 col-lg-4 text-center text-lg-end aos-init aos-animate" data-aos="fade-left" data-aos-delay="350">
-                    <p class="lead fw-bolder">Find your dream home with us today.</p>
-                    <a class="text-white fw-bolder text-link-border border-2 border-white align-self-start pb-1 transition-all opacity-50-hover" href="#">Learn more about our services <i class="ri-arrow-right-line align-bottom"></i></a>
+
+                <div class="col-12 col-md-4">
+                    <h3 class="fs-1 fw-bold mb-4"><i class="ri-contacts-line align-bottom"></i> {% trans 'Contactez-Nous' %}</h3>
+                    <p class="mb-2"><strong>{% trans 'Adresse:' %}</strong> [Votre adresse ici]</p>
+                    <p class="mb-2"><strong>{% trans 'Téléphone:' %}</strong> [Votre numéro de téléphone ici]</p>
+                    <p class="mb-2"><strong>{% trans 'Email:' %}</strong> [Votre email ici]</p>
+                    <p class="mb-2"><strong>{% trans 'Site Web:' %}</strong> [Votre site web ici]</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- SVG Shape Divider-->
+    <!-- SVG Shape Divider -->
     <div class="position-absolute z-index-50 text-white bottom-0 start-0 end-0">
-        <svg class="align-self-end d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="0 53.25 1283 53.25 1283 0 0 53.25"></polygon></svg>
+        <svg class="align-self-end d-flex w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25">
+            <polygon fill="currentColor" points="0 53.25 1283 53.25 1283 0 0 53.25"></polygon>
+        </svg>
     </div>
-    <!-- /SVG Shape Divider-->
+    <!-- /SVG Shape Divider -->
 </section>
+<!-- / Main Section-->
+     <!-- Staff Picks-->
+<section class="mb-9 mt-5 aos-init aos-animate" data-aos="fade-up">
+        <div class="container">
+            <div class="w-md-50 mb-5">
+                <p class="small fw-bolder text-uppercase tracking-wider mb-2 text-muted">{% trans 'Populaire' %}</p>
+                <h2 class="display-5 fw-bold mb-3">{% trans 'Propriétés populaires' %}</h2>
+                <p class="lead">{% trans 'Nous avons trié notre flux pour rassembler une collection de nos produits parfaits pour un été en plein air.' %}</p>
+            </div>
+            <!-- Swiper Latest -->
+            <div class="swiper-container overflow-visible swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events swiper-container-css-mode" data-swiper="" data-options="{
+                &quot;spaceBetween&quot;: 25,
+                &quot;cssMode&quot;: true,
+                &quot;roundLengths&quot;: true,
+                &quot;scrollbar&quot;: {
+                  &quot;el&quot;: &quot;.swiper-scrollbar&quot;,
+                  &quot;hide&quot;: false,
+                  &quot;draggable&quot;: true
+                },
+                &quot;navigation&quot;: {
+                  &quot;nextEl&quot;: &quot;.swiper-next&quot;,
+                  &quot;prevEl&quot;: &quot;.swiper-prev&quot;
+                },
+                &quot;breakpoints&quot;: {
+                  &quot;576&quot;: {
+                    &quot;slidesPerView&quot;: 1
+                  },
+                  &quot;768&quot;: {
+                    &quot;slidesPerView&quot;: 2
+                  },
+                  &quot;992&quot;: {
+                    &quot;slidesPerView&quot;: 3
+                  },
+                  &quot;1200&quot;: {
+                    &quot;slidesPerView&quot;: 4
+                  }
+                }
+              }">
+              <div class="swiper-wrapper pb-5 pe-1">
+                   {% for prop in pop_properties  %}
+                  <div class="swiper-slide d-flex h-auto swiper-slide-active  " style="width: 393px; margin-right: 25px; cursor: pointer;">
+                      <div class="card position-relative h-100 card-listing hover-trigger" data-property-slug="{{ prop.slug }}">
 
-        <!-- Team Presentation-->
-        <section>
-            <div class="container aos-init aos-animate mb-5" data-aos="fade-in">
-                <h2 class="fs-1 fw-bold mb-3 text-center mb-5">Meet Our Team</h2>
-                <div class="row g-3">
-                    <div class="col-12 col-lg-4 aos-init aos-animate" data-aos="fade-left">
-                        <div class="bg-light p-4 d-flex h-100 justify-content-start align-items-center flex-column text-center">
-                            <img src="{% static 'images/team_member_1.jpg' %}" alt="Team Member 1" class="rounded-circle mb-3" width="150" height="150">
-                            <p class="fw-bolder lead">Sarah Johnson</p>
-                            <p class="mb-3">Senior Real Estate Agent</p>
-                            <small class="text-muted d-block mb-2">Sarah brings over 10 years of experience in the real estate industry, specializing in residential properties.</small>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4 aos-init aos-animate" data-aos="fade-left" data-aos-delay="250">
-                        <div class="bg-light p-4 d-flex h-100 justify-content-start align-items-center flex-column text-center">
-                            <img src="{% static 'images/team_member_2.jpg' %}" alt="Team Member 2" class="rounded-circle mb-3" width="150" height="150">
-                            <p class="fw-bolder lead">Michael Anderson</p>
-                            <p class="mb-3">Commercial Property Expert</p>
-                            <small class="text-muted d-block mb-2">Michael has a keen eye for commercial properties and has helped numerous businesses find the perfect location.</small>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4 aos-init aos-animate" data-aos="fade-left" data-aos-delay="300">
-                        <div class="bg-light p-4 d-flex h-100 justify-content-start align-items-center flex-column text-center">
-                            <img src="{% static 'images/team_member_3.jpg' %}" alt="Team Member 3" class="rounded-circle mb-3" width="150" height="150">
-                            <p class="fw-bolder lead">Emily Roberts</p>
-                            <p class="mb-3">Luxury Property Specialist</p>
-                            <small class="text-muted d-block mb-2">Emily specializes in luxury properties and has a reputation for providing exceptional customer service.</small>
-                        </div>
-                    </div>
+        <div class="position-relative">
+            <div class="o-announ-card-image" style="flex-grow: 1;">
+                <a href="{% url 'website:propdetails' prop.slug %}" class="d-flex flex-column flex-grow-1 v-card v-card--link pb-1">
+                    <picture>
+                        <source type="image/webp" srcset="{{ prop.cover_photo.url }}">
+                        <img src="{{ prop.cover_photo.url }}" class="ok-img" style="width: 100%; height: 100%; object-fit: cover;" alt="Property Image">
+                    </picture>
+                </a>
+            </div>
+            <div class="position-absolute top-0 end-0 m-2 d-flex gap-2">
+                <button class="btn btn-outline-light bg-white-hover bg-dark rounded-circle btn-sm p-1" onclick="toggleLike('{{ prop.slug }}')">
+                    <i class="icon-heart"></i>
+                    <span class="badge badge-orange bg-orange rounded-circle position-absolute" style="top: -5px; z-index: 99999;" id="like-count-{{ prop.slug }}"></span>
+                </button>
+                <button class="btn btn-outline-light bg-white-hover bg-dark rounded-circle btn-sm p-1" onclick="saveProperty('{{ prop.slug }}')">
+                    <i class="icon-bookmark"></i>
+                </button>
+            </div>
+            <div class="mx-2 mt-2" style="flex-grow: 0;">
+                <h6 class="mb-1 card-title text-truncate">{{prop.wilaya}} {{ prop.title }}</h6>
+                <div class="d-flex flex-wrap flex-gap-1 align-center mb-1">
+                    <span class="price d-inline-flex"><div class="mr-1">{{ prop.price }}</div><div>DA</div></span>
                 </div>
+            </div>
+
+            <div class="d-inline flex-grow-0">
+                <ul class="mt-2 mx-2 d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="icon-bed"></i>
+                        <span class="mx-2">{{ prop.bedrooms }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="icon-bath"></i>
+                        <span class="mx-2">{{ prop.bathrooms }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="icon-expand"></i>
+                        <span class="mx-2">{{ prop.plot_area }} m²</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-2 mx-2 d-flex justify-content-between align-items-center">
+                <!-- Call and Message Buttons -->
+                <button class="btn btn-outline-dark btn-sm" onclick="showModal('call')">
+                    <i class="icon-phone"></i> Call
+                </button>
+                <button class="btn btn-outline-dark btn-sm" onclick="showModal('message')">
+                    <i class="icon-message"></i> Message
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+                  {% endfor %}
+                <div class="swiper-slide d-flex h-auto justify-content-center align-items-center" style="width: 393px;">
+                  <a href="{% url 'website:properties' %}" class="d-flex text-decoration-none flex-column justify-content-center align-items-center">
+                    <span class="btn btn-dark btn-icon mb-3"><i class="ri-arrow-right-line ri-lg lh-1"></i></span>
+                    <span class="lead fw-bolder">{% trans 'Voir tout' %}</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Buttons-->
+              <div class="swiper-btn swiper-disabled-hide swiper-prev swiper-btn-side btn-icon bg-dark text-white ms-3 shadow-lg mt-n5 ms-n4 swiper-button-disabled"><i class="ri-arrow-left-s-line ri-lg"></i></div>
+              <div class="swiper-btn swiper-disabled-hide swiper-next swiper-btn-side swiper-btn-side-right btn-icon bg-dark text-white me-n4 shadow-lg mt-n5"><i class="ri-arrow-right-s-line ri-lg"></i></div>
+
+              <!-- Add Scrollbar -->
+              <div class="swiper-scrollbar"><div class="swiper-scrollbar-drag" style="transform: translate3d(0px, 0px, 0px); width: 41.3297px;"></div></div>
 
             </div>
-        </section>
-        <!-- /Team Presentation-->
+            <!-- / Swiper Latest-->            </div>
+</section>
+    <!-- / Staff Picks-->
 
+<!-- Section Télécharger l'Application -->
+<section class="my-10 position-relative">
+    <!-- Diviseur de Forme SVG -->
+    <div class="position-absolute z-index-50 text-white top-0 start-0 end-0">
+        <svg class="align-self-start d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="1283 0 0 0 0 53.25 1283 0"/></svg>
+    </div>
+    <!-- /Diviseur de Forme SVG -->
 
-        <!-- /Page Content -->
-    </section>
+    <div class="w-100 h-100 bg-img-cover bg-pos-center-center download-app-container py-5 py-md-7 py-lg-10" style="background-image: url({% static 'images/banners/imagehotspo.jpg'%});">
+        <div class="container  position-relative z-index-10 d-flex align-items-center" data-aos="fade-left">
+            <div class="py-8 d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-start align-items-lg-end col-lg-12 text-center text-lg-end">
+                <div style="margin-right: 20px; position: relative;top: -40px"> <!-- Ajout de la marge -->
+                    <p class="small fw-bolder text-uppercase tracking-wider mb-2 text-black"></p>
+                    <h2 class="display-5 fw-bold mb-3"> Téléchargez Notre Application</h2>
+                    <p class="lead d-none d-lg-block text-black-70">Téléchargez notre application pour explorer des milliers d'annonces, sauvegarder vos favoris et contacter des agents immobiliers où que vous soyez.</p>
+                    <div class="d-lg-none mb-3">
+                        <a href="#" class="me-3">
+                            <img loading="lazy" src="{% static 'img/get-it-on-google-play-badge-png-get-it-on-google-play-logo-800.png'%}" alt="Disponible sur Google Play" width="150">
+                        </a>
+                        <a href="#">
+                            <img loading="lazy" src="{% static 'img/IC_button-app-store@2x.png.png'%}" alt="Télécharger sur l'App Store" width="150">
+                        </a>
+                    </div>
+                </div>
+                <div class="position-relative d-none d-lg-block" style="max-width: 250px;">
+                    <img loading="lazy" src="{% static 'img/smartphone-and-mobile-phone-free-png.png'%}" alt="Icône de Téléphone" class="img-fluid mx-auto">
+                    <div class="position-absolute top-50 start-50 translate-middle" style="transform: translate(-50%, -50%);">
+                        <a href="#" class="me-3">
+                            <img loading="lazy" src="{% static 'img/get-it-on-google-play-badge-png-get-it-on-google-play-logo-800.png'%}" alt="Disponible sur Google Play" width="150">
+                        </a>
+                        <a href="#">
+                            <img loading="lazy" src="{% static 'img/IC_button-app-store@2x.png.png'%}" alt="Télécharger sur l'App Store" width="150">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- / Main Section-->
+    <!-- Diviseur de Forme SVG -->
+    <div class="position-absolute z-index-50 text-white bottom-0 start-0 end-0">
+        <svg class="align-self-end d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="0 53.25 1283 53.25 1283 0 0 53.25"/></svg>
+    </div>
+    <!-- /Diviseur de Forme SVG -->
+</section>
+<!-- /Section Télécharger l'Application -->
+
+        <!-- Linked Product Carousels-->
+
 <!-- Leaflet Map Section -->
 <section class="">
     <div id="map" class="w-100" style="height: 400px; border-radius: 20px; overflow: hidden;"></div>
@@ -578,3 +577,14 @@
                           </div>
             </div>
               {% endblock %}
+
+{% block scripts %}
+<script >
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeLocationSelectors();
+        updateLikeCount();
+
+    })
+</script>
+{% endblock %}
+

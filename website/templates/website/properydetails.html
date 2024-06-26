@@ -1,543 +1,243 @@
- {% extends './pagesbase.html' %}
+{% extends './pagesbase.html' %}
 {% load static %}
- {% block bannertitle %}
- {{ property.title }}
- {% endblock %}
+{% load i18n %}
+
+{% block bannertitle %}
+{{ property.title }}
+{% endblock %}
 {% block bannertext %}
-
- {{ property.description }}
-
- {% endblock %}
-
+{{ property.description }}
+{% endblock %}
 {% block section %}
 
+<section class="mt-5">
+    <section class="container">
+        <div class="row g-5">
+            <div class="col-12 col-lg-7">
+                <!-- Swiper Container -->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        {% if property.vedio %}
+                        <div class="swiper-slide">
+                            <video width="100%" controls>
+                                <source src="{{ property.vedio.url }}" type="video/mp4">
+                            </video>
+                        </div>
+                        {% else %}
+                        <div class="swiper-slide">
+                            <img class="img-fluid zoomable" src="{{ property.cover_photo.url }}" alt="Cover Photo" onclick="showZoomModal(this)">
+                        </div>
+                        {% endif %}
 
+                        {% for photo in property.photos.all %}
+                        <div class="swiper-slide">
+                            <img class="img-fluid zoomable" src="{{ photo.image.url }}" alt="Photo {{ forloop.counter }}" onclick="showZoomModal(this)">
+                        </div>
+                        {% endfor %}
+                    </div>
 
-    <!-- Main Section-->
-    <section class="mt-5 ">
-        <!-- Page Content Goes Here -->
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
 
-        <!-- Product Top-->
-        <section class="container">
-
-            <div class="row g-5">
-
-                <!-- Images Section-->
-                <div class="col-12 col-lg-7">
-             <div class="row g-1">
-    <div class="swiper-container gallery-thumbs-vertical col-2 pb-4">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide bg-light bg-light h-auto">
-                <picture>
-                  {% if property.vedio %}
-
-                    <img class="img-fluid mx-auto d-table" src="" alt="vedio">
-                    {% else%}
-                    <img class="img-fluid mx-auto d-table" src="{{ property.cover_photo.url }}" alt="vedio">
-
-
-                    {% endif %}
-                </picture>
-
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
             </div>
-
-
-            {% for photo in property.photos.all %}
-                {% if forloop.counter <= 3 %}
-                    <div class="swiper-slide bg-light bg-light h-auto">
-                        <picture>
-                            <img class="img-fluid mx-auto d-table" src="{{ photo.image.url }}" alt="Photo {{ forloop.counter }}">
-                        </picture>
+            <div class="col-12 col-lg-5">
+                <div class="pb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <p class="small fw-bolder text-uppercase tracking-wider text-muted mb-0 lh-1">{{property.property_type}}</p>
                     </div>
-                {% endif %}
-            {% endfor %}
-            {% if property.photos.count > 3 %}
-                <div class="swiper-slide bg-white h-auto">
-                    <div class="overlay" id="viewAllPhotos" onclick="openModal()">
-                        <div class="remaining-photos">+{{ property.photos.count|add:"-3" }} photos left</div>
+                    <h1 class="mb-2 fs-2 fw-bold">{{ property.title }}</h1>
+                    <div class="d-flex justify-content-start align-items-center">
+                        <p class="lead fw-bolder m-0 fs-3 lh-1 text-danger me-2">{{property.price}} DZD</p>
                     </div>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="swiper-container gallery-top-vertical col-10">
-        <div class="swiper-wrapper">
-           <div class="swiper-slide bg-white h-auto">
-    {% if property.vedio %}
-        <video width="100%" controls>
-            <source src="{{ property.vedio.url }}" type="video/mp4">
-        </video>
-    {% else %}
-        <picture>
-            <img class="img-fluid mx-auto d-table" src="{{ property.cover_photo.url }}" alt="video">
-        </picture>
-    {% endif %}
-</div>
-
-
-
-            {% for photo in property.photos.all %}
-                {% if forloop.counter <= 3 %}
-                    <div class="swiper-slide bg-white h-auto">
-                        <picture>
-                            <img class="img-fluid d-table mx-auto" src="{{ photo.image.url }}" alt="Photo {{ forloop.counter }}">
-                        </picture>
-                    </div>
-                {% endif %}
-            {% endfor %}
-
-        </div>
-    </div>
-</div>
-
-
-<!-- JavaScript to handle modal activation -->
-
-
-                </div>
-                <!-- /Images Section-->
-
-                <!-- Product Info Section-->
-                <div class="col-12 col-lg-5">
-                    <div class="pb-3">
-
-                        <!-- Product Name, Review, Brand, Price-->
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <p class="small fw-bolder text-uppercase tracking-wider text-muted mb-0 lh-1">{{property.property_type}}</p>
-
-                        </div>
-                        <h1 class="mb-2 fs-2 fw-bold">{{ property.title  }}</h1>
-                        <div class="d-flex justify-content-start align-items-center">
-                            <p class="lead fw-bolder m-0 fs-3 lh-1 text-danger me-2">{{property.price}} DZD</p>
-
-                            <p class="lead fw-bolder m-0 fs-6 lh-1 text-success">TAX {{property.tax}}</p>
-                        </div>
-                        <!-- /Product Name, Review, Brand, Price-->
-
-                        <!-- Product Views-->
-                        <div class="d-flex justify-content-start mt-3">
-                            <div class="alert bg-light rounded py-1 px-2 d-table m-0">
-                                <div class="d-flex justify-content-start align-items-center">
-                                    <i class="ri-fire-fill lh-1 text-orange"></i>
-                                    <div class="ms-2">
-                                        <small class="opacity-75 fw-bolder lh-1">{{property.views}} views </small>
-                                    </div>
+                    <div class="d-flex justify-content-start mt-3">
+                        <div class="alert bg-light rounded py-1 px-2 d-table m-0">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <i class="ri-fire-fill lh-1 text-orange"></i>
+                                <div class="ms-2">
+                                    <small class="opacity-75 fw-bolder lh-1">{{property.views}} views </small>
                                 </div>
                             </div>
                         </div>
-                        <!-- /Product Views-->
-
-                        <!-- Product Options-->
-                        <div class="border-top mt-4 mb-3">
-                            <div class="product-option mb-4 mt-4">
-                                <small class="text-uppercase d-block fw-bolder mb-2">
-                                    Advert Type : <span class=" fw-bold">{{property.advert_type}}</span>
-                                </small>
-                                 <small class="text-uppercase d-block fw-bolder mb-2">
-                                    Property type : <span class=" fw-bold">{{property.property_type}}</span>
-                                </small>
-
-                                 <small class="text-uppercase d-block fw-bolder mb-2">
-                                    City : <span class=" fw-bold">{{property.city}}</span>
-                                </small>
-                                 <small class="text-uppercase d-block fw-bolder mb-2">
-                                    Postal code : <span class=" fw-bold">{{property.postal_code}}</span>
-                                </small>
-                                 <small class="text-uppercase d-block fw-bolder mb-2">
-                                   Street address  : <span class=" fw-bold">{{property.street_address}}</span>
-                                </small>
-                                 <small class="text-uppercase d-block fw-bolder mb-2">
-                                    Plot area : <span class=" fw-bold">{{property.plot_area}}  </span><span class="text-lowercase">m²</span>
-                                </small>
-                                 <small class="text-uppercase d-block fw-bolder mb-2">
-                                    Bedrooms : <span class=" fw-bold">{{property.bedrooms}}</span>
-                                </small>
-                                <small class="text-uppercase d-block fw-bolder mb-2">
-                                    Bathrooms : <span class=" fw-bold">{{property.bathrooms}}</span>
-                                </small>
-
-                            </div>
-
-                        <!-- /Product Options-->
-
-                        <!-- Add To Cart-->
-                        <div class="d-flex justify-content-between mt-3">
-                        <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white disable-child-pointer" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">Contact Agent</button>                            <button class="btn btn-orange btn-orange-chunky"><i class="ri-heart-line"></i></button>
+                    </div>
+                    <div class="border-top mt-4 mb-3">
+                        <div class="product-option mb-4 mt-4">
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Advert Type' %} : <span class=" fw-bold">{{property.advert_type}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Property type' %} : <span class=" fw-bold">{{property.property_type}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Wilaya' %} : <span class=" fw-bold">{{property.wilaya.name_ascii}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Daira' %} : <span class=" fw-bold">{{property.daira.name_ascii}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Commune' %} : <span class=" fw-bold">{{property.commune.name_ascii}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Postal code' %} : <span class=" fw-bold">{{property.postal_code}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Street address' %} : <span class=" fw-bold">{{property.street_address}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Plot area' %} : <span class=" fw-bold">{{property.plot_area}} </span><span class="text-lowercase">m²</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Bedrooms' %} : <span class=" fw-bold">{{property.bedrooms}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Bathrooms' %} : <span class=" fw-bold">{{property.bathrooms}}</span>
+                            </small>
                         </div>
-                        <!-- /Add To Cart-->
-
-                        <!-- Socials-->
+                        <div class="d-flex justify-content-between mt-3">
+                            <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white disable-child-pointer" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">{% trans 'Contact Agent' %}</button>
+                            <button class="btn btn-orange btn-orange-chunky"><i class="ri-heart-line"></i></button>
+                        </div>
                         <div class="my-4">
                             <div class="d-flex justify-content-start align-items-center">
-                                <p class="fw-bolder lh-1 mb-0 me-3">reseau</p>
+                                <p class="fw-bolder lh-1 mb-0 me-3">{% trans 'reseau' %}</p>
                                 <ul class="list-unstyled p-0 m-0 d-flex justify-content-start lh-1 align-items-center mt-1">
                                     <li class="me-2"><a class="text-decoration-none" href="#" role="button"><i class="ri-facebook-box-fill"></i></a></li>
                                     <li class="me-2"><a class="text-decoration-none" href="#" role="button"><i class="ri-instagram-fill"></i></a></li>
                                     <li class="me-2"><a class="text-decoration-none" href="#" role="button"><i class="ri-pinterest-fill"></i></a></li>
                                     <li class="me-2"><a class="text-decoration-none" href="#" role="button"><i class="ri-twitter-fill"></i></a></li>
                                 </ul>
-                            </div>    </div>
-                        <!-- Socials-->
-
-
-                    </div>                </div>
-                <!-- / Product Info Section-->
-            </div>
-            </div>
-    </section>
-        <!-- / Product Top-->
-
-        <section>
-
-            <!-- Product Tabs-->
-            <div class="mt-7 pt-5 border-top">
-                <div class="container aos-init aos-animate" data-aos="fade-right" data-aos-delay="300">
-
-                    <!-- Tab Content-->
-                    <div class="tab-content" id="myTabContent">
-
-                      <!-- Tab Details Content-->
-                        <div class="tab-pane fade show active py-5" id="details" role="tabpanel" aria-labelledby="details-tab">
-
-
-                        <div class="col-12 col-lg-10 mx-auto">
-                        <div class="col-lg-12 text-center pb-5">
-
-                               <div class="row mx-0 py-4 g-0 border-bottom justify-content-center bg-dark border ">
-
-                                <div class="col-md-6  ">
-
-
-                                        <div class="border-bottom pt-3 pb-5 mb-6 d-flex flex-column align-items-center">
-                        <div class="position-relative col-4">
-                            <picture class="avatar avatar-profile">
-                                <img alt="HTML Bootstrap Admin Template by Pixel Rocket" src="/mediafile/img_5.jpg" class="img-thumbnail">
-                            </picture>
-                            <span class="dot bg-success avatar-dot"></span>
-                        </div>
-                        <p class="mb-0 mt-3 text-white"> {{property.user}}</p>
-                        <small class="mb-0 mt-3 text-white"> {{property.user.email}}</small>
-                        <div class="d-flex flex-wrap mt-2 justify-content-between align-items-center">
-                            <div class="py-2 f-h-9 px-3 d-flex text-white justify-content-center align-items-center bg-dark-opacity rounded p-2 small fw-bolder me-1">
-                                <i class="ri-map-pin-line me-2"></i>  {{property.user.profile.city}}
                             </div>
-
                         </div>
-                       {% if property.user.profile.rating %}
-                                <div class="d-flex justify-content-center">
-                                    <!-- Review Stars Medium-->
-                                    <div class="rating position-relative d-table">
-                                        <div class="position-absolute stars" style="width: 80%">
-                                                {% with rating_integer=property.user.profile.rating|stringformat:"i" %}
-                                                    {% for _ in ''|center:rating_integer %}
-                                            <i class="ri-star-fill text-warning ri-2x mr-1"></i>
-                                                    {% endfor %}
-                                                {% endwith %}
-
-
-                                        </div>
-                                        <div class="stars">
-
-                                                        <i class="ri-star-fill ri-2x mr-1 text-white"></i>
-                                                        <i class="ri-star-fill ri-2x mr-1 text-white"></i>
-                                                        <i class="ri-star-fill ri-2x mr-1 text-white"></i>
-                                                        <i class="ri-star-fill ri-2x mr-1 text-white"></i>
-                                                        <i class="ri-star-fill ri-2x mr-1 text-white"></i>
-
-
-                                        </div>
-                                    </div>        </div>
-
-                                  {% endif %}
-                                        </div>
-                                </div><div class="col-md-6 d-flex align-items-center justify-content-center  ">
-                                    <ul class="list-group list-group-flush ">
-                                        <li class="list-group-item d-flex text-white justify-content-between align-items-center border-0 px-0 bg-transparent">
-                                            <span class="fw-bolder ">Name :</span>
-                                            <span class="fw-bolder">{{property.user}}</span>
-                                       </li>
-                                        <li class="list-group-item d-flex text-white justify-content-between align-items-center border-0 px-0 bg-transparent">
-                                            <span class="fw-bolder">Email :</span>
-                                            <span class="fw-bolder">{{property.user.email}}</span>
-                                       </li>
-                                        <li class="list-group-item d-flex text-white justify-content-between align-items-center border-0 px-0 bg-transparent">
-                                            <span class="fw-bolder">Tel :</span>
-                                            <span class="fw-bolder">{{property.user.profile.phone_number}}</span>
-                                       </li>
-                                        <li class="list-group-item d-flex text-white justify-content-between align-items-center border-0 px-0 bg-transparent">
-                                            <span class="fw-bolder">About me : </span>
-                                       </li>
-                                        <li class="list-group-item d-flex text-white  justify-content-between align-items-center border-0 px-0 bg-transparent">
-                                            <span class="fw-bolder">{{property.user.profile.about_me}}</span>
-                                       </li>
-
-                                    </ul>
-                                </div>
-                             </div>
-
-
-
-
-
-
-
-                            </div>
-
-                                                </div>
-                      </div>
-
-<!-- Tab Details Content-->
-
-
                     </div>
-                    <!-- / Tab Content-->                </div>
-            </div>
-            <!-- / Product Tabs-->
-
-        </section>
-
-        <!-- Related Products-->
-        <div class="container my-8">
-            <h3 class="fs-4 fw-bold mb-5 text-center">You May Also Like</h3>
-            <!-- Swiper Latest -->
-            <div class="swiper-container you-may-also-like-swiper overflow-visible" data-swiper="" data-options="{
-        &quot;spaceBetween&quot;: 25,
-        &quot;cssMode&quot;: true,
-        &quot;roundLengths&quot;: true,
-        &quot;scrollbar&quot;: {
-            &quot;el&quot;: &quot;.swiper-scrollbar&quot;,
-            &quot;hide&quot;: false,
-            &quot;draggable&quot;: true
-        },
-        &quot;navigation&quot;: {
-            &quot;nextEl&quot;: &quot;.swiper-next&quot;,
-            &quot;prevEl&quot;: &quot;.swiper-prev&quot;
-        },
-        &quot;breakpoints&quot;: {
-            &quot;576&quot;: {
-                &quot;slidesPerView&quot;: 1
-            },
-            &quot;768&quot;: {
-                &quot;slidesPerView&quot;: 2
-            },
-            &quot;992&quot;: {
-                &quot;slidesPerView&quot;: 3
-            },
-            &quot;1200&quot;: {
-                &quot;slidesPerView&quot;: 4
-            }
-        }
-    }">
-                <div class="swiper-wrapper pb-5 pe-1" id="related-properties">
-                    <!-- Dynamic slides will be appended here -->
                 </div>
-                <!-- Buttons-->
-                <div class="swiper-btn swiper-disabled-hide swiper-prev swiper-btn-side btn-icon bg-dark text-white ms-3 shadow-lg mt-n5 ms-n4"><i class="ri-arrow-left-s-line ri-lg"></i></div>
-                <div class="swiper-btn swiper-disabled-hide swiper-next swiper-btn-side swiper-btn-side-right btn-icon bg-dark text-white me-n4 shadow-lg mt-n5"><i class="ri-arrow-right-s-line ri-lg"></i></div>
-                <!-- Add Scrollbar -->
-                <div class="swiper-scrollbar"></div>
             </div>
         </div>
-        <!--/ Related Products-->
-
-
-        <!-- /Page Content -->
     </section>
-    <!-- / Main Section-->
-  <!-- Cart Offcanvas-->
-
-<!-- Modal for displaying all photos -->
-<div id="allPhotosModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="allPhotosModalLabel" aria-hidden="true">
-    <div class="modal-fullscreen modal-xl">
-        <div class="modal-content" >
-            <div class="modal-header">
-                <h5 class="modal-title" id="allPhotosModalLabel">All Photos</h5>
-                <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close"></button>
-            </div>
-
-
-            <div class="modal-body  ">
-                <div class="swiper-container overflow-visible swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events swiper-container-css-mode" data-swiper="" data-options="{
-                    &quot;spaceBetween&quot;: 25,
-                    &quot;cssMode&quot;: true,
-                    &quot;roundLengths&quot;: true,
-                    &quot;scrollbar&quot;: {
-                      &quot;el&quot;: &quot;.swiper-scrollbar&quot;,
-                      &quot;hide&quot;: false,
-                      &quot;draggable&quot;: true
-                    },
-                    &quot;navigation&quot;: {
-                      &quot;nextEl&quot;: &quot;.swiper-next&quot;,
-                      &quot;prevEl&quot;: &quot;.swiper-prev&quot;
-                    },
-                    &quot;breakpoints&quot;: {
-                      &quot;576&quot;: {
-                        &quot;slidesPerView&quot;: 1
-                      },
-                      &quot;768&quot;: {
-                        &quot;slidesPerView&quot;: 2
-                      },
-                      &quot;992&quot;: {
-                        &quot;slidesPerView&quot;: 3
-                      },
-                      &quot;1200&quot;: {
-                        &quot;slidesPerView&quot;: 4
-                      }
-                    }
-                  }">
-                  <div class="swiper-wrapper pb-5 pe-1">
-
-             {% for photo in property.photos.all %}
-<div class="swiper-slide d-flex mh-100" style="margin-right: 25px;">
-    <!-- Card Product-->
-    <div class="card position-relative h-100 card-listing hover-trigger">
-        <div class="card-header">
-            <a href="{{ photo.image.url }}" class="position-relative overflow-hidden d-block bg-light lg-zoom">
-                <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ photo.image.url }}" alt="">
-            </a>
-        </div>
-        <div class="card-body px-0 text-center">
-            <!-- Any additional content for the card body -->
-        </div>
+</section>
+<!-- Homepage Intro-->
+<section class="position-relative my-5 my-md-7 my-lg-9 bg-dark text-white aos-init aos-animate" data-aos="fade-in">
+    <!-- SVG Shape Divider -->
+    <div class="position-absolute z-index-50 top-0 end-0 start-0">
+        <svg class="align-self-start d-flex w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25">
+            <polygon fill="currentColor" points="1283 0 0 0 0 53.25 1283 0"></polygon>
+        </svg>
     </div>
-    <!--/ Card Product-->
-</div>
-{% endfor %}
+    <!-- /SVG Shape Divider -->
 
-                        <!--/ Card Product-->
-                      </div>
-
-
-                </div>
-
-                  <!-- Buttons-->
-                  <div class="swiper-btn swiper-disabled-hide swiper-prev swiper-btn-side btn-icon bg-dark text-white ms-3 shadow-lg mt-n5 ms-n4 swiper-button-disabled"><i class="ri-arrow-left-s-line ri-lg"></i></div>
-                  <div class="swiper-btn swiper-disabled-hide swiper-next swiper-btn-side swiper-btn-side-right btn-icon bg-dark text-white me-n4 shadow-lg mt-n5"><i class="ri-arrow-right-s-line ri-lg"></i></div>
-
-                  <!-- Add Scrollbar -->
-                  <div class="swiper-scrollbar"><div class="swiper-scrollbar-drag" style="transform: translate3d(0px, 0px, 0px); width: 57.8503px;"></div>
-                  </div>
-                     </div>
-
-
-
-
-
-
-
-
-
+    <div class="py-7 py-lg-10">
+        <div class="container text-white py-4 py-md-6">
+            <div class="text-center mb-5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Flag_of_Algeria.svg/320px-Flag_of_Algeria.svg.png" alt="{% trans 'Drapeau Algérien' %}" style="max-width: 100px;">
+                <h2 class="fw-bold mt-3">{% trans 'Agence Immobilière Algérienne Agréée par l\'État' %}</h2>
             </div>
-        </div>
-    </div>
-</div>
 
-{% endblock %}
-{% block subject %}
-              <div class="d-flex justify-content-between align-items-center">
-              <p class="m-0 fw-bolder">about</p>
-              <p class="m-0 fw-bolder">{{property.title}}</p>
-                <input type="hidden" name="subject" value="{{property.title}}">
-            </div>
-{% endblock %}
-
-
-
-
-        {% block scripts %}
-
-    <script>
-        // Function to fetch and display related properties
-        function fetchRelatedProperties() {
-            // Extract current property attributes
-            const propertyType = "{{property.property_type}}";
-            const advertType = "{{property.advert_type}}";
-            const city = "{{property.city}}";
-            const maxPrice = parseFloat("{{property.price}}") * 1.2; // Example: 20% higher than current property price
-
-            // Prepare API endpoint and query parameters
-            const url = `http://127.0.0.1:8000/api/v1/properties/rank/?advert_type=${advertType}&city=${city}&pricelt=${maxPrice}`;
-
-            // Fetch related properties from the API
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Check if the response contains data
-                    if (Array.isArray(data) && data.length > 0) {
-                        // Generate HTML for each related property
-                        const relatedPropertiesHTML = data.map(item => `
-                    <div class="swiper-slide d-flex h-auto">
-                        <div class="card card-listing hover-trigger card-hover border">
-                            <img src="${item.cover_photo}" class="card-img-top" style="object-fit: cover; height: 200px;" alt="Property Image">
-                            <div class="position-absolute top-5 start-7 translate-middle badge bg-dark p-2">${item.advert_type}</div>
-                            <div class="card-body">
-                                <h5 class="card-title">${item.title}</h5>
-                                <p class="card-text">${item.street_address}, ${item.city}</p>
-                                <p class="card-text"><small class="text-dark">Price: ${item.price}</small></p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Bedrooms <span class="badge bg-dark">${item.bedrooms}</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Bathrooms <span class="badge bg-dark">${item.bathrooms}</span>
-                                </li>
+            <div class="row g-5 align-items-start">
+                <div class="col-12 col-md-4">
+                    <h3 class="fs-1 fw-bold mb-4"><i class="ri-home-4-line align-bottom"></i> {% trans 'Nos Services' %}</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><strong>{% trans 'Vente de Biens Immobiliers' %}</strong>
+                            <ul>
+                                <li>{% trans 'Maisons' %}</li>
+                                <li>{% trans 'Appartements' %}</li>
+                                <li>{% trans 'Terrains' %}</li>
                             </ul>
-                            <div class="card-body">
-                                <a href="http://127.0.0.1:8000/property/${item.slug}" class="btn btn-orange rounded-pill py-2 px-3">See Details</a>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-                        // Append the generated HTML to the "related-properties" div
-                        document.getElementById('related-properties').innerHTML = relatedPropertiesHTML;
+                        </li>
+                        <li class="mb-2"><strong>{% trans 'Location de Biens Immobiliers' %}</strong>
+                            <ul>
+                                <li>{% trans 'Locations à court terme' %}</li>
+                                <li>{% trans 'Locations à long terme' %}</li>
+                            </ul>
+                        </li>
+                        <li class="mb-2"><strong>{% trans 'Gestion Immobilière' %}</strong>
+                            <ul>
+                                <li>{% trans 'Administration de biens' %}</li>
+                                <li>{% trans 'Gestion locative' %}</li>
+                            </ul>
+                        </li>
+                        <li class="mb-2"><strong>{% trans 'Conseil et Accompagnement' %}</strong>
+                            <ul>
+                                <li>{% trans 'Évaluation immobilière' %}</li>
+                                <li>{% trans 'Conseils juridiques' %}</li>
+                                <li>{% trans 'Accompagnement personnalisé' %}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
 
-                        // Initialize Swiper for the specific container or update it
-                        if (window.youMayAlsoLikeSwiper) {
-                            window.youMayAlsoLikeSwiper.update();
-                        } else {
-                            window.youMayAlsoLikeSwiper = new Swiper('.you-may-also-like-swiper', {
-                                spaceBetween: 25,
-                                cssMode: true,
-                                roundLengths: true,
-                                scrollbar: {
-                                    el: '.swiper-scrollbar',
-                                    hide: false,
-                                    draggable: true
-                                },
-                                navigation: {
-                                    nextEl: '.swiper-next',
-                                    prevEl: '.swiper-prev'
-                                },
-                                breakpoints: {
-                                    576: { slidesPerView: 1 },
-                                    768: { slidesPerView: 2 },
-                                    992: { slidesPerView: 3 },
-                                    1200: { slidesPerView: 4 }
-                                }
-                            });
-                        }
-                    } else {
-                        document.getElementById('related-properties').innerHTML = '<p>No related properties found.</p>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching related properties:', error);
-                    document.getElementById('related-properties').innerHTML = '<p>Error fetching related properties.</p>';
-                });
-        }
+                <div class="col-12 col-md-4">
+                    <h3 class="fs-1 fw-bold mb-4"><i class="ri-hand-heart-line align-bottom"></i> {% trans 'Nos Engagements' %}</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><strong>{% trans 'Professionnalisme:' %}</strong> {% trans 'Nous assurons un service de haute qualité avec des agents qualifiés et compétents.' %}</li>
+                        <li class="mb-3"><strong>{% trans 'Transparence:' %}</strong> {% trans 'Toutes nos transactions sont effectuées en toute transparence, conformément aux lois en vigueur.' %}</li>
+                        <li class="mb-3"><strong>{% trans 'Satisfaction Client:' %}</strong> {% trans 'Votre satisfaction est notre priorité. Nous mettons tout en œuvre pour répondre à vos attentes et besoins.' %}</li>
+                    </ul>
+                </div>
 
-        // Call the function to fetch and display related properties
-        fetchRelatedProperties();
+                <div class="col-12 col-md-4">
+                    <h3 class="fs-1 fw-bold mb-4"><i class="ri-contacts-line align-bottom"></i> {% trans 'Contactez-Nous' %}</h3>
+                    <p class="mb-2"><strong>{% trans 'Adresse:' %}</strong> [Votre adresse ici]</p>
+                    <p class="mb-2"><strong>{% trans 'Téléphone:' %}</strong> [Votre numéro de téléphone ici]</p>
+                    <p class="mb-2"><strong>{% trans 'Email:' %}</strong> [Votre email ici]</p>
+                    <p class="mb-2"><strong>{% trans 'Site Web:' %}</strong> [Votre site web ici]</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    </script>
+    <!-- SVG Shape Divider -->
+    <div class="position-absolute z-index-50 text-white bottom-0 start-0 end-0">
+        <svg class="align-self-end d-flex w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25">
+            <polygon fill="currentColor" points="0 53.25 1283 53.25 1283 0 0 53.25"></polygon>
+        </svg>
+    </div>
+    <!-- /SVG Shape Divider -->
+</section>
+<!-- / Main Section-->
+<!-- Zoom Modal -->
+<div class="modal fade" id="zoomModal" tabindex="-1" aria-labelledby="zoomModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="zoomedImage" class="img-fluid" src="" alt="Zoomed Image">
+            </div>
+        </div>
+    </div>
+</div>
 
+{% endblock %}
 
+{% block scripts %}
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-                  {% endblock %}
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    });
+
+    function showZoomModal(image) {
+        const zoomedImage = document.getElementById('zoomedImage');
+        zoomedImage.src = image.src;
+        const bootstrapModal = new bootstrap.Modal(document.getElementById('zoomModal'));
+        bootstrapModal.show();
+    }
+</script>
+{% endblock %}

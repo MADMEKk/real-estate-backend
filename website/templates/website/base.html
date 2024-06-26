@@ -1,6 +1,8 @@
 {% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="{% static 'favicon.ico'%}" />
@@ -26,7 +28,7 @@
     <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg'%}" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    
+
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{% static 'css/libs.bundle.css'%}" />
     <!-- Leaflet CSS -->
@@ -51,13 +53,32 @@
     <!-- Fix for custom scrollbar if JS is disabled-->
     <noscript>
         <style>
+          .zoomable {
+            cursor: pointer;
+            transition: transform 0.2s;
+          }
 
+          .zoomable:hover {
+            transform: scale(1.05);
+          }
+
+          .modal-dialog-centered {
+            display: flex;
+            align-items: center;
+            min-height: calc(100% - 1rem);
+          }
           /**
           * Reinstate scrolling for non-JS clients
           */
           .simplebar-content-wrapper {
             overflow: auto;
           }
+          .btn-container {
+            width: 100%;
+            /* Your existing styles for the form container */
+            position: relative; /* Make the container relative for positioning */
+          }
+
 
 
         </style>
@@ -83,7 +104,24 @@
           },
         }
       });
-
+      var swiperlc = new Swiper('.swiperlc', {
+        slidesPerView: 'auto', // Number of slides per view
+        spaceBetween: 20, // Space between slides
+        loop: true, // Enable loop mode
+        autoplay: {
+          delay: 5000, // Delay between slides in milliseconds
+          disableOnInteraction: false, // Continue autoplay even when user interacts with slider
+        },
+        breakpoints: {
+          // Add breakpoints for responsive behavior
+          768: {
+            slidesPerView: 2, // Number of slides per view on tablets
+          },
+          992: {
+            slidesPerView: 3, // Number of slides per view on laptops/desktops
+          },
+        }
+      });
     </script>
     <style>
       /* Loader CSS */
@@ -100,6 +138,43 @@
         align-items: center;
 
       }
+      .card-listing {
+        transition: transform 0.3s;
+      }
+
+      .card-listing:hover {
+        transform: scale(1.05);
+      }
+
+      .ok-img {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+
+
+      .price {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #ff4500;
+      }
+
+      .list-group-item {
+        font-size: 0.9em;
+      }
+
+      .btn-outline-dark {
+        border-color: #6c757d;
+        color: #6c757d;
+        font-size: 0.8em;
+      }
+
+      .btn-outline-dark:hover {
+        background-color: #6c757d;
+        color: #000000;
+      }
+
+
 
       .loader {
         border: 16px solid #f3f3f3;
@@ -145,12 +220,50 @@
         width: 60px;
         height: 60px;
       }
+      #filters-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 80px;
+        z-index: 1000;
+        width: 60px;
+        height: 60px;
+      }
 
       #whatsapp-icon img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
+      .filter-container {
+
+        position: -webkit-sticky; /* For Safari */
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: rgba(251, 251, 251, 0.77) !important; /* Ensure background color matches your site */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add shadow for better visibility */
+      }
+
+      .filter-bar .form-select-sm,
+      .filter-bar .form-control-sm,
+      .filter-bar .btn-sm {
+        font-size: 0.9rem;
+      }
+
+      .filter-bar .form-group {
+        margin-bottom: 0 !important;
+      }
+
+      .btn-orange {
+        background-color: #ff6600;
+        color: white;
+      }
+
+      .btn-orange:hover {
+        background-color: #e65c00;
+        color: white;
+      }
+
 
     </style>
     <!-- Page Title -->
@@ -158,10 +271,25 @@
   </head>
   <body>
 
-  <div id="loader-overlay" class="loader-overlay">
-    <div class="loader"></div>
+<!-- Modal Structure -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="contactModalLabel">{% trans 'Contacter l\'Agence' %}</h5>
+        <button type="button" class="close" onclick="hideModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBodyContent">
+        <!-- Content will be dynamically loaded here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="hideModal()">{% trans 'Fermer' %}</button>
+      </div>
+    </div>
   </div>
-
+</div>
   {% block body %} {% endblock %}
 
   <script>
@@ -222,10 +350,11 @@
     function changeColor(radioButton) {
     const svgIcon = radioButton.parentElement;
     if (radioButton.checked) {
-      svgIcon.style.backgroundColor = "#fc6229";
-      svgIcon.style.color = "black"
+      svgIcon.style.backgroundColor = "#6c757d";
+      svgIcon.style.color = "white";
     } else {
-      svgIcon.style.backgroundColor = ""; // Reset color when unchecked
+      svgIcon.style.backgroundColor = "white";
+      svgIcon.style.color = "black"// Reset color when unchecked
     }
 
     // Get all radio buttons with the same name
@@ -236,6 +365,8 @@
       const siblingIcon = button.parentElement;
       if (button !== radioButton) { // Exclude the checked radio button
         siblingIcon.style.backgroundColor = "white";
+        svgIcon.style.color = "black"// Reset color when unchecked
+
       }
     });
   }
@@ -245,26 +376,20 @@
   <!-- Initialize Swiper -->
   <script>
     var swiperIcons = new Swiper(".swiperIcons", {
-      slidesPerView: 3,
+      slidesPerView: 2,
       spaceBetween: 10,
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
       },
-      breakpoints: {
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        768: {
-          slidesPerView: 4,
-          spaceBetween: 40,
-        },
-        1024: {
-          slidesPerView: 5,
-          spaceBetween: 50,
-        },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
       },
+
+      mousewheel: true,
+      keyboard: true,
+
     });
   </script>
   <script>
@@ -294,7 +419,52 @@
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/lightgallery/dist/js/lightgallery.min.js"></script>
+  <script>
+    function showModal(type) {
+      let modalBodyContent = '';
 
+      if (type === 'call') {
+        modalBodyContent = '<p>Call the agency at: <strong>+1-234-567-890</strong></p>';
+      } else if (type === 'message') {
+        modalBodyContent = `
+                <p>Choose a messaging option:</p>
+                <div class="d-flex justify-content-around">
+                    <button class="btn btn-success" onclick="window.location.href='https://wa.me/1234567890'">
+                        <i class="icon-whatsapp"></i> WhatsApp
+                    </button>
+                    <button class="btn btn-primary" onclick="window.location.href='viber://chat?number=1234567890'">
+                        <i class="icon-viber"></i> Viber
+                    </button>
+                    <button class="btn btn-info" onclick="openChatOnWebsite()">
+                        <i class="icon-chat"></i> Chat on Website
+                    </button>
+                </div>
+            `;
+      }
+
+      document.getElementById('modalBodyContent').innerHTML = modalBodyContent;
+      document.getElementById('contactModal').classList.add('show');
+      document.getElementById('contactModal').style.display = 'block';
+    }
+
+    function hideModal() {
+      document.getElementById('contactModal').classList.remove('show');
+      document.getElementById('contactModal').style.display = 'none';
+    }
+
+    function openChatOnWebsite() {
+      // Logic to open chat on the website, e.g., opening a chat widget
+      alert('Opening chat on the website...');
+      hideModal();
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+      if (event.target == document.getElementById('contactModal')) {
+        hideModal();
+      }
+    }
+  </script>
 
   <!-- Leaflet JavaScript -->
   <script
@@ -304,7 +474,7 @@
   ></script>
 
   <!-- Initialize Leaflet Map -->
-  <script>
+  <script defer>
     // Initialize and add the map
     function initMap() {
       // The location of your business
@@ -323,7 +493,7 @@
     window.onload = initMap;
   </script>
 
-<script>
+<script defer>
   function getPropertyHTML(item) {
   return `
   <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
@@ -332,7 +502,7 @@
       <div class="position-absolute top-5 start-7 translate-middle badge bg-dark p-2">${item.advert_type}</div>
       <div class="card-body">
         <h5 class="card-title">${item.title}</h5>
-        <p class="card-text">${item.street_address}, ${item.city}</p>
+        <p class="card-text">${item.street_address}, ${item.commune_name} ,${item.daira_name},${item.wilaya_name} </p>
         <p class="card-text"><small class="text-dark">Price: ${item.price}</small></p>
       </div>
       <ul class="list-group list-group-flush">
@@ -387,6 +557,172 @@
   }
   });
   });
+  </script>
+  <!--
+   fetch wiala
+  -->
+  <script defer>
+
+ function initializeLocationSelectors() {
+    fetchWilayas();
+
+    document.getElementById('wilaya').addEventListener('change', function() {
+      const wilayaId = this.value;
+      if (wilayaId) {
+        fetchDairas(wilayaId);
+      } else {
+        resetSelect('daira');
+        resetSelect('commune');
+      }
+    });
+
+    document.getElementById('daira').addEventListener('change', function() {
+      const dairaId = this.value;
+      if (dairaId) {
+        fetchCommunes(dairaId);
+      } else {
+        resetSelect('commune');
+      }
+    });
+
+  function fetchWilayas() {
+    fetch('http://127.0.0.1:8000/api/v1/algeria/wilayas/')
+            .then(response => response.json())
+            .then(data => {
+              populateSelect('wilaya', data);
+            })
+            .catch(error => console.error('Error fetching Wilayas:', error));
+  }
+
+  function fetchDairas(wilayaId) {
+    fetch(`http://127.0.0.1:8000/api/v1/algeria/dairas/${wilayaId}/`)
+            .then(response => response.json())
+            .then(data => {
+              populateSelect('daira', data);
+              resetSelect('commune');
+            })
+            .catch(error => console.error('Error fetching Dairas:', error));
+  }
+
+  function fetchCommunes(dairaId) {
+    fetch(`http://127.0.0.1:8000/api/v1/algeria/communes/${dairaId}/`)
+            .then(response => response.json())
+            .then(data => {
+              populateSelect('commune', data);
+            })
+            .catch(error => console.error('Error fetching Communes:', error));
+  }
+
+  function populateSelect(elementId, data) {
+    const selectElement = document.getElementById(elementId);
+    resetSelect(elementId);
+    data.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.text = `${item.id}   \t ${item.name_ascii}`;
+      selectElement.appendChild(option);
+    });
+  }
+
+  function resetSelect(elementId) {
+    const selectElement = document.getElementById(elementId);
+    selectElement.innerHTML = `<option value="">${elementId}</option>`;
+  }
+}
+
+// Call the function
+
+
+  </script>
+  <!-- search -->
+
+
+
+  <script>
+    async function refreshToken() {
+      try {
+        const refresh_token = localStorage.getItem('refresh_token');
+        const response = await fetch('/api/v1/auth/jwt/refresh/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ refresh: refresh_token })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to refresh token');
+        }
+
+        const data = await response.json();
+        localStorage.setItem('access_token', data.access);
+        return data.access;
+      } catch (error) {
+        alert('Error refreshing token: ' + error);
+        window.location.href = '/login/';
+      }
+    }
+
+    async function toggleLike(propertySlug) {
+      try {
+        let accessToken = localStorage.getItem('access_token'); // Get the access token from where it's stored (e.g., localStorage)
+
+        let response = await fetch(`/api/v1/properties/toggle-like/${propertySlug}/`, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.status === 401) { // If token is invalid or expired
+          accessToken = await refreshToken(); // Attempt to refresh token
+          response = await fetch(`/api/v1/properties/toggle-like/${propertySlug}/`, {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer ' + accessToken,
+              'Content-Type': 'application/json'
+            }
+          });
+        }
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.message === 'Property unliked') {
+            console.log('Property unliked');
+            // Update the UI to show the property is unliked
+          } else {
+            console.log('Property liked');
+            // Update the UI to show the property is liked
+          }
+          updateLikeCount(propertySlug);
+        } else {
+          throw new Error('Failed to toggle like on property');
+        }
+      } catch (error) {
+        console.error('Error toggling like:', error);
+      }
+    }
+
+    async function updateLikeCount(propertySlug) {
+      try {
+        const response = await fetch(`/api/v1/properties/likes/${propertySlug}/`);
+
+        if (response.ok) {
+          const data = await response.json();
+          const likeCountElement = document.getElementById(`like-count-${propertySlug}`);
+          if (likeCountElement) {
+            likeCountElement.textContent = data.likes_count;
+          }
+        } else {
+          throw new Error('Failed to fetch like count');
+        }
+      } catch (error) {
+        console.error('Error fetching like count:', error);
+      }
+    }
+
+
   </script>
 
 

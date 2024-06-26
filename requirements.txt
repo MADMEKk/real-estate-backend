@@ -68,3 +68,5 @@ vine==5.1.0
 watchdog==4.0.0
 wcwidth==0.2.13
 uwsgi==2.0.20
+django-jazzmin==2.6.0
+faker
