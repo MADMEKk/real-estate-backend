@@ -1,0 +1,721 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-05 18:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: base.html:245
+msgid "Contacter l\\"
+msgstr ""
+
+#: base.html:254 baseindex.html:125 listeproducts.html:245
+#: properydetails.html:364
+msgid "Fermer"
+msgstr ""
+
+#: baseindex.html:18
+msgid "Restez connecté"
+msgstr ""
+
+#: baseindex.html:38
+msgid "Trouvez la maison de vos rêves"
+msgstr ""
+
+#: baseindex.html:39
+msgid "Parcourez nos annonces pour trouver la propriété parfaite pour vous."
+msgstr ""
+
+#: baseindex.html:50
+msgid "Support client"
+msgstr ""
+
+#: baseindex.html:51
+msgid "Contactez notre équipe pour obtenir de l\\"
+msgstr ""
+
+#: baseindex.html:62
+msgid "Professionnels de confiance"
+msgstr ""
+
+#: baseindex.html:63
+msgid "Travaillez avec des agents expérimentés dédiés à votre satisfaction."
+msgstr ""
+
+#: baseindex.html:81
+msgid "Liens rapides"
+msgstr ""
+
+#: baseindex.html:83
+msgid "Rechercher des propriétés"
+msgstr ""
+
+#: baseindex.html:84
+msgid "Vendez votre maison"
+msgstr ""
+
+#: baseindex.html:85
+msgid "Locations"
+msgstr ""
+
+#: baseindex.html:86 baseindex.html:124 pagesbase.html:161
+msgid "Contactez-nous"
+msgstr ""
+
+#: baseindex.html:93
+msgid "Ressources"
+msgstr ""
+
+#: baseindex.html:95 index.html:211
+msgid "Évaluation immobilière"
+msgstr ""
+
+#: baseindex.html:96
+msgid "Guides de quartier"
+msgstr ""
+
+#: baseindex.html:97
+msgid "Blog immobilier"
+msgstr ""
+
+#: baseindex.html:104
+msgid "Abonnez-vous à notre newsletter"
+msgstr ""
+
+#: baseindex.html:105
+msgid "Restez informé des dernières nouvelles et des annonces immobilières."
+msgstr ""
+
+#: baseindex.html:109
+msgid "Entrez votre email"
+msgstr ""
+
+#: baseindex.html:132
+msgid "Informations de contact"
+msgstr ""
+
+#: baseindex.html:138
+msgid "Email"
+msgstr ""
+
+#: baseindex.html:139
+msgid "vous@exemple.com"
+msgstr ""
+
+#: baseindex.html:145
+msgid "Gardez-moi informé de vos dernières nouvelles et offres"
+msgstr ""
+
+#: baseindex.html:160
+msgid "Nom"
+msgstr ""
+
+#: baseindex.html:168
+msgid "téléphone"
+msgstr ""
+
+#: baseindex.html:177
+msgid "message"
+msgstr ""
+
+#: baseindex.html:186
+msgid "Envoyer"
+msgstr ""
+
+#: baseindex.html:237
+msgid "Que cherchez-vous ?"
+msgstr ""
+
+#: baseindex.html:238
+msgid "Fermer la recherche"
+msgstr ""
+
+#: baseindex.html:241
+msgid "Recherche par emplacement ..."
+msgstr ""
+
+#: baseindex.html:251
+msgid ""
+"Vous n'avez pas trouvé ce que vous cherchez ? <a class=\"transition-all "
+"opacity-50-hover text-white text-link-border border-white pb-1 border-2\" "
+"href=\"#\">Envoyez-nous un message.</a>"
+msgstr ""
+
+#: index.html:4
+msgid "Agence Immobilière à Oran"
+msgstr ""
+
+#: index.html:22
+msgid "Confiance - Sérieux - Rapidité"
+msgstr ""
+
+#: index.html:32
+msgid "Achat"
+msgstr ""
+
+#: index.html:33
+msgid "Location"
+msgstr ""
+
+#: index.html:40
+msgid "Property Type"
+msgstr ""
+
+#: index.html:41 listeproducts.html:30 listeproducts.html:89
+#: listeproducts.html:281
+msgid "Appartement"
+msgstr ""
+
+#: index.html:42 listeproducts.html:97 listeproducts.html:285
+msgid "Villa"
+msgstr ""
+
+#: index.html:43 listeproducts.html:105 listeproducts.html:289
+msgid "Local"
+msgstr ""
+
+#: index.html:44 listeproducts.html:113 listeproducts.html:293
+msgid "Terrain"
+msgstr ""
+
+#: index.html:45 listeproducts.html:121 listeproducts.html:297
+msgid "Hangar"
+msgstr ""
+
+#: index.html:46 listeproducts.html:129 listeproducts.html:301
+msgid "Bungalow"
+msgstr ""
+
+#: index.html:47 listeproducts.html:137 listeproducts.html:305
+msgid "Usine"
+msgstr ""
+
+#: index.html:54 listeproducts.html:393 properydetails.html:143
+msgid "Wilaya"
+msgstr ""
+
+#: index.html:62
+msgid "Min Price DZD"
+msgstr ""
+
+#: index.html:65
+msgid "Max Price DZD"
+msgstr ""
+
+#: index.html:73
+msgid "Filter"
+msgstr ""
+
+#: index.html:85
+msgid "lire la suite"
+msgstr ""
+
+#: index.html:132
+msgid "Dream"
+msgstr ""
+
+#: index.html:132
+msgid "Home"
+msgstr ""
+
+#: index.html:136
+msgid "Agence immobilière"
+msgstr ""
+
+#: index.html:139
+msgid ""
+"\n"
+"            ImmobiliaH, agent immobilier à Oran, est à votre écoute  : "
+"conseil en ACHAT, VENTE, LOCATION, GESTION et SYNDIC de villas et "
+"d'appartements. Réalise votre évaluation personnelle pour vendre ou louer "
+"dans les meilleures conditions.\n"
+"            "
+msgstr ""
+
+#: index.html:144
+msgid ""
+"\n"
+"            Spécialiste de la villa et de l'appartement, ImmobiliaH réalise "
+"votre projet. Administrateur de biens, gardien de votre patrimoine, "
+"Immobilia gère votre bien comme le sien :\n"
+"            prise en charge totale, mise en place d'un locataire sérieux, "
+"assurance loyers impayés\n"
+"            "
+msgstr ""
+
+#: index.html:149
+msgid "Explorer les propriétés"
+msgstr ""
+
+#: index.html:154 index.html:159
+msgid "Real Estate Banner 1"
+msgstr ""
+
+#: index.html:163
+msgid "Real Estate Banner 3"
+msgstr ""
+
+#: index.html:182
+msgid "Drapeau Algérien"
+msgstr ""
+
+#: index.html:183
+msgid "Agence Immobilière Algérienne Agréée par l\\"
+msgstr ""
+
+#: index.html:188
+msgid "Nos Services"
+msgstr ""
+
+#: index.html:190
+msgid "Vente de Biens Immobiliers"
+msgstr ""
+
+#: index.html:192
+msgid "Maisons"
+msgstr ""
+
+#: index.html:193
+msgid "Appartements"
+msgstr ""
+
+#: index.html:194
+msgid "Terrains"
+msgstr ""
+
+#: index.html:197
+msgid "Location de Biens Immobiliers"
+msgstr ""
+
+#: index.html:199
+msgid "Locations à court terme"
+msgstr ""
+
+#: index.html:200
+msgid "Locations à long terme"
+msgstr ""
+
+#: index.html:203
+msgid "Gestion Immobilière"
+msgstr ""
+
+#: index.html:205
+msgid "Administration de biens"
+msgstr ""
+
+#: index.html:206
+msgid "Gestion locative"
+msgstr ""
+
+#: index.html:209
+msgid "Conseil et Accompagnement"
+msgstr ""
+
+#: index.html:212
+msgid "Conseils juridiques"
+msgstr ""
+
+#: index.html:213
+msgid "Accompagnement personnalisé"
+msgstr ""
+
+#: index.html:220
+msgid "Nos Engagements"
+msgstr ""
+
+#: index.html:222
+msgid "Professionnalisme:"
+msgstr ""
+
+#: index.html:222
+msgid ""
+"Nous assurons un service de haute qualité avec des agents qualifiés et "
+"compétents."
+msgstr ""
+
+#: index.html:223
+msgid "Transparence:"
+msgstr ""
+
+#: index.html:223
+msgid ""
+"Toutes nos transactions sont effectuées en toute transparence, conformément "
+"aux lois en vigueur."
+msgstr ""
+
+#: index.html:224
+msgid "Satisfaction Client:"
+msgstr ""
+
+#: index.html:224
+msgid ""
+"Votre satisfaction est notre priorité. Nous mettons tout en œuvre pour "
+"répondre à vos attentes et besoins."
+msgstr ""
+
+#: index.html:229
+msgid "Contactez-Nous"
+msgstr ""
+
+#: index.html:230
+msgid "Adresse:"
+msgstr ""
+
+#: index.html:231
+msgid "Téléphone:"
+msgstr ""
+
+#: index.html:232
+msgid "Email:"
+msgstr ""
+
+#: index.html:233
+msgid "Site Web:"
+msgstr ""
+
+#: index.html:252
+msgid "Populaire"
+msgstr ""
+
+#: index.html:253
+msgid "Propriétés populaires"
+msgstr ""
+
+#: index.html:254
+msgid ""
+"Nous avons trié notre flux pour rassembler une collection de nos produits "
+"parfaits pour un été en plein air."
+msgstr ""
+
+#: index.html:299
+msgid "voir les détails"
+msgstr ""
+
+#: index.html:320
+msgid "Voir tout"
+msgstr ""
+
+#: listeproducts.html:12
+msgid "Explorez nos propriétés immobilières"
+msgstr ""
+
+#: listeproducts.html:19 listeproducts.html:255
+msgid "Type d\\"
+msgstr ""
+
+#: listeproducts.html:20 listeproducts.html:261
+msgid "À vendre"
+msgstr ""
+
+#: listeproducts.html:21 listeproducts.html:265
+msgid "À louer"
+msgstr ""
+
+#: listeproducts.html:28 listeproducts.html:275
+msgid "Type de propriété"
+msgstr ""
+
+#: listeproducts.html:29
+msgid "Maison"
+msgstr ""
+
+#: listeproducts.html:31
+msgid "Bureau"
+msgstr ""
+
+#: listeproducts.html:32
+msgid "Entrepôt"
+msgstr ""
+
+#: listeproducts.html:33
+msgid "Commercial"
+msgstr ""
+
+#: listeproducts.html:34
+msgid "Autre"
+msgstr ""
+
+#: listeproducts.html:41
+msgid "Prix min"
+msgstr ""
+
+#: listeproducts.html:44
+msgid "Prix max"
+msgstr ""
+
+#: listeproducts.html:50
+msgid "Recherche"
+msgstr ""
+
+#: listeproducts.html:60
+msgid "Filters"
+msgstr ""
+
+#: listeproducts.html:158
+msgid "Return to All Categories"
+msgstr ""
+
+#: listeproducts.html:207
+msgid "Properties"
+msgstr ""
+
+#: listeproducts.html:208
+msgid "chose"
+msgstr ""
+
+#: listeproducts.html:229
+msgid "no property"
+msgstr ""
+
+#: listeproducts.html:233
+msgid "Load More"
+msgstr ""
+
+#: listeproducts.html:244
+msgid "Filtres de propriété"
+msgstr ""
+
+#: listeproducts.html:309
+msgid "Other"
+msgstr ""
+
+#: listeproducts.html:319
+msgid "Gamme de prix"
+msgstr ""
+
+#: listeproducts.html:325 listeproducts.html:344
+msgid "Min"
+msgstr ""
+
+#: listeproducts.html:329 listeproducts.html:348
+msgid "Max"
+msgstr ""
+
+#: listeproducts.html:338
+msgid "Area Range"
+msgstr ""
+
+#: listeproducts.html:358 properydetails.html:161
+msgid "Bedrooms"
+msgstr ""
+
+#: listeproducts.html:364
+msgid "0+ Bedrooms"
+msgstr ""
+
+#: listeproducts.html:368
+msgid "1+ Bedrooms"
+msgstr ""
+
+#: listeproducts.html:372
+msgid "2+ Bedrooms"
+msgstr ""
+
+#: listeproducts.html:376
+msgid "3+ Bedrooms"
+msgstr ""
+
+#: listeproducts.html:380
+msgid "4+ Bedrooms"
+msgstr ""
+
+#: listeproducts.html:384
+msgid "5+ Bedrooms"
+msgstr ""
+
+#: listeproducts.html:395
+msgid "Select Wilaya"
+msgstr ""
+
+#: listeproducts.html:401 properydetails.html:146
+msgid "Daira"
+msgstr ""
+
+#: listeproducts.html:403
+msgid "Select Daira"
+msgstr ""
+
+#: listeproducts.html:409 properydetails.html:149
+msgid "Commune"
+msgstr ""
+
+#: listeproducts.html:411
+msgid "Select Commune"
+msgstr ""
+
+#: listeproducts.html:418
+msgid "Keywords"
+msgstr ""
+
+#: listeproducts.html:422
+msgid "Search"
+msgstr ""
+
+#: listeproducts.html:433
+msgid "Apply Filters"
+msgstr ""
+
+#: login.html:19 login.html:29
+msgid "Connexion"
+msgstr ""
+
+#: login.html:22
+msgid "email"
+msgstr ""
+
+#: login.html:26 register.html:30
+msgid "Mot de passe"
+msgstr ""
+
+#: login.html:33
+msgid "Ou connectez-vous avec"
+msgstr ""
+
+#: login.html:41
+msgid "Inscription?"
+msgstr ""
+
+#: pagesbase.html:72
+msgid "Toggle navigation"
+msgstr ""
+
+#: pagesbase.html:80
+msgid "Annonces"
+msgstr ""
+
+#: pagesbase.html:92 pagesbase.html:115
+msgid "Vente"
+msgstr ""
+
+#: pagesbase.html:95 pagesbase.html:118
+msgid "Appartement - Studio - Loft"
+msgstr ""
+
+#: pagesbase.html:98 pagesbase.html:121
+msgid "Fonds de commerce"
+msgstr ""
+
+#: pagesbase.html:101 pagesbase.html:124
+msgid "Immeuble - Bâtiment - Surface"
+msgstr ""
+
+#: pagesbase.html:104 pagesbase.html:127
+msgid "Maison - Villa"
+msgstr ""
+
+#: pagesbase.html:107 pagesbase.html:130
+msgid "View All"
+msgstr ""
+
+#: pagesbase.html:152
+msgid "Louer"
+msgstr ""
+
+#: pagesbase.html:155
+msgid "Vendre"
+msgstr ""
+
+#: pagesbase.html:158
+msgid "À propos de nous"
+msgstr ""
+
+#: propertysaved.html:23
+msgid "Votre propriété a été enregistrée avec succès"
+msgstr ""
+
+#: propertysaved.html:26
+msgid "Retourner à la page d\\"
+msgstr ""
+
+#: properydetails.html:59
+#, python-format
+msgid "+%(photos_left)s photos restantes"
+msgstr ""
+
+#: properydetails.html:136
+msgid "Advert Type"
+msgstr ""
+
+#: properydetails.html:139
+msgid "Property type"
+msgstr ""
+
+#: properydetails.html:152
+msgid "Postal code"
+msgstr ""
+
+#: properydetails.html:155
+msgid "Street address"
+msgstr ""
+
+#: properydetails.html:158
+msgid "Plot area"
+msgstr ""
+
+#: properydetails.html:164
+msgid "Bathrooms"
+msgstr ""
+
+#: properydetails.html:173
+msgid "Contact Agent"
+msgstr ""
+
+#: properydetails.html:180
+msgid "reseau"
+msgstr ""
+
+#: properydetails.html:310
+msgid "Vous pourriez aussi aimer"
+msgstr ""
+
+#: properydetails.html:363
+msgid "Toutes les photos"
+msgstr ""
+
+#: properydetails.html:447
+msgid "about"
+msgstr ""
+
+#: register.html:18 register.html:44
+msgid "Inscription"
+msgstr ""
+
+#: register.html:21
+msgid "Adresse e-mail"
+msgstr ""
+
+#: register.html:25
+msgid "Nom d\\"
+msgstr ""
+
+#: register.html:34
+msgid "Retaper le mot de passe"
+msgstr ""
+
+#: register.html:40
+msgid "Numéro de téléphone"
+msgstr ""
+
+#: register.html:48
+msgid "Ou s\\"
+msgstr ""
+
+#: register.html:51
+msgid "Vous avez déjà un compte? Connexion"
+msgstr ""
+
+#: savedproperties.html:13
+msgid "Saved Properties"
+msgstr ""

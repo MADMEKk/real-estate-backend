@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="34b01ca4-9d5d-4447-9abd-f1650eb1c31f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/profile.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/BreakdownChart.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/DataGridCustomColumnMenu.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/DataGridCustomToolbar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/FlexBetween.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Header.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navbar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OverviewChart.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Sidebar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/StatBox.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/auth/authAPIServices.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/auth/authSlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/global/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/properties/propertyAPIServices.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/properties/propertyDetailsSlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/properties/propertySlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/ProductDetails/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/breakdown/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/customers/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/daily/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/dashboard/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/geography/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/layout/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/monthly/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/overview/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/performance/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/products/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/transactions/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/state/api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/state/geoData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../website/templates/website/sellproperty.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apps/properties/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../apps/properties/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apps/properties/pagination.py" beforeDir="false" afterPath="$PROJECT_DIR$/../apps/properties/pagination.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apps/properties/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../apps/properties/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apps/properties/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../apps/properties/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apps/properties/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../apps/properties/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project_name/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../project_name/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project_name/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../project_name/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project_name/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../project_name/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project_name/static/images/banners/banner-3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../project_name/static/images/banners/banner-3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/templates/website/baseindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/../website/templates/website/baseindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/templates/website/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../website/templates/website/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/templates/website/listeproducts.html" beforeDir="false" afterPath="$PROJECT_DIR$/../website/templates/website/listeproducts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/templates/website/pagesbase.html" beforeDir="false" afterPath="$PROJECT_DIR$/../website/templates/website/pagesbase.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/templates/website/properydetails.html" beforeDir="false" afterPath="$PROJECT_DIR$/../website/templates/website/properydetails.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../website/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../website/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JSX File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2eVZzIiZ3dbp1adEtnf6j38Uy8i" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/aladine/projects/immo/test/docker/Project/project_name/website/templates",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "npm.install.executor": "Debug",
+    "npm.npm start.executor": "Run",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "ts.external.directory.path": "/snap/webstorm/372/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/features/properties" />
+      <recent name="$PROJECT_DIR$/src/state" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/features/global" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.npm start">
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="34b01ca4-9d5d-4447-9abd-f1650eb1c31f" name="Changes" comment="" />
+      <created>1711991967153</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1711991967153</updated>
+      <workItem from="1711991968447" duration="4045000" />
+      <workItem from="1712024680470" duration="4660000" />
+      <workItem from="1712074956484" duration="4572000" />
+      <workItem from="1712104877452" duration="5635000" />
+      <workItem from="1712110661358" duration="1823000" />
+      <workItem from="1712122944911" duration="3431000" />
+      <workItem from="1712148082778" duration="1439000" />
+      <workItem from="1712247213104" duration="4383000" />
+      <workItem from="1712268900440" duration="4745000" />
+      <workItem from="1712329086015" duration="4799000" />
+      <workItem from="1712359555639" duration="6421000" />
+      <workItem from="1712366338852" duration="3398000" />
+      <workItem from="1712414035547" duration="3017000" />
+      <workItem from="1712453228572" duration="908000" />
+      <workItem from="1712495562757" duration="1579000" />
+      <workItem from="1712497713195" duration="155000" />
+      <workItem from="1712498093284" duration="384000" />
+      <workItem from="1712498495953" duration="1380000" />
+      <workItem from="1712538976764" duration="479000" />
+      <workItem from="1712597212263" duration="988000" />
+      <workItem from="1712624024397" duration="6953000" />
+      <workItem from="1712631247071" duration="1729000" />
+      <workItem from="1712633002903" duration="989000" />
+      <workItem from="1712634045854" duration="1769000" />
+      <workItem from="1713083945126" duration="19000" />
+      <workItem from="1713129892538" duration="1373000" />
+      <workItem from="1713473307568" duration="119000" />
+      <workItem from="1713473789261" duration="5494000" />
+      <workItem from="1713518892390" duration="3722000" />
+      <workItem from="1713545195395" duration="6074000" />
+      <workItem from="1714459395063" duration="635000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

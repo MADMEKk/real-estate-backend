@@ -1,0 +1,1055 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-05 19:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/agentcontact/models.py:9 apps/enquires/models.py:9
+msgid "Your Name"
+msgstr "Your Name"
+
+#: apps/agentcontact/models.py:11 apps/enquires/models.py:11
+msgid "Phone number"
+msgstr "Phone number"
+
+#: apps/agentcontact/models.py:14 apps/enquires/models.py:13
+#: apps/properties/models.py:221 website/templates/website/baseindex.html:138
+msgid "Email"
+msgstr "Email"
+
+#: apps/agentcontact/models.py:16 apps/enquires/models.py:15
+msgid "Message"
+msgstr "Message"
+
+#: apps/enquires/models.py:14
+msgid "Subject"
+msgstr "Subject"
+
+#: apps/profiles/models.py:13
+msgid "Male"
+msgstr "Male"
+
+#: apps/profiles/models.py:14
+msgid "Female"
+msgstr "Female"
+
+#: apps/profiles/models.py:21
+msgid "Phone Number"
+msgstr "Phone Number"
+
+#: apps/profiles/models.py:24
+msgid "About me"
+msgstr "About me"
+
+#: apps/profiles/models.py:27
+msgid "Real Estate license"
+msgstr "Real Estate license"
+
+#: apps/profiles/models.py:30
+msgid "Profile Photo"
+msgstr "Profile Photo"
+
+#: apps/profiles/models.py:33
+msgid "Gender"
+msgstr "Gender"
+
+#: apps/profiles/models.py:41
+msgid "Buyer"
+msgstr "Buyer"
+
+#: apps/profiles/models.py:43
+msgid "Are you looking to Buy a Property?"
+msgstr "Are you looking to Buy a Property?"
+
+#: apps/profiles/models.py:46
+msgid "Seller"
+msgstr "Seller"
+
+#: apps/profiles/models.py:48
+msgid "Are you looking to sell a property?"
+msgstr "Are you looking to sell a property?"
+
+#: apps/profiles/models.py:51
+msgid "Agent"
+msgstr "Agent"
+
+#: apps/profiles/models.py:51
+msgid "Are you an agent?"
+msgstr "Are you an agent?"
+
+#: apps/profiles/models.py:53
+msgid "Top Agent"
+msgstr "Top Agent"
+
+#: apps/profiles/models.py:56
+msgid "Number of Reviews"
+msgstr "Number of Reviews"
+
+#: apps/properties/models.py:38
+msgid "For Sale"
+msgstr "For Sale"
+
+#: apps/properties/models.py:39
+msgid "For Rent"
+msgstr "For Rent"
+
+#: apps/properties/models.py:40
+msgid "Auction"
+msgstr "Auction"
+
+#: apps/properties/models.py:43 website/templates/website/index.html:41
+#: website/templates/website/listeproducts.html:30
+#: website/templates/website/listeproducts.html:89
+#: website/templates/website/listeproducts.html:281
+msgid "Appartement"
+msgstr "Apartment"
+
+#: apps/properties/models.py:44 website/templates/website/index.html:42
+#: website/templates/website/listeproducts.html:97
+#: website/templates/website/listeproducts.html:285
+msgid "Villa"
+msgstr "Villa"
+
+#: apps/properties/models.py:45 website/templates/website/index.html:43
+#: website/templates/website/listeproducts.html:105
+#: website/templates/website/listeproducts.html:289
+msgid "Local"
+msgstr "Commercial Property"
+
+#: apps/properties/models.py:46 website/templates/website/index.html:44
+#: website/templates/website/listeproducts.html:113
+#: website/templates/website/listeproducts.html:293
+msgid "Terrain"
+msgstr "Land"
+
+#: apps/properties/models.py:47 website/templates/website/index.html:45
+#: website/templates/website/listeproducts.html:121
+#: website/templates/website/listeproducts.html:297
+msgid "Hangar"
+msgstr "Warehouse"
+
+#: apps/properties/models.py:48 website/templates/website/index.html:46
+#: website/templates/website/listeproducts.html:129
+#: website/templates/website/listeproducts.html:301
+msgid "Bungalow"
+msgstr "Bungalow"
+
+#: apps/properties/models.py:49 website/templates/website/index.html:47
+#: website/templates/website/listeproducts.html:137
+#: website/templates/website/listeproducts.html:305
+msgid "Usine"
+msgstr "Factory"
+
+#: apps/properties/models.py:50
+#: website/templates/website/listeproducts.html:309
+msgid "Other"
+msgstr "Other"
+
+#: apps/properties/models.py:54
+msgid "Agent, Seller or Buyer"
+msgstr "Agent, Seller or Buyer"
+
+#: apps/properties/models.py:59
+msgid "Property Title"
+msgstr "Property Title"
+
+#: apps/properties/models.py:62
+msgid "Property Reference Code"
+msgstr "Property Reference Code"
+
+#: apps/properties/models.py:68
+msgid "Description"
+msgstr "Description"
+
+#: apps/properties/models.py:76
+msgid "Property commune"
+msgstr "Property Commune"
+
+#: apps/properties/models.py:83
+msgid "Property Daira"
+msgstr "Property District"
+
+#: apps/properties/models.py:90
+msgid "Property Wilaya"
+msgstr "Property Province"
+
+#: apps/properties/models.py:95
+msgid "Postal Code"
+msgstr "Postal Code"
+
+#: apps/properties/models.py:98
+msgid "Street Address"
+msgstr "Street Address"
+
+#: apps/properties/models.py:101
+msgid "Property Number"
+msgstr "Property Number"
+
+#: apps/properties/models.py:106
+msgid "Price"
+msgstr "Price"
+
+#: apps/properties/models.py:110
+msgid "Property Tax"
+msgstr "Property Tax"
+
+#: apps/properties/models.py:114
+msgid "15% property tax charged"
+msgstr "15% property tax charged"
+
+#: apps/properties/models.py:117
+msgid "Plot Area (m^2)"
+msgstr "Plot Area (m^2)"
+
+#: apps/properties/models.py:119
+msgid "Number of floors"
+msgstr "Number of floors"
+
+#: apps/properties/models.py:120
+#: website/templates/website/listeproducts.html:358
+#: website/templates/website/properydetails.html:161
+msgid "Bedrooms"
+msgstr "Bedrooms"
+
+#: apps/properties/models.py:121
+#: website/templates/website/properydetails.html:164
+msgid "Bathrooms"
+msgstr "Bathrooms"
+
+#: apps/properties/models.py:123
+#: website/templates/website/properydetails.html:136
+msgid "Advert Type"
+msgstr "Advert Type"
+
+#: apps/properties/models.py:130 website/templates/website/index.html:40
+msgid "Property Type"
+msgstr "Property Type"
+
+#: apps/properties/models.py:137
+msgid "Main Photo"
+msgstr "Main Photo"
+
+#: apps/properties/models.py:142
+msgid "Published Status"
+msgstr "Published Status"
+
+#: apps/properties/models.py:144
+msgid "Total Views"
+msgstr "Total Views"
+
+#: apps/properties/models.py:145
+msgid "Amenities"
+msgstr "Amenities"
+
+#: apps/properties/models.py:147
+msgid "Property Status"
+msgstr "Property Status"
+
+#: apps/properties/models.py:150
+msgid "Neighborhood Information"
+msgstr "Neighborhood Information"
+
+#: apps/properties/models.py:152
+msgid "Legal Status"
+msgstr "Legal Status"
+
+#: apps/properties/models.py:155
+msgid "Payment Options"
+msgstr "Payment Options"
+
+#: apps/properties/models.py:165
+msgid "Property"
+msgstr "Property"
+
+#: apps/properties/models.py:166
+#: website/templates/website/listeproducts.html:207
+msgid "Properties"
+msgstr "Properties"
+
+#: apps/properties/models.py:203
+msgid "IP Address"
+msgstr "IP Address"
+
+#: apps/properties/models.py:219
+msgid "First Name"
+msgstr "First Name"
+
+#: apps/properties/models.py:220
+msgid "Last Name"
+msgstr "Last Name"
+
+#: apps/properties/models.py:222
+msgid "Phone"
+msgstr "Phone"
+
+#: apps/ratings/models.py:11
+msgid "Poor"
+msgstr "Poor"
+
+#: apps/ratings/models.py:12
+msgid "Fair"
+msgstr "Fair"
+
+#: apps/ratings/models.py:13
+msgid "Good"
+msgstr "Good"
+
+#: apps/ratings/models.py:14
+msgid "Very Good"
+msgstr "Very Good"
+
+#: apps/ratings/models.py:15
+msgid "Excellent"
+msgstr "Excellent"
+
+#: apps/ratings/models.py:19
+msgid "User providing the rating"
+msgstr "User providing the rating"
+
+#: apps/ratings/models.py:25
+msgid "Agent being rated"
+msgstr "Agent being rated"
+
+#: apps/ratings/models.py:31
+msgid "Rating"
+msgstr "Rating"
+
+#: apps/ratings/models.py:36
+msgid "Comment"
+msgstr "Comment"
+
+#: apps/users/admin.py:32
+msgid "Login Credentials"
+msgstr "Login Credentials"
+
+#: apps/users/admin.py:41
+msgid "Personal Information"
+msgstr "Personal Information"
+
+#: apps/users/admin.py:49
+msgid "Permissions and Groups"
+msgstr "Permissions and Groups"
+
+#: apps/users/admin.py:60
+msgid "Important Dates"
+msgstr "Important Dates"
+
+#: apps/users/managers.py:15
+msgid "You must provide a valid email address"
+msgstr "You must provide a valid email address"
+
+#: apps/users/managers.py:23
+msgid "User must have an email address"
+msgstr "User must have an email address"
+
+#: apps/users/managers.py:40
+msgid "Superusers must have a password"
+msgstr "Superusers must have a password"
+
+#: apps/users/models.py:15
+msgid "Username"
+msgstr "Username"
+
+#: apps/users/models.py:16
+msgid "Email Address"
+msgstr "Email Address"
+
+#: apps/users/models.py:28
+msgid "User"
+msgstr "User"
+
+#: apps/users/models.py:29
+msgid "Users"
+msgstr "Users"
+
+#: website/templates/website/base.html:245
+msgid "Contacter l\\"
+msgstr "Contact the\\"
+
+#: website/templates/website/base.html:254
+#: website/templates/website/baseindex.html:125
+#: website/templates/website/listeproducts.html:245
+#: website/templates/website/properydetails.html:364
+msgid "Fermer"
+msgstr "Close"
+
+#: website/templates/website/baseindex.html:18
+msgid "Restez connecté"
+msgstr "Stay connected"
+
+#: website/templates/website/baseindex.html:38
+msgid "Trouvez la maison de vos rêves"
+msgstr "Find your dream home"
+
+#: website/templates/website/baseindex.html:39
+msgid "Parcourez nos annonces pour trouver la propriété parfaite pour vous."
+msgstr "Browse our listings to find the perfect property for you."
+
+#: website/templates/website/baseindex.html:50
+msgid "Support client"
+msgstr "Customer support"
+
+#: website/templates/website/baseindex.html:51
+msgid "Contactez notre équipe pour obtenir de l\\"
+msgstr "Contact our team for\\"
+
+#: website/templates/website/baseindex.html:62
+msgid "Professionnels de confiance"
+msgstr "Trusted professionals"
+
+#: website/templates/website/baseindex.html:63
+msgid "Travaillez avec des agents expérimentés dédiés à votre satisfaction."
+msgstr "Work with experienced agents dedicated to your satisfaction."
+
+#: website/templates/website/baseindex.html:81
+msgid "Liens rapides"
+msgstr "Quick links"
+
+#: website/templates/website/baseindex.html:83
+msgid "Rechercher des propriétés"
+msgstr "Search properties"
+
+#: website/templates/website/baseindex.html:84
+msgid "Vendez votre maison"
+msgstr "Sell your home"
+
+#: website/templates/website/baseindex.html:85
+msgid "Locations"
+msgstr "Rentals"
+
+#: website/templates/website/baseindex.html:86
+#: website/templates/website/baseindex.html:124
+#: website/templates/website/pagesbase.html:161
+msgid "Contactez-nous"
+msgstr "Contact us"
+
+#: website/templates/website/baseindex.html:93
+msgid "Ressources"
+msgstr "Resources"
+
+#: website/templates/website/baseindex.html:95
+#: website/templates/website/index.html:211
+msgid "Évaluation immobilière"
+msgstr "Property valuation"
+
+#: website/templates/website/baseindex.html:96
+msgid "Guides de quartier"
+msgstr "Neighborhood guides"
+
+#: website/templates/website/baseindex.html:97
+msgid "Blog immobilier"
+msgstr "Real estate blog"
+
+#: website/templates/website/baseindex.html:104
+msgid "Abonnez-vous à notre newsletter"
+msgstr "Subscribe to our newsletter"
+#: website/templates/website/baseindex.html:105
+msgid "Restez informé des dernières nouvelles et des annonces immobilières."
+msgstr "Stay informed about the latest news and real estate listings."
+
+#: website/templates/website/baseindex.html:109
+msgid "Entrez votre email"
+msgstr "Enter your email"
+
+#: website/templates/website/baseindex.html:132
+msgid "Informations de contact"
+msgstr "Contact information"
+
+#: website/templates/website/baseindex.html:139
+msgid "vous@exemple.com"
+msgstr "you@example.com"
+
+#: website/templates/website/baseindex.html:145
+msgid "Gardez-moi informé de vos dernières nouvelles et offres"
+msgstr "Keep me informed of your latest news and offers"
+
+#: website/templates/website/baseindex.html:160
+msgid "Nom"
+msgstr "Name"
+
+#: website/templates/website/baseindex.html:168
+msgid "téléphone"
+msgstr "phone"
+
+#: website/templates/website/baseindex.html:177
+msgid "message"
+msgstr "message"
+
+#: website/templates/website/baseindex.html:186
+msgid "Envoyer"
+msgstr "Send"
+
+#: website/templates/website/baseindex.html:237
+msgid "Que cherchez-vous ?"
+msgstr "What are you looking for?"
+
+#: website/templates/website/baseindex.html:238
+msgid "Fermer la recherche"
+msgstr "Close search"
+
+#: website/templates/website/baseindex.html:241
+msgid "Recherche par emplacement ..."
+msgstr "Search by location ..."
+
+#: website/templates/website/baseindex.html:251
+msgid ""
+"Vous n'avez pas trouvé ce que vous cherchez ? <a class=\"transition-all "
+"opacity-50-hover text-white text-link-border border-white pb-1 border-2\" "
+"href=\"#\">Envoyez-nous un message.</a>"
+msgstr ""
+"Didn't find what you're looking for? <a class=\"transition-all "
+"opacity-50-hover text-white text-link-border border-white pb-1 border-2\" "
+"href=\"#\">Send us a message.</a>"
+
+#: website/templates/website/index.html:4
+msgid "Agence Immobilière à Oran"
+msgstr "Real Estate Agency in Oran"
+
+#: website/templates/website/index.html:22
+msgid "Confiance - Sérieux - Rapidité"
+msgstr "Trust - Seriousness - Speed"
+
+#: website/templates/website/index.html:32
+msgid "Achat"
+msgstr "Purchase"
+
+#: website/templates/website/index.html:33
+msgid "Location"
+msgstr "Rental"
+
+#: website/templates/website/index.html:54
+#: website/templates/website/listeproducts.html:393
+#: website/templates/website/properydetails.html:143
+msgid "Wilaya"
+msgstr "Province"
+
+#: website/templates/website/index.html:62
+msgid "Min Price DZD"
+msgstr "Min Price DZD"
+
+#: website/templates/website/index.html:65
+msgid "Max Price DZD"
+msgstr "Max Price DZD"
+
+#: website/templates/website/index.html:73
+msgid "Filter"
+msgstr "Filter"
+
+#: website/templates/website/index.html:85
+msgid "lire la suite"
+msgstr "read more"
+
+#: website/templates/website/index.html:132
+msgid "Dream"
+msgstr "Dream"
+
+#: website/templates/website/index.html:132
+msgid "Home"
+msgstr "Home"
+
+#: website/templates/website/index.html:136
+msgid "Agence immobilière"
+msgstr "Real estate agency"
+
+#: website/templates/website/index.html:139
+msgid ""
+"\n"
+"            ImmobiliaH, agent immobilier à Oran, est à votre écoute  : conseil en ACHAT, VENTE, LOCATION, GESTION et SYNDIC de villas et d'appartements. Réalise votre évaluation personnelle pour vendre ou louer dans les meilleures conditions.\n"
+"            "
+msgstr ""
+"\n"
+"            ImmobiliaH, a real estate agent in Oran, is here for you: advice on PURCHASE, SALE, RENTAL, MANAGEMENT, and CO-OWNERSHIP of villas and apartments. Conduct your personal evaluation to sell or rent under the best conditions.\n"
+"            "
+
+#: website/templates/website/index.html:144
+msgid ""
+"\n"
+"            Spécialiste de la villa et de l'appartement, ImmobiliaH réalise votre projet. Administrateur de biens, gardien de votre patrimoine, Immobilia gère votre bien comme le sien :\n"
+"            prise en charge totale, mise en place d'un locataire sérieux, assurance loyers impayés\n"
+"            "
+msgstr ""
+"\n"
+"            Specialist in villas and apartments, ImmobiliaH makes your project a reality. Property administrator, guardian of your heritage, Immobilia manages your property as if it were its own:\n"
+"            complete management, placement of a serious tenant, unpaid rent insurance\n"
+"            "
+
+#: website/templates/website/index.html:149
+msgid "Explorer les propriétés"
+msgstr "Explore properties"
+
+#: website/templates/website/index.html:154
+#: website/templates/website/index.html:159
+msgid "Real Estate Banner 1"
+msgstr "Real Estate Banner 1"
+
+#: website/templates/website/index.html:163
+msgid "Real Estate Banner 3"
+msgstr "Real Estate Banner 3"
+
+#: website/templates/website/index.html:182
+msgid "Drapeau Algérien"
+msgstr "Algerian Flag"
+
+#: website/templates/website/index.html:183
+msgid "Agence Immobilière Algérienne Agréée par l\\"
+msgstr "Algerian Real Estate Agency Approved by the\\"
+
+#: website/templates/website/index.html:188
+msgid "Nos Services"
+msgstr "Our Services"
+
+#: website/templates/website/index.html:190
+msgid "Vente de Biens Immobiliers"
+msgstr "Real Estate Sales"
+
+#: website/templates/website/index.html:192
+msgid "Maisons"
+msgstr "Houses"
+
+#: website/templates/website/index.html:193
+msgid "Appartements"
+msgstr "Apartments"
+
+#: website/templates/website/index.html:194
+msgid "Terrains"
+msgstr "Land"
+
+#: website/templates/website/index.html:197
+msgid "Location de Biens Immobiliers"
+msgstr "Real Estate Rentals"
+
+#: website/templates/website/index.html:199
+msgid "Locations à court terme"
+msgstr "Short-term rentals"
+
+#: website/templates/website/index.html:200
+msgid "Locations à long terme"
+msgstr "Long-term rentals"
+
+#: website/templates/website/index.html:203
+msgid "Gestion Immobilière"
+msgstr "Property Management"
+
+#: website/templates/website/index.html:205
+msgid "Administration de biens"
+msgstr "Property administration"
+
+#: website/templates/website/index.html:206
+msgid "Gestion locative"
+msgstr "Rental management"
+
+#: website/templates/website/index.html:209
+msgid "Conseil et Accompagnement"
+msgstr "Advice and Support"
+
+#: website/templates/website/index.html:212
+msgid "Conseils juridiques"
+msgstr "Legal advice"
+
+#: website/templates/website/index.html:213
+msgid "Accompagnement personnalisé"
+msgstr "Personalized support"
+
+#: website/templates/website/index.html:220
+msgid "Nos Engagements"
+msgstr "Our Commitments"
+
+#: website/templates/website/index.html:222
+msgid "Professionnalisme:"
+msgstr "Professionalism:"
+
+#: website/templates/website/index.html:222
+msgid ""
+"Nous assurons un service de haute qualité avec des agents qualifiés et "
+"compétents."
+msgstr ""
+"We ensure high-quality service with qualified and competent agents."
+
+#: website/templates/website/index.html:223
+msgid "Transparence:"
+msgstr "Transparency:"
+
+#: website/templates/website/index.html:223
+msgid ""
+"Toutes nos transactions sont effectuées en toute transparence, conformément "
+"aux lois en vigueur."
+msgstr ""
+"All our transactions are carried out with complete transparency, in accordance with current laws."
+
+#: website/templates/website/index.html:224
+msgid "Satisfaction Client:"
+msgstr "Customer Satisfaction:"
+
+#: website/templates/website/index.html:224
+msgid ""
+"Votre satisfaction est notre priorité. Nous mettons tout en œuvre pour "
+"répondre à vos attentes et besoins."
+msgstr ""
+"Your satisfaction is our priority. We do everything possible to meet your expectations and needs."
+
+#: website/templates/website/index.html:229
+msgid "Contactez-Nous"
+msgstr "Contact Us"
+#: website/templates/website/index.html:230
+msgid "Adresse:"
+msgstr "Address:"
+
+#: website/templates/website/index.html:231
+msgid "Téléphone:"
+msgstr "Phone:"
+
+#: website/templates/website/index.html:232
+msgid "Email:"
+msgstr "Email:"
+
+#: website/templates/website/index.html:233
+msgid "Site Web:"
+msgstr "Website:"
+
+#: website/templates/website/index.html:252
+msgid "Populaire"
+msgstr "Popular"
+
+#: website/templates/website/index.html:253
+msgid "Propriétés populaires"
+msgstr "Popular properties"
+
+#: website/templates/website/index.html:254
+msgid ""
+"Nous avons trié notre flux pour rassembler une collection de nos produits "
+"parfaits pour un été en plein air."
+msgstr ""
+"We have sorted our stream to gather a collection of our products perfect for an outdoor summer."
+
+#: website/templates/website/index.html:299
+msgid "voir les détails"
+msgstr "view details"
+
+#: website/templates/website/index.html:320
+msgid "Voir tout"
+msgstr "View all"
+
+#: website/templates/website/listeproducts.html:12
+msgid "Explorez nos propriétés immobilières"
+msgstr "Explore our real estate properties"
+
+#: website/templates/website/listeproducts.html:19
+#: website/templates/website/listeproducts.html:255
+msgid "Type d\\"
+msgstr "Type of\\"
+
+#: website/templates/website/listeproducts.html:20
+#: website/templates/website/listeproducts.html:261
+msgid "À vendre"
+msgstr "For sale"
+
+#: website/templates/website/listeproducts.html:21
+#: website/templates/website/listeproducts.html:265
+msgid "À louer"
+msgstr "For rent"
+
+#: website/templates/website/listeproducts.html:28
+#: website/templates/website/listeproducts.html:275
+msgid "Type de propriété"
+msgstr "Property type"
+
+#: website/templates/website/listeproducts.html:29
+msgid "Maison"
+msgstr "House"
+
+#: website/templates/website/listeproducts.html:31
+msgid "Bureau"
+msgstr "Office"
+
+#: website/templates/website/listeproducts.html:32
+msgid "Entrepôt"
+msgstr "Warehouse"
+
+#: website/templates/website/listeproducts.html:33
+msgid "Commercial"
+msgstr "Commercial"
+
+#: website/templates/website/listeproducts.html:34
+msgid "Autre"
+msgstr "Other"
+
+#: website/templates/website/listeproducts.html:41
+msgid "Prix min"
+msgstr "Min Price"
+
+#: website/templates/website/listeproducts.html:44
+msgid "Prix max"
+msgstr "Max Price"
+
+#: website/templates/website/listeproducts.html:50
+msgid "Recherche"
+msgstr "Search"
+
+#: website/templates/website/listeproducts.html:60
+msgid "Filters"
+msgstr "Filters"
+
+#: website/templates/website/listeproducts.html:158
+msgid "Return to All Categories"
+msgstr "Return to All Categories"
+
+#: website/templates/website/listeproducts.html:208
+msgid "chose"
+msgstr "thing"
+
+#: website/templates/website/listeproducts.html:229
+msgid "no property"
+msgstr "no property"
+
+#: website/templates/website/listeproducts.html:233
+msgid "Load More"
+msgstr "Load More"
+
+#: website/templates/website/listeproducts.html:244
+msgid "Filtres de propriété"
+msgstr "Property Filters"
+
+#: website/templates/website/listeproducts.html:319
+msgid "Gamme de prix"
+msgstr "Price Range"
+
+#: website/templates/website/listeproducts.html:325
+#: website/templates/website/listeproducts.html:344
+msgid "Min"
+msgstr "Min"
+
+#: website/templates/website/listeproducts.html:329
+#: website/templates/website/listeproducts.html:348
+msgid "Max"
+msgstr "Max"
+
+#: website/templates/website/listeproducts.html:338
+msgid "Area Range"
+msgstr "Area Range"
+
+#: website/templates/website/listeproducts.html:364
+msgid "0+ Bedrooms"
+msgstr "0+ Bedrooms"
+
+#: website/templates/website/listeproducts.html:368
+msgid "1+ Bedrooms"
+msgstr "1+ Bedrooms"
+
+#: website/templates/website/listeproducts.html:372
+msgid "2+ Bedrooms"
+msgstr "2+ Bedrooms"
+
+#: website/templates/website/listeproducts.html:376
+msgid "3+ Bedrooms"
+msgstr "3+ Bedrooms"
+
+#: website/templates/website/listeproducts.html:380
+msgid "4+ Bedrooms"
+msgstr "4+ Bedrooms"
+
+#: website/templates/website/listeproducts.html:384
+msgid "5+ Bedrooms"
+msgstr "5+ Bedrooms"
+
+#: website/templates/website/listeproducts.html:395
+msgid "Select Wilaya"
+msgstr "Select Province"
+
+#: website/templates/website/listeproducts.html:401
+#: website/templates/website/properydetails.html:146
+msgid "Daira"
+msgstr "District"
+
+#: website/templates/website/listeproducts.html:403
+msgid "Select Daira"
+msgstr "Select District"
+
+#: website/templates/website/listeproducts.html:409
+#: website/templates/website/properydetails.html:149
+msgid "Commune"
+msgstr "Municipality"
+
+#: website/templates/website/listeproducts.html:411
+msgid "Select Commune"
+msgstr "Select Municipality"
+
+#: website/templates/website/listeproducts.html:418
+msgid "Keywords"
+msgstr "Keywords"
+
+#: website/templates/website/listeproducts.html:422
+msgid "Search"
+msgstr "Search"
+
+#: website/templates/website/listeproducts.html:433
+msgid "Apply Filters"
+msgstr "Apply Filters"
+
+#: website/templates/website/login.html:19
+#: website/templates/website/login.html:29
+msgid "Connexion"
+msgstr "Login"
+
+#: website/templates/website/login.html:22
+msgid "email"
+msgstr "email"
+
+#: website/templates/website/login.html:26
+#: website/templates/website/register.html:30
+msgid "Mot de passe"
+msgstr "Password"
+
+#: website/templates/website/login.html:33
+msgid "Ou connectez-vous avec"
+msgstr "Or log in with"
+
+#: website/templates/website/login.html:41
+msgid "Inscription?"
+msgstr "Sign up?"
+
+#: website/templates/website/pagesbase.html:72
+msgid "Toggle navigation"
+msgstr "Toggle navigation"
+
+#: website/templates/website/pagesbase.html:80
+msgid "Annonces"
+msgstr "Listings"
+
+#: website/templates/website/pagesbase.html:92
+#: website/templates/website/pagesbase.html:115
+msgid "Vente"
+msgstr "Sale"
+
+#: website/templates/website/pagesbase.html:95
+#: website/templates/website/pagesbase.html:118
+msgid "Appartement - Studio - Loft"
+msgstr "Apartment - Studio - Loft"
+
+#: website/templates/website/pagesbase.html:98
+#: website/templates/website/pagesbase.html:121
+msgid "Fonds de commerce"
+msgstr "Business Assets"
+
+#: website/templates/website/pagesbase.html:101
+#: website/templates/website/pagesbase.html:124
+msgid "Immeuble - Bâtiment - Surface"
+msgstr "Building - Structure - Surface"
+
+#: website/templates/website/pagesbase.html:104
+#: website/templates/website/pagesbase.html:127
+msgid "Maison - Villa"
+msgstr "House - Villa"
+
+#: website/templates/website/pagesbase.html:107
+#: website/templates/website/pagesbase.html:130
+msgid "View All"
+msgstr "View All"
+
+#: website/templates/website/pagesbase.html:152
+msgid "Louer"
+msgstr "Rent"
+
+#: website/templates/website/pagesbase.html:155
+msgid "Vendre"
+msgstr "Sell"
+
+#: website/templates/website/pagesbase.html:158
+msgid "À propos de nous"
+msgstr "About Us"
+
+#: website/templates/website/propertysaved.html:23
+msgid "Votre propriété a été enregistrée avec succès"
+msgstr "Your property has been successfully saved"
+
+#: website/templates/website/propertysaved.html:26
+msgid "Retourner à la page d\\"
+msgstr "Return to the\\"
+
+#: website/templates/website/properydetails.html:59
+#, python-format
+msgid "+%(photos_left)s photos restantes"
+msgstr "+%(photos_left)s photos left"
+
+#: website/templates/website/properydetails.html:139
+msgid "Property type"
+msgstr "Property type"
+
+#: website/templates/website/properydetails.html:152
+msgid "Postal code"
+msgstr "Postal code"
+
+#: website/templates/website/properydetails.html:155
+msgid "Street address"
+msgstr "Street address"
+
+#: website/templates/website/properydetails.html:158
+msgid "Plot area"
+msgstr "Plot area"
+
+#: website/templates/website/properydetails.html:173
+msgid "Contact Agent"
+msgstr "Contact Agent"
+
+#: website/templates/website/properydetails.html:180
+msgid "reseau"
+msgstr "network"
+
+#: website/templates/website/properydetails.html:310
+msgid "Vous pourriez aussi aimer"
+msgstr "You might also like"
+
+#: website/templates/website/properydetails.html:363
+msgid "Toutes les photos"
+msgstr "All photos"
+
+#: website/templates/website/properydetails.html:447
+msgid "about"
+msgstr "about"
+
+#: website/templates/website/register.html:18
+#: website/templates/website/register.html:44
+msgid "Inscription"
+msgstr "Sign up"
+
+#: website/templates/website/register.html:21
+msgid "Adresse e-mail"
+msgstr "Email address"
+
+#: website/templates/website/register.html:25
+msgid "Nom d\\"
+msgstr "Username\\"
+
+#: website/templates/website/register.html:34
+msgid "Retaper le mot de passe"
+msgstr "Retype password"
+
+#: website/templates/website/register.html:40
+msgid "Numéro de téléphone"
+msgstr "Phone number"
+
+#: website/templates/website/register.html:48
+msgid "Ou s\\"
+msgstr "Or s\\"
+
+#: website/templates/website/register.html:51
+msgid "Vous avez déjà un compte? Connexion"
+msgstr "Already have an account? Login"
+
+#: website/templates/website/savedproperties.html:13
+msgid "Saved Properties"
+msgstr "Saved Properties"
+

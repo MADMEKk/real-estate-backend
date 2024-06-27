@@ -1,0 +1,1050 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-05 19:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/agentcontact/models.py:9 apps/enquires/models.py:9
+msgid "Your Name"
+msgstr "اسمك"
+
+#: apps/agentcontact/models.py:11 apps/enquires/models.py:11
+msgid "Phone number"
+msgstr "رقم الهاتف"
+
+#: apps/agentcontact/models.py:14 apps/enquires/models.py:13
+#: apps/properties/models.py:221 website/templates/website/baseindex.html:138
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: apps/agentcontact/models.py:16 apps/enquires/models.py:15
+msgid "Message"
+msgstr "الرسالة"
+
+#: apps/enquires/models.py:14
+msgid "Subject"
+msgstr "الموضوع"
+
+#: apps/profiles/models.py:13
+msgid "Male"
+msgstr "ذكر"
+
+#: apps/profiles/models.py:14
+msgid "Female"
+msgstr "أنثى"
+
+#: apps/profiles/models.py:21
+msgid "Phone Number"
+msgstr "رقم الهاتف"
+
+#: apps/profiles/models.py:24
+msgid "About me"
+msgstr "عني"
+
+#: apps/profiles/models.py:27
+msgid "Real Estate license"
+msgstr "رخصة العقارات"
+
+#: apps/profiles/models.py:30
+msgid "Profile Photo"
+msgstr "صورة الملف الشخصي"
+
+#: apps/profiles/models.py:33
+msgid "Gender"
+msgstr "الجنس"
+
+#: apps/profiles/models.py:41
+msgid "Buyer"
+msgstr "مشتري"
+
+#: apps/profiles/models.py:43
+msgid "Are you looking to Buy a Property?"
+msgstr "هل تبحث عن شراء عقار؟"
+
+#: apps/profiles/models.py:46
+msgid "Seller"
+msgstr "بائع"
+
+#: apps/profiles/models.py:48
+msgid "Are you looking to sell a property?"
+msgstr "هل تنوي بيع عقار؟"
+
+#: apps/profiles/models.py:51
+msgid "Agent"
+msgstr "وكيل"
+
+#: apps/profiles/models.py:51
+msgid "Are you an agent?"
+msgstr "هل أنت وكيل؟"
+
+#: apps/profiles/models.py:53
+msgid "Top Agent"
+msgstr "أفضل وكيل"
+
+#: apps/profiles/models.py:56
+msgid "Number of Reviews"
+msgstr "عدد التقييمات"
+
+#: apps/properties/models.py:38
+msgid "For Sale"
+msgstr "للبيع"
+
+#: apps/properties/models.py:39
+msgid "For Rent"
+msgstr "للإيجار"
+
+#: apps/properties/models.py:40
+msgid "Auction"
+msgstr "مزاد"
+
+#: apps/properties/models.py:43 website/templates/website/index.html:41
+#: website/templates/website/listeproducts.html:30
+#: website/templates/website/listeproducts.html:89
+#: website/templates/website/listeproducts.html:281
+msgid "Appartement"
+msgstr "شقة"
+
+#: apps/properties/models.py:44 website/templates/website/index.html:42
+#: website/templates/website/listeproducts.html:97
+#: website/templates/website/listeproducts.html:285
+msgid "Villa"
+msgstr "فيلا"
+
+#: apps/properties/models.py:45 website/templates/website/index.html:43
+#: website/templates/website/listeproducts.html:105
+#: website/templates/website/listeproducts.html:289
+msgid "Local"
+msgstr "محل تجاري"
+
+#: apps/properties/models.py:46 website/templates/website/index.html:44
+#: website/templates/website/listeproducts.html:113
+#: website/templates/website/listeproducts.html:293
+msgid "Terrain"
+msgstr "أرض"
+
+#: apps/properties/models.py:47 website/templates/website/index.html:45
+#: website/templates/website/listeproducts.html:121
+#: website/templates/website/listeproducts.html:297
+msgid "Hangar"
+msgstr "مستودع"
+
+#: apps/properties/models.py:48 website/templates/website/index.html:46
+#: website/templates/website/listeproducts.html:129
+#: website/templates/website/listeproducts.html:301
+msgid "Bungalow"
+msgstr "بنغلو"
+
+#: apps/properties/models.py:49 website/templates/website/index.html:47
+#: website/templates/website/listeproducts.html:137
+#: website/templates/website/listeproducts.html:305
+msgid "Usine"
+msgstr "مصنع"
+
+#: apps/properties/models.py:50
+#: website/templates/website/listeproducts.html:309
+msgid "Other"
+msgstr "آخر"
+
+#: apps/properties/models.py:54
+msgid "Agent, Seller or Buyer"
+msgstr "وكيل، بائع أو مشتري"
+
+#: apps/properties/models.py:59
+msgid "Property Title"
+msgstr "عنوان العقار"
+
+#: apps/properties/models.py:62
+msgid "Property Reference Code"
+msgstr "كود العقار المرجعي"
+
+#: apps/properties/models.py:68
+msgid "Description"
+msgstr "الوصف"
+
+#: apps/properties/models.py:76
+msgid "Property commune"
+msgstr "بلدية العقار"
+
+#: apps/properties/models.py:83
+msgid "Property Daira"
+msgstr "دائرة العقار"
+
+#: apps/properties/models.py:90
+msgid "Property Wilaya"
+msgstr "ولاية العقار"
+
+#: apps/properties/models.py:95
+msgid "Postal Code"
+msgstr "الرمز البريدي"
+
+#: apps/properties/models.py:98
+msgid "Street Address"
+msgstr "عنوان الشارع"
+
+#: apps/properties/models.py:101
+msgid "Property Number"
+msgstr "رقم العقار"
+
+#: apps/properties/models.py:106
+msgid "Price"
+msgstr "السعر"
+
+#: apps/properties/models.py:110
+msgid "Property Tax"
+msgstr "ضريبة العقار"
+
+#: apps/properties/models.py:114
+msgid "15% property tax charged"
+msgstr "تُفرض ضريبة عقارية بنسبة 15٪"
+
+#: apps/properties/models.py:117
+msgid "Plot Area (m^2)"
+msgstr "مساحة القطعة (متر مربع)"
+
+#: apps/properties/models.py:119
+msgid "Number of floors"
+msgstr "عدد الطوابق"
+
+#: apps/properties/models.py:120
+msgid "Bedrooms"
+msgstr "غرف النوم"
+
+#: apps/properties/models.py:121
+msgid "Bathrooms"
+msgstr "الحمامات"
+
+#: apps/properties/models.py:123
+msgid "Advert Type"
+msgstr "نوع الإعلان"
+
+#: apps/properties/models.py:130 website/templates/website/index.html:40
+msgid "Property Type"
+msgstr "نوع العقار"
+
+#: apps/properties/models.py:137
+msgid "Main Photo"
+msgstr "الصورة الرئيسية"
+
+#: apps/properties/models.py:142
+msgid "Published Status"
+msgstr "حالة النشر"
+
+#: apps/properties/models.py:144
+msgid "Total Views"
+msgstr "إجمالي المشاهدات"
+
+#: apps/properties/models.py:145
+msgid "Amenities"
+msgstr "المرافق"
+
+#: apps/properties/models.py:147
+msgid "Property Status"
+msgstr "حالة العقار"
+
+#: apps/properties/models.py:150
+msgid "Neighborhood Information"
+msgstr "معلومات الحي"
+
+#: apps/properties/models.py:152
+msgid "Legal Status"
+msgstr "الوضع القانوني"
+
+#: apps/properties/models.py:155
+msgid "Payment Options"
+msgstr "خيارات الدفع"
+
+#: apps/properties/models.py:165
+msgid "Property"
+msgstr "العقار"
+
+#: apps/properties/models.py:166
+#: website/templates/website/listeproducts.html:207
+msgid "Properties"
+msgstr "العقارات"
+
+#: apps/properties/models.py:203
+msgid "IP Address"
+msgstr "عنوان IP"
+
+#: apps/properties/models.py:219
+msgid "First Name"
+msgstr "الاسم الأول"
+
+#: apps/properties/models.py:220
+msgid "Last Name"
+msgstr "الاسم الأخير"
+
+#: apps/properties/models.py:222
+msgid "Phone"
+msgstr "الهاتف"
+
+#: apps/ratings/models.py:11
+msgid "Poor"
+msgstr "سيئ"
+
+#: apps/ratings/models.py:12
+msgid "Fair"
+msgstr "مقبول"
+
+#: apps/ratings/models.py:13
+msgid "Good"
+msgstr "جيد"
+
+#: apps/ratings/models.py:14
+msgid "Very Good"
+msgstr "جيد جدا"
+
+#: apps/ratings/models.py:15
+msgid "Excellent"
+msgstr "ممتاز"
+
+#: apps/ratings/models.py:19
+msgid "User providing the rating"
+msgstr "المستخدم الذي يقدم التقييم"
+
+#: apps/ratings/models.py:25
+msgid "Agent being rated"
+msgstr "الوكيل الذي يتم تقييمه"
+
+#: apps/ratings/models.py:31
+msgid "Rating"
+msgstr "التقييم"
+
+#: apps/ratings/models.py:36
+msgid "Comment"
+msgstr "التعليق"
+
+#: apps/users/admin.py:32
+msgid "Login Credentials"
+msgstr "بيانات تسجيل الدخول"
+
+#: apps/users/admin.py:41
+msgid "Personal Information"
+msgstr "المعلومات الشخصية"
+
+#: apps/users/admin.py:49
+msgid "Permissions and Groups"
+msgstr "الصلاحيات والمجموعات"
+
+#: apps/users/admin.py:60
+msgid "Important Dates"
+msgstr "التواريخ الهامة"
+#: apps/users/managers.py:15
+msgid "You must provide a valid email address"
+msgstr "يجب عليك تقديم عنوان بريد إلكتروني صالح"
+
+#: apps/users/managers.py:23
+msgid "User must have an email address"
+msgstr "يجب أن يكون لدى المستخدم عنوان بريد إلكتروني"
+
+#: apps/users/managers.py:40
+msgid "Superusers must have a password"
+msgstr "يجب أن يكون لدى المستخدمين المميزين كلمة مرور"
+
+#: apps/users/models.py:15
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#: apps/users/models.py:16
+msgid "Email Address"
+msgstr "عنوان البريد الإلكتروني"
+
+#: apps/users/models.py:28
+msgid "User"
+msgstr "المستخدم"
+
+#: apps/users/models.py:29
+msgid "Users"
+msgstr "المستخدمين"
+
+#: website/templates/website/base.html:245
+msgid "Contacter l\\"
+msgstr "اتصل بـ\\"
+
+#: website/templates/website/base.html:254
+#: website/templates/website/baseindex.html:125
+#: website/templates/website/listeproducts.html:245
+#: website/templates/website/properydetails.html:364
+msgid "Fermer"
+msgstr "إغلاق"
+
+#: website/templates/website/baseindex.html:18
+msgid "Restez connecté"
+msgstr "ابقَ متصلاً"
+
+#: website/templates/website/baseindex.html:38
+msgid "Trouvez la maison de vos rêves"
+msgstr "اعثر على منزل أحلامك"
+
+#: website/templates/website/baseindex.html:39
+msgid "Parcourez nos annonces pour trouver la propriété parfaite pour vous."
+msgstr "تصفح إعلاناتنا للعثور على العقار المثالي لك."
+
+#: website/templates/website/baseindex.html:50
+msgid "Support client"
+msgstr "دعم العملاء"
+
+#: website/templates/website/baseindex.html:51
+msgid "Contactez notre équipe pour obtenir de l\\"
+msgstr "اتصل بفريقنا للحصول على\\"
+
+#: website/templates/website/baseindex.html:62
+msgid "Professionnels de confiance"
+msgstr "محترفون موثوقون"
+
+#: website/templates/website/baseindex.html:63
+msgid "Travaillez avec des agents expérimentés dédiés à votre satisfaction."
+msgstr "اعمل مع وكلاء ذوي خبرة مكرسين لرضاك."
+
+#: website/templates/website/baseindex.html:81
+msgid "Liens rapides"
+msgstr "روابط سريعة"
+
+#: website/templates/website/baseindex.html:83
+msgid "Rechercher des propriétés"
+msgstr "البحث عن العقارات"
+
+#: website/templates/website/baseindex.html:84
+msgid "Vendez votre maison"
+msgstr "بيع منزلك"
+
+#: website/templates/website/baseindex.html:85
+msgid "Locations"
+msgstr "الإيجارات"
+
+#: website/templates/website/baseindex.html:86
+#: website/templates/website/baseindex.html:124
+#: website/templates/website/pagesbase.html:161
+msgid "Contactez-nous"
+msgstr "اتصل بنا"
+
+#: website/templates/website/baseindex.html:93
+msgid "Ressources"
+msgstr "الموارد"
+
+#: website/templates/website/baseindex.html:95
+#: website/templates/website/index.html:211
+msgid "Évaluation immobilière"
+msgstr "تقييم الممتلكات"
+
+#: website/templates/website/baseindex.html:96
+msgid "Guides de quartier"
+msgstr "أدلة الحي"
+
+#: website/templates/website/baseindex.html:97
+msgid "Blog immobilier"
+msgstr "مدونة عقارية"
+
+#: website/templates/website/baseindex.html:104
+msgid "Abonnez-vous à notre newsletter"
+msgstr "اشترك في نشرتنا الإخبارية"
+#: website/templates/website/baseindex.html:105
+msgid "Restez informé des dernières nouvelles et des annonces immobilières."
+msgstr "ابق على اطلاع بآخر الأخبار والإعلانات العقارية."
+
+#: website/templates/website/baseindex.html:109
+msgid "Entrez votre email"
+msgstr "أدخل بريدك الإلكتروني"
+
+#: website/templates/website/baseindex.html:132
+msgid "Informations de contact"
+msgstr "معلومات الاتصال"
+
+#: website/templates/website/baseindex.html:139
+msgid "vous@exemple.com"
+msgstr "you@example.com"
+
+#: website/templates/website/baseindex.html:145
+msgid "Gardez-moi informé de vos dernières nouvelles et offres"
+msgstr "أبقني على اطلاع بآخر الأخبار والعروض"
+
+#: website/templates/website/baseindex.html:160
+msgid "Nom"
+msgstr "الاسم"
+
+#: website/templates/website/baseindex.html:168
+msgid "téléphone"
+msgstr "الهاتف"
+
+#: website/templates/website/baseindex.html:177
+msgid "message"
+msgstr "الرسالة"
+
+#: website/templates/website/baseindex.html:186
+msgid "Envoyer"
+msgstr "إرسال"
+
+#: website/templates/website/baseindex.html:237
+msgid "Que cherchez-vous ?"
+msgstr "ماذا تبحث؟"
+
+#: website/templates/website/baseindex.html:238
+msgid "Fermer la recherche"
+msgstr "إغلاق البحث"
+
+#: website/templates/website/baseindex.html:241
+msgid "Recherche par emplacement ..."
+msgstr "البحث حسب الموقع ..."
+
+#: website/templates/website/baseindex.html:251
+msgid ""
+"Vous n'avez pas trouvé ce que vous cherchez ? <a class=\"transition-all "
+"opacity-50-hover text-white text-link-border border-white pb-1 border-2\" "
+"href=\"#\">Envoyez-nous un message.</a>"
+msgstr ""
+"لم تجد ما تبحث عنه؟ <a class=\"transition-all "
+"opacity-50-hover text-white text-link-border border-white pb-1 border-2\" "
+"href=\"#\">أرسل لنا رسالة.</a>"
+
+#: website/templates/website/index.html:4
+msgid "Agence Immobilière à Oran"
+msgstr "وكالة عقارية في وهران"
+
+#: website/templates/website/index.html:22
+msgid "Confiance - Sérieux - Rapidité"
+msgstr "الثقة - الجدية - السرعة"
+
+#: website/templates/website/index.html:32
+msgid "Achat"
+msgstr "شراء"
+
+#: website/templates/website/index.html:33
+msgid "Location"
+msgstr "تأجير"
+
+#: website/templates/website/index.html:54
+#: website/templates/website/listeproducts.html:393
+#: website/templates/website/properydetails.html:143
+msgid "Wilaya"
+msgstr "ولاية"
+
+#: website/templates/website/index.html:62
+msgid "Min Price DZD"
+msgstr "السعر الأدنى DZD"
+
+#: website/templates/website/index.html:65
+msgid "Max Price DZD"
+msgstr "السعر الأقصى DZD"
+
+#: website/templates/website/index.html:73
+msgid "Filter"
+msgstr "تصفية"
+
+#: website/templates/website/index.html:85
+msgid "lire la suite"
+msgstr "اقرأ المزيد"
+
+#: website/templates/website/index.html:132
+msgid "Dream"
+msgstr "حلم"
+
+#: website/templates/website/index.html:132
+msgid "Home"
+msgstr "المنزل"
+
+#: website/templates/website/index.html:136
+msgid "Agence immobilière"
+msgstr "وكالة عقارية"
+
+#: website/templates/website/index.html:139
+msgid ""
+"\n"
+"            ImmobiliaH, agent immobilier à Oran, est à votre écoute  : conseil en ACHAT, VENTE, LOCATION, GESTION et SYNDIC de villas et d'appartements. Réalise votre évaluation personnelle pour vendre ou louer dans les meilleures conditions.\n"
+"            "
+msgstr ""
+"\n"
+"            ImmobiliaH، وكيل عقاري في وهران، في خدمتك: نصائح في الشراء، البيع، الإيجار، الإدارة والتشارك للفيلات والشقق. إجراء تقييمك الشخصي للبيع أو الإيجار في أفضل الظروف.\n"
+"            "
+
+#: website/templates/website/index.html:144
+msgid ""
+"\n"
+"            Spécialiste de la villa et de l'appartement, ImmobiliaH réalise votre projet. Administrateur de biens, gardien de votre patrimoine, Immobilia gère votre bien comme le sien :\n"
+"            prise en charge totale, mise en place d'un locataire sérieux, assurance loyers impayés\n"
+"            "
+msgstr ""
+"\n"
+"            متخصص في الفيلات والشقق، ImmobiliaH يحقق مشروعك. مدير الممتلكات، حارس تراثك، يدير Immobilia ممتلكاتك كما لو كانت له: \n"
+"            إدارة كاملة، توفير مستأجر جاد، تأمين الإيجارات غير المدفوعة\n"
+"            "
+
+#: website/templates/website/index.html:149
+msgid "Explorer les propriétés"
+msgstr "استكشاف العقارات"
+
+#: website/templates/website/index.html:154
+#: website/templates/website/index.html:159
+msgid "Real Estate Banner 1"
+msgstr "لافتة عقارية 1"
+
+#: website/templates/website/index.html:163
+msgid "Real Estate Banner 3"
+msgstr "لافتة عقارية 3"
+
+#: website/templates/website/index.html:182
+msgid "Drapeau Algérien"
+msgstr "علم الجزائر"
+
+#: website/templates/website/index.html:183
+msgid "Agence Immobilière Algérienne Agréée par l\\"
+msgstr "وكالة عقارية جزائرية معتمدة من\\"
+
+#: website/templates/website/index.html:188
+msgid "Nos Services"
+msgstr "خدماتنا"
+
+#: website/templates/website/index.html:190
+msgid "Vente de Biens Immobiliers"
+msgstr "بيع الممتلكات العقارية"
+
+#: website/templates/website/index.html:192
+msgid "Maisons"
+msgstr "منازل"
+
+#: website/templates/website/index.html:193
+msgid "Appartements"
+msgstr "شقق"
+
+#: website/templates/website/index.html:194
+msgid "Terrains"
+msgstr "أراضي"
+
+#: website/templates/website/index.html:197
+msgid "Location de Biens Immobiliers"
+msgstr "تأجير الممتلكات العقارية"
+
+#: website/templates/website/index.html:199
+msgid "Locations à court terme"
+msgstr "إيجارات قصيرة الأجل"
+
+#: website/templates/website/index.html:200
+msgid "Locations à long terme"
+msgstr "إيجارات طويلة الأجل"
+
+#: website/templates/website/index.html:203
+msgid "Gestion Immobilière"
+msgstr "إدارة الممتلكات"
+
+#: website/templates/website/index.html:205
+msgid "Administration de biens"
+msgstr "إدارة الممتلكات"
+
+#: website/templates/website/index.html:206
+msgid "Gestion locative"
+msgstr "إدارة الإيجارات"
+
+#: website/templates/website/index.html:209
+msgid "Conseil et Accompagnement"
+msgstr "النصيحة والدعم"
+
+#: website/templates/website/index.html:212
+msgid "Conseils juridiques"
+msgstr "نصائح قانونية"
+
+#: website/templates/website/index.html:213
+msgid "Accompagnement personnalisé"
+msgstr "دعم شخصي"
+
+#: website/templates/website/index.html:220
+msgid "Nos Engagements"
+msgstr "التزاماتنا"
+
+#: website/templates/website/index.html:222
+msgid "Professionnalisme:"
+msgstr "الاحترافية:"
+
+#: website/templates/website/index.html:222
+msgid ""
+"Nous assurons un service de haute qualité avec des agents qualifiés et "
+"compétents."
+msgstr ""
+"نحن نضمن خدمة عالية الجودة مع وكلاء مؤهلين وكفوئين."
+
+#: website/templates/website/index.html:223
+msgid "Transparence:"
+msgstr "الشفافية:"
+
+#: website/templates/website/index.html:223
+msgid ""
+"Toutes nos transactions sont effectuées en toute transparence, conformément "
+"aux lois en vigueur."
+msgstr ""
+"جميع معاملاتنا تتم بشفافية تامة، وفقاً للقوانين المعمول بها."
+
+#: website/templates/website/index.html:224
+msgid "Satisfaction Client:"
+msgstr "رضا العملاء:"
+
+#: website/templates/website/index.html:224
+msgid ""
+"Votre satisfaction est notre priorité. Nous mettons tout en œuvre pour "
+"répondre à vos attentes et besoins."
+msgstr ""
+"رضاك هو أولويتنا. نحن نبذل قصارى جهدنا لتلبية توقعاتك واحتياجاتك."
+
+#: website/templates/website/index.html:229
+msgid "Contactez-Nous"
+msgstr "اتصل بنا"
+#: website/templates/website/index.html:230
+msgid "Adresse:"
+msgstr "العنوان:"
+
+#: website/templates/website/index.html:231
+msgid "Téléphone:"
+msgstr "الهاتف:"
+
+#: website/templates/website/index.html:232
+msgid "Email:"
+msgstr "البريد الإلكتروني:"
+
+#: website/templates/website/index.html:233
+msgid "Site Web:"
+msgstr "الموقع الإلكتروني:"
+
+#: website/templates/website/index.html:252
+msgid "Populaire"
+msgstr "شائع"
+
+#: website/templates/website/index.html:253
+msgid "Propriétés populaires"
+msgstr "عقارات شائعة"
+
+#: website/templates/website/index.html:254
+msgid ""
+"Nous avons trié notre flux pour rassembler une collection de nos produits "
+"parfaits pour un été en plein air."
+msgstr ""
+"لقد قمنا بفرز مجموعتنا لجمع تشكيلة من منتجاتنا المثالية لصيف في الهواء الطلق."
+
+#: website/templates/website/index.html:299
+msgid "voir les détails"
+msgstr "عرض التفاصيل"
+
+#: website/templates/website/index.html:320
+msgid "Voir tout"
+msgstr "عرض الكل"
+
+#: website/templates/website/listeproducts.html:12
+msgid "Explorez nos propriétés immobilières"
+msgstr "استكشف عقاراتنا"
+
+#: website/templates/website/listeproducts.html:19
+#: website/templates/website/listeproducts.html:255
+msgid "Type d\\"
+msgstr "نوع \\"
+
+#: website/templates/website/listeproducts.html:20
+#: website/templates/website/listeproducts.html:261
+msgid "À vendre"
+msgstr "للبيع"
+
+#: website/templates/website/listeproducts.html:21
+#: website/templates/website/listeproducts.html:265
+msgid "À louer"
+msgstr "للإيجار"
+
+#: website/templates/website/listeproducts.html:28
+#: website/templates/website/listeproducts.html:275
+msgid "Type de propriété"
+msgstr "نوع العقار"
+
+#: website/templates/website/listeproducts.html:29
+msgid "Maison"
+msgstr "منزل"
+
+#: website/templates/website/listeproducts.html:31
+msgid "Bureau"
+msgstr "مكتب"
+
+#: website/templates/website/listeproducts.html:32
+msgid "Entrepôt"
+msgstr "مستودع"
+
+#: website/templates/website/listeproducts.html:33
+msgid "Commercial"
+msgstr "تجاري"
+
+#: website/templates/website/listeproducts.html:34
+msgid "Autre"
+msgstr "أخرى"
+
+#: website/templates/website/listeproducts.html:41
+msgid "Prix min"
+msgstr "السعر الأدنى"
+
+#: website/templates/website/listeproducts.html:44
+msgid "Prix max"
+msgstr "السعر الأقصى"
+
+#: website/templates/website/listeproducts.html:50
+msgid "Recherche"
+msgstr "بحث"
+
+#: website/templates/website/listeproducts.html:60
+msgid "Filters"
+msgstr "مرشحات"
+
+#: website/templates/website/listeproducts.html:158
+msgid "Return to All Categories"
+msgstr "العودة إلى جميع الفئات"
+
+#: website/templates/website/listeproducts.html:208
+msgid "chose"
+msgstr "شيء"
+
+#: website/templates/website/listeproducts.html:229
+msgid "no property"
+msgstr "لا يوجد عقار"
+
+#: website/templates/website/listeproducts.html:233
+msgid "Load More"
+msgstr "تحميل المزيد"
+
+#: website/templates/website/listeproducts.html:244
+msgid "Filtres de propriété"
+msgstr "مرشحات العقار"
+
+#: website/templates/website/listeproducts.html:319
+msgid "Gamme de prix"
+msgstr "نطاق السعر"
+
+#: website/templates/website/listeproducts.html:325
+#: website/templates/website/listeproducts.html:344
+msgid "Min"
+msgstr "الأدنى"
+
+#: website/templates/website/listeproducts.html:329
+#: website/templates/website/listeproducts.html:348
+msgid "Max"
+msgstr "الأقصى"
+
+#: website/templates/website/listeproducts.html:338
+msgid "Area Range"
+msgstr "نطاق المساحة"
+
+#: website/templates/website/listeproducts.html:364
+msgid "0+ Bedrooms"
+msgstr "0+ غرف نوم"
+
+#: website/templates/website/listeproducts.html:368
+msgid "1+ Bedrooms"
+msgstr "1+ غرف نوم"
+
+#: website/templates/website/listeproducts.html:372
+msgid "2+ Bedrooms"
+msgstr "2+ غرف نوم"
+
+#: website/templates/website/listeproducts.html:376
+msgid "3+ Bedrooms"
+msgstr "3+ غرف نوم"
+
+#: website/templates/website/listeproducts.html:380
+msgid "4+ Bedrooms"
+msgstr "4+ غرف نوم"
+
+#: website/templates/website/listeproducts.html:384
+msgid "5+ Bedrooms"
+msgstr "5+ غرف نوم"
+
+#: website/templates/website/listeproducts.html:395
+msgid "Select Wilaya"
+msgstr "اختر الولاية"
+
+#: website/templates/website/listeproducts.html:401
+#: website/templates/website/properydetails.html:146
+msgid "Daira"
+msgstr "دائرة"
+
+#: website/templates/website/listeproducts.html:403
+msgid "Select Daira"
+msgstr "اختر الدائرة"
+
+#: website/templates/website/listeproducts.html:409
+#: website/templates/website/properydetails.html:149
+msgid "Commune"
+msgstr "بلدية"
+
+#: website/templates/website/listeproducts.html:411
+msgid "Select Commune"
+msgstr "اختر البلدية"
+
+#: website/templates/website/listeproducts.html:418
+msgid "Keywords"
+msgstr "كلمات مفتاحية"
+
+#: website/templates/website/listeproducts.html:422
+msgid "Search"
+msgstr "بحث"
+
+#: website/templates/website/listeproducts.html:433
+msgid "Apply Filters"
+msgstr "تطبيق المرشحات"
+
+#: website/templates/website/login.html:19
+#: website/templates/website/login.html:29
+msgid "Connexion"
+msgstr "تسجيل الدخول"
+
+#: website/templates/website/login.html:22
+msgid "email"
+msgstr "البريد الإلكتروني"
+
+#: website/templates/website/login.html:26
+#: website/templates/website/register.html:30
+msgid "Mot de passe"
+msgstr "كلمة المرور"
+
+#: website/templates/website/login.html:33
+msgid "Ou connectez-vous avec"
+msgstr "أو تسجيل الدخول بواسطة"
+
+#: website/templates/website/login.html:41
+msgid "Inscription?"
+msgstr "تسجيل؟"
+
+#: website/templates/website/pagesbase.html:72
+msgid "Toggle navigation"
+msgstr "تبديل التنقل"
+
+#: website/templates/website/pagesbase.html:80
+msgid "Annonces"
+msgstr "إعلانات"
+
+#: website/templates/website/pagesbase.html:92
+#: website/templates/website/pagesbase.html:115
+msgid "Vente"
+msgstr "بيع"
+
+#: website/templates/website/pagesbase.html:95
+#: website/templates/website/pagesbase.html:118
+msgid "Appartement - Studio - Loft"
+msgstr "شقة - ستوديو - دور علوي"
+
+#: website/templates/website/pagesbase.html:98
+#: website/templates/website/pagesbase.html:121
+msgid "Fonds de commerce"
+msgstr "أصول تجارية"
+
+#: website/templates/website/pagesbase.html:101
+#: website/templates/website/pagesbase.html:124
+msgid "Immeuble - Bâtiment - Surface"
+msgstr "مبنى - بناء - سطح"
+
+#: website/templates/website/pagesbase.html:104
+#: website/templates/website/pagesbase.html:127
+msgid "Maison - Villa"
+msgstr "منزل - فيلا"
+
+#: website/templates/website/pagesbase.html:107
+#: website/templates/website/pagesbase.html:130
+msgid "View All"
+msgstr "عرض الكل"
+
+#: website/templates/website/pagesbase.html:152
+msgid "Louer"
+msgstr "إيجار"
+
+#: website/templates/website/pagesbase.html:155
+msgid "Vendre"
+msgstr "بيع"
+
+#: website/templates/website/pagesbase.html:158
+msgid "À propos de nous"
+msgstr "حولنا"
+
+#: website/templates/website/propertysaved.html:23
+msgid "Votre propriété a été enregistrée avec succès"
+msgstr "تم حفظ ملكيتك بنجاح"
+
+#: website/templates/website/propertysaved.html:26
+msgid "Retourner à la page d\\"
+msgstr "العودة إلى صفحة \\"
+
+#: website/templates/website/properydetails.html:59
+#, python-format
+msgid "+%(photos_left)s photos restantes"
+msgstr "+%(photos_left)s صور متبقية"
+
+#: website/templates/website/properydetails.html:139
+msgid "Property type"
+msgstr "نوع العقار"
+
+#: website/templates/website/properydetails.html:152
+msgid "Postal code"
+msgstr "الرمز البريدي"
+
+#: website/templates/website/properydetails.html:155
+msgid "Street address"
+msgstr "عنوان الشارع"
+
+#: website/templates/website/properydetails.html:158
+msgid "Plot area"
+msgstr "مساحة القطعة"
+
+#: website/templates/website/properydetails.html:173
+msgid "Contact Agent"
+msgstr "الاتصال بالوكيل"
+
+#: website/templates/website/properydetails.html:180
+msgid "reseau"
+msgstr "شبكة"
+
+#: website/templates/website/properydetails.html:310
+msgid "Vous pourriez aussi aimer"
+msgstr "قد يعجبك أيضًا"
+
+#: website/templates/website/properydetails.html:363
+msgid "Toutes les photos"
+msgstr "جميع الصور"
+
+#: website/templates/website/properydetails.html:447
+msgid "about"
+msgstr "حول"
+
+#: website/templates/website/register.html:18
+#: website/templates/website/register.html:44
+msgid "Inscription"
+msgstr "تسجيل"
+
+#: website/templates/website/register.html:21
+msgid "Adresse e-mail"
+msgstr "عنوان البريد الإلكتروني"
+
+#: website/templates/website/register.html:25
+msgid "Nom d\\"
+msgstr "اسم المستخدم\\"
+
+#: website/templates/website/register.html:34
+msgid "Retaper le mot de passe"
+msgstr "أعد إدخال كلمة المرور"
+
+#: website/templates/website/register.html:40
+msgid "Numéro de téléphone"
+msgstr "رقم الهاتف"
+
+#: website/templates/website/register.html:48
+msgid "Ou s\\"
+msgstr "أو \\"
+
+#: website/templates/website/register.html:51
+msgid "Vous avez déjà un compte? Connexion"
+msgstr "هل لديك حساب بالفعل؟ تسجيل الدخول"
+
+#: website/templates/website/savedproperties.html:13
+msgid "Saved Properties"
+msgstr "العقارات المحفوظة"
+
