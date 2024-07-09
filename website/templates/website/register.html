@@ -1,0 +1,152 @@
+{% extends './pagesbase.html' %}
+{% load static %}
+{% load i18n %}
+{% block bannertitle %}
+{{ property.title }}
+{% endblock %}
+{% block bannertext %}
+{{ property.description }}
+{% endblock %}
+{% block section %}
+<div class="container mt-5">
+    <div id="alertContainer"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-4">{% trans 'Inscription' %}</h2>
+            <form id="registrationForm">
+                <div class="mb-3">
+                    <label for="email" class="form-label">{% trans 'Adresse e-mail' %}</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback" id="emailError"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">{% trans 'Nom d\'utilisateur' %}</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                    <div class="invalid-feedback" id="usernameError"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">{% trans 'Mot de passe' %}</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="invalid-feedback" id="passwordError"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="re_password" class="form-label">{% trans 'Retaper le mot de passe' %}</label>
+                    <input type="password" class="form-control" id="re_password" name="re_password" required>
+                    <div class="invalid-feedback" id="rePasswordError"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">{% trans 'Numéro de téléphone' %}</label>
+                    <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+                    <div class="invalid-feedback" id="phoneNumberError"></div>
+                </div>
+                <button type="button" id="registrationButton" class="btn btn-orange">{% trans 'Inscription' %}</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h2 class="mb-4">{% trans 'Ou s\'inscrire avec' %}</h2>
+            <button class="btn btn-danger w-md-75 mb-3" onclick="window.location.href='/auth/o/google-oauth2/'"><i class="icon-google mx-auto me-2"></i> Google</button>
+            <button class="btn btn-primary w-md-75 mb-3" onclick="window.location.href='/auth/o/facebook/'"><i class="icon-facebook mx-auto me-2"></i> Facebook</button>
+            <a href="/login/" class="btn btn-secondary w-md-75"><i class="icon-person_add mx-auto me-2"></i> {% trans 'Vous avez déjà un compte? Connexion' %}</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Registration successful! Please check your email to verify your account.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='/listing/'">Listing</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/'">Home</button>
+                <button type="button" class="btn btn-success" onclick="window.location.href='/login/'">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+<script>
+document.getElementById('registrationButton').addEventListener('click', async function (event) {
+    event.preventDefault();
+
+    const form = document.getElementById('registrationForm');
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    clearErrors();
+
+    if (data.password !== data.re_password) {
+        showError('re_password', 'Passwords do not match');
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/v1/auth/users/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: data.email,
+                username: data.username,
+                password: data.password,
+                re_password: data.re_password,
+                phone_number: data.phone_number,
+            }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            for (const [key, value] of Object.entries(errorData)) {
+                showError(key, value[0]);
+            }
+        } else {
+            showModal('Success', 'Registration successful! Please check your email to verify your account.');
+        }
+    } catch (error) {
+        showModal('Error', 'An error occurred: ' + error);
+    }
+});
+
+function showError(field, message) {
+    const errorElement = document.getElementById(`${field}Error`);
+    if (errorElement) {
+        errorElement.innerText = message;
+        errorElement.style.display = 'block';
+    }
+    const inputElement = document.getElementById(field);
+    if (inputElement) {
+        inputElement.classList.add('is-invalid');
+    }
+}
+
+function clearErrors() {
+    const errorElements = document.querySelectorAll('.invalid-feedback');
+    errorElements.forEach(el => {
+        el.innerText = '';
+        el.style.display = 'none';
+    });
+    const inputElements = document.querySelectorAll('.form-control');
+    inputElements.forEach(el => {
+        el.classList.remove('is-invalid');
+    });
+}
+
+function showModal(title, message) {
+    document.getElementById('successModalLabel').innerText = title;
+    document.querySelector('.modal-body').innerText = message;
+    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+    successModal.show();
+}
+</script>
+{% endblock %}

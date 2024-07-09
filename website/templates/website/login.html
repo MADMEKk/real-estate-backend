@@ -1,0 +1,65 @@
+{% extends './pagesbase.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block bannertitle %}
+Login
+{% endblock %}
+
+{% block bannertext %}
+Please enter your login details
+{% endblock %}
+
+{% block section %}
+<div class="container mt-5">
+    <div id="alertContainer"></div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2 class="mb-4">{% trans 'Login' %}</h2>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="email" class="form-label">{% trans 'Email' %}</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">{% trans 'Password' %}</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">{% trans 'Login' %}</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+        const response = await fetch('/api/v1/auth/jwt/create/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            alert('Error: ' + JSON.stringify(errorData));
+        } else {
+            const responseData = await response.json();
+            localStorage.setItem('access_token', responseData.access);
+            localStorage.setItem('refresh_token', responseData.refresh);
+            alert('Login successful!');
+            window.location.href = '/';  // Redirect to home page or desired page after login
+        }
+    } catch (error) {
+        alert('Error: ' + error);
+    }
+});
+</script>
+{% endblock %}
