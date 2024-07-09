@@ -114,7 +114,7 @@
                 <ul class="list-unstyled mb-0 d-flex align-items-center">
                     <!-- Language Selector -->
                     <li class="ms-1 d-inline-block">
-                        <form method="get" action="{% url 'set_language' %}">
+                        <form method="get" action="{% url 'website:set_language' %}">
                             <select name="language" onchange="this.form.submit()">
                                 <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
                                 <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>Français</option>
@@ -260,7 +260,7 @@
           }'>
             <div class="swiper-wrapper">
                 <div class="swiper-slide position-relative">
-                    <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-1.jpg' %});">
+                    <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images\banners\banner-2.jpg' %});">
                     </div>
                 </div>
                 <div class="swiper-slide position-relative">
@@ -304,16 +304,16 @@
     <div class="col-12 col-md-6 position-relative z-index-20 pe-0 mt-6 " data-aos="fade-left">
 
         <picture class="w-50 d-block position-relative z-index-10 border border-white border-4 shadow-lg">
-            <img loading="lazy" class="img-fluid" src="{% static 'images/slideshows/slideshow-2.jpg'%}" alt="{% trans 'Real Estate Banner 1' %}">
+            <img loading="lazy" class="img-fluid" src="{% static 'images\banners\banner-2.jpg'%}" alt="{% trans 'Real Estate Banner 1' %}">
         </picture>
 
 
         <picture class="w-60 d-block me-8 mt-n10 shadow-lg border border-white border-4 position-relative z-index-20 ms-auto" style="max-height : 140vh !important;">
-            <img loading="lazy" class="img-fluid" src="{% static 'images/slideshows/slideshow-1.jpg'%}" alt="{% trans 'Real Estate Banner 1' %}">
+            <img loading="lazy" class="img-fluid" src="{% static 'images\banners\banner-2.jpg'%}" alt="{% trans 'Real Estate Banner 1' %}">
         </picture>
 
         <picture class="w-50 d-block me-8 mt-n7 shadow-lg border border-white border-4 position-absolute top-0 end-0 z-index-0 ">
-            <img loading="lazy" class="img-fluid" src="{% static 'images/banners/testimonials-bg.jpg'%}" alt="{% trans 'Real Estate Banner 3' %}">
+            <img loading="lazy" class="img-fluid" src="{% static 'images\banners\banner-2.jpg'%}" alt="{% trans 'Real Estate Banner 3' %}">
         </picture>
     </div>
 </div>

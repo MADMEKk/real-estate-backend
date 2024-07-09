@@ -16,7 +16,7 @@
                     <!-- Advert Type Filter -->
                     <div class="form-group mx-1 my-1">
                         <select id="advertype" class="form-select form-select-sm">
-                            <option value="">{% trans 'Type d\'annonce' %}</option>
+                            <option value="">Type d\'annonce  </option>
                             <option value="For Sale">{% trans 'À vendre' %}</option>
                             <option value="For Rent">{% trans 'À louer' %}</option>
                         </select>
@@ -101,7 +101,7 @@
       </div>            <!-- / Pagination-->
   </div>
 
-  <!-- /Page Content -->-- /Page Content -->
+  <!-- /Page Content -->
     </section>
 
 
@@ -119,7 +119,7 @@
                  <!-- Advert Type Filter -->
                  <div class="py-4 widget-filter border-top">
                      <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-advertype" role="button" aria-expanded="false" aria-controls="filter-modal-advertype">
-                         {% trans 'Type d\'annonce' %}
+                         Type d'annonce
                      </a>
                      <div id="filter-modal-advertype" class="collapse">
                          <div class="filter-options mt-3">
@@ -427,7 +427,7 @@
 
 
 
-     async function saveProperty(propertySlug) {
+async function saveProperty(propertySlug) {
          try {
              let accessToken = localStorage.getItem('access_token');
              let response = await fetch(`/api/v1/properties/save-property/${propertySlug}/`, {
@@ -533,10 +533,13 @@
                  if (!response.ok) {
                      throw new Error(`HTTP error! Status: ${response.status}`);
                  }
+                 console.log('fetchsucece')
                  return response.json();
              })
              .then(data => {
                  resetFilters();
+                 console.log('data', data)
+
                  if (Array.isArray(data) && data.length > 0) {
                      displayProperties(data);
                      updateCount(data.length);

@@ -110,13 +110,15 @@
              <ul class="list-unstyled mb-0 d-flex align-items-center">
                  <!-- Language Selector -->
                  <li class="ms-1 d-inline-block">
-                     <form method="get" action="{% url 'set_language' %}">
-                         <select name="language" onchange="this.form.submit()">
-                             <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
-                             <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>Français</option>
-                             <option value="ar" {% if LANGUAGE_CODE == 'ar' %}selected{% endif %}>العربية</option>
-                         </select>
-                     </form>
+                    <form method="get" action="{% url 'website:set_language' %}">
+                        {% csrf_token %}
+                        <select name="language" onchange="this.form.submit()">
+                            <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+                            <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>Français</option>
+                            <option value="ar" {% if LANGUAGE_CODE == 'ar' %}selected{% endif %}>العربية</option>
+                        </select>
+                    </form>
+                    
                  </li>
                  <!-- /Language Selector -->
                  <!-- Navbar Search-->

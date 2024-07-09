@@ -1,0 +1,88 @@
+{% extends './pagesbase.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block section %}
+<div class="container">
+    <div id="activation-message" class="text-center my-4">
+        <i id="activation-icon" class="fas fa-home" style="font-size: 5rem; display: block; animation: fillHouse 2s infinite;"></i>
+    </div>
+    <div id="alert" class="alert alert-info text-center my-4" role="alert" style="display: none;">
+        {% trans 'Activation en cours...' %}
+    </div>
+    <div class="text-center" id="home-button" style="display: none;">
+        <a href="{% url 'website:index' %}" class="btn btn-orange">{% trans 'Retourner à la page d\'accueil' %}</a>
+    </div>
+</div>
+
+<style>
+    @keyframes fillHouse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const uid = '{{ uid|escapejs }}';
+        const token = '{{ token|escapejs }}';
+
+        const successMessage = '{{ "Votre compte a été activé avec succès" | escapejs }}';
+        const failureMessage = '{{ "L\'activation a échoué. Veuillez réessayer." | escapejs }}';
+        const errorMessage = '{{ "Une erreur s\'est produite. Veuillez réessayer." | escapejs }}';
+        const missingParamsMessage = '{{ "Paramètres d\'activation manquants." | escapejs }}';
+
+        const activationIcon = document.getElementById('activation-icon');
+        const alertElement = document.getElementById('alert');
+        const homeButton = document.getElementById('home-button');
+
+        if (uid && token) {
+            alertElement.style.display = 'block';
+            alertElement.textContent = '{{ "Activation en cours..." | escapejs }}';
+
+            fetch('http://localhost:8000/api/v1/auth/users/activation/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ uid: uid, token: token })
+            })
+            .then(response => {
+                activationIcon.style.display = 'none';
+                const messageElement = document.getElementById('activation-message');
+                if (response.status === 204) {
+                    messageElement.innerHTML = '<i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>';
+                    alertElement.classList.replace('alert-info', 'alert-success');
+                    alertElement.textContent = successMessage;
+                } else {
+                    messageElement.innerHTML = '<i class="fas fa-exclamation-circle text-danger" style="font-size: 5rem;"></i>';
+                    alertElement.classList.replace('alert-info', 'alert-danger');
+                    alertElement.textContent = failureMessage;
+                }
+                homeButton.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                activationIcon.style.display = 'none';
+                alertElement.classList.replace('alert-info', 'alert-danger');
+                alertElement.textContent = errorMessage;
+                homeButton.style.display = 'block';
+            });
+        } else {
+            const messageElement = document.getElementById('activation-message');
+            messageElement.innerHTML = '<i class="fas fa-exclamation-circle text-danger" style="font-size: 5rem;"></i>';
+            alertElement.style.display = 'block';
+            alertElement.classList.replace('alert-info', 'alert-danger');
+            alertElement.textContent = missingParamsMessage;
+            homeButton.style.display = 'block';
+        }
+    });
+</script>
+{% endblock %}

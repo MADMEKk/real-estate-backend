@@ -276,9 +276,8 @@ class PropertySearchAPIView(APIView):
             queryset = queryset.filter(postal_code=postal_code)
 
         serializer = PropertySerializer(queryset, many=True)
-        return Response(serializer.data)
-
-
+        return Response(serializer.data, status=status.HTTP_200_OK)
+ 
 class PropertyRankAPIView(APIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = PropertySerializer
