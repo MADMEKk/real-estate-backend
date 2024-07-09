@@ -17,10 +17,10 @@
                 <!-- Swiper Container -->
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        {% if property.vedio %}
+                        {% if property.video %}
                         <div class="swiper-slide">
                             <video width="100%" controls>
-                                <source src="{{ property.vedio.url }}" type="video/mp4">
+                                <source src="{{ property.video.url }}" type="video/mp4">
                             </video>
                         </div>
                         {% else %}
@@ -90,10 +90,31 @@
                                 {% trans 'Plot area' %} : <span class=" fw-bold">{{property.plot_area}} </span><span class="text-lowercase">m²</span>
                             </small>
                             <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Total floors' %} : <span class=" fw-bold">{{property.total_floors}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
                                 {% trans 'Bedrooms' %} : <span class=" fw-bold">{{property.bedrooms}}</span>
                             </small>
                             <small class="text-uppercase d-block fw-bolder mb-2">
                                 {% trans 'Bathrooms' %} : <span class=" fw-bold">{{property.bathrooms}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Tax' %} : <span class=" fw-bold">{{property.tax}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Amenities' %} : <span class=" fw-bold">{{property.amenities}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Property status' %} : <span class=" fw-bold">{{property.property_status}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Neighborhood information' %} : <span class=" fw-bold">{{property.neighborhood_info}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Legal status' %} : <span class=" fw-bold">{{property.legal_status}}</span>
+                            </small>
+                            <small class="text-uppercase d-block fw-bolder mb-2">
+                                {% trans 'Payment options' %} : <span class=" fw-bold">{{property.payment_options}}</span>
                             </small>
                         </div>
                         <div class="d-flex justify-content-between mt-3">

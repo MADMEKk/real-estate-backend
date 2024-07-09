@@ -1,0 +1,164 @@
+{% extends './pagesbase.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block bannertitle %}
+Saved Properties
+{% endblock %}
+
+{% block bannertext %}
+Here are your saved properties.
+{% endblock %}
+
+{% block section %}
+<div class="container mt-5">
+    <div id="alertContainer"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-4">{% trans 'Saved Properties' %}</h2>
+            <div id="propertiesContainer" class="row"></div>
+            <button id="compareButton" class="btn btn-primary mt-3" disabled>{% trans 'Compare' %}</button>
+        </div>
+    </div>
+</div>
+
+<!-- Comparison Modal -->
+<div class="modal fade" id="comparisonModal" tabindex="-1" aria-labelledby="comparisonModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="comparisonModalLabel">{% trans 'Property Comparison' %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="comparisonBody">
+                <!-- Comparison details will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans 'Close' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const propertiesContainer = document.getElementById('propertiesContainer');
+    const alertContainer = document.getElementById('alertContainer');
+    const compareButton = document.getElementById('compareButton');
+    let selectedProperties = [];
+
+    function updateCompareButton() {
+        if (selectedProperties.length === 2) {
+            compareButton.disabled = false;
+        } else {
+            compareButton.disabled = true;
+        }
+    }
+
+    function togglePropertySelection(propertyId) {
+        const index = selectedProperties.indexOf(propertyId);
+        if (index === -1) {
+            if (selectedProperties.length < 2) {
+                selectedProperties.push(propertyId);
+            }
+        } else {
+            selectedProperties.splice(index, 1);
+        }
+        updateCompareButton();
+    }
+
+    function showComparison(properties) {
+        const comparisonBody = document.getElementById('comparisonBody');
+        if (properties.length === 2) {
+            const [property1, property2] = properties;
+            comparisonBody.innerHTML = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>${property1.property_title}</h3>
+                        <p>${property1.property_description}</p>
+                        <p>${property1.property_wilaya}</p>
+                        <p>${property1.advert_type}</p>
+                        <p>${property1.property_type}</p>
+                        <img src="${property1.cover_photo}" alt="${property1.property_title}" class="img-fluid" />
+                        <p>${new Date(property1.saved_at).toLocaleString()}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>${property2.property_title}</h3>
+                        <p>${property2.property_description}</p>
+                        <p>${property2.property_wilaya}</p>
+                        <p>${property2.advert_type}</p>
+                        <p>${property2.property_type}</p>
+                        <img src="${property2.cover_photo}" alt="${property2.property_title}" class="img-fluid" />
+                        <p>${new Date(property2.saved_at).toLocaleString()}</p>
+                    </div>
+                </div>
+            `;
+            new bootstrap.Modal(document.getElementById('comparisonModal')).show();
+        }
+    }
+
+    compareButton.addEventListener('click', async function() {
+        if (selectedProperties.length === 2) {
+            try {
+                const responses = await Promise.all(selectedProperties.map(id => fetch(`/api/v1/saved-properties/${id}/`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json'
+                    }
+                })));
+
+                const properties = await Promise.all(responses.map(response => response.json()));
+                showComparison(properties);
+            } catch (error) {
+                alertContainer.innerHTML = '<div class="alert alert-danger">Error: ' + error.message + '</div>';
+            }
+        }
+    });
+
+    try {
+        const response = await fetch('/api/v1/saved-properties/', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            alertContainer.innerHTML = '<div class="alert alert-danger">Error: ' + JSON.stringify(errorData) + '</div>';
+        } else {
+            const properties = await response.json();
+            if (properties.length > 0) {
+                properties.forEach(property => {
+                    const propertyElement = document.createElement('div');
+                    propertyElement.className = 'col-md-6 property-item mb-3 p-3 border rounded';
+                    propertyElement.innerHTML = `
+                        <h3>${property.property_title}</h3>
+                        <p>${property.property_description}</p>
+                        <p>Wilaya: ${property.property_wilaya}</p>
+                        <p>Type: ${property.advert_type}</p>
+                        <p>Property Type: ${property.property_type}</p>
+                        <img src="${property.cover_photo}" alt="${property.property_title}" class="img-fluid" />
+                        <p>Saved at: ${new Date(property.saved_at).toLocaleString()}</p>
+                        <button class="btn btn-secondary mt-2 compare-btn" data-id="${property.id}">{% trans 'Select for Comparison' %}</button>
+                    `;
+                    propertyElement.querySelector('.compare-btn').addEventListener('click', function() {
+                        const propertyId = this.getAttribute('data-id');
+                        togglePropertySelection(propertyId);
+                        this.classList.toggle('btn-success');
+                        this.classList.toggle('btn-secondary');
+                    });
+                    propertiesContainer.appendChild(propertyElement);
+                });
+            } else {
+                propertiesContainer.innerHTML = '<p>No saved properties found.</p>';
+            }
+        }
+    } catch (error) {
+        alertContainer.innerHTML = '<div class="alert alert-danger">Error: ' + error.message + '</div>';
+    }
+});
+</script>
+{% endblock %}

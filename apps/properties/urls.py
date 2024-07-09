@@ -23,7 +23,7 @@ urlpatterns = [
     path('saved-properties/', views.SavedPropertyAPIView.as_view(), name='saved-properties-list'),
     path('save-property/<slug:slug>/', views.SavedPropertyAPIView.as_view(), name='save-property'),
     path('toggle-like/<slug:slug>/', views.toggle_like_property, name='toggle-like-property'),
-                path('likes/<slug:slug>/', views.property_likes, name='property_likes'),
-            path('likestatus/<slug:slug>/', views.check_like_status, name='check-like-status'),
+    path('likes/<slug:slug>/', views.property_likes, name='property_likes'),
+    path('likestatus/<slug:slug>/', views.check_like_status, name='check-like-status'),
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
