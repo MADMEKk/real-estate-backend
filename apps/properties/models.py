@@ -1,6 +1,6 @@
 import random
 import string
-
+import os
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
@@ -12,7 +12,11 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework.response import Response
 from algeria.models import *
 from apps.common.models import TimeStampedUUIDModel
+from PIL import Image
+from django.conf import settings
 
+from .utils import add_logo_watermark
+from algeria.models import Commune, Daira, Wilaya
 User = get_user_model()
 
 
@@ -25,13 +29,8 @@ class PropertyPublishedManager(models.Manager):
         )
 
 
-from django.db import models
-from django.utils.translation import gettext_lazy as _
-from autoslug import AutoSlugField
-from django.core.validators import MinValueValidator
-import random
-import string
-from algeria.models import Commune, Daira, Wilaya
+
+
 
 class Property(TimeStampedUUIDModel):
     class AdvertType(models.TextChoices):
@@ -47,6 +46,8 @@ class Property(TimeStampedUUIDModel):
         HANGAR = "Hangar", _("Hangar")
         BUNGALOW = "Bungalow", _("Bungalow")
         USINE = "Usine", _("Usine")
+        BEREAU = "Bereau", _("Bereau")
+        IMMEUBLE = "Immeuble", _("Immeuble")
         OTHER = "Other", _("Other")
 
     user = models.ForeignKey(
@@ -118,7 +119,7 @@ class Property(TimeStampedUUIDModel):
     )
     total_floors = models.IntegerField(verbose_name=_("Number of floors"), default=0)
     bedrooms = models.IntegerField(verbose_name=_("Bedrooms"), default=1)
-    bathrooms =models.IntegerField(verbose_name=_("Bathrooms"), default=1)
+    bathrooms = models.IntegerField(verbose_name=_("Bathrooms"), default=1)
     advert_type = models.CharField(
         verbose_name=_("Advert Type"),
         max_length=50,
@@ -146,7 +147,6 @@ class Property(TimeStampedUUIDModel):
     property_status = models.CharField(
         verbose_name=_("Property Status"), max_length=50, default="New"
     )
-
     neighborhood_info = models.TextField(verbose_name=_("Neighborhood Information"), blank=True, null=True)
     legal_status = models.CharField(
         verbose_name=_("Legal Status"), max_length=100, default="Clear"
@@ -154,6 +154,19 @@ class Property(TimeStampedUUIDModel):
     payment_options = models.CharField(
         verbose_name=_("Payment Options"), max_length=100, default="Cash"
     )
+
+    # New boolean fields
+    ascenseur = models.BooleanField(verbose_name=_("Ascenseur"), default=False)
+    balcon = models.BooleanField(verbose_name=_("Balcon"), default=False)
+    cave = models.BooleanField(verbose_name=_("Cave"), default=False)
+    garage = models.BooleanField(verbose_name=_("Garage"), default=False)
+    gardien = models.BooleanField(verbose_name=_("Gardien"), default=False)
+    interphone = models.BooleanField(verbose_name=_("Interphone"), default=False)
+    meuble = models.BooleanField(verbose_name=_("Meublé"), default=False)
+    parking_exterieur = models.BooleanField(verbose_name=_("Parking Extérieur"), default=False)
+    parking_sous_sol = models.BooleanField(verbose_name=_("Parking Sous-sol"), default=False)
+    salle_deau = models.BooleanField(verbose_name=_("Salle d'eau"), default=False)
+    terrasse = models.BooleanField(verbose_name=_("Terrasse"), default=False)
 
     objects = models.Manager()
     published = PropertyPublishedManager()
@@ -164,15 +177,36 @@ class Property(TimeStampedUUIDModel):
     class Meta:
         verbose_name = _("Property")
         verbose_name_plural = _("Properties")
-
     def save(self, *args, **kwargs):
+        # Ensure title and description formatting
         self.title = str.title(self.title)
         self.description = str.capitalize(self.description)
-        self.ref_code = "".join(
-            random.choices(string.ascii_uppercase + string.digits, k=10)
-        )
+        
+        # Generate ref_code if not already set
+        if not self.ref_code:
+            self.ref_code = "".join(random.choices(string.ascii_uppercase + string.digits, k=10))
+        
+        # Save the instance initially
         super(Property, self).save(*args, **kwargs)
 
+        # Handle cover photo watermarking
+        if self.cover_photo:
+            # Handle file path for the watermarked image
+            cover_photo_path = self.cover_photo.path
+            watermarked_filename = f'watermarked_{os.path.basename(cover_photo_path)}'
+            watermarked_cover_photo_path = os.path.join(settings.MEDIA_ROOT, watermarked_filename)
+
+            # Path to the logo image (ensure this path is correct)
+            logo_path = os.path.join(settings.STATIC_ROOT, 'LOGO_Image.png')  # Adjust the path to your logo image
+
+            # Add watermark to the cover photo using the logo
+            add_logo_watermark(cover_photo_path, watermarked_cover_photo_path, logo_path)
+
+            # Update cover_photo path in the database
+            self.cover_photo.name = watermarked_filename
+
+            # Save the updated cover photo path
+            super(Property, self).save(update_fields=['cover_photo'])
     @property
     def final_property_price(self):
         tax_percentage = self.tax
@@ -180,21 +214,34 @@ class Property(TimeStampedUUIDModel):
         tax_amount = round(tax_percentage * property_price, 2)
         price_after_tax = float(round(property_price + tax_amount, 2))
         return price_after_tax
-
-
-    @property
-    def final_property_price(self):
-        tax_percentage = self.tax
-        property_price = self.price
-        tax_amount = round(tax_percentage * property_price, 2)
-        price_after_tax = float(round(property_price + tax_amount, 2))
-        return price_after_tax
-
 
 class Photo(models.Model):
     image = models.ImageField(upload_to='property_photos')
     property = models.ForeignKey(Property, related_name='photos', on_delete=models.CASCADE)
 
+    def save(self, *args, **kwargs):
+        # Save the Photo instance initially
+        super(Photo, self).save(*args, **kwargs)
+        
+        # Handle watermarking only if the image is set
+        if self.image:
+            # Ensure the image is saved before watermarking
+            image_path = self.image.path
+            
+            # Define the path for the watermarked image
+            watermarked_image_path = os.path.join(settings.MEDIA_ROOT, 'watermarked_' + os.path.basename(image_path))
+
+            # Path to the logo image (ensure this path is correct)
+            logo_path = os.path.join(settings.MEDIA_ROOT, 'path_to_logo.png')  # Adjust the path to your logo image
+
+            # Add watermark to the image using the logo
+            add_logo_watermark(image_path, watermarked_image_path, logo_path)
+
+            # Update the image field to point to the watermarked image
+            self.image.name = os.path.relpath(watermarked_image_path, settings.MEDIA_ROOT)
+            
+            # Save the updated Photo instance with the new image path
+            super(Photo, self).save(update_fields=['image'])
     def __str__(self):
         return self.image.url
 

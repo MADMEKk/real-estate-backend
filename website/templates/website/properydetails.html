@@ -18,20 +18,20 @@
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
                         {% if property.video %}
-                        <div class="swiper-slide">
+                        <div class="swiper-slide swiper-slide-center-images my-auto">
                             <video width="100%" controls>
                                 <source src="{{ property.video.url }}" type="video/mp4">
                             </video>
                         </div>
                         {% else %}
-                        <div class="swiper-slide">
-                            <img class="img-fluid zoomable" src="{{ property.cover_photo.url }}" alt="Cover Photo" onclick="showZoomModal(this)">
+                        <div class="swiper-slide swiper-slide-center-images my-auto">
+                            <img class="img-fluid zoomable fixed-height" src="{{ property.cover_photo.url }}" alt="Cover Photo" onclick="showZoomModal(this)">
                         </div>
                         {% endif %}
 
                         {% for photo in property.photos.all %}
-                        <div class="swiper-slide">
-                            <img class="img-fluid zoomable" src="{{ photo.image.url }}" alt="Photo {{ forloop.counter }}" onclick="showZoomModal(this)">
+                        <div class="swiper-slide swiper-slide-center-images my-auto">
+                            <img class="img-fluid zoomable fixed-height" src="{{ photo.image.url }}" alt="Photo {{ forloop.counter }}" onclick="showZoomModal(this)">
                         </div>
                         {% endfor %}
                     </div>
@@ -98,24 +98,8 @@
                             <small class="text-uppercase d-block fw-bolder mb-2">
                                 {% trans 'Bathrooms' %} : <span class=" fw-bold">{{property.bathrooms}}</span>
                             </small>
-                            <small class="text-uppercase d-block fw-bolder mb-2">
-                                {% trans 'Tax' %} : <span class=" fw-bold">{{property.tax}}</span>
-                            </small>
-                            <small class="text-uppercase d-block fw-bolder mb-2">
-                                {% trans 'Amenities' %} : <span class=" fw-bold">{{property.amenities}}</span>
-                            </small>
-                            <small class="text-uppercase d-block fw-bolder mb-2">
-                                {% trans 'Property status' %} : <span class=" fw-bold">{{property.property_status}}</span>
-                            </small>
-                            <small class="text-uppercase d-block fw-bolder mb-2">
-                                {% trans 'Neighborhood information' %} : <span class=" fw-bold">{{property.neighborhood_info}}</span>
-                            </small>
-                            <small class="text-uppercase d-block fw-bolder mb-2">
-                                {% trans 'Legal status' %} : <span class=" fw-bold">{{property.legal_status}}</span>
-                            </small>
-                            <small class="text-uppercase d-block fw-bolder mb-2">
-                                {% trans 'Payment options' %} : <span class=" fw-bold">{{property.payment_options}}</span>
-                            </small>
+
+                            
                         </div>
                         <div class="d-flex justify-content-between mt-3">
                             <button class="btn btn-dark btn-dark-chunky flex-grow-1 me-2 text-white disable-child-pointer" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">{% trans 'Contact Agent' %}</button>
@@ -138,6 +122,42 @@
         </div>
     </section>
 </section>
+<section class="container mt-5">
+    <div class="row g-5">
+        <div class="col-8">
+            <div class="border-top mt-4 pt-4">
+                <div class="mb-4">
+                    <h3 class="fw-bold mb-3">{% trans 'Description' %}</h3>
+                    <p class="description mb-0" id="description">{{ property.description }}</p>
+                    <a href="javascript:void(0);" id="description-read-more" class="read-more text-decoration-none">{% trans 'Read more' %}</a>
+                </div>
+                <div class="mb-4">
+                    <h3 class="fw-bold mb-3">{% trans 'Neighborhood Information' %}</h3>
+                    <p class="neighborhood-info mb-0" id="neighborhood-info">{{ property.neighborhood_info }}</p>
+                    <a href="javascript:void(0);" id="neighborhood-read-more" class="read-more text-decoration-none">{% trans 'Read more' %}</a>
+                </div>
+                <div class="mb-4">
+                    <h3 class="fw-bold mb-3">{% trans 'Amenities' %}</h3>
+                    <p class="mb-0">{{ property.amenities }}</p>
+                </div>
+                <div class="mb-4">
+                    <h3 class="fw-bold mb-3">{% trans 'Property Status' %}</h3>
+                    <p class="mb-0">{{ property.property_status }}</p>
+                </div>
+                <div class="mb-4">
+                    <h3 class="fw-bold mb-3">{% trans 'Legal Status' %}</h3>
+                    <p class="mb-0">{{ property.legal_status }}</p>
+                </div>
+                <div class="mb-4">
+                    <h3 class="fw-bold mb-3">{% trans 'Payment Options' %}</h3>
+                    <p class="mb-0">{{ property.payment_options }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <!-- Homepage Intro-->
 <section class="position-relative my-5 my-md-7 my-lg-9 bg-dark text-white aos-init aos-animate" data-aos="fade-in">
     <!-- SVG Shape Divider -->
@@ -202,7 +222,6 @@
                     <p class="mb-2"><strong>{% trans 'Adresse:' %}</strong> [Votre adresse ici]</p>
                     <p class="mb-2"><strong>{% trans 'Téléphone:' %}</strong> [Votre numéro de téléphone ici]</p>
                     <p class="mb-2"><strong>{% trans 'Email:' %}</strong> [Votre email ici]</p>
-                    <p class="mb-2"><strong>{% trans 'Site Web:' %}</strong> [Votre site web ici]</p>
                 </div>
             </div>
         </div>
@@ -242,7 +261,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const swiper = new Swiper('.swiper-container', {
             slidesPerView: 1,
-            spaceBetween: 10,
+            spaceBetween: 3,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -252,6 +271,9 @@
                 clickable: true,
             },
         });
+
+
+        
     });
 
     function showZoomModal(image) {
@@ -261,4 +283,41 @@
         bootstrapModal.show();
     }
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var description = document.getElementById("description");
+    var descriptionReadMore = document.getElementById("description-read-more");
+    var neighborhoodInfo = document.getElementById("neighborhood-info");
+    var neighborhoodReadMore = document.getElementById("neighborhood-read-more");
+
+    function checkOverflow(element, readMoreElement) {
+        var lineHeight = parseFloat(getComputedStyle(element).lineHeight);
+        var maxHeight = 4 * lineHeight; // 4 lines
+
+        if (element.scrollHeight > maxHeight) {
+            readMoreElement.classList.add("visible");
+        }
+    }
+
+    checkOverflow(description, descriptionReadMore);
+    checkOverflow(neighborhoodInfo, neighborhoodReadMore);
+
+    descriptionReadMore.addEventListener("click", function() {
+        description.classList.toggle("expanded");
+        descriptionReadMore.textContent = description.classList.contains("expanded") ? "{% trans 'Read less' %}" : "{% trans 'Read more' %}";
+    });
+
+    neighborhoodReadMore.addEventListener("click", function() {
+        neighborhoodInfo.classList.toggle("expanded");
+        neighborhoodReadMore.textContent = neighborhoodInfo.classList.contains("expanded") ? "{% trans 'Read less' %}" : "{% trans 'Read more' %}";
+    });
+});
+
+
+</script>
+
+
+
 {% endblock %}
+
+

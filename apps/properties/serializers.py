@@ -185,10 +185,28 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email', 'is_agent']
 
+
 class PropertyCreateSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Property
-        fields = '__all__'
+        fields = [
+            "user",
+            "title",
+            "wilaya",
+            "commune",
+            "daira",
+            "postal_code",
+            "street_address",
+            "property_number",
+            "price",
+            "plot_area",
+            "bedrooms",
+            "advert_type",
+            "property_type",
+            "cover_photo",
+        ]
+     
 
 class UpdatePropertySerializer(serializers.ModelSerializer):
     class Meta:

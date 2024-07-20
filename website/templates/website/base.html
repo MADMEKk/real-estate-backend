@@ -53,6 +53,7 @@
     <!-- Fix for custom scrollbar if JS is disabled-->
     <noscript>
         <style>
+          
           .zoomable {
             cursor: pointer;
             transition: transform 0.2s;
@@ -123,6 +124,7 @@
         }
       });
     </script>
+    
     <style>
       /* Loader CSS */
       .loader-overlay {
@@ -263,7 +265,46 @@
         background-color: #e65c00;
         color: white;
       }
+      .fixed-height {
+        max-height: 600px !important; /* Set a fixed height */
+        object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
+    }
+    
+    .swiper-slide-center-images {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
 
+
+    .description,
+.neighborhood-info {
+    max-height: 6em; /* Adjust to the height equivalent of 4 lines */
+    overflow: hidden;
+    position: relative;
+    line-height: 1.6;
+}
+
+.read-more {
+    display: none;
+    color: #007bff;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: #0056b3;
+}
+
+.description-expanded,
+.neighborhood-info-expanded {
+    max-height: none;
+}
+
+.description-expanded ~ #description-read-more,
+.neighborhood-info-expanded ~ #neighborhood-read-more {
+    display: none;
+}
 
     </style>
     <!-- Page Title -->
@@ -272,24 +313,81 @@
   <body>
 
 <!-- Modal Structure -->
+<!-- Modal Structure -->
 <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="contactModalLabel">{% trans 'Contacter l\'Agence' %}</h5>
-        <button type="button" class="close" onclick="hideModal()">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <div class="modal-dialog modal-dialog-centered custom-modal-dialog">
+    <div class="modal-content custom-modal-content">
+      <div class="modal-header custom-modal-header">
+        <h5 class="modal-title custom-modal-title" id="contactModalLabel">{% trans 'Contacter l\'Agence' %}</h5>
+        <span class="close custom-close" data-bs-dismiss="modal" aria-label="Close" onclick="hideModal()">
+          <span aria-hidden="true">X</span>
+        </span>
       </div>
-      <div class="modal-body" id="modalBodyContent">
+      <div class="modal-body custom-modal-body" id="modalBodyContent">
         <!-- Content will be dynamically loaded here -->
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onclick="hideModal()">{% trans 'Fermer' %}</button>
+      <div class="modal-footer custom-modal-footer">
+        <button type="button" class="btn btn-secondary custom-btn-secondary" data-bs-dismiss="modal" onclick="hideModal()">{% trans 'Fermer' %}</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Custom CSS -->
+<style>
+  .custom-modal-dialog {
+    max-width: 600px;
+  }
+
+  .custom-modal-content {
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .custom-modal-header {
+    border-bottom: none;
+    padding: 20px 30px;
+  }
+
+  .custom-modal-title {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .custom-close {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #000;
+    margin: -10px -10px -10px auto;
+  }
+
+  .custom-close:hover {
+    color: #dc3545;
+  }
+
+  .custom-modal-body {
+    padding: 20px 30px;
+  }
+
+  .custom-modal-footer {
+    border-top: none;
+    padding: 20px 30px;
+  }
+
+  .custom-btn-secondary {
+    background-color: #dad9ff;
+    border-color: #6c757d;
+    border-radius: 25px;
+    padding: 10px 20px;
+  }
+
+  .custom-btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+</style>
+
   {% block body %} {% endblock %}
 
   <script>

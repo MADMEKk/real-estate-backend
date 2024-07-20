@@ -2,237 +2,288 @@
 {% load static %}
 {% load i18n %}
 {% block title %}{{ _('Agence Immobilière à Oran') }}{% endblock %}
-
-
 {% block content %}
 <div id="loader-overlay" class="loader-overlay">
     <div class="loader"></div>
 </div>
 <!-- Navbar -->
 <div class="position-relative z-index-30">
-    <!-- Navbar -->
-    <nav    class="navbar navbar-expand-lg navbar-light bg-white  flex-column  border-0 position-absolute w-100 z-index-30 ">
-        <div class="w-100 pb-lg-0 pt-lg-0 pt-4 pb-3">
-            <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
-
-                <!-- Logo-->
-                <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0" href="{% url 'website:index' %}">
-                    <!-- Start of Logo-->
-                    <div class="d-flex align-items-center">
-                        <div class="f-w-20 d-flex align-items-center me-2 lh-1">
-                            <!-- SVG Logo Here -->
-                        </div>
-                        <span class="fs-5"></span>
-                    </div>
-                    <!-- / Logo-->
-                </a>
-                <!-- / Logo-->
-
-                <!-- Main Navigation-->
-                <div class="ms-5 flex-shrink-0 navbar-collapse navbar-collapse-light w-auto flex-grow-1 collapse" id="navbarNavDropdown" style="">
-                    <!-- Mobile Nav Toggler-->
-                    <button class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 position-absolute top-0 end-0 mt-3 me-2 collapsed" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="{% trans 'Toggle navigation' %}">
-                        <i class="ri-close-circle-line ri-2x"></i>
+   <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white flex-column border-0 position-absolute w-100 z-index-30">
+    <div class="w-100 ">
+        <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
+            <!-- Language Selector -->
+            <div class="w-100 d-flex justify-content-end  ">
+                <form method="get" action="{% url 'website:set_language' %}" class="d-flex">
+                    <button class="btn btn-link p-0 mx-1" type="submit" name="language" value="en" {% if LANGUAGE_CODE == 'en' %}disabled{% endif %}>
+                        <img src="{% static 'flags/us.gif' %}" alt="English" style="width: 15px; height: 15px;"><span> EN </span>  |
                     </button>
-                    <!-- / Mobile Nav Toggler-->
-                    <ul class="navbar-nav py-lg-2 mx-auto">
-                        <li class="nav-item me-lg-4 dropdown position-static">
-                            <a class="nav-link fw-bolder dropdown-toggle py-lg-4" role="button" data-bs-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" href="{% url 'website:properties' %}?status=For Sale">{% trans 'Annonces' %}</a>
-                            <div class="dropdown-menu dropdown-megamenu">
-                                <div class="container">
-                                    <div class="row g-0">
-                                        <div class="col-12 col-lg-7">
-                                            <div class="row py-lg-5">
-                                                <div class="col col-lg-6 mb-5 mb-sm-0">
-                                                    <h6 class="dropdown-heading">{% trans 'Vente' %}</h6>
-                                                    <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item">
-                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Sale&property_type=Appartement-Villa-Local">Appartement-Villa-Local</a>
-                                                        </li>
-                                                        <li class="dropdown-list-item">
-                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Sale&property_type=Terrain-Hangar">Terrain-Hangar</a>
-                                                        </li>
-                                                        <!-- Add more combined filters as needed -->
-                                                    </ul>
-                                                </div>
-                                                <div class="col col-lg-6 mb-5 mb-sm-0">
-                                                    <h6 class="dropdown-heading">{% trans 'Location' %}</h6>
-                                                    <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item">
-                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Rent&property_type=Bungalow-Usine-Hangar">Bungalow-Usine-Hangar</a>
-                                                        </li>
-                                                        <li class="dropdown-list-item">
-                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Rent&property_type=Appartement-Villa-Bungalow">Appartement-Villa-Bungalow</a>
-                                                        </li>
-                                                        <li class="dropdown-list-item">
-                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Rent&property_type=Local">Local</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-12 mt-4">
-                                                    <h6 class="dropdown-heading">{% trans 'Annonces par localité' %}</h6>
-                                                    <ul class="list-unstyled">
-                                                        <li class="dropdown-list-item">
-                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?wilaya=Oran">Oran</a>
-                                                        </li>
-                                                        <li class="dropdown-list-item">
-                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?wilaya=Alger">Alger</a>
-                                                        </li>
-                                                        <li class="dropdown-list-item">
-                                                            <a class="dropdown-item" href="{% url 'website:properties' %}?wilaya=Setif">Setif</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                    <button class="btn btn-link p-0 mx-1" type="submit" name="language" value="fr" {% if LANGUAGE_CODE == 'fr' %}disabled{% endif %}>
+                        <img src="{% static 'flags/fr.gif' %}" alt="Français" style="width: 15px; height: 15px;"> <span> FR </span> |
+                    </button>
+                    <button class="btn btn-link p-0 mx-1" type="submit" name="language" value="ar" {% if LANGUAGE_CODE == 'ar' %}disabled{% endif %}>
+                        <img src="{% static 'flags/dz.gif' %}" alt="العربية" style="width: 15px; height: 15px;"><span> AR</span>
+                    </button>
+                </form>
+            </div>
+            <!-- / Language Selector -->
+
+            <!-- Logo-->
+            <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0" href="{% url 'website:index' %}">
+                <!-- Start of Logo-->
+                <div class="d-flex align-items-center">
+                    <div class="f-w-20 d-flex align-items-center me-2 lh-1">
+                        <!-- SVG Logo Here -->
+                        logo
+                    </div>
+                    <span class="fs-5"></span>
+                </div>
+                <!-- / Logo-->
+            </a>
+            <!-- / Logo-->
+
+            <!-- Main Navigation-->
+            <div class="ms-5 flex-shrink-0 navbar-collapse navbar-collapse-light w-auto flex-grow-1 collapse" id="navbarNavDropdown">
+                <!-- Mobile Nav Toggler-->
+                <button class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 position-absolute top-0 end-0 mt-3 me-2 collapsed" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="{% trans 'Toggle navigation' %}">
+                    <i class="ri-close-circle-line ri-2x"></i>
+                </button>
+                <!-- / Mobile Nav Toggler-->
+                <ul class="navbar-nav  mx-auto">
+                    <li class="nav-item me-lg-4 dropdown position-static">
+                        <a class="nav-link fw-bolder dropdown-toggle py-lg-4" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'website:properties' %}?status=For Sale">{% trans 'Annonces' %}</a>
+                        <div class="dropdown-menu dropdown-megamenu">
+                            <div class="container">
+                                <div class="row g-0">
+                                    <div class="col-12 col-lg-7">
+                                        <div class="row py-lg-5">
+                                            <div class="col col-lg-6 mb-5 mb-sm-0">
+                                                <h6 class="dropdown-heading">{% trans 'Vente' %}</h6>
+                                                <ul class="list-unstyled">
+                                                    <li class="dropdown-list-item">
+                                                        <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Sale&property_type=Appartement-Villa-Local">Appartement-Villa-Local</a>
+                                                    </li>
+                                                    <li class="dropdown-list-item">
+                                                        <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Sale&property_type=Terrain-Hangar">Terrain-Hangar</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col col-lg-6 mb-5 mb-sm-0">
+                                                <h6 class="dropdown-heading">{% trans 'Location' %}</h6>
+                                                <ul class="list-unstyled">
+                                                    <li class="dropdown-list-item">
+                                                        <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Rent&property_type=Bungalow-Usine-Hangar">Bungalow-Usine-Hangar</a>
+                                                    </li>
+                                                    <li class="dropdown-list-item">
+                                                        <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Rent&property_type=Appartement-Villa-Bungalow">Appartement-Villa-Bungalow</a>
+                                                    </li>
+                                                    <li class="dropdown-list-item">
+                                                        <a class="dropdown-item" href="{% url 'website:properties' %}?advert_type=For+Rent&property_type=Local">Local</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-12 mt-4">
+                                                <h6 class="dropdown-heading">{% trans 'Annonces par localité' %}</h6>
+                                                <ul class="list-unstyled">
+                                                    <li class="dropdown-list-item">
+                                                        <a class="dropdown-item" href="{% url 'website:properties' %}?wilaya=31">Oran</a>
+                                                    </li>
+                                                    <li class="dropdown-list-item">
+                                                        <a class="dropdown-item" href="{% url 'website:properties' %}?wilaya=16">Alger</a>
+                                                    </li>
+                                                    <li class="dropdown-list-item">
+                                                        <a class="dropdown-item" href="{% url 'website:properties' %}?wilaya=19">Setif</a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
-                                        <div class="d-none d-lg-block col-lg-5">
-                                            <div class="vw-50 h-100 bg-img-cover bg-pos-center-center position-absolute" style="background-image: url({% static 'images/banners/testimonials-bg.jpg'%});"></div>
-                                        </div>
+                                    </div>
+                                    <div class="d-none d-lg-block col-lg-5">
+                                        <div class="vw-50 h-100 bg-img-cover bg-pos-center-center position-absolute" style="background-image: url({% static 'images/banners/testimonials-bg.jpg'%});"></div>
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li class="nav-item me-lg-4">
-                            <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:properties' %}?status=for rent">{% trans 'Louer' %}</a>
-                        </li>
-                        <li class="nav-item me-lg-4">
-                            <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:sellproperty' %}">{% trans 'Vendre' %}</a>
-                        </li>
-                        <li class="nav-item me-lg-4">
-                            <a class="nav-link fw-bolder py-lg-4" href="#map">{% trans 'À propos de nous' %}</a>
-                        </li>
-                        <li class="nav-item me-lg-4">
-                            <a class="nav-link fw-bolder py-lg-4" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">{% trans 'Contactez-nous' %}</a>
-                        </li>
-
-                    </ul>
-                </div>
-                <!-- / Main Navigation-->
-
-                <!-- Navbar Icons-->
-                <ul class="list-unstyled mb-0 d-flex align-items-center">
-                    <!-- Language Selector -->
-                    <li class="ms-1 d-inline-block">
-                        <form method="get" action="{% url 'website:set_language' %}">
-                            <select name="language" onchange="this.form.submit()">
-                                <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
-                                <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>Français</option>
-                                <option value="ar" {% if LANGUAGE_CODE == 'ar' %}selected{% endif %}>العربية</option>
-                            </select>
-                        </form>
+                        </div>
                     </li>
-                    <!-- /Language Selector -->
-                    <!-- Navbar Search-->
-                    <li class="ms-1 d-inline-block">
-                        <button class="btn btn-link px-2 text-decoration-none d-flex align-items-center" data-pr-search="">
-                            <i class="ri-search-2-line ri-lg align-middle"></i>
-                        </button>
+                   
+                    <li class="nav-item me-lg-4">
+                        <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:sellproperty' %}">{% trans 'Poser un Annonce' %}</a>
                     </li>
-                    <!-- /Navbar Search-->
-                    <!-- Navbar Wishlist-->
-                    <li class="ms-1 d-none d-lg-inline-block">
-                        <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center" href="#">
-                        </a>
+                    <li class="nav-item me-lg-4">
+                        <a class="nav-link fw-bolder py-lg-4" href="#map">{% trans 'À propos de nous' %}</a>
                     </li>
-                    <!-- /Navbar Wishlist-->
-
-                    <!-- Navbar Login/Logout-->
-                    <li class="ms-1" id="auth-link">
-                        <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="/login">
-                            Login <i class="ri-user-line ri-lg align-middle"></i>
-                        </a>
+                    <li class="nav-item me-lg-4">
+                        <a class="nav-link fw-bolder py-lg-4" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">{% trans 'Contactez-nous' %}</a>
                     </li>
-                    <!-- /Navbar Login-->
-                    <!-- Navbar Cart-->
-                    <li class="ms-1 d-inline-block position-relative">
-                    </li>
-                    <!-- /Navbar Cart-->
-
-                    <!-- Navbar Toggle Icon-->
-                    <li class="d-inline-block d-lg-none">
-                        <button class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 d-flex align-items-center collapsed" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="ri-menu-line ri-lg align-middle"></i>
-                        </button>
-                    </li>
-                    <!-- /Navbar Toggle Icon-->
                 </ul>
-                <!-- / Navbar Icons-->
-
             </div>
+            <!-- / Main Navigation-->
+
+            <!-- Navbar Icons-->
+            <ul class="list-unstyled mb-0 d-flex align-items-center">
+                <!-- Navbar Search-->
+                <li class="ms-1 d-inline-block">
+                    <button class="btn btn-link px-2 text-decoration-none d-flex align-items-center" data-pr-search="">
+                        <i class="ri-search-2-line ri-lg align-middle"></i>
+                    </button>
+                </li>
+                <!-- /Navbar Search-->
+                <!-- Navbar Wishlist-->
+                <li class="ms-1 d-none d-lg-inline-block">
+                    <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center" href="#">
+                    </a>
+                </li>
+                <!-- /Navbar Wishlist-->
+
+                <!-- Navbar Login/Logout-->
+                <li class="ms-1" id="auth-link">
+                    <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="/login">
+                        Login <i class="ri-user-line ri-lg align-middle"></i>
+                    </a>
+                </li>
+                <!-- /Navbar Login-->
+                <!-- Navbar Cart-->
+                <li class="ms-1 d-inline-block position-relative">
+                </li>
+                <!-- /Navbar Cart-->
+
+                <!-- Navbar Toggle Icon-->
+                <li class="d-inline-block d-lg-none">
+                    <button class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 d-flex align-items-center collapsed" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="ri-menu-line ri-lg align-middle"></i>
+                    </button>
+                </li>
+                <!-- /Navbar Toggle Icon-->
+            </ul>
+            <!-- / Navbar Icons-->
         </div>
-    </nav>
-    <!-- / Navbar-->    </div>
+    </div>
+</nav>
 <!-- / Navbar-->
+   
+</div>
 
-
-
-        <!-- / Hero Section -->
-<section class=" position-relative bg-overlay-dark" style="height: 100vh">
+<!-- / Hero Section -->
+<section class=" position-relative bg-overlay-dark pt-6" style="min-height: 100vh">
     <div class="container d-flex h-100 justify-content-center align-items-center position-relative z-index-10">
-        <div class="d-flex justify-content-center align-items-center h-100 position-relative z-index-10 text-white">
-            <div class="d-flex flex-column justify-content-between mt-9">
-                <h3 class="display-md-6     fw-bold px-2 px-md-5 text-center mx-auto col-lg-8 mt-md-0" data-aos="fade-up" data-aos-delay="500">{% trans 'Confiance - Sérieux - Rapidité' %}</h3>
+        <div class="d-flex justify-content-center align-items-center h-100 position-relative z-index-10 text-white w-100">
+            <div class="d-flex flex-column justify-content-between mt-9 w-100">
+                <h3 class="display-md-5  fw-bold px-2 px-md-5 text-center mx-auto col-lg-8 mt-md-0 " data-aos="fade-up" data-aos-delay="500">{% trans 'Confiance - Sérieux - Rapidité' %}</h3>
 
-                <div class="mt-5" data-aos="fade-in " data-aos-delay="900">
-
-                    <form action="{% url 'website:properties' %}" method="GET" >
-                        <div class="filter-container rounded-3 ">
-                            <div class="filter-bar d-flex justify-content-center w-100 flex-wrap p-3  rounded">
+                <div class="mt-5" data-aos="fade-in" data-aos-delay="900">
+                    <form action="{% url 'website:properties' %}" method="GET">
+                        <div class="filter-container rounded-3">
+                            <!-- Property Type Filter using Icons -->
+                            <div class="form-group mx-1 my-1 d-flex justify-content-center pt-4">
+                                <input type="hidden" id="propertype" name="property_type" value="">
+                                <div class="property-type-icons d-flex justify-content-between w-75 flex-wrap px-3 pt-3 rounded text-dark ">
+                                    <div class="property-icon" data-value="Appartement">
+                                        <img src="{% static 'images/logos/appartement.svg' %}" alt="Appartement" class="icon-img">
+                                        <span>{% trans 'Appartement' %}</span>
+                                    </div>
+                                    <div class="property-icon" data-value="Villa">
+                                        <img src="{% static 'images/logos/maison.svg' %}" alt="Villa" class="icon-img">
+                                        <span>{% trans 'Villa' %}</span>
+                                    </div>
+                                    <div class="property-icon" data-value="Local">
+                                        <img src="{% static 'images/logos/commercial.svg' %}" alt="Local" class="icon-img">
+                                        <span>{% trans 'Local' %}</span>
+                                    </div>
+                                    <div class="property-icon" data-value="Terrain">
+                                        <img src="{% static 'images/logos/terrain.svg' %}" alt="Terrain" class="icon-img">
+                                        <span>{% trans 'Terrain' %}</span>
+                                    </div>
+                                    <div class="property-icon" data-value="Bureau">
+                                        <img src="{% static 'images/logos/bureau.svg' %}" alt="Bureau" class="icon-img">
+                                        <span>{% trans 'Bureau' %}</span>
+                                    </div>
+                                    <div class="property-icon" data-value="Immeuble">
+                                        <img src="{% static 'images/logos/immeuble.svg' %}" alt="Immeuble" class="icon-img">
+                                        <span>{% trans 'Immeuble' %}</span>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- Filter Bar -->
+                            <div class="filter-bar d-flex justify-content-center w-100 flex-wrap p-4 pb-5 rounded  shadow-sm">
                                 <!-- Advert Type Filter -->
-                                <div class="form-group mx-1 my-1">
-                                    <select id="advertype" class="form-select ri-2x select2-dropdown form-select-sm">
-                                        <option value="For Sale">{% trans 'Achat' %}</option>
+                                <div class="form-group mx-2 my-2 d-flex align-items-center">
+                                    <select id="advertype" name="advert_type" class="form-select form-select-md rounded-pill">
+                                        <option value="For Sale">{% trans 'Vendre' %}</option>
                                         <option value="For Rent">{% trans 'Location' %}</option>
                                     </select>
                                 </div>
-
-                                <!-- Property Type Filter -->
-                                <div class="form-group mx-1 my-1">
-                                    <select id="propertype" class="form-select form-select-sm">
-                                        <option value="">{% trans 'Property Type' %}</option>
-                                        <option value="Appartement">{% trans 'Appartement' %}</option>
-                                        <option value="Villa">{% trans 'Villa' %}</option>
-                                        <option value="Local">{% trans 'Local' %}</option>
-                                        <option value="Terrain">{% trans 'Terrain' %}</option>
-                                        <option value="Hangar">{% trans 'Hangar' %}</option>
-                                        <option value="Bungalow">{% trans 'Bungalow' %}</option>
-                                        <option value="Usine">{% trans 'Usine' %}</option>
-                                    </select>
-                                </div>
-
                                 <!-- Wilaya Dropdown -->
-                                <div class="form-group mx-1 my-1">
-                                    <select id="wilaya" name="wilaya" class="form-select form-select-sm" >
+                                <div class="form-group mx-2 my-2 d-flex align-items-center">
+                                    <select id="wilaya" name="wilaya" class="form-select form-select-md rounded-pill">
                                         <option value="">{% trans 'Wilaya' %}</option>
+                                        <option value="1">Wilaya 1</option>
+                                        <option value="2">Wilaya 2</option>
+                                        <!-- Add more options as needed -->
                                     </select>
                                 </div>
-
-
                                 <!-- Price Range Filter -->
-                                <div class="d-flex mx-1 my-1">
+                                <div class="d-flex mx-2 my-2 align-items-center form-group">
                                     <div class="form-group">
-                                        <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="{% trans 'Min Price DZD' %}" min="0">
+                                        <input type="number" id="minPrice" class="form-control form-control-md rounded-pill" placeholder="{% trans 'Min Price DZD' %}" min="0">
                                     </div>
-                                    <div class="form-group mx-1">
-                                        <input type="number" id="maxPrice" class="form-control form-control-sm" placeholder="{% trans 'Max Price DZD' %}" min="0">
+                                    <span class="mx-2">-</span>
+                                    <div class="form-group">
+                                        <input type="number" id="maxPrice" class="form-control form-control-md rounded-pill" placeholder="{% trans 'Max Price DZD' %}" min="0">
                                     </div>
                                 </div>
-
-
-
                                 <!-- Filter Button -->
-                                <div class="form-group mx-1 my-1">
-                                    <button class="btn btn-orange btn-sm" type="submit">{% trans 'Filter' %}</button>
+                                <div class="d-flex mx-2 my-2 align-items-center form-group ">
+                                    <button class="btn btn-orange  rounded-pill" type="submit">{% trans 'Filter' %}</button>
                                 </div>
                             </div>
+
+
                         </div>
-
-
-
                     </form>
+                
+                    <!-- Add some basic styles -->
+                    <style>
+                        .property-type-icons .property-icon {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            cursor: pointer;
+                            margin: 0 10px; /* Adjust margin for smaller screens */
+                        }
+                    
+                        .icon-img {
+                            width: 90px; /* Adjust the size as needed */
+                            height: auto;
+                        }
+                    
+                        .property-type-icons .property-icon.selected {
+                            border: 2px solid orange;
+                            border-radius: 10px;
+                            padding: 5px;
+                        }
+                    
+                        .filter-bar {
+                            margin-top: 20px; /* Add some space between icons and other filters */
+                        }
+                    </style>
+                    
+                
+                    <!-- Add JavaScript to handle icon selection -->
+                    <script>
+                        document.querySelectorAll('.property-type-icons .property-icon').forEach(icon => {
+                            icon.addEventListener('click', function () {
+                                document.querySelectorAll('.property-type-icons .property-icon').forEach(icon => {
+                                    icon.classList.remove('selected');
+                                });
+                                this.classList.add('selected');
+                                document.getElementById('propertype').value = this.getAttribute('data-value');
+                            });
+                        });
+                    </script>
                 </div>
-                <a href="#suite" class=" d-block text-center text-decoration-none animation-float ri-2x transition-all opacity-50-hover text-white mt-9"
+                
+                <a href="#suite" class=" d-block text-center text-decoration-none animation-float ri-2x transition-all opacity-50-hover text-white mt-3"
                       data-pixr-scrollto data-target=".brand-section" data-aos="fade-up"
                       data-aos-delay="700">
                     {% trans 'lire la suite' %}
@@ -246,39 +297,36 @@
         </div>
     </div>
     <div class="position-absolute z-index-1 top-0 bottom-0 start-0 end-0">
-        <!-- Swiper Info -->
-        <div class="swiper-container overflow-hidden bg-light w-100 h-100"
-             data-swiper
-             data-options='{
-            "slidesPerView": 1,
-            "speed": 1500,
-            "loop": true,
-            "effect": "fade",
-            "autoplay": {
-              "delay": 5000
-            }
-          }'>
-            <div class="swiper-wrapper">
-                <div class="swiper-slide position-relative">
-                    <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images\banners\banner-2.jpg' %});">
-                    </div>
-                </div>
-                <div class="swiper-slide position-relative">
-                    <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-2.jpg' %}));">
-                    </div>
-                </div>
-                <div class="swiper-slide position-relative">
-                    <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-7.jpg' %}));">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- / Swiper Info-->            </div>
+      <!-- Swiper Info -->
+<div class="swiper-container overflow-hidden bg-light w-100 h-100"
+data-swiper
+data-options='{
+   "slidesPerView": 1,
+   "speed": 1500,
+   "loop": true,
+   "effect": "fade",
+   "autoplay": {
+     "delay": 5000
+   }
+ }'>
+<div class="swiper-wrapper">
+   <div class="swiper-slide position-relative">
+       <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/banners/banner-2.jpg' %});">
+       </div>
+   </div>
+   <div class="swiper-slide position-relative">
+       <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-2.jpg' %});">
+       </div>
+   </div>
+   <div class="swiper-slide position-relative">
+       <div class="w-100 h-100 bg-img-cover animation-move bg-pos-center-center" style="background-image: url({% static 'images/slideshows/slideshow-1.jpg' %});">
+       </div>
+   </div>
+</div>
+</div>
+<!-- / Swiper Info-->
+    </div>
 </section>
-<!--/ Hero Section-->
-<!--/ Hero Section-->
-
 
 <div class="position-relative row my-lg-7 pt-5 ps-3 pt-lg-0 w-100 mt-6" id="suite" >
     <div class="bg-text bottom-0 start-0 end-0" data-aos="fade-up" >
@@ -304,18 +352,19 @@
     <div class="col-12 col-md-6 position-relative z-index-20 pe-0 mt-6 " data-aos="fade-left">
 
         <picture class="w-50 d-block position-relative z-index-10 border border-white border-4 shadow-lg">
-            <img loading="lazy" class="img-fluid" src="{% static 'images\banners\banner-2.jpg'%}" alt="{% trans 'Real Estate Banner 1' %}">
+            <img loading="lazy" class="img-fluid" src="{% static 'images\banners\banner-1.jpg'%}" alt="{% trans 'Real Estate Banner 1' %}">
         </picture>
 
 
         <picture class="w-60 d-block me-8 mt-n10 shadow-lg border border-white border-4 position-relative z-index-20 ms-auto" style="max-height : 140vh !important;">
-            <img loading="lazy" class="img-fluid" src="{% static 'images\banners\banner-2.jpg'%}" alt="{% trans 'Real Estate Banner 1' %}">
+            <img loading="lazy" class="img-fluid" src="{% static 'images\banners\banner-5.jpg'%}" alt="{% trans 'Real Estate Banner 1' %}">
         </picture>
 
         <picture class="w-50 d-block me-8 mt-n7 shadow-lg border border-white border-4 position-absolute top-0 end-0 z-index-0 ">
-            <img loading="lazy" class="img-fluid" src="{% static 'images\banners\banner-2.jpg'%}" alt="{% trans 'Real Estate Banner 3' %}">
+            <img loading="lazy" class="img-fluid" src="{% static 'images\banners\banner-4.jpg'%}" alt="{% trans 'Real Estate Banner 3' %}">
         </picture>
     </div>
+
 </div>
 <!-- / Linked Product Carousels-->
 
@@ -383,19 +432,11 @@
                     <p class="mb-2"><strong>{% trans 'Adresse:' %}</strong> [Votre adresse ici]</p>
                     <p class="mb-2"><strong>{% trans 'Téléphone:' %}</strong> [Votre numéro de téléphone ici]</p>
                     <p class="mb-2"><strong>{% trans 'Email:' %}</strong> [Votre email ici]</p>
-                    <p class="mb-2"><strong>{% trans 'Site Web:' %}</strong> [Votre site web ici]</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- SVG Shape Divider -->
-    <div class="position-absolute z-index-50 text-white bottom-0 start-0 end-0">
-        <svg class="align-self-end d-flex w-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25">
-            <polygon fill="currentColor" points="0 53.25 1283 53.25 1283 0 0 53.25"></polygon>
-        </svg>
-    </div>
-    <!-- /SVG Shape Divider -->
 </section>
 <!-- / Main Section-->
      <!-- Staff Picks-->
@@ -483,10 +524,10 @@
             </div>
             <div class="mt-2 mx-2 d-flex justify-content-between align-items-center">
                 <!-- Call and Message Buttons -->
-                <button class="btn btn-outline-dark btn-sm" onclick="showModal('call')">
+                <button class="btn btn-outline-white bg-success btn-sm" onclick="showModal('call')">
                     <i class="icon-phone"></i> Call
                 </button>
-                <button class="btn btn-outline-dark btn-sm" onclick="showModal('message')">
+                <button class="btn btn-outline-white bg-info btn-sm" onclick="showModal('message')">
                     <i class="icon-message"></i> Message
                 </button>
             </div>
@@ -511,55 +552,11 @@
 
             </div>
             <!-- / Swiper Latest-->            </div>
+             
 </section>
     <!-- / Staff Picks-->
 
-<!-- Section Télécharger l'Application -->
-<section class="my-10 position-relative">
-    <!-- Diviseur de Forme SVG -->
-    <div class="position-absolute z-index-50 text-white top-0 start-0 end-0">
-        <svg class="align-self-start d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="1283 0 0 0 0 53.25 1283 0"/></svg>
-    </div>
-    <!-- /Diviseur de Forme SVG -->
 
-    <div class="w-100 h-100 bg-img-cover bg-pos-center-center download-app-container py-5 py-md-7 py-lg-10" style="background-image: url({% static 'images/banners/imagehotspo.jpg'%});">
-        <div class="container  position-relative z-index-10 d-flex align-items-center" data-aos="fade-left">
-            <div class="py-8 d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-start align-items-lg-end col-lg-12 text-center text-lg-end">
-                <div style="margin-right: 20px; position: relative;top: -40px"> <!-- Ajout de la marge -->
-                    <p class="small fw-bolder text-uppercase tracking-wider mb-2 text-black"></p>
-                    <h2 class="display-5 fw-bold mb-3"> Téléchargez Notre Application</h2>
-                    <p class="lead d-none d-lg-block text-black-70">Téléchargez notre application pour explorer des milliers d'annonces, sauvegarder vos favoris et contacter des agents immobiliers où que vous soyez.</p>
-                    <div class="d-lg-none mb-3">
-                        <a href="#" class="me-3">
-                            <img loading="lazy" src="{% static 'img/get-it-on-google-play-badge-png-get-it-on-google-play-logo-800.png'%}" alt="Disponible sur Google Play" width="150">
-                        </a>
-                        <a href="#">
-                            <img loading="lazy" src="{% static 'img/IC_button-app-store@2x.png.png'%}" alt="Télécharger sur l'App Store" width="150">
-                        </a>
-                    </div>
-                </div>
-                <div class="position-relative d-none d-lg-block" style="max-width: 250px;">
-                    <img loading="lazy" src="{% static 'img/smartphone-and-mobile-phone-free-png.png'%}" alt="Icône de Téléphone" class="img-fluid mx-auto">
-                    <div class="position-absolute top-50 start-50 translate-middle" style="transform: translate(-50%, -50%);">
-                        <a href="#" class="me-3">
-                            <img loading="lazy" src="{% static 'img/get-it-on-google-play-badge-png-get-it-on-google-play-logo-800.png'%}" alt="Disponible sur Google Play" width="150">
-                        </a>
-                        <a href="#">
-                            <img loading="lazy" src="{% static 'img/IC_button-app-store@2x.png.png'%}" alt="Télécharger sur l'App Store" width="150">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Diviseur de Forme SVG -->
-    <div class="position-absolute z-index-50 text-white bottom-0 start-0 end-0">
-        <svg class="align-self-end d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1283 53.25"><polygon fill="currentColor" points="0 53.25 1283 53.25 1283 0 0 53.25"/></svg>
-    </div>
-    <!-- /Diviseur de Forme SVG -->
-</section>
-<!-- /Section Télécharger l'Application -->
 
         <!-- Linked Product Carousels-->
 

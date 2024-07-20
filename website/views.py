@@ -3,14 +3,8 @@ from apps.properties.models import *
 from django.http import HttpResponseRedirect,JsonResponse
 from django.utils.translation import activate
 from django.conf import settings
-# Create your views here.
-import requests
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.contrib.auth import authenticate, login
-from rest_framework_simplejwt.tokens import RefreshToken
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse
+from rest_framework.decorators import  permission_classes
+from django.views.decorators.cache import cache_page
 import json
 from django.contrib.auth.models import User
 

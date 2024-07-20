@@ -11,45 +11,167 @@
     <div class="container position-relative z-index-20" data-aos="fade-right" data-aos-delay="300">
         <h1 class="fw-bold display-6 mb-4 text-white">{% trans 'Explorez nos propriétés immobilières' %}</h1>
         <div>
-            <div class="filter-container">
-                <div class="filter-bar d-flex justify-content-center w-100 flex-wrap p-3 bg-light rounded">
-                    <!-- Advert Type Filter -->
-                    <div class="form-group mx-1 my-1">
-                        <select id="advertype" class="form-select form-select-sm">
-                            <option value="">Type d\'annonce  </option>
-                            <option value="For Sale">{% trans 'À vendre' %}</option>
-                            <option value="For Rent">{% trans 'À louer' %}</option>
-                        </select>
-                    </div>
-
-                    <!-- Property Type Filter -->
-                    <div class="form-group mx-1 my-1">
-                        <select id="propertype" class="form-select form-select-sm">
-                            <option value="">{% trans 'Type de propriété' %}</option>
-                            <option value="House">{% trans 'Maison' %}</option>
-                            <option value="Apartment">{% trans 'Appartement' %}</option>
-                            <option value="Office">{% trans 'Bureau' %}</option>
-                            <option value="Warehouse">{% trans 'Entrepôt' %}</option>
-                            <option value="Commercial">{% trans 'Commercial' %}</option>
-                            <option value="Other">{% trans 'Autre' %}</option>
-                        </select>
-                    </div>
-
-                    <!-- Price Range Filter -->
-                    <div class="d-flex mx-1 my-1">
-                        <div class="form-group">
-                            <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="{% trans 'Prix min' %}" min="0">
+            <div class="mt-5" data-aos="fade-in" data-aos-delay="900">
+                <form action="{% url 'website:properties' %}" method="GET">
+                    <div class="filter-container rounded-3">
+                        <!-- Property Type Filter using Icons -->
+                        <div class="form-group mx-1 my-1 d-flex justify-content-center pt-4">
+                            <input type="hidden" id="propertype" name="property_type" value="">
+                            <div class="property-type-icons d-flex justify-content-between w-75 flex-wrap px-3 pt-3 rounded text-dark">
+                                <div class="property-icon" data-value="Appartement">
+                                    <img src="{% static 'images/logos/appartement.svg' %}" alt="Appartement" class="icon-img">
+                                    <span>{% trans 'Appartement' %}</span>
+                                </div>
+                                <div class="property-icon" data-value="Villa">
+                                    <img src="{% static 'images/logos/maison.svg' %}" alt="Villa" class="icon-img">
+                                    <span>{% trans 'Villa' %}</span>
+                                </div>
+                                <div class="property-icon" data-value="Local">
+                                    <img src="{% static 'images/logos/commercial.svg' %}" alt="Local" class="icon-img">
+                                    <span>{% trans 'Local' %}</span>
+                                </div>
+                                <div class="property-icon" data-value="Terrain">
+                                    <img src="{% static 'images/logos/terrain.svg' %}" alt="Terrain" class="icon-img">
+                                    <span>{% trans 'Terrain' %}</span>
+                                </div>
+                                <div class="property-icon" data-value="Bureau">
+                                    <img src="{% static 'images/logos/bureau.svg' %}" alt="Bureau" class="icon-img">
+                                    <span>{% trans 'Bureau' %}</span>
+                                </div>
+                                <div class="property-icon" data-value="Immeuble">
+                                    <img src="{% static 'images/logos/immeuble.svg' %}" alt="Immeuble" class="icon-img">
+                                    <span>{% trans 'Immeuble' %}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group mx-1">
-                            <input type="number" id="maxPrice" class="form-control form-control-sm" placeholder="{% trans 'Prix max' %}" min="0">
+                
+                        <!-- Filter Bar -->
+                        <div class="filter-bar d-flex justify-content-center w-100 flex-wrap p-4 pb-5 rounded shadow-sm">
+                            <!-- Advert Type Filter -->
+                            <div class="form-group mx-2 my-2">
+                                <select id="advertype" name="advert_type" class="form-select form-select-md rounded-pill">
+                                    <option value="For Sale">{% trans 'Vendre' %}</option>
+                                    <option value="For Rent">{% trans 'Location' %}</option>
+                                </select>
+                            </div>
+                            <!-- Wilaya Dropdown -->
+                            <div class="form-group mx-2 my-2">
+                                <select id="wilaya" name="wilaya" class="form-select form-select-md rounded-pill">
+                                    <option value="">{% trans 'Wilaya' %}</option>
+                                    <option value="1">Wilaya 1</option>
+                                    <option value="2">Wilaya 2</option>
+                                    <!-- Add more options as needed -->
+                                </select>
+                            </div>
+                            <!-- Price Range Filter -->
+                            <div class="d-flex mx-2 my-2 form-group align-items-center">
+                                <input type="number" id="minPrice" name="min_price" class="form-control form-control-md rounded-pill" placeholder="{% trans 'Min Price DZD' %}" min="0">
+                                <span class="mx-2">-</span>
+                                <input type="number" id="maxPrice" name="max_price" class="form-control form-control-md rounded-pill" placeholder="{% trans 'Max Price DZD' %}" min="0">
+                            </div>
+                            <!-- Checkbox Filters as Buttons -->
+                              <!-- Features Buttons -->
+            <div class="form-group mx-2 my-2 d-flex flex-wrap container">
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="ascenseur">{% trans 'Ascenseur' %}</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="balcon">{% trans 'Balcon' %}</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="cave">{% trans 'Cave' %}</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="garage">{% trans 'Garage' %}</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="gardien">{% trans 'Gardien' %}</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="interphone">{% trans 'Interphone' %}</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="meuble">{% trans 'Meublé' %}</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="parking_exterieur">{% trans 'Parking Extérieur' %}</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="parking_sous_sol">{% trans 'Parking Sous-sol' %}</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="salle_deau">{% trans 'Salle d\'eau' %}</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="terrasse">{% trans 'Terrasse' %}</button>
+            </div>
+            <!-- Hidden Input for Features -->
+            <input type="hidden" id="features" name="features" value="">
+            <!-- Filter Button -->
+                            <!-- Filter Button -->
+                            <div class="form-group mx-2 my-2">
+                                <button class="btn btn-orange rounded-pill" type="submit">{% trans 'Filter' %}</button>
+                            </div>
                         </div>
                     </div>
+                </form>
+                
+                <!-- Add some basic styles -->
+                <style>
+                    .property-type-icons .property-icon {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        cursor: pointer;
+                        margin: 0 10px; /* Adjust margin for smaller screens */
+                    }
+                
+                    .icon-img {
+                        width: 40px; /* Adjust the size as needed */
+                        height: auto;
+                    }
+                
+                    .property-type-icons .property-icon.selected {
+                        border: 2px solid orange;
+                        border-radius: 10px;
+                        padding: 5px;
+                    }
+                
+                    .filter-bar {
+                        margin-top: 20px; /* Add some space between icons and other filters */
+                    }
+                
+                    .btn-outline-secondary {
+                        font-size: 14px; /* Adjust the font size as needed */
+                        color: black;
+                    }
+                
+                    .btn-outline-secondary.active {
+                        background-color: orange;
+                        border-color: orange;
+                        color: white;
+                    }
+                </style>
+                
+                <!-- Add JavaScript to handle button toggle -->
+                <script>
+                    document.querySelectorAll('.property-icon').forEach(function(icon) {
+                        icon.addEventListener('click', function() {
+                            document.querySelectorAll('.property-icon').forEach(function(el) {
+                                el.classList.remove('selected');
+                            });
+                            this.classList.add('selected');
+                            document.getElementById('propertype').value = this.getAttribute('data-value');
+                        });
+                    });
+                
+                  
+                    });
+                </script>
+                <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const featureButtons = document.querySelectorAll('.feature-btn');
+        const featuresInput = document.getElementById('features');
+        const selectedFeatures = new Set();
 
-                    <!-- Filter Button -->
-                    <div class="form-group mx-1 my-1">
-                        <button class="btn btn-orange btn-sm" onclick="filtersearch()">{% trans 'Recherche' %}</button>
-                    </div>
-                </div>
+        featureButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const feature = this.getAttribute('data-value');
+                if (selectedFeatures.has(feature)) {
+                    selectedFeatures.delete(feature);
+                    this.classList.remove('active');
+                } else {
+                    selectedFeatures.add(feature);
+                    this.classList.add('active');
+                }
+                // Update hidden input with selected features
+                featuresInput.value = Array.from(selectedFeatures).join(',');
+            });
+        });
+    });
+</script>
+
+
+                
             </div>
         </div>
     </div>
@@ -81,7 +203,8 @@
 
                   <!-- / Sort Options-->
               </div>
-          </div>            <!-- /Category Toolbar-->
+          </div>            
+          <!-- /Category Toolbar-->
 
 
           <!-- Products-->
@@ -102,7 +225,7 @@
   </div>
 
   <!-- /Page Content -->
-    </section>
+</section>
 
 
  <!--filter-->
@@ -202,7 +325,7 @@
                  <!-- Area Range Filter -->
                  <div class="py-4 widget-filter widget-filter-area border-top">
                      <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-area" role="button" aria-expanded="false" aria-controls="filter-modal-area">
-                         {% trans 'Area Range' %}
+                         {% trans 'superficie' %}
                      </a>
                      <div id="filter-modal-area" class="collapse">
                          <div class="d-flex justify-content-between align-items-center">
@@ -222,33 +345,30 @@
                  <!-- Bedrooms Filter -->
                  <div class="py-4 widget-filter border-top">
                      <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-bedrooms" role="button" aria-expanded="false" aria-controls="filter-modal-bedrooms">
-                         {% trans 'Bedrooms' %}
+                         {% trans 'Chambres' %}
                      </a>
                      <div id="filter-modal-bedrooms" class="collapse">
                          <div class="filter-options mt-3">
-                             <div class="form-group form-check mb-0">
-                                 <input type="radio" class="form-check-input" id="filter-bedrooms-modal-0" name="bedrooms" value="0">
-                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-0">{% trans '0+ Bedrooms' %}</label>
-                             </div>
+                             
                              <div class="form-group form-check mb-0">
                                  <input type="radio" class="form-check-input" id="filter-bedrooms-modal-1" name="bedrooms" value="1">
-                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-1">{% trans '1+ Bedrooms' %}</label>
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-1">{% trans 'F1+ ' %}</label>
                              </div>
                              <div class="form-group form-check mb-0">
                                  <input type="radio" class="form-check-input" id="filter-bedrooms-modal-2" name="bedrooms" value="2">
-                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-2">{% trans '2+ Bedrooms' %}</label>
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-2">{% trans 'F2+ ' %}</label>
                              </div>
                              <div class="form-group form-check mb-0">
                                  <input type="radio" class="form-check-input" id="filter-bedrooms-modal-3" name="bedrooms" value="3">
-                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-3">{% trans '3+ Bedrooms' %}</label>
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-3">{% trans 'F3+ ' %}</label>
                              </div>
                              <div class="form-group form-check mb-0">
                                  <input type="radio" class="form-check-input" id="filter-bedrooms-modal-4" name="bedrooms" value="4">
-                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-4">{% trans '4+ Bedrooms' %}</label>
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-4">{% trans 'F4+ ' %}</label>
                              </div>
                              <div class="form-group form-check mb-0">
                                  <input type="radio" class="form-check-input" id="filter-bedrooms-modal-5" name="bedrooms" value="5">
-                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-5">{% trans '5+ Bedrooms' %}</label>
+                                 <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-bedrooms-modal-5">{% trans 'F5+ ' %}</label>
                              </div>
                          </div>
                      </div>
@@ -279,6 +399,61 @@
                      </select>
                  </div>
 
+
+                 <div class="py-4 widget-filter border-top">
+                    <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-features" role="button" aria-expanded="false" aria-controls="filter-modal-features">
+                        {% trans 'Caractéristiques supplémentaires' %}
+                    </a>
+                    <div id="filter-modal-features" class="collapse">
+                        <div class="filter-options mt-3">
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-ascenseur" name="ascenseur" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-ascenseur">{% trans "Ascenseur" %}</label>
+                            </div>
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-balcon" name="balcon" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-balcon">{% trans "Balcon" %}</label>
+                            </div>
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-cave" name="cave" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-cave">{% trans "Cave" %}</label>
+                            </div>
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-garage" name="garage" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-garage">{% trans "Garage" %}</label>
+                            </div>
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-gardien" name="gardien" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-gardien">{% trans "Gardien" %}</label>
+                            </div>
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-interphone" name="interphone" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-interphone">{% trans "Interphone" %}</label>
+                            </div>
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-meuble" name="meuble" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-meuble">{% trans "Meublé" %}</label>
+                            </div>
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-parking_exterieur" name="parking_exterieur" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-parking_exterieur">{% trans "Parking Extérieur" %}</label>
+                            </div>
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-parking_sous_sol" name="parking_sous_sol" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-parking_sous_sol">{% trans "Parking Sous-sol" %}</label>
+                            </div>
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-salle_deau" name="salle_deau" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-salle_deau">{% trans "Salle d'eau" %}</label>
+                            </div>
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="filter-terrasse" name="terrasse" value="True">
+                                <label class="form-check-label fw-normal text-body flex-grow-1 d-flex justify-content-between" for="filter-terrasse">{% trans "Terrasse" %}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                  <!-- Keywords Filter -->
                  <div class="py-4 widget-filter border-top">
                      <a class="small text-body text-decoration-none text-secondary-hover transition-all fs-6 fw-bolder d-block collapse-icon-chevron" data-bs-toggle="collapse" href="#filter-modal-location" role="button" aria-expanded="false" aria-controls="filter-modal-location">
@@ -293,6 +468,8 @@
                  </div>
                  <!-- / Keywords Filter -->
              </div>
+         </div>
+     </div>
              <!-- / Filters -->
 
              <!-- Filter Button -->
@@ -410,10 +587,10 @@
             </div>
             <div class="mt-2 mx-2 d-flex justify-content-between align-items-center">
                 <!-- Call and Message Buttons -->
-                <button class="btn btn-outline-dark btn-sm" onclick="showModal('call')">
+                <button class="btn btn-outline-white bg-success btn-sm" onclick="showModal('call')">
                     <i class="icon-phone"></i> Call
                 </button>
-                <button class="btn btn-outline-dark btn-sm" onclick="showModal('message')">
+                <button class="btn btn-outline-white bg-info btn-sm" onclick="showModal('message')">
                     <i class="icon-message"></i> Message
                 </button>
             </div>
@@ -533,7 +710,7 @@ async function saveProperty(propertySlug) {
                  if (!response.ok) {
                      throw new Error(`HTTP error! Status: ${response.status}`);
                  }
-                 console.log('fetchsucece')
+                 console.log('fetchsucece',url,requestOptions)
                  return response.json();
              })
              .then(data => {

@@ -12,7 +12,9 @@
  {% endblock %}
 
 {% block section %}
-
+<div id="loader-overlay" class="loader-overlay">
+    <div class="loader"></div>
+</div>
 <section class="mt-0  vh-lg-100">
 
 
@@ -23,58 +25,31 @@
                 <form id="propertyForm" enctype="multipart/form-data">
                     <!-- property type -->
                     {% csrf_token %}
-
-                    <div class="step" style="min-height: 60vh; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-
-                    <div class="container py-5">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-12">
+                    <!-- Advert Type -->
+                <!-- Advert Type -->
+                    <div class="container step" style="min-height: 60vh; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <div class=" py-5">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12">
                                     <!-- Step Content -->
                                     <div class="form-group">
-                                        <label class="form-label" style="font-size: 1.25rem; font-weight: 500; margin-bottom: 20px;">Property Type</label>
-                                        <div class="btn-group-toggle d-flex flex-wrap" data-toggle="buttons">
-                                            <label class="btn btn-outline-dark property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
-                                                <i class="icon-building" style="font-size: 1.5rem;"></i>
-                                                <input type="radio" class="btn-check" name="property_type" value="Appartement" autocomplete="off" onchange="changeColor(this)">
-                                                <br>Apartment
-                                            </label>
-                                            <label class="btn btn-outline-dark property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
-                                                <i class="flaticon-house-1" style="font-size: 1.5rem;"></i>
-                                                <input type="radio" class="btn-check" name="property_type" value="Villa" autocomplete="off" onchange="changeColor(this)">
-                                                <br>Villa
-                                            </label>
-                                            <label class="btn btn-outline-dark property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
-                                                <i class="icon-map" style="font-size: 1.5rem;"></i>
-                                                <input type="radio" class="btn-check" name="property_type" value="Terrain" autocomplete="off" onchange="changeColor(this); changePropertyType(this)">
-                                                <br>Terrain
-                                            </label>
-                                            <label class="btn btn-outline-dark property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
-                                                <i class="flaticon-house-2" style="font-size: 1.5rem;"></i>
-                                                <input type="radio" class="btn-check" name="property_type" value="Hangar" autocomplete="off" onchange="changeColor(this)">
-                                                <br>Hangar
-                                            </label>
-                                            <label class="btn btn-outline-dark property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
-                                                <i class="flaticon-house-4" style="font-size: 1.5rem;"></i>
-                                                <input type="radio" class="btn-check" name="property_type" value="Bungalow" autocomplete="off" onchange="changeColor(this)">
-                                                    <br>Bungalow
-                                            </label>
-                                            <label class="btn btn-outline-dark property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
-                                                <i class="icon-industry" style="font-size: 1.5rem;"></i>
-                                                <input type="radio" class="btn-check" name="property_type" value="Usine" autocomplete="off" onchange="changeColor(this)">
-                                                <br>Usine
-                                            </label>
-
-                                            <label class="btn btn-outline-dark property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
-                                                <i class="icon-pencil " style="font-size: 1.5rem;"></i>
-                                                <input type="radio" class="btn-check" name="property_type" value="Other" autocomplete="off" onchange="changeColor(this)">
-                                                <br>Other
-                                            </label>
-
+                                        <label class="form-label" style="font-size: 1.25rem; font-weight: 500; margin-bottom: 20px;">Advert Type</label>
+                                        <div class="btn-group-toggle d-flex justify-content-center flex-wrap" data-toggle="buttons">
+                                                <input type="radio" name="advert_type" value="For Sale" autocomplete="off" class="btn-check" id="for_sale">
+                                                <label class="btn btn-outline-dark btn-lg rounded m-2 d-flex flex-column align-items-center" for="for_sale">
+                                                    <i class="icon-handshake-o" style="font-size: 1.5rem;"></i>
+                                                    For Sale
+                                                </label>
+                                                <input type="radio" name="advert_type" value="For Rent" autocomplete="off" class="btn-check" id="for_rent">
+                                                <label class="btn btn-outline-dark btn-lg rounded m-2 d-flex flex-column align-items-center" for="for_rent">
+                                                    <i class="icon-calendar" style="font-size: 1.5rem;"></i>
+                                                    For Rent
+                                                </label>
                                         </div>
-
                                     </div>
                                     <!-- End Step Content -->
                                 </div>
+                                
                             </div>
                         </div>
                         <div class="container">
@@ -84,161 +59,406 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
-                    <!-- advert type -->
-                    <div class="step" style="min-height: 60vh;">
-                        <!-- Step 2 Content -->
-                        <div class="form-group">
-                            <label class="form-label">Advert Type</label>
-                            <div class="btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-                                <label class="btn btn-outline-orange property-label">
-                                    <input type="checkbox" name="advert_type" value="For Sale"> For Sale
-                                </label>
-                                <label class="btn btn-outline-orange property-label">
-                                    <input type="checkbox" name="advert_type" value="For Rent"> For Rent
-                                </label>
 
+                    <div class="container step" style="min-height: 60vh; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+
+                        <div class="container py-5">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12">
+                                    <!-- Step Content -->
+                                    <div class="form-group">
+                                        <label class="form-label" style="font-size: 1.25rem; font-weight: 500; margin-bottom: 20px;">Property Type</label>
+                                        <div class="btn-group-toggle d-flex flex-wrap" data-toggle="buttons">
+                                            <label class="btn btn-outline-dark btn-lg rounded property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
+                                                <i class="icon-building" style="font-size: 1.5rem;"></i>
+                                                <input type="radio" class="btn-check" name="property_type" value="Appartement" autocomplete="off" onchange="changeColor(this)">
+                                                <br>Appartement
+                                            </label>
+                                            <label class="btn btn-outline-dark btn-lg rounded property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
+                                                <i class="flaticon-house-1" style="font-size: 1.5rem;"></i>
+                                                <input type="radio" class="btn-check" name="property_type" value="Villa" autocomplete="off" onchange="changeColor(this)">
+                                                <br>Villa
+                                            </label>
+                                            <label class="btn btn-outline-dark btn-lg rounded property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
+                                                <i class="icon-map" style="font-size: 1.5rem;"></i>
+                                                <input type="radio" class="btn-check" name="property_type" value="Local" autocomplete="off" onchange="changeColor(this)">
+                                                <br>Local
+                                            </label>
+                                            <label class="btn btn-outline-dark btn-lg rounded property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
+                                                <i class="icon-map" style="font-size: 1.5rem;"></i>
+                                                <input type="radio" class="btn-check" name="property_type" value="Terrain" autocomplete="off" onchange="changeColor(this)">
+                                                <br>Terrain
+                                            </label>
+                                            <label class="btn btn-outline-dark btn-lg rounded property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
+                                                <i class="flaticon-house-2" style="font-size: 1.5rem;"></i>
+                                                <input type="radio" class="btn-check" name="property_type" value="Hangar" autocomplete="off" onchange="changeColor(this)">
+                                                <br>Hangar
+                                            </label>
+                                            <label class="btn btn-outline-dark btn-lg rounded property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
+                                                <i class="flaticon-house-4" style="font-size: 1.5rem;"></i>
+                                                <input type="radio" class="btn-check" name="property_type" value="Bungalow" autocomplete="off" onchange="changeColor(this)">
+                                                <br>Bungalow
+                                            </label>
+                                            <label class="btn btn-outline-dark btn-lg rounded property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
+                                                <i class="icon-industry" style="font-size: 1.5rem;"></i>
+                                                <input type="radio" class="btn-check" name="property_type" value="Usine" autocomplete="off" onchange="changeColor(this)">
+                                                <br>Usine
+                                            </label>
+                                            <label class="btn btn-outline-dark btn-lg rounded property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
+                                                <i class="icon-pencil" style="font-size: 1.5rem;"></i>
+                                                <input type="radio" class="btn-check" name="property_type" value="Bereau" autocomplete="off" onchange="changeColor(this)">
+                                                <br>Bereau
+                                            </label>
+                                            <label class="btn btn-outline-dark btn-lg rounded property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
+                                                <i class="icon-building" style="font-size: 1.5rem;"></i>
+                                                <input type="radio" class="btn-check" name="property_type" value="Immeuble" autocomplete="off" onchange="changeColor(this)">
+                                                <br>Immeuble
+                                            </label>
+                                            <label class="btn btn-outline-dark btn-lg rounded property-label m-2" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); padding: 15px; text-align: center; border-width: 2px;">
+                                                <i class="icon-pencil" style="font-size: 1.5rem;"></i>
+                                                <input type="radio" class="btn-check" name="property_type" value="Other" autocomplete="off" onchange="changeColor(this)">
+                                                <br>Other
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- End Step Content -->
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-100 h-auto mt-10">
-                            <button type="button" class="btn btn-white prev">Previous</button>
-                            <button type="button" class="btn btn-orange next">Next</button>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-between">
+                                        <button type="button" class="btn btn-secondary prev">Previous</button>
+                                        <button type="button" class="btn btn-orange next">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
                     <!-- prop info step -->
-                    <div class="step" style="min-height: 60vh;">
-                        <!-- Property Title -->
-                        <div class="form-group">
-                            <label for="title" class="form-label">Property Title</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter property title" required>
+                <div class="step container py-5" style="min-height: 60vh; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-6"> <!-- col-md-6 will apply 50% width on medium screens and larger -->
+                            <!-- Property Title -->
+                            <div class="form-group">
+                                <label for="title" class="form-label">Property Title</label>
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter property title" required>
+                            </div>
+                            <!-- Description -->
+                            <div class="form-group">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter property description"></textarea>
+                            </div>
+                            <!-- Price -->
+                            <div class="form-group">
+                                <label for="price" class="form-label">Price</label>
+                                <input type="number" class="form-control" id="price" name="price" placeholder="Enter price" required>
+                            </div>
+                            <!-- / Price -->
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-between">
+                                        <button type="button" class="btn btn-secondary prev">Previous</button>
+                                        <button type="button" class="btn btn-orange next">Next</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Description -->
-                        <div class="form-group">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter property description"></textarea>
-                        </div>
-                        <!-- Price -->
-                        <div class="form-group">
-                            <label for="price" class="form-label">Price</label>
-                            <input type="number" class="form-control" id="price" name="price" placeholder="Enter price" required>
-                        </div>
-                        <!-- / Price -->
-
-                        <button type="button" class="btn btn-white prev">Previous</button>
-                        <button type="button" class="btn btn-orange next">Next</button>
                     </div>
+                </div>
+
 
                     <!-- prop address step -->
-                    <div class="step" style="min-height: 60vh;">
-                        <!-- Wilaya -->
-                        <div class="form-group">
-                            <label for="wilaya" class="form-label">Wilaya</label>
-                            <!-- Wilaya Dropdown -->
-                            <div class="form-group mx-1 my-1">
-                                <select id="wilaya" name="wilaya" class="form-select form-select-sm" >
-                                    <option value="">{% trans 'Wilaya' %}</option>
-                                </select>
-                            </div>                        </div>
-                        <!-- / Wilaya -->
-                        <!-- Daira -->
-                        <div class="form-group">
-                            <label for="daira" class="form-label">Daira</label>
-                            <div class="form-group mx-1 my-1">
-                                <select id="daira" name="daira" class="form-select form-select-sm" >
-                                    <option value="">{% trans 'Wilaya' %}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- / Daira -->
-                        <!-- Commune -->
-                        <div class="form-group">
-                            <label for="commune" class="form-label">Commune</label>
-                            <div class="form-group mx-1 my-1">
-                                <select id="commune" name="commune" class="form-select form-select-sm" required>
-                                    <option value="">{% trans 'Wilaya' %}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- / Commune -->
-                        <!-- Postal Code -->
-                        <div class="form-group">
-                            <label for="postal_code" class="form-label">Postal Code</label>
-                            <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="Enter postal code" required>
-                        </div>
-                        <!-- / Postal Code -->
-                        <!-- Street Address -->
-                        <div class="form-group">
-                            <label for="street_address" class="form-label">Street Address</label>
-                            <input type="text" class="form-control" id="street_address" name="street_address" placeholder="Enter street address" required>
-                        </div>
-                        <!-- / Street Address -->
-                        <!-- Property Number -->
-                        <div class="form-group">
-                            <label for="property_number" class="form-label">Property Number</label>
-                            <input type="number" class="form-control" id="property_number" name="property_number" placeholder="Enter property number" required>
-                        </div>
-                        <!-- / Property Number -->
+                    <div class="step" style="min-height: 60vh; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                      
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-6">
+                                     <!-- Wilaya -->
+                                <div class="form-group">
+                                    <label for="wilaya" class="form-label">Wilaya</label>
+                                    <!-- Wilaya Dropdown -->
+                                    <div class="form-group mx-1 my-1">
+                                        <select id="wilaya" name="wilaya" class="form-select form-select-sm" >
+                                            <option value="">{% trans 'Wilaya' %}</option>
+                                        </select>
+                                    </div>                        </div>
+                                <!-- / Wilaya -->
+                                <!-- Daira -->
+                                <div class="form-group">
+                                    <label for="daira" class="form-label">Daira</label>
+                                    <div class="form-group mx-1 my-1">
+                                        <select id="daira" name="daira" class="form-select form-select-sm" >
+                                            <option value="">{% trans 'Wilaya' %}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- / Daira -->
+                                <!-- Commune -->
+                                <div class="form-group">
+                                    <label for="commune" class="form-label">Commune</label>
+                                    <div class="form-group mx-1 my-1">
+                                        <select id="commune" name="commune" class="form-select form-select-sm" required>
+                                            <option value="">{% trans 'Wilaya' %}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- / Commune -->
+                                <!-- Postal Code -->
+                                <div class="form-group">
+                                    <label for="postal_code" class="form-label">Postal Code</label>
+                                    <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="Enter postal code" required>
+                                </div>
+                                <!-- / Postal Code -->
+                                <!-- Street Address -->
+                                <div class="form-group">
+                                    <label for="street_address" class="form-label">Street Address</label>
+                                    <input type="text" class="form-control" id="street_address" name="street_address" placeholder="Enter street address" required>
+                                </div>
+                                <!-- / Street Address -->
+                                <!-- Property Number -->
+                                <div class="form-group">
+                                    <label for="property_number" class="form-label">Property Number</label>
+                                    <input type="number" class="form-control" id="property_number" name="property_number" placeholder="Enter property number" required>
+                                </div>
+                                <!-- / Property Number -->
 
-                        <button type="button" class="btn btn-white prev">Previous</button>
-                        <button type="button" class="btn btn-orange next">Next</button>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary prev">Previous</button>
+                                            <button type="button" class="btn btn-orange next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- prop details step -->
-                    <div class="step" style="min-height: 60vh;">
-                        <!-- Plot Area -->
-                        <div class="form-group">
-                            <label for="plot_area" class="form-label">Plot Area(m^2)</label>
-                            <input type="number" class="form-control" id="plot_area" name="plot_area" placeholder="Enter plot area" required>
+                    <div class="step" style="min-height: 60vh; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-6">        
+                                <!-- Plot Area -->
+                                <div class="form-group">
+                                    <label for="plot_area" class="form-label">Plot Area(m^2)</label>
+                                    <input type="number" class="form-control" id="plot_area" name="plot_area" placeholder="Enter plot area" required>
+                                </div>
+                                <!-- / Plot Area -->
+                                <!-- Total Floors -->
+                                <div class="form-group">
+                                    <label for="total_floors" class="form-label">Number of Floors</label>
+                                    <input type="number" class="form-control" id="total_floors" name="total_floors" placeholder="Enter total floors" required>
+                                </div>
+                                <!-- / Total Floors -->
+                                <!-- Bedrooms -->
+                                <div class="form-group">
+                                    <label for="bedrooms" class="form-label">Bedrooms</label>
+                                    <input type="number" class="form-control" id="bedrooms" name="bedrooms" placeholder="Enter number of bedrooms" required>
+                                </div>
+                                <!-- / Bedrooms -->
+                                <!-- Bathrooms -->
+                                <div class="form-group">
+                                    <label for="bathrooms" class="form-label">Bathrooms</label>
+                                    <input type="number" class="form-control" id="bathrooms" name="bathrooms" placeholder="Enter number of bathrooms" required>
+                                </div>
+                                <!-- / Bathrooms -->
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary prev">Previous</button>
+                                            <button type="button" class="btn btn-orange next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- / Plot Area -->
-                        <!-- Total Floors -->
-                        <div class="form-group">
-                            <label for="total_floors" class="form-label">Number of Floors</label>
-                            <input type="number" class="form-control" id="total_floors" name="total_floors" placeholder="Enter total floors" required>
+                    </div>
+                    <!-- Additional Amenities -->
+                    <div class="step" style="min-height: 60vh; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-6">
+                                     <!-- Gardien -->
+                                <div class="form-group">
+                                    <label for="gardien" class="form-label">Gardien</label>
+                                    <input type="checkbox" id="gardien" name="gardien">
+                                </div>
+                                <!-- / Gardien -->
+                                <!-- Interphone -->
+                                <div class="form-group">
+                                    <label for="interphone" class="form-label">Interphone</label>
+                                    <input type="checkbox" id="interphone" name="interphone">
+                                </div>
+                                <!-- / Interphone -->
+                                <!-- Meublé -->
+                                <div class="form-group">
+                                    <label for="meuble" class="form-label">Meublé</label>
+                                    <input type="checkbox" id="meuble" name="meuble">
+                                </div>
+                                <!-- / Meublé -->
+                                <!-- Parking Extérieur -->
+                                <div class="form-group">
+                                    <label for="parking_exterieur" class="form-label">Parking Extérieur</label>
+                                    <input type="checkbox" id="parking_exterieur" name="parking_exterieur">
+                                </div>
+                                <!-- / Parking Extérieur -->
+                                <!-- Parking Sous-sol -->
+                                <div class="form-group">
+                                    <label for="parking_sous_sol" class="form-label">Parking Sous-sol</label>
+                                    <input type="checkbox" id="parking_sous_sol" name="parking_sous_sol">
+                                </div>
+                                <!-- / Parking Sous-sol -->
+                                <!-- Salle d'eau -->
+                                <div class="form-group">
+                                    <label for="salle_deau" class="form-label">Salle d'eau</label>
+                                    <input type="checkbox" id="salle_deau" name="salle_deau">
+                                </div>
+                                <!-- / Salle d'eau -->
+                                <!-- Terrasse -->
+                                <div class="form-group">
+                                    <label for="terrasse" class="form-label">Terrasse</label>
+                                    <input type="checkbox" id="terrasse" name="terrasse">
+                                </div>
+                                <!-- / Terrasse -->
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary prev">Previous</button>
+                                            <button type="button" class="btn btn-orange next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
                         </div>
-                        <!-- / Total Floors -->
-                        <!-- Bedrooms -->
-                        <div class="form-group">
-                            <label for="bedrooms" class="form-label">Bedrooms</label>
-                            <input type="number" class="form-control" id="bedrooms" name="bedrooms" placeholder="Enter number of bedrooms" required>
+                    </div>
+                    
+                    <!-- Amenities -->
+                    <div class="step" style="min-height: 60vh; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-6"> 
+                        
+                                <!-- Ascenseur -->
+                                <div class="form-group">
+                                    <label for="ascenseur" class="form-label">Ascenseur</label>
+                                    <input type="checkbox" id="ascenseur" name="ascenseur">
+                                </div>
+                                <!-- / Ascenseur -->
+                                <!-- Balcon -->
+                                <div class="form-group">
+                                    <label for="balcon" class="form-label">Balcon</label>
+                                    <input type="checkbox" id="balcon" name="balcon">
+                                </div>
+                                <!-- / Balcon -->
+                                <!-- Cave -->
+                                <div class="form-group">
+                                    <label for="cave" class="form-label">Cave</label>
+                                    <input type="checkbox" id="cave" name="cave">
+                                </div>
+                                <!-- / Cave -->
+                                <!-- Garage -->
+                                <div class="form-group">
+                                    <label for="garage" class="form-label">Garage</label>
+                                    <input type="checkbox" id="garage" name="garage">
+                                </div>
+                                <!-- / Garage -->
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary prev">Previous</button>
+                                            <button type="button" class="btn btn-orange next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <!-- / Bedrooms -->
-                        <!-- Bathrooms -->
-                        <div class="form-group">
-                            <label for="bathrooms" class="form-label">Bathrooms</label>
-                            <input type="number" class="form-control" id="bathrooms" name="bathrooms" placeholder="Enter number of bathrooms" required>
+
+                    </div>
+                    <!-- Property Details -->
+                    <div class="step" style="min-height: 60vh; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-6">  
+                                <!-- Amenities -->
+                                <div class="form-group">
+                                    <label for="amenities" class="form-label">Amenities</label>
+                                    <textarea class="form-control" id="amenities" name="amenities" placeholder="Enter amenities" rows="3"></textarea>
+                                </div>
+                                <!-- / Amenities -->
+                                <!-- Property Status -->
+                                <div class="form-group">
+                                    <label for="property_status" class="form-label">Property Status</label>
+                                    <input type="text" class="form-control" id="property_status" name="property_status" placeholder="Enter property status" required>
+                                </div>
+                                <!-- / Property Status -->
+                                <!-- Neighborhood Information -->
+                                <div class="form-group">
+                                    <label for="neighborhood_info" class="form-label">Neighborhood Information</label>
+                                    <textarea class="form-control" id="neighborhood_info" name="neighborhood_info" placeholder="Enter neighborhood information" rows="3"></textarea>
+                                </div>
+                                <!-- / Neighborhood Information -->
+                                <!-- Legal Status -->
+                                <div class="form-group">
+                                    <label for="legal_status" class="form-label">Legal Status</label>
+                                    <input type="text" class="form-control" id="legal_status" name="legal_status" placeholder="Enter legal status" required>
+                                </div>
+                                <!-- / Legal Status -->
+                                <!-- Payment Options -->
+                                <div class="form-group">
+                                    <label for="payment_options" class="form-label">Payment Options</label>
+                                    <input type="text" class="form-control" id="payment_options" name="payment_options" placeholder="Enter payment options" required>
+                                </div>
+                                <!-- / Payment Options -->
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary prev">Previous</button>
+                                            <button type="button" class="btn btn-orange next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- / Bathrooms -->
-                        <button type="button" class="btn btn-white prev">Previous</button>
-                        <button type="button" class="btn btn-orange next">Next</button>
                     </div>
 
                     <!-- prop info step -->
-                    <div class="step" style="min-height: 60vh;">
-                        <!-- Cover Photo -->
-                        <div class="form-group">
-                            <label for="cover_photo" class="form-label">Cover Photo</label>
-                            <input type="file" class="form-control" id="cover_photo" name="cover_photo">
+                    <div class="step" style="min-height: 60vh; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-6">
+                                <!-- Cover Photo -->
+                                <div class="form-group">
+                                    <label for="cover_photo" class="form-label">Cover Photo</label>
+                                    <input type="file" class="form-control" id="cover_photo" name="cover_photo">
+                                </div>
+                                <!-- / Cover Photo -->
+                                <!-- Video -->
+                                <div class="form-group">
+                                    <label for="video" class="form-label">Video</label>
+                                    <input type="file" class="form-control" id="video" name="video">
+                                </div>
+                                <!-- / Video -->
+                                <!-- Photos -->
+                                <div class="form-group">
+                                    <label for="photos" class="form-label">Photos</label>
+                                    <input type="file" class="form-control" id="photos" name="photos" multiple>
+                                    <small class="form-text text-muted">Tap to select multiple photos.</small>
+                                </div>
+                                <!-- / Photos -->
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary prev">Previous</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <!-- / Cover Photo -->
-                        <!-- Video -->
-                        <div class="form-group">
-                            <label for="video" class="form-label">Video</label>
-                            <input type="file" class="form-control" id="video" name="video">
-                        </div>
-                        <!-- / Video -->
-                        <!-- Photos -->
-                        <div class="form-group">
-                            <label for="photos" class="form-label">Photos</label>
-                            <input type="file" class="form-control" id="photos" name="photos" multiple>
-                            <small class="form-text text-muted">Tap to select multiple photos.</small>
-                        </div>
-                        <!-- / Photos -->
-                        <button type="button" class="btn btn-white prev">Previous</button>
-                        <button type="submit" class="btn btn-orange">Submit</button>
                     </div>
                     <!-- Additional steps go here -->
                 </form>
@@ -376,4 +596,5 @@
 
      showStep(currentStep);
  </script>
+
  {% endblock %}

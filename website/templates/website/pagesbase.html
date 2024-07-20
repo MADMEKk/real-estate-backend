@@ -10,12 +10,30 @@
  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mx-0 p-0 flex-column border-0">
      <div class="w-100 pb-lg-0 pt-lg-0 pt-4 pb-3">
          <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
-             <!-- Logo-->
+            <!-- Language Selector -->
+<div class="w-100 d-flex justify-content-end">
+    <form method="get" action="{% url 'website:set_language' %}" class="d-flex">
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <button class="btn btn-link p-0 mx-1" type="submit" name="language" value="en" {% if LANGUAGE_CODE == 'en' %}disabled{% endif %}>
+            <img src="{% static 'flags/us.gif' %}" alt="English" style="width: 15px; height: 15px;"><span> EN </span>  |
+        </button>
+        <button class="btn btn-link p-0 mx-1" type="submit" name="language" value="fr" {% if LANGUAGE_CODE == 'fr' %}disabled{% endif %}>
+            <img src="{% static 'flags/fr.gif' %}" alt="Français" style="width: 15px; height: 15px;"> <span> FR </span> |
+        </button>
+        <button class="btn btn-link p-0 mx-1" type="submit" name="language" value="ar" {% if LANGUAGE_CODE == 'ar' %}disabled{% endif %}>
+            <img src="{% static 'flags/dz.gif' %}" alt="العربية" style="width: 15px; height: 15px;"><span> AR</span>
+        </button>
+    </form>
+</div>
+<!-- / Language Selector -->
+
+            
+            <!-- Logo-->
              <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0" href="{% url 'website:index' %}">
                  <!-- Start of Logo-->
                  <div class="d-flex align-items-center">
                      <div class="f-w-20 d-flex align-items-center me-2 lh-1">
-                         <!-- SVG Logo Here -->
+                         <!-- SVG Logo Here --> LOGO
                      </div>
                      <span class="fs-5"></span>
                  </div>
@@ -108,19 +126,7 @@
              <!-- / Main Navigation-->
              <!-- Navbar Icons-->
              <ul class="list-unstyled mb-0 d-flex align-items-center">
-                 <!-- Language Selector -->
-                 <li class="ms-1 d-inline-block">
-                    <form method="get" action="{% url 'website:set_language' %}">
-                        {% csrf_token %}
-                        <select name="language" onchange="this.form.submit()">
-                            <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
-                            <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>Français</option>
-                            <option value="ar" {% if LANGUAGE_CODE == 'ar' %}selected{% endif %}>العربية</option>
-                        </select>
-                    </form>
-                    
-                 </li>
-                 <!-- /Language Selector -->
+              
                  <!-- Navbar Search-->
                  <li class="ms-1 d-inline-block">
                      <button class="btn btn-link px-2 text-decoration-none d-flex align-items-center" data-pr-search="">
