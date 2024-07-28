@@ -154,6 +154,72 @@
                 </div>
             </div>
         </div>
+    
+        <!-- Add Features Column -->
+        <div class="col-4">
+            <div class="border-top mt-4 pt-4">
+                <h3 class="fw-bold mb-3">{% trans 'Features' %}</h3>
+                <ul class="list-unstyled">
+                    {% if property.ascenseur %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Ascenseur' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Ascenseur' %}</li>
+                    {% endif %}
+                    {% if property.balcon %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Balcon' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Balcon' %}</li>
+                    {% endif %}
+                    {% if property.cave %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Cave' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Cave' %}</li>
+                    {% endif %}
+                    {% if property.garage %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Garage' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Garage' %}</li>
+                    {% endif %}
+                    {% if property.gardien %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Gardien' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Gardien' %}</li>
+                    {% endif %}
+                    {% if property.interphone %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Interphone' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Interphone' %}</li>
+                    {% endif %}
+                    {% if property.meuble %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Meublé' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Meublé' %}</li>
+                    {% endif %}
+                    {% if property.parking_exterieur %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Parking Extérieur' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Parking Extérieur' %}</li>
+                    {% endif %}
+                    {% if property.parking_sous_sol %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Parking Sous-sol' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Parking Sous-sol' %}</li>
+                    {% endif %}
+                    {% if property.salle_deau %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Salle d\'eau' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Salle d\'eau' %}</li>
+                    {% endif %}
+                    {% if property.terrasse %}
+                        <li class="badge rounded-pill bg-success mx-1 my-1">{% trans 'Terrasse' %}</li>
+                    {% else %}
+                        <li class="badge rounded-pill bg-white text-muted mx-1 my-1">{% trans 'Terrasse' %}</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     </div>
 </section>
 

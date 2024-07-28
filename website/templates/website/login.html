@@ -13,20 +13,46 @@ Please enter your login details
 {% block section %}
 <div class="container mt-5">
     <div id="alertContainer"></div>
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h2 class="mb-4">{% trans 'Login' %}</h2>
-            <form id="loginForm">
-                <div class="mb-3">
-                    <label for="email" class="form-label">{% trans 'Email' %}</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="mb-4 text-center">{% trans 'Login' %}</h2>
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="btn btn-outline-orange btn-lg rounded-pill d-flex align-items-center justify-content-center" type="button">
+                            <i class=" icon-google me-2"></i>{% trans 'Login with Google' %}
+                        </button>
+                        <button class="btn btn-outline-primary btn-lg rounded-pill d-flex align-items-center justify-content-center" type="button">
+                            <i class="icon-facebook me-2"></i>{% trans 'Login with Facebook' %}
+                        </button>
+                    </div>
+                    <div class="text-center mb-3">
+                        <span>{% trans 'OR' %}</span>
+                    </div>
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">{% trans 'Email' %}</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="icon-envelope"></i></span>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">{% trans 'Password' %}</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="icon-lock"></i></span>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">{% trans 'Login' %}</button>
+                        </div>
+                    </form>
+                    <p class="text-center mt-3">
+                        {% trans "Don't have an account?" %} <a href="{% url 'website:register' %}">{% trans 'Register' %}</a>
+                    </p>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">{% trans 'Password' %}</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary">{% trans 'Login' %}</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>

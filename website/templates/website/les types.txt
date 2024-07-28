@@ -1,0 +1,17 @@
+les types 
+carcas
+terrain agricole 
+deplux
+studio
+address user
+status
+
+
+
+
+
+
+neighborhood_info = models.TextField(verbose_name=_("Neighborhood Information"), blank=True, null=True)
+payment_options = models.CharField(
+    verbose_name=_("Payment Options"), max_length=100, default="Cash"
+)

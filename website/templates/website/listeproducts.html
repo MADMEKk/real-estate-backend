@@ -18,44 +18,60 @@
                         <div class="form-group mx-1 my-1 d-flex justify-content-center pt-4">
                             <input type="hidden" id="propertype" name="property_type" value="">
                             <div class="property-type-icons d-flex justify-content-between w-75 flex-wrap px-3 pt-3 rounded text-dark">
-                                <div class="property-icon" data-value="Appartement">
+                                <div class="property-icon  d-flex flex-column align-items-center" data-value="Appartement">
                                     <img src="{% static 'images/logos/appartement.svg' %}" alt="Appartement" class="icon-img">
                                     <span>{% trans 'Appartement' %}</span>
                                 </div>
-                                <div class="property-icon" data-value="Villa">
+                                <div class="property-icon  d-flex flex-column align-items-center" data-value="Villa">
                                     <img src="{% static 'images/logos/maison.svg' %}" alt="Villa" class="icon-img">
                                     <span>{% trans 'Villa' %}</span>
                                 </div>
-                                <div class="property-icon" data-value="Local">
+                                <div class="property-icon  d-flex flex-column align-items-center" data-value="Local">
                                     <img src="{% static 'images/logos/commercial.svg' %}" alt="Local" class="icon-img">
                                     <span>{% trans 'Local' %}</span>
                                 </div>
-                                <div class="property-icon" data-value="Terrain">
+                                <div class="property-icon  d-flex flex-column align-items-center" data-value="Terrain">
                                     <img src="{% static 'images/logos/terrain.svg' %}" alt="Terrain" class="icon-img">
                                     <span>{% trans 'Terrain' %}</span>
                                 </div>
-                                <div class="property-icon" data-value="Bureau">
+                                <div class="property-icon  d-flex flex-column align-items-center" data-value="Bureau">
                                     <img src="{% static 'images/logos/bureau.svg' %}" alt="Bureau" class="icon-img">
                                     <span>{% trans 'Bureau' %}</span>
                                 </div>
-                                <div class="property-icon" data-value="Immeuble">
+                                <div class="property-icon  d-flex flex-column align-items-center" data-value="Immeuble">
                                     <img src="{% static 'images/logos/immeuble.svg' %}" alt="Immeuble" class="icon-img">
                                     <span>{% trans 'Immeuble' %}</span>
                                 </div>
+                                <div class="dropdown property-icon">
+                                    <img src="{% static 'images/logos/category.png' %}" alt="More" class="icon-img dropdown-toggle drpdwntgl" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>{% trans 'Plus' %}</span>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item drpdwn" href="#" data-value="Hangar">{% trans 'Hangar' %}</a></li>
+                                        <li><a class="dropdown-item drpdwn" href="#" data-value="Bungalow">{% trans 'Bungalow' %}</a></li>
+                                        <li><a class="dropdown-item drpdwn" href="#" data-value="Usine">{% trans 'Usine' %}</a></li>
+                                        <li><a class="dropdown-item drpdwn" href="#" data-value="Carcas">{% trans 'Carcas' %}</a></li>
+                                        <li><a class="dropdown-item drpdwn" href="#" data-value="Terrain Agricole">{% trans 'Terrain Agricole' %}</a></li>
+                                        <li><a class="dropdown-item drpdwn" href="#" data-value="Deplux">{% trans 'Deplux' %}</a></li>
+                                        <li><a class="dropdown-item drpdwn" href="#" data-value="Studio">{% trans 'Studio' %}</a></li>
+                                        <li><a class="dropdown-item drpdwn" href="#" data-value="Autres">{% trans 'Other' %}</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                
+            
                         <!-- Filter Bar -->
                         <div class="filter-bar d-flex justify-content-center w-100 flex-wrap p-4 pb-5 rounded shadow-sm">
                             <!-- Advert Type Filter -->
-                            <div class="form-group mx-2 my-2">
+                            <div class="form-group col-12 col-md-3 mx-2 my-2">
                                 <select id="advertype" name="advert_type" class="form-select form-select-md rounded-pill">
                                     <option value="For Sale">{% trans 'Vendre' %}</option>
                                     <option value="For Rent">{% trans 'Location' %}</option>
+                                    <option value="Echange">{% trans 'Echange' %}</option>
+
                                 </select>
                             </div>
                             <!-- Wilaya Dropdown -->
-                            <div class="form-group mx-2 my-2">
+                            <div class="form-group col-12 col-md-3 mx-2 my-2">
                                 <select id="wilaya" name="wilaya" class="form-select form-select-md rounded-pill">
                                     <option value="">{% trans 'Wilaya' %}</option>
                                     <option value="1">Wilaya 1</option>
@@ -64,74 +80,69 @@
                                 </select>
                             </div>
                             <!-- Price Range Filter -->
-                            <div class="d-flex mx-2 my-2 form-group align-items-center">
+                            <div class="d-flex col-12 col-md-4 mx-2 my-2 form-group align-items-center">
                                 <input type="number" id="minPrice" name="min_price" class="form-control form-control-md rounded-pill" placeholder="{% trans 'Min Price DZD' %}" min="0">
                                 <span class="mx-2">-</span>
                                 <input type="number" id="maxPrice" name="max_price" class="form-control form-control-md rounded-pill" placeholder="{% trans 'Max Price DZD' %}" min="0">
                             </div>
-                            <!-- Checkbox Filters as Buttons -->
-                              <!-- Features Buttons -->
-            <div class="form-group mx-2 my-2 d-flex flex-wrap container">
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="ascenseur">{% trans 'Ascenseur' %}</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="balcon">{% trans 'Balcon' %}</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="cave">{% trans 'Cave' %}</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="garage">{% trans 'Garage' %}</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="gardien">{% trans 'Gardien' %}</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="interphone">{% trans 'Interphone' %}</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="meuble">{% trans 'Meublé' %}</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="parking_exterieur">{% trans 'Parking Extérieur' %}</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="parking_sous_sol">{% trans 'Parking Sous-sol' %}</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="salle_deau">{% trans 'Salle d\'eau' %}</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="terrasse">{% trans 'Terrasse' %}</button>
-            </div>
-            <!-- Hidden Input for Features -->
-            <input type="hidden" id="features" name="features" value="">
-            <!-- Filter Button -->
+                            <!-- Features Buttons -->
+                            <div class="form-group col-12 mx-2 my-2 d-flex flex-wrap container">
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="ascenseur">{% trans 'Ascenseur' %}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="balcon">{% trans 'Balcon' %}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="cave">{% trans 'Cave' %}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="garage">{% trans 'Garage' %}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="gardien">{% trans 'Gardien' %}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="interphone">{% trans 'Interphone' %}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="meuble">{% trans 'Meublé' %}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="parking_exterieur">{% trans 'Parking Extérieur' %}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="parking_sous_sol">{% trans 'Parking Sous-sol' %}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="salle_deau">{% trans 'Salle d\'eau' %}</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mx-1 my-1 feature-btn" data-value="terrasse">{% trans 'Terrasse' %}</button>
+                            </div>
+                            <!-- Hidden Input for Features -->
+                            <input type="hidden" id="features" name="features" value="">
                             <!-- Filter Button -->
-                            <div class="form-group mx-2 my-2">
-                                <button class="btn btn-orange rounded-pill" type="submit">{% trans 'Filter' %}</button>
+                            <div class="form-group col-12 col-md-2 mx-2 my-2">
+                                <button class="btn btn-orange rounded-pill w-100" type="submit">{% trans 'Rechercher' %}</button>
                             </div>
                         </div>
                     </div>
                 </form>
-                
+            
                 <!-- Add some basic styles -->
                 <style>
                     .property-type-icons .property-icon {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
                         cursor: pointer;
-                        margin: 0 10px; /* Adjust margin for smaller screens */
+                        margin-bottom: 15px; /* Adjust margin for spacing */
                     }
-                
+            
                     .icon-img {
-                        width: 40px; /* Adjust the size as needed */
+                        width: 70px; /* Adjust the size as needed */
                         height: auto;
                     }
-                
+            
                     .property-type-icons .property-icon.selected {
                         border: 2px solid orange;
                         border-radius: 10px;
                         padding: 5px;
                     }
-                
+            
                     .filter-bar {
                         margin-top: 20px; /* Add some space between icons and other filters */
                     }
-                
+            
                     .btn-outline-secondary {
                         font-size: 14px; /* Adjust the font size as needed */
                         color: black;
                     }
-                
+            
                     .btn-outline-secondary.active {
                         background-color: orange;
                         border-color: orange;
                         color: white;
                     }
                 </style>
-                
+            
                 <!-- Add JavaScript to handle button toggle -->
                 <script>
                     document.querySelectorAll('.property-icon').forEach(function(icon) {
@@ -143,32 +154,30 @@
                             document.getElementById('propertype').value = this.getAttribute('data-value');
                         });
                     });
-                
-                  
-                    });
                 </script>
                 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const featureButtons = document.querySelectorAll('.feature-btn');
-        const featuresInput = document.getElementById('features');
-        const selectedFeatures = new Set();
-
-        featureButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const feature = this.getAttribute('data-value');
-                if (selectedFeatures.has(feature)) {
-                    selectedFeatures.delete(feature);
-                    this.classList.remove('active');
-                } else {
-                    selectedFeatures.add(feature);
-                    this.classList.add('active');
-                }
-                // Update hidden input with selected features
-                featuresInput.value = Array.from(selectedFeatures).join(',');
-            });
-        });
-    });
-</script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const featureButtons = document.querySelectorAll('.feature-btn');
+                        const featuresInput = document.getElementById('features');
+                        const selectedFeatures = new Set();
+            
+                        featureButtons.forEach(button => {
+                            button.addEventListener('click', function() {
+                                const feature = this.getAttribute('data-value');
+                                if (selectedFeatures.has(feature)) {
+                                    selectedFeatures.delete(feature);
+                                    this.classList.remove('active');
+                                } else {
+                                    selectedFeatures.add(feature);
+                                    this.classList.add('active');
+                                }
+                                // Update hidden input with selected features
+                                featuresInput.value = Array.from(selectedFeatures).join(',');
+                            });
+                        });
+                    });
+                </script>
+            
 
 
                 
@@ -652,7 +661,6 @@ async function saveProperty(propertySlug) {
 
 
  <script>
-
 
      initializeLocationSelectors();
 

@@ -820,9 +820,104 @@
       }
     }
 
+// URLs for Djoser token endpoints
+const verifyTokenUrl = '/api/v1/auth/jwt/verify/';
+const refreshTokenUrl = '/api/v1/auth/jwt/refresh/';
+
+// Function to get token from storage
+const getToken = (tokenType) => {
+  return localStorage.getItem(tokenType) || sessionStorage.getItem(tokenType);
+};
+
+// Function to save token to storage
+const saveToken = (tokenType, token) => {
+  localStorage.setItem(tokenType, token);
+  sessionStorage.setItem(tokenType, token);
+};
+
+// Function to remove tokens from storage
+const removeTokens = () => {
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('refresh_token');
+  sessionStorage.removeItem('access_token');
+  sessionStorage.removeItem('refresh_token');
+};
+
+// Function to refresh the JWT token
+async function refreshToken() {
+  try {
+    const refresh_token = getToken('refresh_token');
+    const response = await fetch(refreshTokenUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ refresh: refresh_token })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to refresh token');
+    }
+
+    const data = await response.json();
+    saveToken('access_token', data.access);
+    return data.access;
+  } catch (error) {
+    alert('Error refreshing token: ' + error);
+    removeTokens();
+    window.location.href = '/login/';
+  }
+}
+
+// Function to check if JWT token exists and is valid
+const checkToken = async () => {
+  let accessToken = getToken('access_token');
+  const refreshToken = getToken('refresh_token');
+
+  if (!accessToken || !refreshToken) {
+    // Redirect to login page if tokens are not found
+    window.location.href = '/login/';
+    return;
+  }
+
+  // Verify the access token
+  try {
+    const verifyResponse = await fetch(verifyTokenUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ token: accessToken })
+    });
+
+    if (!verifyResponse.ok) {
+      // Access token is invalid, try to refresh it
+      accessToken = await refreshToken();
+    }
+  } catch (error) {
+    console.error('Token verification/refresh failed:', error);
+    // Redirect to login page on error
+    window.location.href = '/login/';
+  }
+};
+
+// Function to call on pages where token verification is needed
+const verifyUserAuthentication = () => {
+  window.addEventListener('load', checkToken);
+};
+
 
   </script>
-
+ <script>
+                        // Script to set the selected property type from the dropdown
+                        document.querySelectorAll('.drpdwn').forEach(item => {
+                            item.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                document.getElementById('propertype').value = this.getAttribute('data-value');
+                                document.querySelector('.drpdwntgl').innerHTML = '<i class="icon-hamburger-menu"></i> ' + this.innerHTML;
+                            });
+                        });
+                    </script>
 
   {% block scripts %} {% endblock %}
   </body>

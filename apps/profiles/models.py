@@ -20,6 +20,7 @@ class Profile(TimeStampedUUIDModel):
     lastname = models.CharField(verbose_name=_("Last Name"), max_length=50 , default="lastname")
     naissance = models.DateField(verbose_name=_("Date of Birth"), null=True, blank=True)
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
+    address=models.CharField(verbose_name=_("Address"), max_length=50 ,default="Oran")
     phone_number = PhoneNumberField(
         verbose_name=_("Phone Number"), max_length=30, default="+1234566789"
     )

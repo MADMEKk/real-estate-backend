@@ -45,6 +45,11 @@
                                                     <i class="icon-calendar" style="font-size: 1.5rem;"></i>
                                                     For Rent
                                                 </label>
+                                                <input type="radio" name="advert_type" value="Echange" autocomplete="off" class="btn-check" id="echange">
+                                                <label class="btn btn-outline-dark btn-lg rounded m-2 d-flex flex-column align-items-center" for="echange">
+                                                    <i class="icon-calendar" style="font-size: 1.5rem;"></i>
+                                                    Echanege
+                                                </label>
                                         </div>
                                     </div>
                                     <!-- End Step Content -->
@@ -395,24 +400,14 @@
                                     <input type="text" class="form-control" id="property_status" name="property_status" placeholder="Enter property status" required>
                                 </div>
                                 <!-- / Property Status -->
-                                <!-- Neighborhood Information -->
-                                <div class="form-group">
-                                    <label for="neighborhood_info" class="form-label">Neighborhood Information</label>
-                                    <textarea class="form-control" id="neighborhood_info" name="neighborhood_info" placeholder="Enter neighborhood information" rows="3"></textarea>
-                                </div>
-                                <!-- / Neighborhood Information -->
+                             
                                 <!-- Legal Status -->
                                 <div class="form-group">
                                     <label for="legal_status" class="form-label">Legal Status</label>
                                     <input type="text" class="form-control" id="legal_status" name="legal_status" placeholder="Enter legal status" required>
                                 </div>
                                 <!-- / Legal Status -->
-                                <!-- Payment Options -->
-                                <div class="form-group">
-                                    <label for="payment_options" class="form-label">Payment Options</label>
-                                    <input type="text" class="form-control" id="payment_options" name="payment_options" placeholder="Enter payment options" required>
-                                </div>
-                                <!-- / Payment Options -->
+                             
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-between">
@@ -483,6 +478,8 @@
 {% endblock %}
 {% block scripts %}
  <script>
+    verifyUserAuthentication();
+
      document.addEventListener("DOMContentLoaded", function () {
          initializeLocationSelectors();
          const propertyForm = document.getElementById("propertyForm");

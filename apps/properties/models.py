@@ -36,7 +36,7 @@ class Property(TimeStampedUUIDModel):
     class AdvertType(models.TextChoices):
         FOR_SALE = "For Sale", _("For Sale")
         FOR_RENT = "For Rent", _("For Rent")
-        AUCTION = "Auction", _("Auction")
+        ECHANGE = "Echange", _("Echange")
 
     class PropertyType(models.TextChoices):
         APPARTEMENT = "Appartement", _("Appartement")
@@ -48,6 +48,10 @@ class Property(TimeStampedUUIDModel):
         USINE = "Usine", _("Usine")
         BEREAU = "Bereau", _("Bereau")
         IMMEUBLE = "Immeuble", _("Immeuble")
+        CARCAS = "Carcas", _("Carcas")
+        TERRAIN_AGRICOLE = "Terrain Agricole", _("Terrain Agricole")
+        DEPLUX = "Deplux", _("Deplux")
+        STUDIO = "Studio", _("Studio")
         OTHER = "Other", _("Other")
 
     user = models.ForeignKey(
@@ -147,13 +151,10 @@ class Property(TimeStampedUUIDModel):
     property_status = models.CharField(
         verbose_name=_("Property Status"), max_length=50, default="New"
     )
-    neighborhood_info = models.TextField(verbose_name=_("Neighborhood Information"), blank=True, null=True)
     legal_status = models.CharField(
         verbose_name=_("Legal Status"), max_length=100, default="Clear"
     )
-    payment_options = models.CharField(
-        verbose_name=_("Payment Options"), max_length=100, default="Cash"
-    )
+
 
     # New boolean fields
     ascenseur = models.BooleanField(verbose_name=_("Ascenseur"), default=False)
@@ -163,11 +164,9 @@ class Property(TimeStampedUUIDModel):
     gardien = models.BooleanField(verbose_name=_("Gardien"), default=False)
     interphone = models.BooleanField(verbose_name=_("Interphone"), default=False)
     meuble = models.BooleanField(verbose_name=_("Meublé"), default=False)
-    parking_exterieur = models.BooleanField(verbose_name=_("Parking Extérieur"), default=False)
-    parking_sous_sol = models.BooleanField(verbose_name=_("Parking Sous-sol"), default=False)
-    salle_deau = models.BooleanField(verbose_name=_("Salle d'eau"), default=False)
+    parking_exterieur = models.BooleanField(verbose_name=_("Parking"), default=False)
+    salle_deau = models.BooleanField(verbose_name=_("bage d'eau"), default=False)
     terrasse = models.BooleanField(verbose_name=_("Terrasse"), default=False)
-
     objects = models.Manager()
     published = PropertyPublishedManager()
 

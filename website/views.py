@@ -25,6 +25,8 @@ def website(request):
 def register(request):
     return render(request, 'website/register.html')
 
+def userproperties(request):
+    return render(request, 'website/userproperties.html')
 
 
 def savedproperties(request):

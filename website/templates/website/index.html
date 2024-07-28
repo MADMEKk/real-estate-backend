@@ -162,13 +162,17 @@
 <!-- / Navbar-->
    
 </div>
-
+<div id="whatsapp-icon">
+    <a href="https://wa.me/YOURNUMBER" target="_blank">
+        <img src="{% static 'images/logos/whatsapp.gif' %}" alt="WhatsApp">
+    </a>
+</div>
 <!-- / Hero Section -->
 <section class=" position-relative bg-overlay-dark pt-6" style="min-height: 100vh">
     <div class="container d-flex h-100 justify-content-center align-items-center position-relative z-index-10">
         <div class="d-flex justify-content-center align-items-center h-100 position-relative z-index-10 text-white w-100">
             <div class="d-flex flex-column justify-content-between mt-9 w-100">
-                <h3 class="display-md-5  fw-bold px-2 px-md-5 text-center mx-auto col-lg-8 mt-md-0 " data-aos="fade-up" data-aos-delay="500">{% trans 'Confiance - Sérieux - Rapidité' %}</h3>
+                <h3 class="display-md-5  fw-bold px-2 px-md-5 text-center mx-auto col-lg-8 mt-md-0 animation-float" data-aos="fade-up" data-aos-delay="500">{% trans 'Confiance - Sérieux - Rapidité' %}</h3>
 
                 <div class="mt-5" data-aos="fade-in" data-aos-delay="900">
                     <form action="{% url 'website:properties' %}" method="GET">
@@ -176,7 +180,7 @@
                             <!-- Property Type Filter using Icons -->
                             <div class="form-group mx-1 my-1 d-flex justify-content-center pt-4">
                                 <input type="hidden" id="propertype" name="property_type" value="">
-                                <div class="property-type-icons d-flex justify-content-between w-75 flex-wrap px-3 pt-3 rounded text-dark ">
+                                <div class="property-type-icons d-flex justify-content-between w-75 flex-wrap px-3 pt-3 rounded text-dark">
                                     <div class="property-icon" data-value="Appartement">
                                         <img src="{% static 'images/logos/appartement.svg' %}" alt="Appartement" class="icon-img">
                                         <span>{% trans 'Appartement' %}</span>
@@ -201,16 +205,33 @@
                                         <img src="{% static 'images/logos/immeuble.svg' %}" alt="Immeuble" class="icon-img">
                                         <span>{% trans 'Immeuble' %}</span>
                                     </div>
+                                    <!-- Hamburger Menu Icon for Other Property Types -->
+                                    <div class="dropdown property-icon">
+                                        <img src="{% static 'images/logos/category.png' %}" alt="More" class="icon-img dropdown-toggle drpdwntgl" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span>{% trans 'Plus' %}</span>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item drpdwn" href="#" data-value="Hangar">{% trans 'Hangar' %}</a></li>
+                                            <li><a class="dropdown-item drpdwn" href="#" data-value="Bungalow">{% trans 'Bungalow' %}</a></li>
+                                            <li><a class="dropdown-item drpdwn" href="#" data-value="Usine">{% trans 'Usine' %}</a></li>
+                                            <li><a class="dropdown-item drpdwn" href="#" data-value="Carcas">{% trans 'Carcas' %}</a></li>
+                                            <li><a class="dropdown-item drpdwn" href="#" data-value="Terrain Agricole">{% trans 'Terrain Agricole' %}</a></li>
+                                            <li><a class="dropdown-item drpdwn" href="#" data-value="Deplux">{% trans 'Deplux' %}</a></li>
+                                            <li><a class="dropdown-item drpdwn" href="#" data-value="Studio">{% trans 'Studio' %}</a></li>
+                                            <li><a class="dropdown-item drpdwn" href="#" data-value="Autres">{% trans 'Other' %}</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                
+                    
                             <!-- Filter Bar -->
-                            <div class="filter-bar d-flex justify-content-center w-100 flex-wrap p-4 pb-5 rounded  shadow-sm">
+                            <div class="filter-bar d-flex justify-content-center w-100 flex-wrap p-4 pb-5 rounded shadow-sm">
                                 <!-- Advert Type Filter -->
                                 <div class="form-group mx-2 my-2 d-flex align-items-center">
-                                    <select id="advertype" name="advert_type" class="form-select form-select-md rounded-pill">
+                                    <select id="advertype" name="advert_type" class="form-select form-select-md rounded-pill pe-5">
+                                        <option value="">{% trans 'choisie votre project' %}</option>
                                         <option value="For Sale">{% trans 'Vendre' %}</option>
                                         <option value="For Rent">{% trans 'Location' %}</option>
+                                        <option value="Echange">{% trans 'Echange' %}</option>
                                     </select>
                                 </div>
                                 <!-- Wilaya Dropdown -->
@@ -222,25 +243,16 @@
                                         <!-- Add more options as needed -->
                                     </select>
                                 </div>
-                                <!-- Price Range Filter -->
-                                <div class="d-flex mx-2 my-2 align-items-center form-group">
-                                    <div class="form-group">
-                                        <input type="number" id="minPrice" class="form-control form-control-md rounded-pill" placeholder="{% trans 'Min Price DZD' %}" min="0">
-                                    </div>
-                                    <span class="mx-2">-</span>
-                                    <div class="form-group">
-                                        <input type="number" id="maxPrice" class="form-control form-control-md rounded-pill" placeholder="{% trans 'Max Price DZD' %}" min="0">
-                                    </div>
-                                </div>
                                 <!-- Filter Button -->
-                                <div class="d-flex mx-2 my-2 align-items-center form-group ">
-                                    <button class="btn btn-orange  rounded-pill" type="submit">{% trans 'Filter' %}</button>
+                                <div class="d-flex mx-2 my-2 align-items-center form-group">
+                                    <button class="btn btn-orange rounded-pill" type="submit">{% trans 'Rechercher' %}</button>
                                 </div>
                             </div>
-
-
                         </div>
                     </form>
+                    
+                   
+                    
                 
                     <!-- Add some basic styles -->
                     <style>

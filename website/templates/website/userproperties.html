@@ -1,0 +1,111 @@
+{% extends './pagesbase.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block bannertitle %}
+Properties
+{% endblock %}
+
+{% block bannertext %}
+{% endblock %}
+
+{% block section %}
+<div class="container mt-5">
+    <h1>{% trans 'My Properties for Sale' %}</h1>
+    <div class="row">
+        {% for property in properties %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="{{ property.photo.url }}" class="card-img-top" alt="{{ property.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ property.title }}</h5>
+                    <p class="card-text">{{ property.description }}</p>
+                    <p class="card-text"><strong>{% trans 'Price:' %}</strong> {{ property.price }}</p>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ property.id }}" data-title="{{ property.title }}" data-description="{{ property.description }}" data-price="{{ property.price }}">{% trans 'Update' %}</button>
+                    <button class="btn btn-danger" onclick="deleteProperty({{ property.id }})">{% trans 'Delete' %}</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Update Property Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">{% trans 'Update Property' %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateForm" method="POST" action="">
+                    {% csrf_token %}
+                    <input type="hidden" id="propertyId" name="property_id">
+                    <div class="mb-3">
+                        <label for="propertyTitle" class="form-label">{% trans 'Title' %}</label>
+                        <input type="text" class="form-control" id="propertyTitle" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="propertyDescription" class="form-label">{% trans 'Description' %}</label>
+                        <textarea class="form-control" id="propertyDescription" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="propertyPrice" class="form-label">{% trans 'Price' %}</label>
+                        <input type="number" class="form-control" id="propertyPrice" name="price">
+                    </div>
+                    <button type="submit" class="btn btn-primary">{% trans 'Save changes' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script>
+    // Script to populate the update modal with property data
+    document.addEventListener('DOMContentLoaded', function () {
+        var updateModal = document.getElementById('updateModal');
+        updateModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var propertyId = button.getAttribute('data-id');
+            var propertyTitle = button.getAttribute('data-title');
+            var propertyDescription = button.getAttribute('data-description');
+            var propertyPrice = button.getAttribute('data-price');
+
+            var modalTitle = updateModal.querySelector('.modal-title');
+            var propertyIdInput = updateModal.querySelector('#propertyId');
+            var propertyTitleInput = updateModal.querySelector('#propertyTitle');
+            var propertyDescriptionInput = updateModal.querySelector('#propertyDescription');
+            var propertyPriceInput = updateModal.querySelector('#propertyPrice');
+
+            modalTitle.textContent = '{% trans "Update Property" %}';
+            propertyIdInput.value = propertyId;
+            propertyTitleInput.value = propertyTitle;
+            propertyDescriptionInput.value = propertyDescription;
+            propertyPriceInput.value = propertyPrice;
+        });
+    });
+
+    // Script to handle property deletion
+    function deleteProperty(propertyId) {
+        if (confirm("{% trans 'Are you sure you want to delete this property?' %}")) {
+            fetch("", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({property_id: propertyId})
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert("{% trans 'An error occurred while deleting the property.' %}");
+                }
+            });
+        }
+    }
+</script>
+    
+{% endblock %}

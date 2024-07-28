@@ -106,11 +106,9 @@
                              </div>
                          </div>
                      </li>
+   
                      <li class="nav-item me-lg-4">
-                         <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:properties' %}?status=for rent">{% trans 'Louer' %}</a>
-                     </li>
-                     <li class="nav-item me-lg-4">
-                         <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:sellproperty' %}">{% trans 'Vendre' %}</a>
+                         <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:sellproperty' %}">{% trans 'Poser un Annonce' %}</a>
                      </li>
                      <li class="nav-item me-lg-4">
                          <a class="nav-link fw-bolder py-lg-4" href="#map">{% trans 'À propos de nous' %}</a>
@@ -119,7 +117,7 @@
                          <a class="nav-link fw-bolder py-lg-4" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">{% trans 'Contactez-nous' %}</a>
                      </li>
                      <li class="nav-item me-lg-4" style="display: none" id="savedlink">
-                         <a class="nav-link fw-bolder py-lg-4" href="/savedprope" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">{% trans 'Saved Properties' %}</a>
+                         <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:savedproperties' %}">{% trans 'Saved Properties' %}</a>
                      </li>
                  </ul>
              </div>
@@ -147,7 +145,7 @@
         Login <i class="ri-user-line ri-lg align-middle"></i>
     </a>
 </li>
-<!-- /Navbar Login-->
+                    <!-- /Navbar Login-->
                  <!-- Navbar Cart-->
                  <li class="ms-1 d-inline-block position-relative">
                  </li>

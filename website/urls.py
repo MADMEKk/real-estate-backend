@@ -12,6 +12,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_view, name='login'),
     path('savedproperties/', savedproperties, name='savedproperties'),
+    path('userproperties/', userproperties, name='userproperties'),
     path('register/', register, name='register'),
     path('activate/<str:uid>/<str:token>/', activateaccount, name='activate'),
     path('createprofile/', createprofile, name='createprofile'),

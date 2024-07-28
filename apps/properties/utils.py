@@ -14,7 +14,7 @@ def add_logo_watermark(input_image_path, output_image_path, logo_path, position=
     if logo_width > desired_logo_width:
         ratio = desired_logo_width / float(logo_width)
         new_logo_size = (int(logo_width * ratio), int(logo_height * ratio))
-        logo = logo.resize(new_logo_size, Image.ANTIALIAS)
+        logo = logo.resize(new_logo_size, Image.Resampling.LANCZOS)
 
     # Adjust the logo transparency
     alpha = logo.split()[3]  # Get the alpha channel
