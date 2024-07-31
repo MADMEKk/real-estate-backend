@@ -110,20 +110,22 @@
                      <li class="nav-item me-lg-4">
                          <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:sellproperty' %}">{% trans 'Poser un Annonce' %}</a>
                      </li>
-                     <li class="nav-item me-lg-4">
-                         <a class="nav-link fw-bolder py-lg-4" href="#map">{% trans 'À propos de nous' %}</a>
-                     </li>
-                     <li class="nav-item me-lg-4">
-                         <a class="nav-link fw-bolder py-lg-4" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">{% trans 'Contactez-nous' %}</a>
-                     </li>
+                     
+                     
                      <li class="nav-item me-lg-4" style="display: none" id="savedlink">
                          <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:savedproperties' %}">{% trans 'Saved Properties' %}</a>
                      </li>
+                     <li class="nav-item me-lg-4" style="display: none" id="myproplink">
+                        <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:userproperties' %}">{% trans 'Mes Annonces' %}</a>
+                    </li>
+                    <li class="nav-item me-lg-4">
+                        <a class="nav-link fw-bolder py-lg-4" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">{% trans 'Contactez-nous' %}</a>
+                    </li>
                  </ul>
              </div>
              <!-- / Main Navigation-->
              <!-- Navbar Icons-->
-             <ul class="list-unstyled mb-0 d-flex align-items-center">
+            <ul class="list-unstyled mb-0 d-flex align-items-center">
               
                  <!-- Navbar Search-->
                  <li class="ms-1 d-inline-block">
@@ -131,26 +133,20 @@
                          <i class="ri-search-2-line ri-lg align-middle"></i>
                      </button>
                  </li>
-                 <!-- /Navbar Search-->
                  <!-- Navbar Wishlist-->
                  <li class="ms-1 d-none d-lg-inline-block">
                      <a class="btn btn-link px-2 py-0 text-decoration-none d-flex align-items-center" href="#">
                      </a>
                  </li>
-                 <!-- /Navbar Wishlist-->
-
-              <!-- Navbar Login/Logout-->
-<li class="ms-1" id="auth-link">
-    <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="/login">
-        Login <i class="ri-user-line ri-lg align-middle"></i>
-    </a>
-</li>
-                    <!-- /Navbar Login-->
+                    <!-- Navbar Login/Logout-->
+                    <li class="ms-1" id="auth-link">
+                    <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="/login">
+                        Login <i class="ri-user-line ri-lg align-middle"></i>
+                    </a>
+                    </li>
                  <!-- Navbar Cart-->
                  <li class="ms-1 d-inline-block position-relative">
                  </li>
-                 <!-- /Navbar Cart-->
-
                  <!-- Navbar Toggle Icon-->
                  <li class="d-inline-block d-lg-none">
                      <button class="btn btn-link px-2 text-decoration-none navbar-toggler border-0 d-flex align-items-center collapsed" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,67 +154,12 @@
                      </button>
                  </li>
                  <!-- /Navbar Toggle Icon-->
-             </ul>
+            </ul>
              <!-- / Navbar Icons-->
          </div>
      </div>
  </nav>
- <script >
 
-
-     document.addEventListener('DOMContentLoaded', ()=> {
-         const authLink = document.getElementById('auth-link');
-         const savedlink = document.getElementById('savedlink');
-
-         function updateAuthLink() {
-             const accessToken = localStorage.getItem('access_token');
-             if (accessToken) {
-                 savedlink.style.display="block"
-                 authLink.innerHTML = `
- <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="/" id="logout">Logout <i class="ri-user-line ri-lg align-middle"></i></a>
- `;
-                 document.getElementById('logout').addEventListener('click', function() {
-                     localStorage.removeItem('access_token');
-                     localStorage.removeItem('refresh_token');
-                     updateAuthLink();
-                 });
-             } else {
-                 savedlink.style.display="none"
-                 authLink.innerHTML = `
- <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="/login" >Login <i class="ri-user-line ri-lg align-middle"></i></a>
- `;
-             }
-         }
-
-         updateAuthLink();/*
-         function redirectToListProducts(advertType, propertyType, locality) {
-             const queryParams = new URLSearchParams({
-                 advert_type: advertType,
-                 property_type: propertyType,
-             });
-
-             if (locality && locality !== 'null') {
-                 queryParams.append('wilaya', locality);
-             }
-
-             const redirectUrl = `/properties?${queryParams.toString()}`;
-             window.location.href = redirectUrl;
-         }
-
-         // Add event listeners to the dropdown items
-         document.querySelectorAll('.dropdown-item').forEach(item => {
-             item.addEventListener('click', function(event) {
-                 event.preventDefault();
-                 const advertType = this.getAttribute('data-advert-type');
-                 const propertyType = this.getAttribute('data-property-type');
-
-                 redirectToListProducts(advertType, propertyType);
-             });
-         });*/
-            });
-
-
- </script>
 
  <!-- / Navbar-->
 {% block section %}

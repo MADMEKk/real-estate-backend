@@ -389,7 +389,67 @@
 </style>
 
   {% block body %} {% endblock %}
+ <script >
 
+
+     document.addEventListener('DOMContentLoaded', ()=> {
+         const authLink = document.getElementById('auth-link');
+         const savedlink = document.getElementById('savedlink');
+         const myproplink = document.getElementById('myproplink');
+
+         function updateAuthLink() {
+             const accessToken = localStorage.getItem('access_token');
+             if (accessToken) {
+             console.log('accessToken');
+                 savedlink.style.display="block"
+                 myproplink.style.display="block"
+                 authLink.innerHTML = `
+                    <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="/" id="logout">Logout <i class="ri-user-line ri-lg align-middle"></i></a>
+                    `;
+                 document.getElementById('logout').addEventListener('click', function() {
+                     localStorage.removeItem('access_token');
+                     localStorage.removeItem('refresh_token');
+                     updateAuthLink();
+                 });
+             } else {
+                 savedlink.style.display="none"
+                 myproplink.style.display="none"
+                 authLink.innerHTML = `
+                    <a class="btn btn-link px-2 text-decoration-none d-flex align-items-center" href="/login" >Login <i class="ri-user-line ri-lg align-middle"></i></a>
+                    `;
+             }
+         }
+
+         updateAuthLink();
+         /*
+         function redirectToListProducts(advertType, propertyType, locality) {
+             const queryParams = new URLSearchParams({
+                 advert_type: advertType,
+                 property_type: propertyType,
+             });
+
+             if (locality && locality !== 'null') {
+                 queryParams.append('wilaya', locality);
+             }
+
+             const redirectUrl = `/properties?${queryParams.toString()}`;
+             window.location.href = redirectUrl;
+         }
+
+         // Add event listeners to the dropdown items
+         document.querySelectorAll('.dropdown-item').forEach(item => {
+             item.addEventListener('click', function(event) {
+                 event.preventDefault();
+                 const advertType = this.getAttribute('data-advert-type');
+                 const propertyType = this.getAttribute('data-property-type');
+
+                 redirectToListProducts(advertType, propertyType);
+             });
+         });*/
+            });
+
+
+ </script>
   <script>
     window.addEventListener('load', function() {
       document.getElementById('loader-overlay').style.display = 'none';
@@ -917,6 +977,7 @@ const verifyUserAuthentication = () => {
                                 document.querySelector('.drpdwntgl').innerHTML = '<i class="icon-hamburger-menu"></i> ' + this.innerHTML;
                             });
                         });
+                        
                     </script>
 
   {% block scripts %} {% endblock %}

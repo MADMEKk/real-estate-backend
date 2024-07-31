@@ -109,11 +109,15 @@
                     <li class="nav-item me-lg-4">
                         <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:sellproperty' %}">{% trans 'Poser un Annonce' %}</a>
                     </li>
-                    <li class="nav-item me-lg-4">
-                        <a class="nav-link fw-bolder py-lg-4" href="#map">{% trans 'À propos de nous' %}</a>
-                    </li>
+                  
                     <li class="nav-item me-lg-4">
                         <a class="nav-link fw-bolder py-lg-4" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">{% trans 'Contactez-nous' %}</a>
+                    </li>
+                    <li class="nav-item me-lg-4" style="display: none" id="savedlink">
+                         <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:savedproperties' %}">{% trans 'Saved Properties' %}</a>
+                     </li>
+                     <li class="nav-item me-lg-4" style="display: none" id="myproplink">
+                        <a class="nav-link fw-bolder py-lg-4" href="{% url 'website:userproperties' %}">{% trans 'Mes Annonces' %}</a>
                     </li>
                 </ul>
             </div>
@@ -594,6 +598,9 @@ data-options='{
         updateLikeCount();
 
     })
+
+    
 </script>
+
 {% endblock %}
 
