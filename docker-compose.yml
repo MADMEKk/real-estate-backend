@@ -7,7 +7,7 @@ services:
       dockerfile: ./docker/local/django/Dockerfile
     command: /start
     volumes:
-      - .:/app  # Mount the project directory into the container
+      - .:/app # Mount the project directory into the container
       - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
     # ports:
@@ -56,28 +56,41 @@ services:
       - aures-estate
 
   flower:
-      build:
-          context: .
-          dockerfile: ./docker/local/django/Dockerfile
-      command: celery flower
-      volumes:
-          - .:/app
-      env_file:
-          - .env
-      ports:
-          - "5557:5555"
-      depends_on:
-          - redis
-          - postgres-db
-      networks:
-          - aures-estate
+    build:
+      context: .
+      dockerfile: ./docker/local/django/Dockerfile
+    command: celery flower
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    ports:
+      - "5557:5555"
+    depends_on:
+      - redis
+      - postgres-db
+    networks:
+      - aures-estate
+
+  nextjs:
+    build:
+      context: ./frontend/nextjs
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/nextjs:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - aures-estate
 
   nginx:
     restart: always
     depends_on:
       - api
     volumes:
-      - .:/app  # Mount the project directory into the container
+      - .:/app # Mount the project directory into the container
       - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
     build:
@@ -87,7 +100,6 @@ services:
       - "8000:80"
     networks:
       - aures-estate
-
 
 networks:
   aures-estate:
