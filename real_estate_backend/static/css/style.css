@@ -1,0 +1,46 @@
+.marquee {
+  overflow-x:hidden
+}
+.marquee-body {
+  display:flex;
+  flex-wrap:nowrap;
+  white-space:nowrap;
+  min-width:100%
+}
+.marquee-section {
+  display:flex;
+  flex-shrink:0;
+  align-items:center;
+  overflow:hidden
+}
+.marquee-hover-pause:hover * {
+  -webkit-animation-play-state:paused;
+  animation-play-state:paused
+}
+
+.card-hover {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Transparent initially */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.card-hover:hover .overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+}
+
+.card-hover:hover .card-title,
+.card-hover:hover .card-text
+ {
+    color: #fc6229; /* Change text color to white on hover */
+}
+.card-hover:hover {
+    transform: scale(1.1);
+}

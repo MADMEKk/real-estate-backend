@@ -231,7 +231,7 @@ class Photo(models.Model):
             watermarked_image_path = os.path.join(settings.MEDIA_ROOT, 'watermarked_' + os.path.basename(image_path))
 
             # Path to the logo image (ensure this path is correct)
-            logo_path = os.path.join(settings.MEDIA_ROOT, 'path_to_logo.png')  # Adjust the path to your logo image
+            logo_path = os.path.join(settings.STATIC_ROOT, 'LOGO_Image.png')  # Adjust the path to your logo image
 
             # Add watermark to the image using the logo
             add_logo_watermark(image_path, watermarked_image_path, logo_path)

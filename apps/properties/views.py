@@ -186,18 +186,20 @@ def update_property_api_view(request, slug):
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def create_property_api_view(request):
-    user = request.user
+    # user = request.user
     data = request.data
-    data["user"] = user.pkid
+    # data["user"] = user.pkid
     photos = request.FILES.getlist("photos")
+    request.data._mutable = True
     del data["photos"]
+    request.data._mutable = False
     serializer = PropertyCreateSerializer(data=data)
     if serializer.is_valid():
 
         property_instance = serializer.save()
         property_id = property_instance.id
         upload_property_photos(property_id, photos)
-        logger.info(f"Property {serializer.data.get('title')} created by {user.username}")
+        # logger.info(f"Property {serializer.data.get('title')} created by {user.username}")
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -309,7 +311,7 @@ class PropertyRankAPIView(APIView):
             queryset = queryset.filter(description__icontains=catch_phrase)
 
         # If no results, apply fallback mechanism
-        fallback_attempts = 0
+        fallback_attempts = 5
         max_fallback_attempts = 15  # Define how many fallback attempts to make
 
         while not queryset.exists() and fallback_attempts < max_fallback_attempts:

@@ -12,3 +12,414 @@ update the details page
 
 
 regression linear on panel
+
+
+property types 
+    each type with it info 50%
+    add localisation on properties  ok
+add with agency or self
+add agency profile
+    rating , 360 camera , drone sells etc .... 
+
+
+
+    new property
+
+# Abstract base class for all properties
+class PropertyBase(models.Model):
+    class AdvertType(models.TextChoices):
+        FOR_SALE = "For Sale", _("For Sale")
+        FOR_RENT = "For Rent", _("For Rent")
+        ECHANGE = "Echange", _("Echange")
+    class PropertyLegalStatus(models.TextChoices):
+        FREEHOLD = 'Freehold', _('Freehold')
+        LEASEHOLD = 'Leasehold', _('Leasehold')
+        COMMONHOLD = 'Commonhold', _('Commonhold')
+        SHARED_OWNERSHIP = 'Shared Ownership', _('Shared Ownership')
+        SHARED_EQUITY = 'Shared Equity', _('Shared Equity')
+        RENT_TO_BUY = 'Rent to Buy', _('Rent to Buy')
+        LEASE_OPTION = 'Lease Option', _('Lease Option')
+        OWNER_OCCUPIED = 'Owner Occupied', _('Owner Occupied')
+        TENANTED = 'Tenanted', _('Tenanted')
+        VACANT_POSSESSION = 'Vacant Possession', _('Vacant Possession')
+        REPOSSESSED = 'Repossessed', _('Repossessed')
+        PROBATE = 'Probate', _('Probate')
+        TRUST = 'Trust', _('Trust')
+        COMPANY_OWNED = 'Company Owned', _('Company Owned')
+        CHARITY_OWNED = 'Charity Owned', _('Charity Owned')
+        PUBLIC_OWNED = 'Public Owned', _('Public Owned')
+        PRIVATE_OWNED = 'Private Owned', _('Private Owned')
+    class PropertyStatus(models.TextChoices):
+        NEW = 'New', _('New')
+        UNDER_CONSTRUCTION = 'Under Construction', _('Under Construction')
+        UNDER_RENOVATION = 'Under Renovation', _('Under Renovation')
+        READY_TO_MOVE_IN = 'Ready to Move In', _('Ready to Move In')
+        OCCUPIED = 'Occupied', _('Occupied')
+        VACANT = 'Vacant', _('Vacant')
+        SOLD = 'Sold', _('Sold')
+        PENDING_SALE = 'Pending Sale', _('Pending Sale')
+        PENDING_RENTAL = 'Pending Rental', _('Pending Rental')
+        RENTED = 'Rented', _('Rented')
+        LEASED = 'Leased', _('Leased')
+        OFF_MARKET = 'Off Market', _('Off Market')
+        CANCELED = 'Canceled', _('Canceled')
+        EXPIRED = 'Expired', _('Expired')
+        WITHDRAWN = 'Withdrawn', _('Withdrawn')
+
+
+    # Common fields across all property types
+    user = models.ForeignKey(
+        User,
+        verbose_name=_("Agent, Seller, or Buyer"),
+        related_name="properties",
+        on_delete=models.DO_NOTHING,
+    )
+    title = models.CharField(verbose_name=_("Property Title"), max_length=250)
+    slug = models.SlugField(unique=True)
+    ref_code = models.CharField(
+        verbose_name=_("Property Reference Code"),
+        max_length=255,
+        unique=True,
+        blank=True,
+    )
+    description = models.TextField(
+        verbose_name=_("Description"),
+        default="Default description...update me please...",
+    )
+    commune = models.ForeignKey(
+        Commune,
+        related_name="commune_properties",
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Property Commune"),
+        default="1131"
+    )
+    daira = models.ForeignKey(
+        Daira,
+        related_name="daira_properties",
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Property Daira"),
+        default="374"
+    )
+    wilaya = models.ForeignKey(
+        Wilaya,
+        related_name="wilaya_properties",
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Property Wilaya"),
+        default="31"
+    )
+    postal_code = models.CharField(
+        verbose_name=_("Postal Code"), max_length=100, default="140"
+    )
+    street_address = models.CharField(
+        verbose_name=_("Street Address"), max_length=150, default="KG8 Avenue"
+    )
+    property_number = models.IntegerField(
+        verbose_name=_("Property Number"),
+        validators=[MinValueValidator(1)],
+        default=112,
+    )
+    price = models.DecimalField(
+        verbose_name=_("Price"), max_digits=30, decimal_places=2, default=0.0
+    )
+    tax = models.DecimalField(
+        verbose_name=_("Property Tax"),
+        max_digits=6,
+        decimal_places=2,
+        default=0.15,
+        help_text=_("15% property tax charged"),
+    )
+    advert_type = models.CharField(
+        verbose_name=_("Advert Type"),
+        max_length=50,
+        choices=AdvertType.choices,
+        default=AdvertType.FOR_SALE,
+    )
+    cover_photo = models.ImageField(
+        verbose_name=_("Main Photo"), default="/house_sample.jpg", null=True, blank=True
+    )
+    video = models.FileField(default="/interior_sample.jpg", null=True, blank=True)
+    published_status = models.BooleanField(
+        verbose_name=_("Published Status"), default=False
+    )
+    views = models.IntegerField(verbose_name=_("Total Views"), default=0)
+    property_status = models.CharField(
+        verbose_name=_("Property Status"), max_length=50, choices=PropertyStatus.choices, default=PropertyStatus.NEW
+    )
+    legal_status = models.CharField(max_length=50, choices=PropertyLegalStatus.choices)
+    verbose_name=_("Legal Status"), max_length=100, default="Clear"
+    )
+
+    latitude = models.DecimalField(
+        verbose_name=_("Latitude"),
+        max_digits=9,
+        decimal_places=6,
+        null=True,
+        blank=True,
+        help_text=_("GPS latitude of the property location"),
+    )
+    longitude = models.DecimalField(
+        verbose_name=_("Longitude"),
+        max_digits=9,
+        decimal_places=6,
+        null=True,
+        blank=True,
+        help_text=_("GPS longitude of the property location"),
+    )
+
+    class Meta:
+        abstract = True
+
+
+# Model for Apartment properties
+class Apartment(PropertyBase):
+    apartment_type = models.CharField(
+        verbose_name=_("Apartment Type"), max_length=50, choices=ApartmentType.choices, default=ApartmentType.STUDIO
+    )
+    bedrooms = models.IntegerField(verbose_name=_("Bedrooms"), default=1)
+    bathrooms = models.IntegerField(verbose_name=_("Bathrooms"), default=1)
+    balcon = models.BooleanField(verbose_name=_("Balcon"), default=False)
+    ascenseur = models.BooleanField(verbose_name=_("Ascenseur"), default=False)
+    living_area = models.DecimalField(
+        verbose_name=_("Living Area"), max_digits=10, decimal_places=2, default=0.0
+    )
+    total_area = models.DecimalField(
+        verbose_name=_("Total Area"), max_digits=10, decimal_places=2, default=0.0
+    )
+    floor_number = models.IntegerField(verbose_name=_("Floor Number"), default=1)
+    total_floors = models.IntegerField(verbose_name=_("Total Floors"), default=1)
+    parking = models.BooleanField(verbose_name=_("Parking"), default=False)
+    storage = models.BooleanField(verbose_name=_("Storage"), default=False)
+    heating = models.BooleanField(verbose_name=_("Heating"), default=False)
+    elevator = models.BooleanField(verbose_name=_("Elevator"), default=False)
+    security = models.BooleanField(verbose_name=_("Security"), default=False)
+    intercom = models.BooleanField(verbose_name=_("Intercom"), default=False)
+    internet = models.BooleanField(verbose_name=_("Internet"), default=False)
+    furnished = models.BooleanField(verbose_name=_("Furnished"), default=False)
+    appliances = models.BooleanField(verbose_name=_("Appliances"), default=False)
+    view = models.CharField(
+        verbose_name=_("View"), max_length=50, choices=View.choices, default=View.CITY
+    )
+
+    class View(models.TextChoices):
+        CITY = 'City', _('City')
+        PARK = 'Park', _('Park')
+        RIVER = 'River', _('River')
+        MOUNTAIN = 'Mountain', _('Mountain')
+        SEA = 'Sea', _('Sea')
+        GARDEN = 'Garden', _('Garden')
+        POOL = 'Pool', _('Pool')
+
+
+
+# Model for Villa properties
+class Villa(PropertyBase):
+    class VillaType(models.TextChoices):
+        DETACHED = "Detached", _("Detached")
+        SEMI_DETACHED = "Semi Detached", _("Semi Detached")
+
+    villa_type = models.CharField(
+        verbose_name=_("Villa Type"),
+        max_length=50,
+        choices=VillaType.choices,
+        default=VillaType.DETACHED,
+    )
+    plot_area = models.DecimalField(
+        verbose_name=_("Plot Area (m^2)"), max_digits=8, decimal_places=2, default=0.0
+    )
+    total_floors = models.IntegerField(verbose_name=_("Number of floors"), default=0)
+    garage = models.BooleanField(verbose_name=_("Garage"), default=False)
+    gardien = models.BooleanField(verbose_name=_("Gardien"), default=False)
+
+    class Meta:
+        verbose_name = _("Villa")
+        verbose_name_plural = _("Villas")
+
+
+# Model for Local properties
+class Local(PropertyBase):
+    class LocalType(models.TextChoices):
+        COMMERCIAL = "Commercial", _("Commercial")
+        INDUSTRIAL = "Industrial", _("Industrial")
+
+    local_type = models.CharField(
+        verbose_name=_("Local Type"),
+        max_length=50,
+        choices=LocalType.choices,
+        default=LocalType.COMMERCIAL,
+    )
+    surface_area = models.DecimalField(
+        verbose_name=_("Surface Area (m^2)"), max_digits=8, decimal_places=2, default=0.0
+    )
+    meuble = models.BooleanField(verbose_name=_("Meublé"), default=False)
+    interphone = models.BooleanField(verbose_name=_("Interphone"), default=False)
+
+    class Meta:
+        verbose_name = _("Local")
+        verbose_name_plural = _("Locals")
+
+
+# Model for Terrain properties
+class Terrain(PropertyBase):
+    class TerrainType(models.TextChoices):
+        AGRICOLE = "Agricole", _("Agricole")
+        URBAIN = "Urbain", _("Urbain")
+
+    terrain_type = models.CharField(
+        verbose_name=_("Terrain Type"),
+        max_length=50,
+        choices=TerrainType.choices,
+        default=TerrainType.AGRICOLE,
+    )
+    surface_area = models.DecimalField(
+        verbose_name=_("Surface Area (m^2)"), max_digits=8, decimal_places=2, default=0.0
+    )
+    parking_exterieur = models.BooleanField(verbose_name=_("Parking"), default=False)
+    salle_deau = models.BooleanField(verbose_name=_("Sall de bain"), default=False)
+
+    class Meta:
+        verbose_name = _("Terrain")
+        verbose_name_plural = _("Terrains")
+
+
+# Model for Hangar properties
+class Hangar(PropertyBase):
+    surface_area = models.DecimalField(
+        verbose_name=_("Surface Area (m^2)"), max_digits=8, decimal_places=2, default=0.0
+    )
+    loading_dock = models.BooleanField(verbose_name=_("Loading Dock"), default=False)
+
+    class Meta:
+        verbose_name = _("Hangar")
+        verbose_name_plural = _("Hangars")
+
+
+# Model for Bungalow properties
+class Bungalow(PropertyBase):
+    bedrooms = models.IntegerField(verbose_name=_("Bedrooms"), default=2)
+    bathrooms = models.IntegerField(verbose_name=_("Bathrooms"), default=1)
+    garden = models.BooleanField(verbose_name=_("Garden"), default=False)
+
+    class Meta:
+        verbose_name = _("Bungalow")
+        verbose_name_plural = _("Bungalows")
+
+
+# Model for Usine properties
+class Usine(PropertyBase):
+    surface_area = models.DecimalField(
+        verbose_name=_("Surface Area (m^2)"), max_digits=8, decimal_places=2, default=0.0
+    )
+    production_capacity = models.DecimalField(
+        verbose_name=_("Production Capacity (units)"), max_digits=10, decimal_places=2, default=0.0
+    )
+
+    class Meta:
+        verbose_name = _("Usine")
+        verbose_name_plural = _("Usines")
+
+
+# Model for Bereau properties
+class Bereau(PropertyBase):
+    floor_area = models.DecimalField(
+        verbose_name=_("Floor Area (m^2)"), max_digits=8, decimal_places=2, default=0.0
+    )
+    meeting_rooms = models.IntegerField(verbose_name=_("Meeting Rooms"), default=1)
+    furnished = models.BooleanField(verbose_name=_("Furnished"), default=False)
+
+    class Meta:
+        verbose_name = _("Bereau")
+        verbose_name_plural = _("Bereaaux")
+
+
+# Model for Immeuble properties
+class Immeuble(PropertyBase):
+    total_floors = models.IntegerField(verbose_name=_("Total Floors"), default=1)
+    units = models.IntegerField(verbose_name=_("Number of Units"), default=1)
+    elevator = models.BooleanField(verbose_name=_("Elevator"), default=False)
+
+    class Meta:
+        verbose_name = _("Immeuble")
+        verbose_name_plural = _("Immeubles")
+
+
+class Carcas(PropertyBase):
+    building_stage = models.CharField(
+        verbose_name=_("Building Stage"),
+        max_length=100,
+        default="Foundation",
+    )
+    estimated_completion_date = models.DateField(
+        verbose_name=_("Estimated Completion Date"), null=True, blank=True
+    )
+    floors_completed = models.IntegerField(
+        verbose_name=_("Floors Completed"), default=0
+    )
+
+    class Meta:
+        verbose_name = _("Carcas")
+        verbose_name_plural = _("Carcases")
+
+
+# Model for Terrain Agricole properties
+class TerrainAgricole(PropertyBase):
+    cultivated_area = models.DecimalField(
+        verbose_name=_("Cultivated Area (hectares)"),
+        max_digits=8,
+        decimal_places=2,
+        default=0.0,
+    )
+    irrigation_system = models.BooleanField(
+        verbose_name=_("Irrigation System"), default=False
+    )
+
+    class Meta:
+        verbose_name = _("Terrain Agricole")
+        verbose_name_plural = _("Terrains Agricoles")
+
+
+# Model for Deplux properties
+class Deplux(PropertyBase):
+    bedrooms = models.IntegerField(verbose_name=_("Bedrooms"), default=3)
+    bathrooms = models.IntegerField(verbose_name=_("Bathrooms"), default=2)
+    duplex_type = models.CharField(
+        verbose_name=_("Duplex Type"),
+        max_length=50,
+        default="Single Level",
+    )
+    garden = models.BooleanField(verbose_name=_("Garden"), default=False)
+
+    class Meta:
+        verbose_name = _("Deplux")
+        verbose_name_plural = _("Depluxes")
+
+
+# Model for Studio properties
+class Studio(PropertyBase):
+    floor_area = models.DecimalField(
+        verbose_name=_("Floor Area (m^2)"),
+        max_digits=8,
+        decimal_places=2,
+        default=0.0,
+    )
+    open_plan = models.BooleanField(verbose_name=_("Open Plan"), default=True)
+    balcony = models.BooleanField(verbose_name=_("Balcony"), default=False)
+
+    class Meta:
+        verbose_name = _("Studio")
+        verbose_name_plural = _("Studios")
+
+
+# Model for Other properties
+class Other(PropertyBase):
+    property_type = models.CharField(
+        verbose_name=_("Property Type"),
+        max_length=100,
+        default="Other",
+    )
+    additional_features = models.TextField(
+        verbose_name=_("Additional Features"), blank=True, null=True
+    )
+
+    class Meta:
+        verbose_name = _("Other")
+        verbose_name_plural = _("Other Properties")

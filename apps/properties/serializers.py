@@ -31,7 +31,6 @@ class PropertySerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
     cover_photo = serializers.SerializerMethodField()
     video = serializers.SerializerMethodField()
-    profile_photo = serializers.SerializerMethodField()
     commune_name = serializers.CharField(source='commune.name', read_only=True)
     daira_name = serializers.CharField(source='daira.name', read_only=True)
     wilaya_name = serializers.CharField(source='wilaya.name', read_only=True)
@@ -41,7 +40,6 @@ class PropertySerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "user",
-            "profile_photo",
             "title",
             "slug",
             "ref_code",
@@ -73,9 +71,7 @@ class PropertySerializer(serializers.ModelSerializer):
             "amenities",
             "property_status",
 
-            "neighborhood_info",
             "legal_status",
-            "payment_options",
         ]
 
     def get_user(self, obj):
@@ -84,8 +80,6 @@ class PropertySerializer(serializers.ModelSerializer):
     def get_cover_photo(self, obj):
         return obj.cover_photo.url
 
-    def get_profile_photo(self, obj):
-        return obj.user.profile.profile_photo.url
 
     def get_video(self, obj):
         return obj.video.url
