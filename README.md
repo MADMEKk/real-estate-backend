@@ -70,6 +70,17 @@ A powerful and feature-rich Django-based real estate platform backend that combi
 - **Containerization:** Docker & Docker Compose
 - **Languages:** Python, JavaScript
 - **Monitoring:** Flower 2.0.1
+- 
+## 📸 Screenshots
+
+![Screenshot 2025-06-15 at 14-53-14](images/Screenshot%202025-06-15%20at%2014-53-14%20Aures%20REAL%20ESTATE.png)
+![Screenshot 2025-06-15 at 14-53-46](images/Screenshot%202025-06-15%20at%2014-53-46%20Aures%20REAL%20ESTATE.png)
+![Screenshot 2025-06-15 at 14-54-08](images/Screenshot%202025-06-15%20at%2014-54-08%20Aures%20REAL%20ESTATE.png)
+![Screenshot 2025-06-15 at 15-55-05](images/Screenshot%202025-06-15%20at%2015-55-05%20Aures%20REAL%20ESTATE.png)
+![Screenshot 2025-06-15 at 16-49-13](images/Screenshot%202025-06-15%20at%2016-49-13%20Aures%20REAL%20ESTATE.png)
+![Screenshot 2025-06-15 at 17-21-54](images/Screenshot%202025-06-15%20at%2017-21-54%20Aures%20REAL%20ESTATE.png)
+![Screenshot 2025-06-15 at 17-27-06](images/Screenshot%202025-06-15%20at%2017-27-06%20Aures%20REAL%20ESTATE.png)
+![Screenshot 2025-06-15 at 17-27-16](images/Screenshot%202025-06-15%20at%2017-27-16%20Aures%20REAL%20ESTATE.png)
 
 ## 🚀 Quick Start with Docker
 
